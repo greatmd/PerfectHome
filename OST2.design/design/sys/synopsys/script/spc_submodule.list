@@ -1,0 +1,13 @@
+spc
+spc/dec
+spc/exu
+spc/fgu
+spc/gkt
+spc/ifu/ifu_cmu
+spc/ifu/ifu_ftu
+spc/ifu/ifu_ibu
+spc/lsu
+spc/mmu
+spc/pku
+spc/pmu
+spc/tlu

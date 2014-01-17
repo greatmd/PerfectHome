@@ -1,0 +1,12 @@
+Author : Donguk Moon
+email : dongukmoon@stanford.edu
+
+original package is missing pnr script. 
+The following files had beed added for PNR purposes
+
+1. pnr_spc.scr 
+  - pnr script for spc core 
+
+2. run.scr 
+  - modified to include section 7-1 for PNR information
+  - section 2 : analyze -define LIB  has been added 
