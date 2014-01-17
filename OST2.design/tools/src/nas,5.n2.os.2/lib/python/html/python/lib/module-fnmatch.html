@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-shutil.html" />
+<link rel="prev" href="module-glob.html" />
+<link rel="parent" href="allos.html" />
+<link rel="next" href="module-shutil.html" />
+<meta name='aesop' content='information' />
+<title>6.25 fnmatch -- Unix filename pattern matching</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.24 glob  "
+  href="module-glob.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.26 shutil  "
+  href="module-shutil.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-glob.html">6.24 glob  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-shutil.html">6.26 shutil  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0082500000000000000000">
+6.25 <tt class="module">fnmatch</tt> --
+         <span class="Unix">Unix</span> filename pattern matching</A>
+</H1>
+
+<P>
+<A NAME="module-fnmatch"></A>
+
+<P>
+<a id='l2h-2345' xml:id='l2h-2345'></a>
+
+<P>
+This module provides support for <span class="Unix">Unix</span> shell-style wildcards, which
+are <em>not</em> the same as regular expressions (which are documented
+in the <tt class="module"><a href="module-re.html">re</a></tt><a id='l2h-2346' xml:id='l2h-2346'></a> module).  The special
+characters used in shell-style wildcards are:
+
+<P>
+<div class="center"><table class="realtable">
+  <thead>
+    <tr>
+      <th class="center">Pattern</th>
+      <th class="left"  >Meaning</th>
+      </tr>
+    </thead>
+  <tbody>
+    <tr><td class="center" valign="baseline"><code>*</code></td>
+        <td class="left"  >matches everything</td></tr>
+    <tr><td class="center" valign="baseline"><code>?</code></td>
+        <td class="left"  >matches any single character</td></tr>
+    <tr><td class="center" valign="baseline"><code>[<var>seq</var>]</code></td>
+        <td class="left"  >matches any character in <var>seq</var></td></tr>
+    <tr><td class="center" valign="baseline"><code>[!<var>seq</var>]</code></td>
+        <td class="left"  >matches any character not in <var>seq</var></td></tr></tbody>
+</table></div>
+
+<P>
+Note that the filename separator (<code>'/'</code> on <span class="Unix">Unix</span>) is <em>not</em>
+special to this module.  See module
+<tt class="module"><a href="module-glob.html">glob</a></tt><a id='l2h-2347' xml:id='l2h-2347'></a> for pathname expansion
+(<tt class="module"><a href="module-glob.html">glob</a></tt> uses <tt class="function">fnmatch()</tt> to match pathname
+segments).  Similarly, filenames starting with a period are
+not special for this module, and are matched by the <code>*</code> and
+<code>?</code> patterns.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2342' xml:id='l2h-2342' class="function">fnmatch</tt></b>(</nobr></td>
+  <td><var>filename, pattern</var>)</td></tr></table></dt>
+<dd>
+Test whether the <var>filename</var> string matches the <var>pattern</var>
+string, returning true or false.  If the operating system is
+case-insensitive, then both parameters will be normalized to all
+lower- or upper-case before the comparison is performed.  If you
+require a case-sensitive comparison regardless of whether that's
+standard for your operating system, use <tt class="function">fnmatchcase()</tt>
+instead.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2343' xml:id='l2h-2343' class="function">fnmatchcase</tt></b>(</nobr></td>
+  <td><var>filename, pattern</var>)</td></tr></table></dt>
+<dd>
+Test whether <var>filename</var> matches <var>pattern</var>, returning true or
+false; the comparison is case-sensitive.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2344' xml:id='l2h-2344' class="function">filter</tt></b>(</nobr></td>
+  <td><var>names, pattern</var>)</td></tr></table></dt>
+<dd>
+Return the subset of the list of <var>names</var> that match <var>pattern</var>.
+It is the same as <code>[n for n in names if fnmatch(n, pattern)]</code>, but
+implemented more efficiently.
+
+<span class="versionnote">New in version 2.2.</span>
+
+</dl>
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-glob.html">glob</a></tt>:</b>
+    <dd><span class="Unix">Unix</span> shell-style path expansion.
+  </dl>
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.24 glob  "
+  href="module-glob.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.26 shutil  "
+  href="module-shutil.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-glob.html">6.24 glob  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-shutil.html">6.26 shutil  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

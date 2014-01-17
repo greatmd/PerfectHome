@@ -1,0 +1,744 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="whatsnew24.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="whatsnew24.html" title='What's New in Python 2.4' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node14.html" />
+<link rel="prev" href="node12.html" />
+<link rel="parent" href="whatsnew24.html" />
+<link rel="next" href="node14.html" />
+<meta name='aesop' content='information' />
+<title>12 New, Improved, and Deprecated Modules</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11 Other Language Changes"
+  href="node12.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="13 Build and C"
+  href="node14.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node12.html">11 Other Language Changes</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node14.html">13 Build and C</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="node13.html#SECTION0001310000000000000000">12.1 cookielib</a>
+<LI><A href="node13.html#SECTION0001320000000000000000">12.2 doctest</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+<HR>
+
+<H1><A NAME="SECTION0001300000000000000000">
+12 New, Improved, and Deprecated Modules</A>
+</H1>
+
+<P>
+As usual, Python's standard library received a number of enhancements and
+bug fixes.  Here's a partial list of the most notable changes, sorted
+alphabetically by module name. Consult the
+<span class="file">Misc/NEWS</span> file in the source tree for a more
+complete list of changes, or look through the CVS logs for all the
+details.
+
+<P>
+
+<UL>
+<LI>The <tt class="module">asyncore</tt> module's <tt class="function">loop()</tt> function now
+   has a <var>count</var> parameter that lets you perform a limited number
+   of passes through the polling loop.  The default is still to loop
+   forever.
+
+<P>
+</LI>
+<LI>The <tt class="module">base64</tt> module now has more complete RFC 3548 support
+  for Base64, Base32, and Base16 encoding and decoding, including
+  optional case folding and optional alternative alphabets.
+  (Contributed by Barry Warsaw.)
+
+<P>
+</LI>
+<LI>The <tt class="module">bisect</tt> module now has an underlying C implementation
+   for improved performance.
+   (Contributed by Dmitry Vasiliev.)
+
+<P>
+</LI>
+<LI>The CJKCodecs collections of East Asian codecs, maintained
+by Hye-Shik Chang, was integrated into 2.4.  
+The new encodings are:
+
+<P>
+
+<UL>
+<LI>Chinese (PRC): gb2312, gbk, gb18030, big5hkscs, hz
+</LI>
+<LI>Chinese (ROC): big5, cp950
+</LI>
+<LI>Japanese: cp932, euc-jis-2004, euc-jp,
+euc-jisx0213, iso-2022-jp, iso-2022-jp-1, iso-2022-jp-2,
+ iso-2022-jp-3, iso-2022-jp-ext, iso-2022-jp-2004,
+ shift-jis, shift-jisx0213, shift-jis-2004
+</LI>
+<LI>Korean: cp949, euc-kr, johab, iso-2022-kr
+</LI>
+</UL> 
+
+<P>
+</LI>
+<LI>Some other new encodings were added: HP Roman8, 
+ISO_8859-11, ISO_8859-16, PCTP-154, and TIS-620.
+
+<P>
+</LI>
+<LI>The UTF-8 and UTF-16 codecs now cope better with receiving partial input.
+Previously the <tt class="class">StreamReader</tt> class would try to read more data,
+making it impossible to resume decoding from the stream.  The
+<tt class="method">read()</tt> method will now return as much data as it can and future
+calls will resume decoding where previous ones left off. 
+(Implemented by Walter D&#246;rwald.)
+
+<P>
+</LI>
+<LI>There is a new <tt class="module">collections</tt> module for 
+   various specialized collection datatypes.  
+   Currently it contains just one type, <tt class="class">deque</tt>, 
+   a double-ended queue that supports efficiently adding and removing
+   elements from either end:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; from collections import deque
+&gt;&gt;&gt; d = deque('ghi')        # make a new deque with three items
+&gt;&gt;&gt; d.append('j')           # add a new entry to the right side
+&gt;&gt;&gt; d.appendleft('f')       # add a new entry to the left side
+&gt;&gt;&gt; d                       # show the representation of the deque
+deque(['f', 'g', 'h', 'i', 'j'])
+&gt;&gt;&gt; d.pop()                 # return and remove the rightmost item
+'j'
+&gt;&gt;&gt; d.popleft()             # return and remove the leftmost item
+'f'
+&gt;&gt;&gt; list(d)                 # list the contents of the deque
+['g', 'h', 'i']
+&gt;&gt;&gt; 'h' in d                # search the deque
+True
+</pre></div>
+
+<P>
+Several modules, such as the <tt class="module">Queue</tt> and <tt class="module">threading</tt>
+modules, now take advantage of <tt class="class">collections.deque</tt> for improved
+performance.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The <tt class="module">ConfigParser</tt> classes have been enhanced slightly.
+   The <tt class="method">read()</tt> method now returns a list of the files that
+   were successfully parsed, and the <tt class="method">set()</tt> method raises
+   <tt class="exception">TypeError</tt> if passed a <var>value</var> argument that isn't a
+   string.   (Contributed by John Belmonte and David Goodger.)
+
+<P>
+</LI>
+<LI>The <tt class="module">curses</tt> module now supports the ncurses extension 
+   <tt class="function">use_default_colors()</tt>.  On platforms where the terminal
+   supports transparency, this makes it possible to use a transparent
+   background.  (Contributed by J&#246;rg Lehmann.)
+
+<P>
+</LI>
+<LI>The <tt class="module">difflib</tt> module now includes an <tt class="class">HtmlDiff</tt> class
+that creates an HTML table showing a side by side comparison
+of two versions of a text.   (Contributed by Dan Gass.)
+
+<P>
+</LI>
+<LI>The <tt class="module">email</tt> package was updated to version 3.0, 
+which dropped various deprecated APIs and removes support for Python
+versions earlier than 2.3.  The 3.0 version of the package uses a new
+incremental parser for MIME messages, available in the
+<tt class="module">email.FeedParser</tt> module.  The new parser doesn't require
+reading the entire message into memory, and doesn't throw exceptions
+if a message is malformed; instead it records any problems in the 
+<tt class="member">defect</tt> attribute of the message.  (Developed by Anthony
+Baxter, Barry Warsaw, Thomas Wouters, and others.)
+
+<P>
+</LI>
+<LI>The <tt class="module">heapq</tt> module has been converted to C.  The resulting
+   tenfold improvement in speed makes the module suitable for handling
+   high volumes of data.  In addition, the module has two new functions
+   <tt class="function">nlargest()</tt> and <tt class="function">nsmallest()</tt> that use heaps to
+   find the N largest or smallest values in a dataset without the
+   expense of a full sort.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The <tt class="module">httplib</tt> module now contains constants for HTTP
+status codes defined in various HTTP-related RFC documents.  Constants
+have names such as <tt class="constant">OK</tt>, <tt class="constant">CREATED</tt>,
+<tt class="constant">CONTINUE</tt>, and <tt class="constant">MOVED_PERMANENTLY</tt>; use pydoc to
+get a full list.  (Contributed by Andrew Eland.)
+
+<P>
+</LI>
+<LI>The <tt class="module">imaplib</tt> module now supports IMAP's THREAD command
+(contributed by Yves Dionne) and new <tt class="method">deleteacl()</tt> and
+<tt class="method">myrights()</tt> methods (contributed by Arnaud Mazin).
+
+<P>
+</LI>
+<LI>The <tt class="module">itertools</tt> module gained a
+  <tt class="function">groupby(<var>iterable</var><big>[</big>, <var>func</var><big>]</big>)</tt> function.
+  <var>iterable</var> is something that can be iterated over to return a
+  stream of elements, and the optional <var>func</var> parameter is a
+  function that takes an element and returns a key value; if omitted,
+  the key is simply the element itself.  <tt class="function">groupby()</tt> then
+  groups the elements into subsequences which have matching values of
+  the key, and returns a series of 2-tuples containing the key value
+  and an iterator over the subsequence.
+
+<P>
+Here's an example to make this clearer.  The <var>key</var> function simply
+returns whether a number is even or odd, so the result of
+<tt class="function">groupby()</tt> is to return consecutive runs of odd or even
+numbers.
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; import itertools
+&gt;&gt;&gt; L = [2, 4, 6, 7, 8, 9, 11, 12, 14]
+&gt;&gt;&gt; for key_val, it in itertools.groupby(L, lambda x: x % 2):
+...    print key_val, list(it)
+... 
+0 [2, 4, 6]
+1 [7]
+0 [8]
+1 [9, 11]
+0 [12, 14]
+&gt;&gt;&gt;
+</pre></div>
+
+<P>
+<tt class="function">groupby()</tt> is typically used with sorted input.  The logic
+for <tt class="function">groupby()</tt> is similar to the <span class="Unix">Unix</span> <code>uniq</code> filter
+which makes it handy for eliminating, counting, or identifying
+duplicate elements:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; word = 'abracadabra'
+&gt;&gt;&gt; letters = sorted(word)   # Turn string into a sorted list of letters
+&gt;&gt;&gt; letters 
+['a', 'a', 'a', 'a', 'a', 'b', 'b', 'c', 'd', 'r', 'r']
+&gt;&gt;&gt; for k, g in itertools.groupby(letters):
+...    print k, list(g)
+... 
+a ['a', 'a', 'a', 'a', 'a']
+b ['b', 'b']
+c ['c']
+d ['d']
+r ['r', 'r']
+&gt;&gt;&gt; # List unique letters
+&gt;&gt;&gt; [k for k, g in groupby(letters)]                     
+['a', 'b', 'c', 'd', 'r']
+&gt;&gt;&gt; # Count letter occurrences
+&gt;&gt;&gt; [(k, len(list(g))) for k, g in groupby(letters)]     
+[('a', 5), ('b', 2), ('c', 1), ('d', 1), ('r', 2)]
+</pre></div>
+
+<P>
+(Contributed by Hye-Shik Chang.)
+
+<P>
+</LI>
+<LI><tt class="module">itertools</tt> also gained a function named
+<tt class="function">tee(<var>iterator</var>, <var>N</var>)</tt> that returns <var>N</var> independent
+iterators that replicate <var>iterator</var>.  If <var>N</var> is omitted, the
+default is 2.
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; L = [1,2,3]
+&gt;&gt;&gt; i1, i2 = itertools.tee(L)
+&gt;&gt;&gt; i1,i2
+(&lt;itertools.tee object at 0x402c2080&gt;, &lt;itertools.tee object at 0x402c2090&gt;)
+&gt;&gt;&gt; list(i1)               # Run the first iterator to exhaustion
+[1, 2, 3]
+&gt;&gt;&gt; list(i2)               # Run the second iterator to exhaustion
+[1, 2, 3]
+&gt;
+</pre></div>
+
+<P>
+Note that <tt class="function">tee()</tt> has to keep copies of the values returned 
+by the iterator; in the worst case, it may need to keep all of them.  
+This should therefore be used carefully if the leading iterator
+can run far ahead of the trailing iterator in a long stream of inputs.
+If the separation is large, then you might as well use 
+<tt class="function">list()</tt> instead.  When the iterators track closely with one
+another, <tt class="function">tee()</tt> is ideal.  Possible applications include
+bookmarking, windowing, or lookahead iterators.
+(Contributed by Raymond Hettinger.)       
+
+<P>
+</LI>
+<LI>A number of functions were added to the <tt class="module">locale</tt> 
+module, such as <tt class="function">bind_textdomain_codeset()</tt> to specify a
+particular encoding and a family of <tt class="function">l*gettext()</tt> functions
+that return messages in the chosen encoding.
+(Contributed by Gustavo Niemeyer.)
+
+<P>
+</LI>
+<LI>Some keyword arguments were added to the <tt class="module">logging</tt>
+package's <tt class="function">basicConfig</tt> function to simplify log
+configuration.  The default behavior is to log messages to standard
+error, but various keyword arguments can be specified to log to a
+particular file, change the logging format, or set the logging level.
+For example:
+
+<P>
+<div class="verbatim"><pre>
+import logging
+logging.basicConfig(filename='/var/log/application.log',
+    level=0,  # Log all messages
+    format='%(levelname):%(process):%(thread):%(message)')	            
+</pre></div>
+
+<P>
+Other additions to the <tt class="module">logging</tt> package include a
+<tt class="method">log(<var>level</var>, <var>msg</var>)</tt> convenience method, as well as a
+<tt class="class">TimedRotatingFileHandler</tt> class that rotates its log files at a
+timed interval.  The module already had <tt class="class">RotatingFileHandler</tt>,
+which rotated logs once the file exceeded a certain size.  Both
+classes derive from a new <tt class="class">BaseRotatingHandler</tt> class that can
+be used to implement other rotating handlers.
+
+<P>
+(Changes implemented by Vinay Sajip.)
+
+<P>
+</LI>
+<LI>The <tt class="module">marshal</tt> module now shares interned strings on unpacking a 
+data structure.  This may shrink the size of certain pickle strings,
+but the primary effect is to make <span class="file">.pyc</span> files significantly smaller.
+(Contributed by Martin von Loewis.)
+
+<P>
+</LI>
+<LI>The <tt class="module">nntplib</tt> module's <tt class="class">NNTP</tt> class gained
+<tt class="method">description()</tt> and <tt class="method">descriptions()</tt> methods to retrieve 
+newsgroup descriptions for a single group or for a range of groups.
+(Contributed by J&#252;rgen A. Erhard.)
+
+<P>
+</LI>
+<LI>Two new functions were added to the <tt class="module">operator</tt> module, 
+<tt class="function">attrgetter(<var>attr</var>)</tt> and <tt class="function">itemgetter(<var>index</var>)</tt>.
+Both functions return callables that take a single argument and return
+the corresponding attribute or item; these callables make excellent
+data extractors when used with <tt class="function">map()</tt> or
+<tt class="function">sorted()</tt>.  For example:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; L = [('c', 2), ('d', 1), ('a', 4), ('b', 3)]
+&gt;&gt;&gt; map(operator.itemgetter(0), L)
+['c', 'd', 'a', 'b']
+&gt;&gt;&gt; map(operator.itemgetter(1), L)
+[2, 1, 4, 3]
+&gt;&gt;&gt; sorted(L, key=operator.itemgetter(1)) # Sort list by second tuple item
+[('d', 1), ('c', 2), ('b', 3), ('a', 4)]
+</pre></div>
+
+<P>
+(Contributed by Raymond Hettinger.)       
+
+<P>
+</LI>
+<LI>The <tt class="module">optparse</tt> module was updated in various ways.  The
+module now passes its messages through <tt class="function">gettext.gettext()</tt>,
+making it possible to internationalize Optik's help and error
+messages.  Help messages for options can now include the string
+<code>'%default'</code>, which will be replaced by the option's default
+value.  (Contributed by Greg Ward.)
+
+<P>
+</LI>
+<LI>The long-term plan is to deprecate the <tt class="module">rfc822</tt> module
+in some future Python release in favor of the <tt class="module">email</tt> package.
+To this end, the <tt class="function">email.Utils.formatdate()</tt> function has been
+changed to make it usable as a replacement for
+<tt class="function">rfc822.formatdate()</tt>.  You may want to write new e-mail
+processing code with this in mind.  (Change implemented by Anthony
+Baxter.)
+
+<P>
+</LI>
+<LI>A new <tt class="function">urandom(<var>n</var>)</tt> function was added to the
+<tt class="module">os</tt> module, returning a string containing <var>n</var> bytes of
+random data.  This function provides access to platform-specific
+sources of randomness such as <span class="file">/dev/urandom</span> on Linux or the
+Windows CryptoAPI.  (Contributed by Trevor Perrin.)
+
+<P>
+</LI>
+<LI>Another new function: <tt class="function">os.path.lexists(<var>path</var>)</tt> 
+returns true if the file specified by <var>path</var> exists, whether or
+not it's a symbolic link.  This differs from the existing
+<tt class="function">os.path.exists(<var>path</var>)</tt> function, which returns false if 
+<var>path</var> is a symlink that points to a destination that doesn't exist.
+(Contributed by Beni Cherniavsky.)
+
+<P>
+</LI>
+<LI>A new <tt class="function">getsid()</tt> function was added to the
+<tt class="module">posix</tt> module that underlies the <tt class="module">os</tt> module.
+(Contributed by J. Raynor.)
+
+<P>
+</LI>
+<LI>The <tt class="module">poplib</tt> module now supports POP over SSL.  (Contributed by
+Hector Urtubia.)
+
+<P>
+</LI>
+<LI>The <tt class="module">profile</tt> module can now profile C extension functions.
+(Contributed by Nick Bastin.)
+
+<P>
+</LI>
+<LI>The <tt class="module">random</tt> module has a new method called
+   <tt class="method">getrandbits(<var>N</var>)</tt> that returns a long integer <var>N</var>
+   bits in length.  The existing <tt class="method">randrange()</tt> method now uses
+   <tt class="method">getrandbits()</tt> where appropriate, making generation of
+   arbitrarily large random numbers more efficient.  (Contributed by
+   Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The regular expression language accepted by the <tt class="module">re</tt> module
+   was extended with simple conditional expressions, written as
+   <tt class="regexp">(?(<var>group</var>)<var>A</var>|<var>B</var>)</tt>.  <var>group</var> is either a
+   numeric group ID or a group name defined with <tt class="regexp">(?P&lt;group&gt;...)</tt> 
+   earlier in the expression.  If the specified group matched, the
+   regular expression pattern <var>A</var> will be tested against the string; if
+   the group didn't match, the pattern <var>B</var> will be used instead.
+   (Contributed by Gustavo Niemeyer.)
+
+<P>
+</LI>
+<LI>The <tt class="module">re</tt> module is also no longer recursive, thanks to a
+massive amount of work by Gustavo Niemeyer.  In a recursive regular
+expression engine, certain patterns result in a large amount of C
+stack space being consumed, and it was possible to overflow the stack.
+For example, if you matched a 30000-byte string of "<tt class="samp">a</tt>" characters
+against the expression <tt class="regexp">(a|b)+</tt>, one stack frame was consumed
+per character.  Python 2.3 tried to check for stack overflow and raise
+a <tt class="exception">RuntimeError</tt> exception, but certain patterns could
+sidestep the checking and if you were unlucky Python could segfault.
+Python 2.4's regular expression engine can match this pattern without
+problems.
+
+<P>
+</LI>
+<LI>A new <tt class="function">socketpair()</tt> function, returning a pair of
+connected sockets, was added to the <tt class="module">socket</tt> module.
+(Contributed by Dave Cole.)
+
+<P>
+</LI>
+<LI>The <tt class="function">sys.exitfunc()</tt> function has been deprecated.  Code
+should be using the existing <tt class="module">atexit</tt> module, which correctly
+handles calling multiple exit functions.  Eventually
+<tt class="function">sys.exitfunc()</tt> will become a purely internal interface,
+accessed only by <tt class="module">atexit</tt>.
+
+<P>
+</LI>
+<LI>The <tt class="module">tarfile</tt> module now generates GNU-format tar files
+by default.  (Contributed by Lars Gustaebel.)
+
+<P>
+</LI>
+<LI>The <tt class="module">threading</tt> module now has an elegantly simple way to support 
+thread-local data.  The module contains a <tt class="class">local</tt> class whose
+attribute values are local to different threads.
+
+<P>
+<div class="verbatim"><pre>
+import threading
+
+data = threading.local()
+data.number = 42
+data.url = ('www.python.org', 80)
+</pre></div>
+
+<P>
+Other threads can assign and retrieve their own values for the
+<tt class="member">number</tt> and <tt class="member">url</tt> attributes.  You can subclass
+<tt class="class">local</tt> to initialize attributes or to add methods.
+(Contributed by Jim Fulton.)
+
+<P>
+</LI>
+<LI>The <tt class="module">timeit</tt> module now automatically disables periodic
+  garbarge collection during the timing loop.  This change makes
+  consecutive timings more comparable.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The <tt class="module">weakref</tt> module now supports a wider variety of objects
+   including Python functions, class instances, sets, frozensets, deques,
+   arrays, files, sockets, and regular expression pattern objects.
+   (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The <tt class="module">xmlrpclib</tt> module now supports a multi-call extension for 
+transmitting multiple XML-RPC calls in a single HTTP operation.
+(Contributed by Brian Quinlan.)
+
+<P>
+</LI>
+<LI>The <tt class="module">mpz</tt>, <tt class="module">rotor</tt>, and <tt class="module">xreadlines</tt> modules have 
+been removed.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION0001310000000000000000">
+12.1 cookielib</A>
+</H2>
+
+<P>
+The <tt class="module">cookielib</tt> library supports client-side handling for HTTP
+cookies, mirroring the <tt class="module">Cookie</tt> module's server-side cookie
+support. Cookies are stored in cookie jars; the library transparently
+stores cookies offered by the web server in the cookie jar, and
+fetches the cookie from the jar when connecting to the server. As in
+web browsers, policy objects control whether cookies are accepted or
+not.
+
+<P>
+In order to store cookies across sessions, two implementations of
+cookie jars are provided: one that stores cookies in the Netscape
+format so applications can use the Mozilla or Lynx cookie files, and
+one that stores cookies in the same format as the Perl libwww library.
+
+<P>
+<tt class="module">urllib2</tt> has been changed to interact with <tt class="module">cookielib</tt>:
+<tt class="class">HTTPCookieProcessor</tt> manages a cookie jar that is used when
+accessing URLs.
+
+<P>
+This module was contributed by John J. Lee.
+
+<P>
+
+<H2><A NAME="SECTION0001320000000000000000">
+12.2 doctest</A>
+</H2>
+
+<P>
+The <tt class="module">doctest</tt> module underwent considerable refactoring thanks
+to Edward Loper and Tim Peters.  Testing can still be as simple as
+running <tt class="function">doctest.testmod()</tt>, but the refactorings allow
+customizing the module's operation in various ways
+
+<P>
+The new <tt class="class">DocTestFinder</tt> class extracts the tests from a given 
+object's docstrings:
+
+<P>
+<div class="verbatim"><pre>
+def f (x, y):
+    """&gt;&gt;&gt; f(2,2)
+4
+&gt;&gt;&gt; f(3,2)
+6
+    """
+    return x*y
+
+finder = doctest.DocTestFinder()
+
+# Get list of DocTest instances
+tests = finder.find(f)
+</pre></div>
+
+<P>
+The new <tt class="class">DocTestRunner</tt> class then runs individual tests and can
+produce a summary of the results:
+
+<P>
+<div class="verbatim"><pre>
+runner = doctest.DocTestRunner()
+for t in tests:
+    tried, failed = runner.run(t)
+    
+runner.summarize(verbose=1)
+</pre></div>
+
+<P>
+The above example produces the following output:
+
+<P>
+<div class="verbatim"><pre>
+1 items passed all tests:
+   2 tests in f
+2 tests in 1 items.
+2 passed and 0 failed.
+Test passed.
+</pre></div>
+
+<P>
+<tt class="class">DocTestRunner</tt> uses an instance of the <tt class="class">OutputChecker</tt>
+class to compare the expected output with the actual output.  This
+class takes a number of different flags that customize its behaviour;
+ambitious users can also write a completely new subclass of
+<tt class="class">OutputChecker</tt>.
+
+<P>
+The default output checker provides a number of handy features.
+For example, with the <tt class="constant">doctest.ELLIPSIS</tt> option flag,
+an ellipsis ("<tt class="samp">...</tt>") in the expected output matches any substring, 
+making it easier to accommodate outputs that vary in minor ways:
+
+<P>
+<div class="verbatim"><pre>
+def o (n):
+    """&gt;&gt;&gt; o(1)
+&lt;__main__.C instance at 0x...&gt;
+&gt;&gt;&gt;
+"""
+</pre></div>
+
+<P>
+Another special string, "<tt class="samp">&lt;BLANKLINE&gt;</tt>", matches a blank line:
+
+<P>
+<div class="verbatim"><pre>
+def p (n):
+    """&gt;&gt;&gt; p(1)
+&lt;BLANKLINE&gt;
+&gt;&gt;&gt;
+"""
+</pre></div>
+
+<P>
+Another new capability is producing a diff-style display of the output
+by specifying the <tt class="constant">doctest.REPORT_UDIFF</tt> (unified diffs),
+<tt class="constant">doctest.REPORT_CDIFF</tt> (context diffs), or
+<tt class="constant">doctest.REPORT_NDIFF</tt> (delta-style) option flags.  For example:
+
+<P>
+<div class="verbatim"><pre>
+def g (n):
+    """&gt;&gt;&gt; g(4)
+here
+is
+a
+lengthy
+&gt;&gt;&gt;"""
+    L = 'here is a rather lengthy list of words'.split()
+    for word in L[:n]:
+        print word
+</pre></div>
+
+<P>
+Running the above function's tests with
+<tt class="constant">doctest.REPORT_UDIFF</tt> specified, you get the following output:
+
+<P>
+<div class="verbatim"><pre>
+**********************************************************************
+File ``t.py'', line 15, in g
+Failed example:
+    g(4)
+Differences (unified diff with -expected +actual):
+    @@ -2,3 +2,3 @@
+     is
+     a
+    -lengthy
+    +rather
+**********************************************************************
+</pre></div>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11 Other Language Changes"
+  href="node12.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="13 Build and C"
+  href="node14.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node12.html">11 Other Language Changes</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node14.html">13 Build and C</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 1.01.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

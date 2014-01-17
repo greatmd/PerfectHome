@@ -1,0 +1,13 @@
+/import/bw/tools/local/perl-5.8.0/bin/scantest
+/import/bw/tools/local/perl-5.8.0/bin/venial
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/ScanTest.cfg
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/ScanTest.pm
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/ScanTest/Audit.pm
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/ScanTest/BlockFlow.pm
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/ScanTest/LibraryFlow.pm
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/ScanTest/NiAcFlow.pm
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/dof.template
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/tpf.template
+/import/bw/tools/local/perl-5.8.0/man/man1/scantest.1
+/import/bw/tools/local/perl-5.8.0/man/man3/ScanTest.3
+/import/bw/tools/local/perl-5.8.0/man/man3/ScanTest::NiAcFlow.3

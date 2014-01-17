@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="ref.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="ref.html" title='Python Reference Manual' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="dict.html" />
+<link rel="prev" href="lists.html" />
+<link rel="parent" href="atoms.html" />
+<link rel="next" href="dict.html" />
+<meta name='aesop' content='information' />
+<title>5.2.5 Generator expressions</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.2.4 List displays"
+  href="lists.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.2 Atoms"
+  href="atoms.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.2.6 Dictionary displays"
+  href="dict.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="lists.html">5.2.4 List displays</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="atoms.html">5.2 Atoms</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="dict.html">5.2.6 Dictionary displays</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION007250000000000000000"></A><A NAME="genexpr"></A>
+<BR>
+5.2.5 Generator expressions
+</H2>
+<a id='l2h-349' xml:id='l2h-349'></a>
+<P>
+A generator expression is a compact generator notation in parentheses:
+
+<P>
+<dl><dd class="grammar">
+<div class="productions">
+<table>
+<tr>
+    <td><a id='tok-generator_expression' xml:id='tok-generator_expression'>generator_expression</a></td>
+    <td>::=</td>
+    <td>"(" <a class='grammartoken' href="lists.html#tok-test">test</a> <a class='grammartoken' href="genexpr.html#tok-genexpr_for">genexpr_for</a> ")"</td></tr>
+  <tr>
+    <td><a id='tok-genexpr_for' xml:id='tok-genexpr_for'>genexpr_for</a></td>
+    <td>::=</td>
+    <td>"for" <a class='grammartoken' href="exprlists.html#tok-expression_list">expression_list</a> "in" <a class='grammartoken' href="lists.html#tok-test">test</a>
+              [<a class='grammartoken' href="genexpr.html#tok-genexpr_iter">genexpr_iter</a>]</td></tr>
+  <tr>
+    <td><a id='tok-genexpr_iter' xml:id='tok-genexpr_iter'>genexpr_iter</a></td>
+    <td>::=</td>
+    <td><a class='grammartoken' href="genexpr.html#tok-genexpr_for">genexpr_for</a> | <a class='grammartoken' href="genexpr.html#tok-genexpr_if">genexpr_if</a></td></tr>
+  <tr>
+    <td><a id='tok-genexpr_if' xml:id='tok-genexpr_if'>genexpr_if</a></td>
+    <td>::=</td>
+    <td>"if" <a class='grammartoken' href="lists.html#tok-test">test</a> [<a class='grammartoken' href="genexpr.html#tok-genexpr_iter">genexpr_iter</a>]</td></tr>
+</table>
+</div>
+<a class="grammar-footer"
+  href="grammar.txt" type="text/plain"
+  >Download entire grammar as text.</a>
+</dd></dl>
+
+<P>
+A generator expression yields a new generator object.
+<a id='l2h-350' xml:id='l2h-350'></a><a id='l2h-351' xml:id='l2h-351'></a>It consists of a single expression followed by at least one
+<tt class="keyword">for</tt> clause and zero or more <tt class="keyword">for</tt> or <tt class="keyword">if</tt>
+clauses.  The iterating values of the new generator are those that
+would be produced by considering each of the <tt class="keyword">for</tt> or
+<tt class="keyword">if</tt> clauses a block, nesting from left to right, and
+evaluating the expression to yield a value that is reached the
+innermost block for each iteration.
+
+<P>
+Variables used in the generator expression are evaluated lazily
+when the <tt class="method">next()</tt> method is called for generator object
+(in the same fashion as normal generators). However, the leftmost
+<tt class="keyword">for</tt> clause is immediately evaluated so that error produced
+by it can be seen before any other possible error in the code that
+handles the generator expression.
+Subsequent <tt class="keyword">for</tt> clauses cannot be evaluated immediately since
+they may depend on the previous <tt class="keyword">for</tt> loop.
+For example: "<tt class="samp">(x*y for x in range(10) for y in bar(x))</tt>".
+
+<P>
+The parentheses can be omitted on calls with only one argument.
+See section <A href="calls.html#calls">5.3.4</A> for the detail.
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.2.4 List displays"
+  href="lists.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.2 Atoms"
+  href="atoms.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.2.6 Dictionary displays"
+  href="dict.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="lists.html">5.2.4 List displays</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="atoms.html">5.2 Atoms</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="dict.html">5.2.6 Dictionary displays</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

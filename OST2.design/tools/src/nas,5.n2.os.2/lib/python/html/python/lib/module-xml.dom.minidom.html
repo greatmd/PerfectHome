@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-xml.dom.pulldom.html" />
+<link rel="prev" href="module-xml.dom.html" />
+<link rel="parent" href="markup.html" />
+<link rel="next" href="dom-objects.html" />
+<meta name='aesop' content='information' />
+<title>13.7 xml.dom.minidom -- Lightweight DOM implementation</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="13.6.3.2 Accessor Methods"
+  href="dom-accessor-methods.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="13. Structured Markup Processing"
+  href="markup.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="13.7.1 DOM Objects"
+  href="dom-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="dom-accessor-methods.html">13.6.3.2 Accessor Methods</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="markup.html">13. Structured Markup Processing</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="dom-objects.html">13.7.1 DOM Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0015700000000000000000">
+13.7 <tt class="module">xml.dom.minidom</tt> --
+         Lightweight DOM implementation</A>
+</H1>
+
+<P>
+<A NAME="module-xml.dom.minidom"></A>
+
+<P>
+
+<span class="versionnote">New in version 2.0.</span>
+
+<P>
+<tt class="module">xml.dom.minidom</tt> is a light-weight implementation of the
+Document Object Model interface.  It is intended to be
+simpler than the full DOM and also significantly smaller.
+
+<P>
+DOM applications typically start by parsing some XML into a DOM.  With
+<tt class="module">xml.dom.minidom</tt>, this is done through the parse functions:
+
+<P>
+<div class="verbatim"><pre>
+from xml.dom.minidom import parse, parseString
+
+dom1 = parse('c:\\temp\\mydata.xml') # parse an XML file by name
+
+datasource = open('c:\\temp\\mydata.xml')
+dom2 = parse(datasource)   # parse an open file
+
+dom3 = parseString('&lt;myxml&gt;Some data&lt;empty/&gt; some more data&lt;/myxml&gt;')
+</pre></div>
+
+<P>
+The <tt class="function">parse()</tt> function can take either a filename or an open
+file object.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4445' xml:id='l2h-4445' class="function">parse</tt></b>(</nobr></td>
+  <td><var>filename_or_file, parser</var>)</td></tr></table></dt>
+<dd>
+  Return a <tt class="class">Document</tt> from the given input. <var>filename_or_file</var>
+  may be either a file name, or a file-like object. <var>parser</var>, if
+  given, must be a SAX2 parser object. This function will change the
+  document handler of the parser and activate namespace support; other
+  parser configuration (like setting an entity resolver) must have been
+  done in advance.
+</dl>
+
+<P>
+If you have XML in a string, you can use the
+<tt class="function">parseString()</tt> function instead:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4446' xml:id='l2h-4446' class="function">parseString</tt></b>(</nobr></td>
+  <td><var>string</var><big>[</big><var>, parser</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  Return a <tt class="class">Document</tt> that represents the <var>string</var>. This
+  method creates a <tt class="class">StringIO</tt> object for the string and passes
+  that on to <tt class="function">parse</tt>.
+</dl>
+
+<P>
+Both functions return a <tt class="class">Document</tt> object representing the
+content of the document.
+
+<P>
+What the <tt class="function">parse()</tt> and <tt class="function">parseString()</tt> functions do
+is connect an XML parser with a ``DOM builder'' that can accept parse
+events from any SAX parser and convert them into a DOM tree.  The name
+of the functions are perhaps misleading, but are easy to grasp when
+learning the interfaces.  The parsing of the document will be
+completed before these functions return; it's simply that these
+functions do not provide a parser implementation themselves.
+
+<P>
+You can also create a <tt class="class">Document</tt> by calling a method on a ``DOM
+Implementation'' object.  You can get this object either by calling
+the <tt class="function">getDOMImplementation()</tt> function in the
+<tt class="module"><a href="module-xml.dom.html">xml.dom</a></tt> package or the <tt class="module">xml.dom.minidom</tt> module.
+Using the implementation from the <tt class="module">xml.dom.minidom</tt> module will
+always return a <tt class="class">Document</tt> instance from the minidom
+implementation, while the version from <tt class="module"><a href="module-xml.dom.html">xml.dom</a></tt> may provide
+an alternate implementation (this is likely if you have the
+<a class="ulink" href="http://pyxml.sourceforge.net/"
+  >PyXML package</a> installed).  Once
+you have a <tt class="class">Document</tt>, you can add child nodes to it to populate
+the DOM:
+
+<P>
+<div class="verbatim"><pre>
+from xml.dom.minidom import getDOMImplementation
+
+impl = getDOMImplementation()
+
+newdoc = impl.createDocument(None, "some_tag", None)
+top_element = newdoc.documentElement
+text = newdoc.createTextNode('Some textual content.')
+top_element.appendChild(text)
+</pre></div>
+
+<P>
+Once you have a DOM document object, you can access the parts of your
+XML document through its properties and methods.  These properties are
+defined in the DOM specification.  The main property of the document
+object is the <tt class="member">documentElement</tt> property.  It gives you the
+main element in the XML document: the one that holds all others.  Here
+is an example program:
+
+<P>
+<div class="verbatim"><pre>
+dom3 = parseString("&lt;myxml&gt;Some data&lt;/myxml&gt;")
+assert dom3.documentElement.tagName == "myxml"
+</pre></div>
+
+<P>
+When you are finished with a DOM, you should clean it up.  This is
+necessary because some versions of Python do not support garbage
+collection of objects that refer to each other in a cycle.  Until this
+restriction is removed from all versions of Python, it is safest to
+write your code as if cycles would not be cleaned up.
+
+<P>
+The way to clean up a DOM is to call its <tt class="method">unlink()</tt> method:
+
+<P>
+<div class="verbatim"><pre>
+dom1.unlink()
+dom2.unlink()
+dom3.unlink()
+</pre></div>
+
+<P>
+<tt class="method">unlink()</tt> is a <tt class="module">xml.dom.minidom</tt>-specific extension to
+the DOM API.  After calling <tt class="method">unlink()</tt> on a node, the node and
+its descendants are essentially useless.
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seetitle">
+    <dt><em class="citetitle"><a href="http://www.w3.org/TR/REC-DOM-Level-1/"
+        >Document Object
+            Model (DOM) Level 1 Specification</a></em></dt>
+    <dd>The W3C recommendation for the
+            DOM supported by <tt class="module">xml.dom.minidom</tt>.</dd>
+  </dl>
+</div>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="dom-objects.html">13.7.1 DOM Objects</a>
+<LI><A href="dom-example.html">13.7.2 DOM Example</a>
+<LI><A href="minidom-and-dom.html">13.7.3 minidom and the DOM standard</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="13.6.3.2 Accessor Methods"
+  href="dom-accessor-methods.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="13. Structured Markup Processing"
+  href="markup.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="13.7.1 DOM Objects"
+  href="dom-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="dom-accessor-methods.html">13.6.3.2 Accessor Methods</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="markup.html">13. Structured Markup Processing</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="dom-objects.html">13.7.1 DOM Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

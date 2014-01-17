@@ -1,0 +1,15 @@
+#!/bin/sh
+
+isa=`/bin/isalist | /bin/grep sparcv9+vis2`
+if [ -z "$isa" ] ; then
+    echo "Error: need isa sparcv9+vis2 or above"
+    exit
+fi
+
+vonk=`/bin/dirname $0`
+root=`/bin/dirname $vonk`
+
+PYTHONPATH=$root/pfe:. \
+PYTHONHOME=$DV_ROOT/tools/src/nas,5.n2.os.2/lib/python \
+$PFEPRE $root/bin/_n2nas $root/pfe/N2_Main.py $*
+

@@ -1,0 +1,54 @@
+# Globals configs
+#
+$num_threads_per_node = 64;
+$num_threads_per_core = 8;
+
+# Override register lists
+our @allregs = qw(f0 f2 f4 f6 f8 f10 f12 f14 
+                 f16 f18 f20 f22 f24 f26 f28 f30 
+                 f32 f34 f36 f38 f40 f42 f44 f46 
+                 f48 f50 f52 f54 f56 f58 f60 f62 
+                 PC NPC CWP CCR FPRS FSR PSTATE 
+                 HPSTATE ASI TICK TL PIL 
+                 CANSAVE CANRESTORE CLEANWIN OTHERWIN
+                 VER WSTATE GL TBA HTBA
+                 TICK_CMPR STICK_CMPR HSTICK_CMPR 
+                 HINTP SOFTINT GSR INTR_RECEIVE
+                 TPC1 TNPC1 TSTATE1 TT1
+                 TPC2 TNPC2 TSTATE2 TT2
+                 TPC3 TNPC3 TSTATE3 TT3
+                 TPC4 TNPC4 TSTATE4 TT4
+                 TPC5 TNPC5 TSTATE5 TT5
+                 TPC6 TNPC6 TSTATE6 TT6
+                 HTSTATE1 HTSTATE2 HTSTATE3 HTSTATE4
+                 HTSTATE5 HTSTATE6 
+                 LSU_CONTROL WATCHPOINT_ADDR
+                 CTXT_PRIM_0 CTXT_SEC_0
+                 CTXT_PRIM_1 CTXT_SEC_1
+                 I_TAG_ACC D_TAG_ACC DSFAR
+                 CTXT_Z_TSB_CFG0 CTXT_Z_TSB_CFG1
+                 CTXT_Z_TSB_CFG2 CTXT_Z_TSB_CFG3
+                 CTXT_NZ_TSB_CFG0 CTXT_NZ_TSB_CFG1
+                 CTXT_NZ_TSB_CFG2 CTXT_NZ_TSB_CFG3  
+                 ) ;
+
+# Initial state
+sub init_state {
+    my $tid = shift;
+    $state{$tid}{0}{"PC"} = "0000fffff0000020";
+    $state{$tid}{0}{"NPC"} = "0000fffff0000024";
+    $state{$tid}{0}{"CCR"} = "0000000000000000";
+    $state{$tid}{0}{"FPRS"} = "0000000000000004";
+    $state{$tid}{0}{"VER"} = "003e002410030607";
+    $state{$tid}{0}{"PSTATE"} = "0000000000000014";
+    $state{$tid}{0}{"HPSTATE"} = "0000000000000024";
+    $state{$tid}{0}{"TL"} = "0000000000000006";
+    $state{$tid}{0}{"TT6"} = "0000000000000001";
+    $state{$tid}{0}{"GL"} = "0000000000000003";
+    $state{$tid}{0}{"TICK"} = "8000000000000000";
+} # }}}
+
+
+
+# Need this
+1;

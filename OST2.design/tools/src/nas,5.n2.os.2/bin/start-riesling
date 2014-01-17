@@ -1,0 +1,100 @@
+#!/bin/sh
+
+# /bin/isalist can return
+#     sparcv9+vis2 sparcv9+vis sparcv9 sparcv8plus+vis sparcv8plus ...
+# or
+#     sparcv9 sparcv8plus sparcv8 sparcv8-fsmuld ... sparcv9+vis2 ...
+# or other forms. awk on the first parameter do not always work, use grep 
+# instead.
+
+isa=`/bin/isalist | /bin/grep sparcv9+vis2`
+if [ -z "$isa" ] ; then
+    echo "Error: need isa sparcv9+vis2 or above"
+    exit
+fi
+
+# If the NASENV environment variable is set to "pfe" then an interactive
+# nas is started in an xterm with a PFE interface. If the NASENV contains
+# "dbx" then dbx is started before nas with an interactive pfe is started.
+
+argv="$*"
+
+nasroot=$TRE_ROOT/$tool,$version
+
+# What the f.. sims sets the HOME environment variable to something else 
+# and we certainly don't like that, so set it back to what is 'defined'
+
+HOME=/home/$USER
+PYTHONPATH=$nasroot/pfe:$nasroot/pfe/samfe
+PYTHONHOME=$DV_ROOT/tools/src/nas,5.n2.os.2/lib/python
+
+export HOME
+export PYTHONPATH
+export PYTHONHOME
+
+xterm="/usr/openwin/bin/xterm -sb -sl 10000 -geometry 90x60 -cr blue"
+nas=$nasroot/bin/_n2nas
+n2main=$nasroot/pfe/N2_Main.py
+dbx=dbx
+
+# -c         : record, generate dut.inp/dut.out
+# -f         : format, output in n2 sas.log format
+# -i         : interactive
+# -n         : invoke nas-fe command parser for batch & interactive modes
+# -p         : replay, from ref.inp
+# -r version : release
+# -t         : trace, show instructions and register delta
+
+case $NASENV in
+  dbx)
+    setpgrp $xterm -e $dbx  -c "runargs $n2main -i -t -r $version $argv" $nas 
+    ;;
+  dbxrec)
+    setpgrp $xterm -e $dbx  -c "runargs $n2main -i -t -c -r $version $argv" $nas 
+    ;;
+  dbxply)
+    # make sure ref.inp is available, if not, rename/copy dut.inp as such.
+    setpgrp $xterm -e $dbx  -c "runargs $n2main -i -t -p -r $version $argv" $nas 
+    ;;
+  pfe)
+    setpgrp $xterm -e $nas $n2main -i -t -r $version $argv
+    ;;
+  pferec)
+    setpgrp $xterm -e $nas $n2main -i -t -c -r $version $argv
+    ;;
+  record)
+    setpgrp $nas $n2main -c -r $version $argv
+    ;;
+  replay)
+    # make sure ref.inp is available, if not, rename/copy dut.inp as such.
+    setpgrp $nas $n2main -t -p -r $version $argv
+    ;;
+  replayi)
+    # make sure ref.inp is available, if not, rename/copy dut.inp as such.
+    setpgrp $nas $n2main -i -p -r $version $argv
+    ;;
+  replayrec)
+    # replay from ref.inp and generate a new set of dut.inp/dut.out
+    setpgrp $nas $n2main -t -p -c -r $version $argv
+    ;;
+  trace)
+    setpgrp $nas $n2main -t -r $version $argv
+    ;;
+  tracerec)
+    setpgrp $nas $n2main -t -c -r $version $argv
+    ;;
+  v5)
+    # no recording, no tracing, this is RTL cosim default, 
+    # in v5 sas.log format.
+    setpgrp $nas $n2main -r $version $argv
+    ;;
+  samfe)
+    setpgrp $nas $n2main -f -n -r $version $argv
+    ;;
+  *)
+    # no recording, no tracing, this is RTL cosim default, 
+    # in n2 sas.log format.
+    setpgrp $nas $n2main -f -r $version $argv
+    ;;
+esac
+

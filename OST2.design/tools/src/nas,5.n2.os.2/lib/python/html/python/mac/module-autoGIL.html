@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="mac.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="mac.html" title='Macintosh Library Modules' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="module-FrameWork.html" />
+<link rel="parent" href="macpython-modules.html" />
+<link rel="next" href="scripting.html" />
+<meta name='aesop' content='information' />
+<title>2.9 autoGIL -- Global Interpreter Lock handling in event loops</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="2.8.5 DialogWindow Objects"
+  href="dialogwindow-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="2. MacPython Modules"
+  href="macpython-modules.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3. MacPython OSA Modules"
+  href="scripting.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="dialogwindow-objects.html">2.8.5 DialogWindow Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="macpython-modules.html">2. MacPython Modules</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="scripting.html">3. MacPython OSA Modules</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION004900000000000000000">
+2.9 <tt class="module">autoGIL</tt> --
+         Global Interpreter Lock handling in event loops</A>
+</H1>
+
+<P>
+<A NAME="module-autoGIL"></A>  
+<p class="availability">Availability: <span
+ class="platform">Macintosh</span>.</p>
+
+<P>
+The <tt class="module">autoGIL</tt> module provides a function <tt class="function">installAutoGIL</tt> that
+automatically locks and unlocks Python's Global Interpreter Lock
+when running an event loop.
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-135' xml:id='l2h-135' class="exception">AutoGILError</tt></b></dt>
+<dd>
+Raised if the observer callback cannot be installed, for example because
+the current thread does not have a run loop.
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-136' xml:id='l2h-136' class="function">installAutoGIL</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+	Install an observer callback in the event loop (CFRunLoop) for the
+	current thread, that will lock and unlock the Global Interpreter Lock
+	(GIL) at appropriate times, allowing other Python threads to run while
+	the event loop is idle.
+
+<P>
+Availability: OSX 10.1 or later.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="2.8.5 DialogWindow Objects"
+  href="dialogwindow-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="2. MacPython Modules"
+  href="macpython-modules.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3. MacPython OSA Modules"
+  href="scripting.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="dialogwindow-objects.html">2.8.5 DialogWindow Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="macpython-modules.html">2. MacPython Modules</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="scripting.html">3. MacPython OSA Modules</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

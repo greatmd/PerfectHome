@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="optparse-standard-option-types.html" />
+<link rel="prev" href="optparse-standard-option-actions.html" />
+<link rel="parent" href="optparse-reference-guide.html" />
+<link rel="next" href="optparse-standard-option-types.html" />
+<meta name='aesop' content='information' />
+<title>6.21.3.5 Option attributes</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.4 Standard option actions"
+  href="optparse-standard-option-actions.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.3.6 Standard option types"
+  href="optparse-standard-option-types.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-standard-option-actions.html">6.21.3.4 Standard option actions</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-standard-option-types.html">6.21.3.6 Standard option types</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION0082135000000000000000"></A><A NAME="optparse-option-attributes"></A>
+<BR>
+6.21.3.5 Option attributes
+</H3>
+
+<P>
+The following option attributes may be passed as keyword arguments
+to <code>parser.add_option()</code>.  If you pass an option attribute
+that is not relevant to a particular option, or fail to pass a required
+option attribute, <tt class="module">optparse</tt> raises OptionError.
+
+<UL>
+<LI> 
+<tt class="member">action</tt> (default: <code>"store"</code>)
+
+<P>
+Determines <tt class="module">optparse</tt>'s behaviour when this option is seen on the command
+line; the available options are documented above.
+
+<P>
+</LI>
+<LI> 
+<tt class="member">type</tt> (default: <code>"string"</code>)
+
+<P>
+The argument type expected by this option (e.g., <code>"string"</code> or
+<code>"int"</code>); the available option types are documented below.
+
+<P>
+</LI>
+<LI> 
+<tt class="member">dest</tt> (default: derived from option strings)
+
+<P>
+If the option's action implies writing or modifying a value somewhere,
+this tells <tt class="module">optparse</tt> where to write it: <tt class="member">dest</tt> names an attribute of the
+<code>options</code> object that <tt class="module">optparse</tt> builds as it parses the command line.
+
+<P>
+</LI>
+<LI> 
+<code>default</code> (deprecated)
+
+<P>
+The value to use for this option's destination if the option is not
+seen on the command line.  Deprecated; use <code>parser.set_defaults()</code>
+instead.
+
+<P>
+</LI>
+<LI> 
+<code>nargs</code> (default: 1)
+
+<P>
+How many arguments of type <tt class="member">type</tt> should be consumed when this
+option is seen.  If &gt; 1, <tt class="module">optparse</tt> will store a tuple of values to
+<tt class="member">dest</tt>.
+
+<P>
+</LI>
+<LI> 
+<code>const</code>
+
+<P>
+For actions that store a constant value, the constant value to store.
+
+<P>
+</LI>
+<LI> 
+<code>choices</code>
+
+<P>
+For options of type <code>"choice"</code>, the list of strings the user
+may choose from.
+
+<P>
+</LI>
+<LI> 
+<code>callback</code>
+
+<P>
+For options with action <code>"callback"</code>, the callable to call when this
+option is seen.  See section&nbsp;<A href="optparse-option-callbacks.html#optparse-option-callbacks">6.21.4</A>, Option Callbacks for detail on the arguments
+passed to <code>callable</code>.
+
+<P>
+</LI>
+<LI> 
+<code>callback_args</code>, <code>callback_kwargs</code>
+
+<P>
+Additional positional and keyword arguments to pass to <code>callback</code>
+after the four standard callback arguments.
+
+<P>
+</LI>
+<LI> 
+<tt class="member">help</tt>
+
+<P>
+Help text to print for this option when listing all available options
+after the user supplies a <tt class="member">help</tt> option (such as <code>"-help"</code>).
+If no help text is supplied, the option will be listed without help
+text.  To hide this option, use the special value <code>SUPPRESS_HELP</code>.
+
+<P>
+</LI>
+<LI> 
+<code>metavar</code> (default: derived from option strings)
+
+<P>
+Stand-in for the option argument(s) to use when printing help text.
+See section&nbsp;<A href="optparse-tutorial.html#optparse-tutorial">6.21.2</A>, the tutorial for an example.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.4 Standard option actions"
+  href="optparse-standard-option-actions.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.3.6 Standard option types"
+  href="optparse-standard-option-types.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-standard-option-actions.html">6.21.3.4 Standard option actions</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-standard-option-types.html">6.21.3.6 Standard option types</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

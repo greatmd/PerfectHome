@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="module-dbhash.html" />
+<link rel="parent" href="module-dbhash.html" />
+<link rel="next" href="module-whichdb.html" />
+<meta name='aesop' content='information' />
+<title>7.11.1 Database Objects </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.11 dbhash  "
+  href="module-dbhash.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.11 dbhash  "
+  href="module-dbhash.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.12 whichdb  "
+  href="module-whichdb.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-dbhash.html">7.11 dbhash  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-dbhash.html">7.11 dbhash  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-whichdb.html">7.12 whichdb  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0091110000000000000000"></A><A NAME="dbhash-objects"></A>
+<BR>
+7.11.1 Database Objects 
+</H2>
+
+<P>
+The database objects returned by <tt class="function">open()</tt> provide the methods 
+common to all the DBM-style databases and mapping objects.  The following
+methods are available in addition to the standard methods.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2789' xml:id='l2h-2789' class="method">first</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  It's possible to loop over every key/value pair in the database using
+  this method   and the <tt class="method">next()</tt> method.  The traversal is ordered by
+  the databases internal hash values, and won't be sorted by the key
+  values.  This method returns the starting key.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2790' xml:id='l2h-2790' class="method">last</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Return the last key/value pair in a database traversal.  This may be used to
+  begin a reverse-order traversal; see <tt class="method">previous()</tt>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2791' xml:id='l2h-2791' class="method">next</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Returns the key next key/value pair in a database traversal.  The
+  following code prints every key in the database <code>db</code>, without
+  having to create a list in memory that contains them all:
+
+<P>
+<div class="verbatim"><pre>
+print db.first()
+for i in xrange(1, len(db)):
+    print db.next()
+</pre></div>
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2792' xml:id='l2h-2792' class="method">previous</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Returns the previous key/value pair in a forward-traversal of the database.
+  In conjunction with <tt class="method">last()</tt>, this may be used to implement
+  a reverse-order traversal.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2793' xml:id='l2h-2793' class="method">sync</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  This method forces any unwritten data to be written to the disk.
+</dl>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.11 dbhash  "
+  href="module-dbhash.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.11 dbhash  "
+  href="module-dbhash.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.12 whichdb  "
+  href="module-whichdb.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-dbhash.html">7.11 dbhash  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-dbhash.html">7.11 dbhash  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-whichdb.html">7.12 whichdb  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

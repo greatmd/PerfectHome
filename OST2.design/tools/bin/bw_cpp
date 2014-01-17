@@ -1,0 +1,7 @@
+#! /bin/sh
+exe=$CC_BIN/cpp
+if [ -x $exe ]; then
+exec $exe -E `/bin/echo $@ | /bin/sed 's/-B/ /g' `
+else
+die "executable $exe not found!"
+fi

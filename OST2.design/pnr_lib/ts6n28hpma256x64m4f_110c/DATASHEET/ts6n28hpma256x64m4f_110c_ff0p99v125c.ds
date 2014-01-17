@@ -1,0 +1,510 @@
+****************************************************************************** 
+*        Software         : TSMC MEMORY COMPILER tsn28hpm2prf_2011.06.06.110c 
+*        Technology       : TSMC 28nm CMOS LOGIC High Performance Mobile 1P10M HKMG CU_ELK 0.9V
+*        Memory Type      : TSMC 28nm High Performance Mobile Two Port Register File
+*                         : with d240 bit cell SVT periphery 
+*        Library Name     : ts6n28hpma256x64m4f (user specify : TS6N28HPMA256X64M4F) 
+*        Library Version  : 110c 
+*        Generated Time   : 2013/09/17, 17:42:29 
+****************************************************************************** 
+*******************************************************************************
+*
+*STATEMENT OF USE
+*
+*This information contains confidential and proprietary information of TSMC.
+*No part of this information may be reproduced, transmitted, transcribed,
+*stored in a retrieval system, or translated into any human or computer
+*language, in any form or by any means, electronic, mechanical, magnetic,
+*optical, chemical, manual, or otherwise, without the prior written permission
+*of TSMC. This information was prepared for informational purpose and is for
+*use by TSMC's customers only. TSMC reserves the right to make changes in the
+*information at any time and without notice.
+*
+*******************************************************************************
+
+1. Features and Naming Conventions
+
+1.1 Features
+  
+    - 4 metal layers used
+    - Allow M4 channel routing through M4 power mesh
+    - Input and output pins all on single side of macro
+    - Two-port addressing permits simultaneous reading and writing of
+      two different address locations
+    - Synchronous write operation through port A
+    - Synchronous read operation through port B
+    - Positive edge-triggered input latches on Ports A and B for address,
+      data, and enables
+    - Performance options with segment type, bank or mux selection
+    - Support global EDA models and precise timing characterization data
+    
+  
+1.2 Naming Conventions
+  For example:
+
+  Instance naming example: ts6n28hpma{NW}x{NB}m{CM}{SEG}{BWEB}{BIST}{SLP}{SD}_{version}
+    -------------------------------------------------------------------------------------------
+    |              Naming           | NW  | NB | CM | SEG | BWEB | BIST | SLP | SD  | Version |
+    -------------------------------------------------------------------------------------------
+    | ts6n28hpma256x64m4s_110c       | 256 | 64 | 4  |  S  | N/A  | N/A  | N/A | N/A |  110c   |
+    -------------------------------------------------------------------------------------------
+    | ts6n28hpma256x64m4sw_110c      | 256 | 64 | 4  |  S  |  W   | N/A  | N/A | N/A |  110c   |
+    -------------------------------------------------------------------------------------------
+    | ts6n28hpma256x64m4swb_110c     | 256 | 64 | 4  |  S  |  W   |  B   | N/A | N/A |  110c   |
+    -------------------------------------------------------------------------------------------
+    | ts6n28hpma256x64m4swbs_110c    | 256 | 64 | 4  |  S  |  W   |  B   |  S  | N/A |  110c   |
+    -------------------------------------------------------------------------------------------
+    | ts6n28hpma128x16m4fwbso_110c   | 128 | 16 | 4  |  F  |  W   |  B   |  S  |  O  |  110c   |
+    -------------------------------------------------------------------------------------------
+  
+
+2. Memory Description
+
+    The ts6n28hpma256x64m4f or user specify TS6N28HPMA256X64M4F is a low power synchronous two-port,
+256 words by 64 bits mux4 Fast segmentation memory designed with TSMC 8T SRAM bit cell in TSMC's ten-layer metal,
+28nm CLN28HPM (0.9V) CMOS process.
+    The SRAM operates at a voltage of 0.9V +/- 10% and a junction temperature range of -40 deg to +125 deg.
+
+3. Area
+
+   -------------------------------------------------------------
+   |  Width(um)  | Height(um)  |  Area (um^2) pre-shrink       |
+   -------------------------------------------------------------
+   |   47.765    |  317.515    |   15166.104                     |
+   -------------------------------------------------------------
+
+  
+4. Pin Description
+  
+   SRAM macro : ts6n28hpma256x64m4f or user specify TS6N28HPMA256X64M4F
+
+  --------------------------------------------------------------------------------------------
+  |          Pin           |          Type         |            Description                  |
+  --------------------------------------------------------------------------------------------
+  |          VDD          |          Supply       |            Power bus                    |
+  --------------------------------------------------------------------------------------------
+  |          VSS           |          Supply       |            Ground bus                   |
+  --------------------------------------------------------------------------------------------
+  |        AA[7:0]         |          Input        |          Address input on Port A (write)|
+  --------------------------------------------------------------------------------------------
+  |        AB[7:0]         |          Input        |          Address input on Port B (read) |
+  --------------------------------------------------------------------------------------------
+  |        D[63:0]         |          Input        |          Data input                     |
+  --------------------------------------------------------------------------------------------
+  |          CLKW          |          Input        |          Write Clock input              |
+  --------------------------------------------------------------------------------------------
+  |          CLKR          |          Input        |          Read Clock input               |
+  --------------------------------------------------------------------------------------------
+  |          REB           |          Input        |          Read enable bar                |
+  --------------------------------------------------------------------------------------------
+  |          WEB           |          Input        |          Write enable bar               |
+  --------------------------------------------------------------------------------------------
+  |        Q[63:0]         |          Output       |          Data output                    |
+  --------------------------------------------------------------------------------------------
+  |          RCT[1:0]      |          Input        |      Read Cycle Time Control	     |
+  --------------------------------------------------------------------------------------------
+  |          WCT[1:0]      |          Input        |      Write Cycle Time Control	     |
+  --------------------------------------------------------------------------------------------
+  |          KP[2:0]       |          Input        |      Keeper drive strength select	     |
+  --------------------------------------------------------------------------------------------
+Note:
+        RCT[1:0], WCT[1:0] and KP[2:0] default settings :
+        ---------------------------------------------------------
+        |         |  RCT[1:0]   |   WCT[1:0]    |    KP[2:0]    |
+        ---------------------------------------------------------
+        | Default |     00      |      00       |       101     |
+        ---------------------------------------------------------
+
+        RCT[1:0], WCT[1:0] and KP[2:0] pin settings might be subject to change in future revision release
+ after silicon validation.  The timing data is characterized with the above default settings.
+        Other setting combinations of logic state would only be used for silicon debugging purpose only.
+
+
+5. Block diagram
+
+            --------------------------------
+            |                              |
+   RCT ---->|                              |
+            |                              |
+            |                              |
+   WCT ---->|                              |
+            |                              |
+            |                              |
+   KP  ---->|                              |
+            |                              |
+            |                              |
+            |                              |
+    CLKR--->|                              |
+            |                              |
+            |     Synchronous 2PRF         |
+            |                              |
+    CLKW--->|                              |
+            |                              |
+            |                              |
+            |                              |
+     AA --->|                              |
+            |                              |
+            |                              |
+            |                              |
+     AB --->|                              |
+            |                              |
+            |                              |
+            |                              |
+    REB --->|                              |
+            |                              |
+            |                              |
+            |                              |
+    WEB --->|                              |
+            |                              |
+            |                              |
+            |                              |
+            --------------------------------
+                 ^         	   |
+                 |         	   |
+                 |         	   |
+                 |         	   v
+                 D         	   Q
+            
+
+
+
+
+
+6. SRAM truth table
+
+   I. Functional
+   --------------------------------------------------------------------------------------------------
+   |                    |      |      |      |      |	   |	 |     |	    |		    |
+   |   stage            | CLKR | CLKW |  REB | WEB  |  D   | AB  | AA  |    Q	    |	  mem	    |
+   -------------------------------------------------------------------------------------------------|
+   |  read              | L->H |  -   |  L   |  H   |  -   |  b  |  -  |  Mem[b][i] |    hold       |
+   -------------------------------------------------------------------------------------------------|  
+   |  write bit[i]      |  -   | L->H |  H   |  L   | d[i] |  -  |  a  |    hold    | Mem[a][i]=d[i]|
+   -------------------------------------------------------------------------------------------------|
+   |write and read a!=b | L->H | L->H |  L   |  L   | d[i] |  b  |  a  |  Mem[b][i] | Mem[a][i]=d[i]|
+   |------------------------------------------------------------------------------------------------|
+   |read then write a==b| L->H | L->H |  L   |  L   | d[i] |  b  |  a  |  Mem[b][i] | Mem[a][i]=d[i]|
+   |------------------------------------------------------------------------------------------------|
+   |write then read a==b| L->H | L->H |  L   |  L   | d[i] |  b  |  a  |  Mem[b][i] | Mem[a][i]=d[i]|
+   |                    |      |      |      |      |      |     |     |  = d[i]    |               |
+   |------------------------------------------------------------------------------------------------|
+
+
+   -------------------------------------------------------------------------------------------
+   |                    |     | Read | Write| Read | Write|Bit Write| Write | Read  | Data In|
+   |  Function          | BIST| Clock| Clock|Enable|Enable|  MasK   |Address|Address|        |
+   |-----------------------------------------------------------------------------------------|
+   |  Normal            |  L  | CLKR | CLKW | REB  | WEB  |  BWEB   |   AA  |   AB  |   D    |
+   |-----------------------------------------------------------------------------------------|
+   |  BIST              |  H  | CLKR | CLKW | REBM | WEBM |  BWEBM  |  AMA  |  ABA  |   DM   |
+   |-----------------------------------------------------------------------------------------|
+
+   Terms used in the above truth or hazard tables :
+   Condition:
+       L            Logic low
+       H            Logic high
+       x/z          Unknown  or high impedance
+       -            Logic low, logic high, or unknown. Not include high impedance
+       L->H         rising edge
+       H->L         falling edge
+   Output Q:
+       hold         Keep the previous state
+       x            Unknown (either logic low or logic high)
+       L            Logic low
+       data-out     Output of normal read function
+   Mem: 
+       Mem[a]=x     Memory content is unknown at the specific memory address A
+       Mem[a][i]=x  Memory content is unknown at the specific memory address A and specific IO
+       hold         Keep the previous state
+       all x        Store unknown to all memory address
+
+
+7. Timing specification
+
+* Normal Mode READ cycle
+
+             |                                     |                                     |                  
+             |<-------------- trcyc -------------->|<-------------- trcyc -------------->|                  
+             |                                     |                                     |                   
+             |<---- trckh ----->|                  |                  |<---- trckl ---->|                  
+             | ---------------- |                  | ---------------- |                  | ---------------- 
+             |/                \|                  |/                \|                  |/                \ 
+CLKR         |                  |                  |                  |                  |                  \
+            /|                  |\                /|                  |\                /|                   \ 
+  ---------- |                  | ---------------- |                  | ---------------- |                    ------  
+        |trs    trh                            trs    trh                            trs    trh   
+        |<-->|<------>|                       |<-->|<------>|                       |<-->|<------>|   
+  ----- |    |        | --------------------- | ----------- | --------------------- |             | ----------- 
+       \|             |/                     \|/           \|/                     \|             |/ 
+REB     |             |                       |             |                       |             |
+       /|\           /|\                     /|             |\                     /|\           /|\
+  ----- | ----------- | --------------------- |             | --------------------- | ----------- | -----------
+        |tws    twh                            tws    twh                            tws    twh
+        |<-->|<------>|                       |<-->|<------>|                       |<-->|<------>|
+  ----- | ----------- | --------------------- | ----------- | --------------------- | ----------- | -----------
+       \|/           \|/                     \|/           \|/                     \|/           \|/
+WEB     |             |                       |             |                       |             |
+       /|             |\                     /|             |\                     /|             |\
+  ----- |             | --------------------- |             | --------------------- |             | -----------
+        |tabs   tabh                                                                 tabs   tabh   
+        |<-->|<------>|                                                             |<-->|<------>|   
+  ----- | ----------- | ----------------------------------------------------------- | ----------- | ----------- 
+       \|/           \|/                                                           \|/           \|/  
+AB      |     A0      |                                                             |     A1      |
+       /|\           /|\                                                           /|\           /|\
+  ----- | ----------- | ----------------------------------------------------------- | ----------- | -----------
+             |<------- tcd ------------>|                                          |<------- tcd ------------>|
+             |<--- thold -------->|     |                                          |<--- thold -------->|     |
+  -----------|------------------- | --- | ------------------------------------------------------------- | --- | ------
+                                 \|/   \|/                                                             \|/   \|/    
+Q              pre-Q              |     |          Q0                                                   |     |   Q1    
+                                 /|\   /|\                                                             /|\   /|\
+  ------------------------------- | --- | ------------------------------------------------------------- | --- | ------
+
+
+* Normal Mode Write cycle with bit write mask
+
+             |                                     |                                     |                  
+             |<------------- twcyc --------------->|<------------- twcyc --------------->|                  
+             |                                     |                                     |                   
+             |<----- twckh ---->|                  |                  |<----- twckl ---->|                  
+             | ---------------- |                  | ---------------- |                  | ---------------- 
+             |/                \|                  |/                \|                  |/                \ 
+CLKW         |                  |                  |                  |                  |                  \
+            /|                  |\                /|                  |\                /|                   \ 
+  ---------- |                  | ---------------- |                  | ---------------- |                    -
+        |tws    twh                            tws    twh                            tws   twh   
+        |<-->|<------>|                       |<-->|<------>|                       |<-->|<------>|   
+  ----- |    |        | --------------------- | ----------- | --------------------- |             | ----------- 
+       \|             |/                     \|/           \|/                     \|             |/ 
+WEB     |             |                       |             |                       |             |
+       /|\           /|\                     /|             |\                     /|\           /|\
+  ----- | ----------- | --------------------- |             | --------------------- | ----------- | -----------
+        |trs    trh                            trs    trh                            trs   trh
+        |<-->|<------>|                       |<-->|<------>|                       |<-->|<------>|
+  ----- | ----------- | --------------------- | ----------- | --------------------- | ----------- | -----------
+       \|/           \|/                     \|/           \|/                     \|/           \|/
+REB     |             |                       |             |                       |             |
+       /|             |\                     /|             |\                     /|             |\
+  ----- |             | --------------------- |             | --------------------- |             | -----------
+        |taas   taah                                                                 taas   taah   
+        |<-->|<------>|                                                             |<-->|<------>|   
+  ----- | ----------- | ----------------------------------------------------------- | ----------- | ----------- 
+       \|/           \|/                                                           \|/           \|/  
+AA      |    A0       |                                                             |    A1       |
+       /|\           /|\                                                           /|\           /|\
+  ----- | ----------- | ----------------------------------------------------------- | ----------- | -----------
+        |tds    tdh                                                                  tds   tdh   
+        |<-->|<------>|                                                             |<-->|<------>|   
+  ----- | ----------- | ----------------------------------------------------------- | ----------- | ----------- 
+       \|/           \|/                                                           \|/           \|/  
+D       |    D0       |                                                             |    D1       |
+       /|\           /|\                                                           /|\           /|\
+  ----- | ----------- | ----------------------------------------------------------- | ----------- | -----------                                                                  
+
+
+
+*  Timing waveform for Clock Separation (when AA==AB)
+
+             | -----------------                                        | ----------------
+             |/                 \                                       |/                \
+CLKR         |                   \                                      |                  \
+            /|                    \                                    /|                   \
+  ---------- |<-trwcc-->|          -------------------------- |<-twrcc->|                    -
+                        | ----------------                    | ----------------
+                        |/                \                   |/                \
+CLKW                    |                  \                  |                  \
+                       /|                   \                /|                   \
+  --------------------- |                    ---------------- |                    -----------
+
+  ----------- | ------------------------------------ | ---------------------------------------
+             \|/                                    \|/                   
+D    D0       |                    D1                |                 D2   
+             /|\                                    /|\                   
+  ----------- | ------------------------------------ | ---------------------------------------
+  -----------------   ------------------------------------------------------   ---------------
+     		   \ / \ / 						    \ / \ /  
+Q    	   Q0	  	     			  Q0				      D2
+     		   / \ / \ 						    / \ / \   
+  -----------------   ------------------------------------------------------   ---------------
+
+
+
+
+
+
+
+
+
+                --------------------------------------------------------
+                | REB | WEB | AA==AB | CLK sep |    Q      | Mem[AA]   |
+                --------------------------------------------------------
+                |  H  |  H  |    X   |    X    | No change | No change |
+                --------------------------------------------------------
+                |  H  |  L  |    X   |    X    | No change |    D      |
+                --------------------------------------------------------
+                |  L  |  H  |    X   |    X    | Valid     | No change |
+                --------------------------------------------------------
+                |  L  |  L  |   No   |    X    | Valid     |    D      |
+                --------------------------------------------------------
+                |  L  |  L  |   Yes  | >trwcc  | Valid     |    D      |
+                --------------------------------------------------------
+                |  L  |  L  |   Yes  | <trwcc  | Unknown   |    D      |
+                --------------------------------------------------------
+                |  L  |  L  |   Yes  | >twrcc  | Valid     |    D      |
+                --------------------------------------------------------
+                |  L  |  L  |   Yes  | <twrcc  | Unknown   |    D      |
+                --------------------------------------------------------
+
+  Note: The maximum slew for each input signal is 0.255ns from (10-90)% or 0.319ns from (0-100)%
+        Rising signals are measured at 50% of VDD and falling signals are measured at 50% of VDD
+        Rising and falling slews are measured from 10% VDD to 90% VDD
+
+
+SRAM timing:(ff0p99v125c FF, 0.99, 125.00)
+
+I. Normal Mode
+           
+           Parameter                 Symbol    Param. Value (ns)
+ 
+           ---------                 ------    ------------
+           Minimum read cycle time   trcyc         0.477
+           Minimum write cycle time  twcyc         0.442
+           CLK to Valid Q            tcd           0.281
+           CLK to Invalid Q          thold         0.123
+           Write Address setup       taas          0.126
+           Write Address hold        taah          0.075
+           Read Address setup        tabs          0.188
+           Read Address hold         tabh          0.076
+           Read enable setup         trs           0.182
+           Read enable hold          trh           0.022
+           Write enable setup        tws           0.177
+           Write enable hold         twh           0.023
+           Data setup                tds           0.049
+           Data hold                 tdh           0.135
+           Clock high - CLKR         trckh         0.101
+           Clock low - CLKR          trckl         0.300
+           Clock high - CLKW         twckh         0.100
+           Clock low - CLKW          twckl         0.259
+           Clock separation W-R      twrcc (1)     0.478
+           Clock separation R-W      trwcc (1)     0.478
+
+  1. twrcc apply only for determinate results where addresses match. 
+
+
+
+
+
+
+
+8. Process Voltage and Temperature(PVT) Characterization Conditions
+   -----------------------------------------------------------------------------------
+   |  PVT                   |  Process         |  Voltage(V)      |  Temperature(C)  |
+   -----------------------------------------------------------------------------------
+   |  ss0p81vm40c           |  SS              |  0.81            |  -40             |
+   -----------------------------------------------------------------------------------
+   |  ss0p81v125c           |  SS              |  0.81            |  125             |
+   -----------------------------------------------------------------------------------
+   |  ss0p81v0c             |  SS              |  0.81            |    0             |
+   -----------------------------------------------------------------------------------
+   |  tt0p9v25c             |  TT              |  0.9             |   25             |
+   -----------------------------------------------------------------------------------
+   |  tt0p9v85c             |  TT              |  0.9             |   85             |
+   -----------------------------------------------------------------------------------
+   |  ff0p99vm40c           |  FF              |  0.99            |  -40             |
+   -----------------------------------------------------------------------------------
+   |  ff0p99v125c           |  FF              |  0.99            |  125             |
+   -----------------------------------------------------------------------------------
+   |  ff0p99v0c             |  FF              |  0.99            |    0             |
+   -----------------------------------------------------------------------------------
+   |  ffg0p99v125c          |  FFG             |  0.99            |  125             |
+   -----------------------------------------------------------------------------------
+
+   Note
+   1. FFG/0.99V/125C corner is supported as one extra pvt corner in NLDM and only
+      leakage data is provided.
+   2. Permanent damage could occur if the operation exceeds the table listing above.
+      
+
+9. Pin capacitance
+
+           Pin          Value (pF)
+
+           ---------    ------------------
+           AA[7:0]         0.002
+           AB[7:0]         0.002
+           D[63:0]         0.001
+           CLKR            0.023
+           CLKW            0.016
+           REB             0.002
+           WEB             0.002
+           RCT[1:0]	   0.004
+           WCT[1:0]	   0.005
+           KP[2:0]	   0.013
+
+
+10. Power
+    The tables below provide static and dynamic power information for the 
+    different operational modes of the memory.  The total average macro 
+    power will be the sum of the static component (namely, leakage) and 
+    the dynamic components.  Although the data provided in this document 
+    mainly pertains to a specific process, voltage, and temperature (PVT) 
+    condition based on user selection, the leakage at the worst case PVT 
+    has also been provided for reference.
+
+  10.1  Static Power					           
+
+    Functional Mode                                                                Value
+    ------------                                         ----------------------------------------------------------
+                                                                Total            Periphery            Cell Array
+
+    Leakage Current                                         4011.6900 (uA)     3284.2639 (uA)       727.4261 (uA)
+    Worst Case Leakage Current @ FF /0.99V/125C             4011.6900 (uA)     3284.2639 (uA)       727.4261 (uA)
+    Worst Case Leakage Current @ FFG/0.99V/125C             2593.9600 (uA)     2237.4438 (uA)       356.5162 (uA)
+
+
+  10.2 Dynamic Power - Average
+
+    Functional Mode (Total)                             Value
+    --------------------------                          ----------------
+    Read 						 7.023 (uA/MHz)
+    Write 			                         8.007 (uA/MHz) 
+    Standby*				                 3.598 (uA/MHz) 
+
+
+    * Standby Mode = memory is disabled by REB & WEB pin, CLK, address, data, 
+      and bitwrite pins maintain 50% activity.
+
+    1.  The above values assume 50% activity, which is typically defined 
+        as 1/2 the bus pins changing along with the relevant control pins, 
+        with NO load on the output pins (Q).  
+    2.  For more event specific power or pin/bus contribution information, 
+        see the Dynamic Power breakout table below.
+    3.  No load on outputs (Q).  
+
+
+    Dynamic Power - Breakout per pin
+    --------------------------------
+
+           Pins				Value
+           ----          		-----
+           CLKR - Read Mode		6.618 (uA/MHz)      
+           CLKW - Write Mode		6.878 (uA/MHz)    
+           CLK  - Deselect 		2.165 (uA/MHz)       
+           REB				0.034 (uA/MHz)
+           WEB				0.025 (uA/MHz)  
+
+           Buses			Value (per pin)
+           -----    		 	---------------
+           D[63:0]                       0.026 (uA/MHz)
+           AA[7:0]                  0.068 (uA/MHz)
+           AB[7:0]                  0.068 (uA/MHz)
+           Q[63:0]                       0.003 (uA/MHz)
+
+
+           RCT[1:0]	                    0.025 (uA/MHz)
+           WCT[1:0]	                    0.025 (uA/MHz)
+           KP[2:0]	                    0.025 (uA/MHz)
+
+    1. n = number of IO bits.       
+    2. m = number of addresses.

@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-subprocess.html" />
+<link rel="prev" href="module-statvfs.html" />
+<link rel="parent" href="allos.html" />
+<link rel="next" href="dircmp-objects.html" />
+<meta name='aesop' content='information' />
+<title>6.7 filecmp -- File and Directory Comparisons</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.6 statvfs  "
+  href="module-statvfs.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.7.1 The dircmp class"
+  href="dircmp-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-statvfs.html">6.6 statvfs  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="dircmp-objects.html">6.7.1 The dircmp class</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008700000000000000000">
+6.7 <tt class="module">filecmp</tt> --
+         File and Directory Comparisons</A>
+</H1>
+
+<P>
+<A NAME="module-filecmp"></A>
+
+<P>
+The <tt class="module">filecmp</tt> module defines functions to compare files and
+directories, with various optional time/correctness trade-offs.
+
+<P>
+The <tt class="module">filecmp</tt> module defines the following functions:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1814' xml:id='l2h-1814' class="function">cmp</tt></b>(</nobr></td>
+  <td><var>f1, f2</var><big>[</big><var>, shallow</var><big>[</big><var>, use_statcache</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Compare the files named <var>f1</var> and <var>f2</var>, returning <code>True</code> if
+they seem equal, <code>False</code> otherwise.
+
+<P>
+Unless <var>shallow</var> is given and is false, files with identical
+<tt class="function">os.stat()</tt> signatures are taken to be equal.
+
+<span class="versionnote">Changed in version 2.3:
+<var>use_statcache</var> is obsolete and ignored..</span>
+
+<P>
+Files that were compared using this function will not be compared again
+unless their <tt class="function">os.stat()</tt> signature changes.
+
+<P>
+Note that no external programs are called from this function, giving it
+portability and efficiency.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1815' xml:id='l2h-1815' class="function">cmpfiles</tt></b>(</nobr></td>
+  <td><var>dir1, dir2, common</var><big>[</big><var>,
+                           shallow</var><big>[</big><var>, use_statcache</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Returns three lists of file names: <var>match</var>, <var>mismatch</var>,
+<var>errors</var>.  <var>match</var> contains the list of files match in both
+directories, <var>mismatch</var> includes the names of those that don't,
+and <var>errros</var> lists the names of files which could not be
+compared.  Files may be listed in <var>errors</var> because the user may
+lack permission to read them or many other reasons, but always that
+the comparison could not be done for some reason.
+
+<P>
+The <var>common</var> parameter is a list of file names found in both directories.
+The <var>shallow</var> and <var>use_statcache</var> parameters have the same
+meanings and default values as for <tt class="function">filecmp.cmp()</tt>.
+</dl>
+
+<P>
+Example:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; import filecmp
+&gt;&gt;&gt; filecmp.cmp('libundoc.tex', 'libundoc.tex')
+True
+&gt;&gt;&gt; filecmp.cmp('libundoc.tex', 'lib.tex')
+False
+</pre></div>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="dircmp-objects.html">6.7.1 The <tt class="class">dircmp</tt> class</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.6 statvfs  "
+  href="module-statvfs.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.7.1 The dircmp class"
+  href="dircmp-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-statvfs.html">6.6 statvfs  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="dircmp-objects.html">6.7.1 The dircmp class</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

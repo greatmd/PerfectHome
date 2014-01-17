@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node527.html" />
+<link rel="prev" href="module-smtpd.html" />
+<link rel="parent" href="module-smtpd.html" />
+<link rel="next" href="node527.html" />
+<meta name='aesop' content='information' />
+<title>11.13.1 SMTPServer Objects</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.13 smtpd  "
+  href="module-smtpd.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11.13 smtpd  "
+  href="module-smtpd.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.13.2 DebuggingServer Objects"
+  href="node527.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-smtpd.html">11.13 smtpd  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-smtpd.html">11.13 smtpd  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node527.html">11.13.2 DebuggingServer Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00131310000000000000000">
+11.13.1 SMTPServer Objects</A>
+</H2>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-3510' xml:id='l2h-3510' class="class">SMTPServer</tt></b>(</nobr></td>
+  <td><var>localaddr, remoteaddr</var>)</td></tr></table></dt>
+<dd>
+Create a new <tt class="class">SMTPServer</tt> object, which binds to local address
+<var>localaddr</var>.  It will treat <var>remoteaddr</var> as an upstream SMTP
+relayer.  It inherits from <tt class="class">asyncore.dispatcher</tt>, and so will
+insert itself into <tt class="module"><a href="module-asyncore.html">asyncore</a></tt>'s event loop on instantiation.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3511' xml:id='l2h-3511' class="method">process_message</tt></b>(</nobr></td>
+  <td><var>peer, mailfrom, rcpttos, data</var>)</td></tr></table></dt>
+<dd>
+Raise <tt class="exception">NotImplementedError</tt> exception. Override this in
+subclasses to do something useful with this message. Whatever was
+passed in the constructor as <var>remoteaddr</var> will be available as the
+<tt class="member">_remoteaddr</tt> attribute. <var>peer</var> is the remote host's address,
+<var>mailfrom</var> is the envelope originator, <var>rcpttos</var> are the
+envelope recipients and <var>data</var> is a string containing the contents
+of the e-mail (which should be in <a class="rfc" id='rfcref-90352' xml:id='rfcref-90352'
+href="http://www.faqs.org/rfcs/rfc2822.html">RFC 2822</a> format).
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.13 smtpd  "
+  href="module-smtpd.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11.13 smtpd  "
+  href="module-smtpd.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.13.2 DebuggingServer Objects"
+  href="node527.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-smtpd.html">11.13 smtpd  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-smtpd.html">11.13 smtpd  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node527.html">11.13.2 DebuggingServer Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node66.html" />
+<link rel="prev" href="node64.html" />
+<link rel="parent" href="module-pickle.html" />
+<link rel="next" href="node66.html" />
+<meta name='aesop' content='information' />
+<title>3.14.3 Usage</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.14.2 Data stream format"
+  href="node64.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3.14 pickle  "
+  href="module-pickle.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.14.4 What can be"
+  href="node66.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node64.html">3.14.2 Data stream format</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-pickle.html">3.14 pickle  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node66.html">3.14.4 What can be</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0051430000000000000000">
+3.14.3 Usage</A>
+</H2>
+
+<P>
+To serialize an object hierarchy, you first create a pickler, then you
+call the pickler's <tt class="method">dump()</tt> method.  To de-serialize a data
+stream, you first create an unpickler, then you call the unpickler's
+<tt class="method">load()</tt> method.  The <tt class="module">pickle</tt> module provides the
+following constant:
+
+<P>
+<dl><dt><b><tt id='l2h-633' xml:id='l2h-633'>HIGHEST_PROTOCOL</tt></b></dt>
+<dd>
+The highest protocol version available.  This value can be passed
+as a <var>protocol</var> value.
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dd></dl>
+
+<P>
+The <tt class="module">pickle</tt> module provides the
+following functions to make this process more convenient:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-634' xml:id='l2h-634' class="function">dump</tt></b>(</nobr></td>
+  <td><var>obj, file</var><big>[</big><var>, protocol</var><big>[</big><var>, bin</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Write a pickled representation of <var>obj</var> to the open file object
+<var>file</var>.  This is equivalent to
+<code>Pickler(<var>file</var>, <var>protocol</var>, <var>bin</var>).dump(<var>obj</var>)</code>.
+
+<P>
+If the <var>protocol</var> parameter is omitted, protocol 0 is used.
+If <var>protocol</var> is specified as a negative value
+or <tt class="constant">HIGHEST_PROTOCOL</tt>,
+the highest protocol version will be used.
+
+<P>
+
+<span class="versionnote">Changed in version 2.3:
+The <var>protocol</var> parameter was added.
+The <var>bin</var> parameter is deprecated and only provided
+for backwards compatibility.  You should use the <var>protocol</var>
+parameter instead.</span>
+
+<P>
+If the optional <var>bin</var> argument is true, the binary pickle format
+is used; otherwise the (less efficient) text pickle format is used
+(for backwards compatibility, this is the default).
+
+<P>
+<var>file</var> must have a <tt class="method">write()</tt> method that accepts a single
+string argument.  It can thus be a file object opened for writing, a
+<tt class="module"><a href="module-StringIO.html">StringIO</a></tt> object, or any other custom
+object that meets this interface.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-635' xml:id='l2h-635' class="function">load</tt></b>(</nobr></td>
+  <td><var>file</var>)</td></tr></table></dt>
+<dd>
+Read a string from the open file object <var>file</var> and interpret it as
+a pickle data stream, reconstructing and returning the original object
+hierarchy.  This is equivalent to <code>Unpickler(<var>file</var>).load()</code>.
+
+<P>
+<var>file</var> must have two methods, a <tt class="method">read()</tt> method that takes
+an integer argument, and a <tt class="method">readline()</tt> method that requires no
+arguments.  Both methods should return a string.  Thus <var>file</var> can
+be a file object opened for reading, a
+<tt class="module">StringIO</tt> object, or any other custom
+object that meets this interface.
+
+<P>
+This function automatically determines whether the data stream was
+written in binary mode or not.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-636' xml:id='l2h-636' class="function">dumps</tt></b>(</nobr></td>
+  <td><var>obj</var><big>[</big><var>, protocol</var><big>[</big><var>, bin</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Return the pickled representation of the object as a string, instead
+of writing it to a file.
+
+<P>
+If the <var>protocol</var> parameter is omitted, protocol 0 is used.
+If <var>protocol</var> is specified as a negative value
+or <tt class="constant">HIGHEST_PROTOCOL</tt>,
+the highest protocol version will be used.
+
+<P>
+
+<span class="versionnote">Changed in version 2.3:
+The <var>protocol</var> parameter was added.
+The <var>bin</var> parameter is deprecated and only provided
+for backwards compatibility.  You should use the <var>protocol</var>
+parameter instead.</span>
+
+<P>
+If the optional <var>bin</var> argument is
+true, the binary pickle format is used; otherwise the (less efficient)
+text pickle format is used (this is the default).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-637' xml:id='l2h-637' class="function">loads</tt></b>(</nobr></td>
+  <td><var>string</var>)</td></tr></table></dt>
+<dd>
+Read a pickled object hierarchy from a string.  Characters in the
+string past the pickled object's representation are ignored.
+</dl>
+
+<P>
+The <tt class="module">pickle</tt> module also defines three exceptions:
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-638' xml:id='l2h-638' class="exception">PickleError</tt></b></dt>
+<dd>
+A common base class for the other exceptions defined below.  This
+inherits from <tt class="exception">Exception</tt>.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-639' xml:id='l2h-639' class="exception">PicklingError</tt></b></dt>
+<dd>
+This exception is raised when an unpicklable object is passed to
+the <tt class="method">dump()</tt> method.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-640' xml:id='l2h-640' class="exception">UnpicklingError</tt></b></dt>
+<dd>
+This exception is raised when there is a problem unpickling an object.
+Note that other exceptions may also be raised during unpickling,
+including (but not necessarily limited to) <tt class="exception">AttributeError</tt>,
+<tt class="exception">EOFError</tt>, <tt class="exception">ImportError</tt>, and <tt class="exception">IndexError</tt>.
+</dd></dl>
+
+<P>
+The <tt class="module">pickle</tt> module also exports two callables<A NAME="tex2html15"
+  HREF="#foot8968"><SUP>3.3</SUP></A>, <tt class="class">Pickler</tt> and <tt class="class">Unpickler</tt>:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-641' xml:id='l2h-641' class="class">Pickler</tt></b>(</nobr></td>
+  <td><var>file</var><big>[</big><var>, protocol</var><big>[</big><var>, bin</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+This takes a file-like object to which it will write a pickle data
+stream.  
+
+<P>
+If the <var>protocol</var> parameter is omitted, protocol 0 is used.
+If <var>protocol</var> is specified as a negative value,
+the highest protocol version will be used.
+
+<P>
+
+<span class="versionnote">Changed in version 2.3:
+The <var>bin</var> parameter is deprecated and only provided
+for backwards compatibility.  You should use the <var>protocol</var>
+parameter instead.</span>
+
+<P>
+Optional <var>bin</var> if true, tells the pickler to use the more
+efficient binary pickle format, otherwise the ASCII format is used
+(this is the default).
+
+<P>
+<var>file</var> must have a <tt class="method">write()</tt> method that accepts a single
+string argument.  It can thus be an open file object, a
+<tt class="module">StringIO</tt> object, or any other custom
+object that meets this interface.
+</dl>
+
+<P>
+<tt class="class">Pickler</tt> objects define one (or two) public methods:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-642' xml:id='l2h-642' class="method">dump</tt></b>(</nobr></td>
+  <td><var>obj</var>)</td></tr></table></dt>
+<dd>
+Write a pickled representation of <var>obj</var> to the open file object
+given in the constructor.  Either the binary or ASCII format will
+be used, depending on the value of the <var>bin</var> flag passed to the
+constructor.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-643' xml:id='l2h-643' class="method">clear_memo</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Clears the pickler's ``memo''.  The memo is the data structure that
+remembers which objects the pickler has already seen, so that shared
+or recursive objects pickled by reference and not by value.  This
+method is useful when re-using picklers.
+
+<P>
+<div class="note"><b class="label">Note:</b>
+Prior to Python 2.3, <tt class="method">clear_memo()</tt> was only available on the
+picklers created by <tt class="module"><a href="module-cPickle.html">cPickle</a></tt>.  In the <tt class="module">pickle</tt> module,
+picklers have an instance variable called <tt class="member">memo</tt> which is a
+Python dictionary.  So to clear the memo for a <tt class="module">pickle</tt> module
+pickler, you could do the following:
+
+<P>
+<div class="verbatim"><pre>
+mypickler.memo.clear()
+</pre></div>
+
+<P>
+Code that does not need to support older versions of Python should
+simply use <tt class="method">clear_memo()</tt>.
+</div>
+</dl>
+
+<P>
+It is possible to make multiple calls to the <tt class="method">dump()</tt> method of
+the same <tt class="class">Pickler</tt> instance.  These must then be matched to the
+same number of calls to the <tt class="method">load()</tt> method of the
+corresponding <tt class="class">Unpickler</tt> instance.  If the same object is
+pickled by multiple <tt class="method">dump()</tt> calls, the <tt class="method">load()</tt> will
+all yield references to the same object.<A NAME="tex2html16"
+  HREF="#foot8970"><SUP>3.4</SUP></A>
+<P>
+<tt class="class">Unpickler</tt> objects are defined as:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-644' xml:id='l2h-644' class="class">Unpickler</tt></b>(</nobr></td>
+  <td><var>file</var>)</td></tr></table></dt>
+<dd>
+This takes a file-like object from which it will read a pickle data
+stream.  This class automatically determines whether the data stream
+was written in binary mode or not, so it does not need a flag as in
+the <tt class="class">Pickler</tt> factory.
+
+<P>
+<var>file</var> must have two methods, a <tt class="method">read()</tt> method that takes
+an integer argument, and a <tt class="method">readline()</tt> method that requires no
+arguments.  Both methods should return a string.  Thus <var>file</var> can
+be a file object opened for reading, a
+<tt class="module">StringIO</tt> object, or any other custom
+object that meets this interface.
+</dl>
+
+<P>
+<tt class="class">Unpickler</tt> objects have one (or two) public methods:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-645' xml:id='l2h-645' class="method">load</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Read a pickled object representation from the open file object given
+in the constructor, and return the reconstituted object hierarchy
+specified therein.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-646' xml:id='l2h-646' class="method">noload</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+This is just like <tt class="method">load()</tt> except that it doesn't actually
+create any objects.  This is useful primarily for finding what's
+called ``persistent ids'' that may be referenced in a pickle data
+stream.  See section&nbsp;<A href="pickle-protocol.html#pickle-protocol">3.14.5</A> below for more details.
+
+<P>
+<strong>Note:</strong> the <tt class="method">noload()</tt> method is currently only
+available on <tt class="class">Unpickler</tt> objects created with the
+<tt class="module">cPickle</tt> module.  <tt class="module">pickle</tt> module <tt class="class">Unpickler</tt>s do
+not have the <tt class="method">noload()</tt> method.
+</dl>
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot8968">... callables</A><A
+ HREF="node65.html#tex2html15"><SUP>3.3</SUP></A></DT>
+<DD>In the
+<tt class="module">pickle</tt> module these callables are classes, which you could
+subclass to customize the behavior.  However, in the <tt class="module"><a href="module-cPickle.html">cPickle</a></tt>
+module these callables are factory functions and so cannot be
+subclassed.  One common reason to subclass is to control what
+objects can actually be unpickled.  See section&nbsp;<A href="pickle-sub.html#pickle-sub">3.14.6</A> for
+more details.
+
+</DD>
+<DT><A NAME="foot8970">... object.</A><A
+ HREF="node65.html#tex2html16"><SUP>3.4</SUP></A></DT>
+<DD><em>Warning</em>: this
+is intended for pickling multiple objects without intervening
+modifications to the objects or their parts.  If you modify an object
+and then pickle it again using the same <tt class="class">Pickler</tt> instance, the
+object is not pickled again -- a reference to it is pickled and the
+<tt class="class">Unpickler</tt> will return the old value, not the modified one.
+There are two problems here: (1) detecting changes, and (2)
+marshalling a minimal set of changes.  Garbage Collection may also
+become a problem here.
+
+</DD>
+</DL>
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.14.2 Data stream format"
+  href="node64.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3.14 pickle  "
+  href="module-pickle.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.14.4 What can be"
+  href="node66.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node64.html">3.14.2 Data stream format</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-pickle.html">3.14 pickle  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node66.html">3.14.4 What can be</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

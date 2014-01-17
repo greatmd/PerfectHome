@@ -1,0 +1,291 @@
+#!/import/bw/tools/local/perl-5.8.0/bin/perl -w
+
+eval 'exec /import/bw/tools/local/perl-5.8.0/bin/perl -w -S $0 ${1+"$@"}'
+    if 0; # not running under some shell
+
+use strict;
+use warnings;
+use lib '.';
+
+use ScanTest;
+
+&ScanTest::BlockFlow::BlockFlow;
+
+__END__
+
+=head1 NAME
+
+scantest - Perl script for scan pattern generation.
+
+=head1 SYNOPSIS
+
+scantest [options] gate_level_netlist
+
+=head1 ABSTRACT
+
+"scantest" is a front-end interface for use of the ScanTest
+package for automatic test pattern generation using FastScan.
+"scantest" controls the creation of the test procedure file,
+FastScan command file and execution script, as well as the
+generation and simulation of test patterns.
+
+=head1 DESCRIPTION
+
+The intention behind "scantest" is to simplify the ATPG flow.
+If a design file conforms to the built-in defaults the entire
+flow can be run by specifying only the design file:
+
+=over 4
+
+scantest design_file
+
+=back
+
+The default design settings are as follows:
+
+=over
+
+=item * one scan chain
+
+=item * clock port is named "clk"
+
+=item * scanin port is named "si"
+
+=item * scanout port is named "so"
+
+=item * scanenable port is named "se"
+
+=back
+
+If the design does not conform to these defaults, switches
+are available to modify the operation of "scantest".
+
+=head2 OPTIONS
+
+=over
+
+=item -[no]atpg
+
+Run atpg only. If the option is negated, only simulation
+is performed. This is the same as specifying "-sim"
+
+=item -bb or -blackbox
+
+Enable automatic black box recognition. Typically this option
+should not be required. The switch can be used to force
+continuation of the flow in the presence of missing cells.
+Coverage is likely to be poor.
+
+Before setting this switch the user is advised to check that
+correct version of the library is being referenced and that
+all verilog files have been specified.
+
+In the event that a view is known to be missing (such as a
+memory block) this switch will need to be specified.
+
+=item -clk
+
+Introduces a comma separated list of rising edge active clocks.
+Default settings are overridden. Default names must be given
+explicitly if needed.
+
+=item -comb
+
+Specifies that the block has no sequential cells. Normally
+"scantest" searches for the presence of default or user
+specified clock ports. Specifying "-comb" suppresses this
+behavior.
+
+=item -design
+
+Optional switch that introduces a single design file.
+
+=item -dftlib
+
+Allows a non-default FastScan library to be specified.
+
+The DFT library is normally "$LIBDIR/u1/atpg/u1.mdl".
+This switch is provided for library debug purposes. Do not
+use it in the normal flow!
+
+=item -[no]dofile
+
+If set, this switch causes only the FastScan command file
+(dofile) to be generated.
+
+If negated, the switch allows the flow to proceed without
+generating a new default command file. The command file
+should be already present. This switch allows the user
+to develop a custom command file.
+
+=item -dumpdir
+
+Allows a non-default dump directory to be specified.
+
+By default, "scantest" creates a dump area for simulation
+files in either "/export/home/bw" (scratch area available
+when running under dream) or "/tmp". The user is free to
+choose somewhere else.
+
+A subdirectory composed of the user's name and process
+id is created into which the simulation files are dumped.
+
+=over
+
+NOTE: The dump directory is never cleaned out. The user
+is responsible for ensuring that unnecessary files are
+removed.
+
+=back
+
+=item -flist
+
+Specifies verilog include files. This switch is necessary
+if the design is spread over multiple files.
+
+By default no include files are assumed.
+
+=item -fslog
+
+Specifies an alternate name for the fastscan log file.
+        
+=item -help
+
+Prints the list of switches with brief descriptions and
+default settings.
+
+=item -hi
+
+Introduces a comma separated list of input ports which
+need to be contrained high.
+
+By default none are assumed.
+
+=item -lo
+
+Introduces a comma separated list of input ports which
+need to be contrained low.
+
+By default none are assumed.
+
+=item -ph1
+
+Introduces a comma separated list of rising edge active clocks.
+This switch is an alias for "clk".
+
+=item -ph2
+
+Introduces a comma separated list of falling edge active clocks.
+
+By default none are assumed.
+
+=item -[no]runfile
+
+If set, this switch causes only the FastScan run file to be
+generated.
+
+If negated, the switch allows the flow to proceed without
+generating a new default run file. The run file needs to
+be already present. This switch allows the user to invoke
+FastScan with customized settings.
+
+=item -se
+
+Introduces a comma separated list of scanenable ports.
+Typically, only one scan enable port is expected. This
+switch is provided to specify a non-default port name.
+
+In the event that the default name, "se", is also required
+it needs to be explicitly specified.
+
+=item -si
+
+Introduces a comma separated list of scanin ports. The
+default setting is overwritten. If the default name, "si",
+is also required it needs to be explicitly specified.
+
+The order of the scanin ports must match that of the
+corresponding scanout ports.
+
+=item -[no]simulation
+
+If set, this switch causes only simulation to be performed.
+If negated, the switch halts the flow after pattern
+generation.
+
+=item -smalljob
+
+Selects a 20 minute FastScan license. This works for small
+jobs when no licence is available on the default large queue.
+
+=item -so
+
+Introduces a comma separated list of scanout ports. The
+default setting is overwritten. If the default name, "so",
+is also required it needs to be explicitly specified.
+
+The order of the scanout ports must match that of the
+corresponding scanin ports.
+
+=item -[no]tpfile
+
+If set, this switch causes only the FastScan test procedure
+file to be generated.
+
+If negated, the switch allows the flow to proceed without
+generating a new default test procedure file. The test
+procedure file should be already present. This switch allows
+the user to develop a custom protocol.
+
+=item -top
+
+This switch specifies the name of the top module. By default
+the top module name is taken from the root of the design
+file. The switch is necessary if the top module name does
+not match the design file name or if there are multiple top
+modules present.
+
+=item -verbose
+
+If set, this switch will cause untestable fault information
+to be added to the ATPG log file. If coverage is low, this
+additional information could be large.
+
+=item -vverbose
+
+The "vverbose" flag adds instance coverage information to
+the ATPG log file. If the design file contains a large number
+of instances, printing the additional statistics slows down
+the flow and increases the size of the log file.
+
+=item -vlist
+
+Allows multiple design files and/or libraries to be listed
+in a separate file. Internally this switch is used to reference
+the m1 library ("$LIBDIR/m1/compiled/m1.vL"). If this switch
+is used and the m1 library also needs to be referenced the
+library must be explicitly specified.
+
+=head1 ENVIRONMENT
+
+"scantest" uses two environment variables:
+
+=item LIBDIR
+
+Specifies the location of the design libraries.
+
+=item USER
+
+Identifies where the default dump directory will be created.
+
+=back
+
+=head1 SEE ALSO
+
+ScanTest(3), http://www.mentor.com/dft
+
+=head1 AUTHOR
+
+Roger Mistely, E<lt>roger.mistely@sun.comE<gt>
+
+=cut

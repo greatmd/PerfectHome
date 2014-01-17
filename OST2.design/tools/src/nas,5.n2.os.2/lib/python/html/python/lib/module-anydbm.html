@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-dbhash.html" />
+<link rel="prev" href="module-mmap.html" />
+<link rel="parent" href="someos.html" />
+<link rel="next" href="module-dbhash.html" />
+<meta name='aesop' content='information' />
+<title>7.10 anydbm -- Generic access to DBM-style databases</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.9 mmap  "
+  href="module-mmap.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Optional Operating System"
+  href="someos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.11 dbhash  "
+  href="module-dbhash.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-mmap.html">7.9 mmap  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="someos.html">7. Optional Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-dbhash.html">7.11 dbhash  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0091000000000000000000">
+7.10 <tt class="module">anydbm</tt> --
+         Generic access to DBM-style databases</A>
+</H1>
+
+<P>
+<A NAME="module-anydbm"></A>
+
+<P>
+<tt class="module">anydbm</tt> is a generic interface to variants of the DBM
+database -- <tt class="module"><a href="module-dbhash.html">dbhash</a></tt><a id='l2h-2780' xml:id='l2h-2780'></a> (requires
+<tt class="module"><a href="module-bsddb.html">bsddb</a></tt><a id='l2h-2781' xml:id='l2h-2781'></a>),
+<tt class="module"><a href="module-gdbm.html">gdbm</a></tt><a id='l2h-2782' xml:id='l2h-2782'></a>, or
+<tt class="module"><a href="module-dbm.html">dbm</a></tt><a id='l2h-2783' xml:id='l2h-2783'></a>.  If none of these modules is
+installed, the slow-but-simple implementation in module
+<tt class="module"><a href="module-dumbdbm.html">dumbdbm</a></tt><a id='l2h-2784' xml:id='l2h-2784'></a> will be used.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2778' xml:id='l2h-2778' class="function">open</tt></b>(</nobr></td>
+  <td><var>filename</var><big>[</big><var>, flag</var><big>[</big><var>, mode</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Open the database file <var>filename</var> and return a corresponding object.
+
+<P>
+If the database file already exists, the <tt class="module"><a href="module-whichdb.html">whichdb</a></tt> module is 
+used to determine its type and the appropriate module is used; if it
+does not exist, the first module listed above that can be imported is
+used.
+
+<P>
+The optional <var>flag</var> argument can be
+<code>'r'</code> to open an existing database for reading only,
+<code>'w'</code> to open an existing database for reading and writing,
+<code>'c'</code> to create the database if it doesn't exist, or
+<code>'n'</code>, which will always create a new empty database.  If not
+specified, the default value is <code>'r'</code>.
+
+<P>
+The optional <var>mode</var> argument is the <span class="Unix">Unix</span> mode of the file, used
+only when the database has to be created.  It defaults to octal
+<code>0666</code> (and will be modified by the prevailing umask).
+</dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-2779' xml:id='l2h-2779' class="exception">error</tt></b></dt>
+<dd>
+A tuple containing the exceptions that can be raised by each of the
+supported modules, with a unique exception <tt class="exception">anydbm.error</tt> as
+the first item -- the latter is used when <tt class="exception">anydbm.error</tt> is
+raised.
+</dd></dl>
+
+<P>
+The object returned by <tt class="function">open()</tt> supports most of the same
+functionality as dictionaries; keys and their corresponding values can
+be stored, retrieved, and deleted, and the <tt class="method">has_key()</tt> and
+<tt class="method">keys()</tt> methods are available.  Keys and values must always be
+strings.
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-dbhash.html">dbhash</a></tt>:</b>
+    <dd>BSD <code>db</code> database interface.
+  </dl>
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-dbm.html">dbm</a></tt>:</b>
+    <dd>Standard <span class="Unix">Unix</span> database interface.
+  </dl>
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-dumbdbm.html">dumbdbm</a></tt>:</b>
+    <dd>Portable implementation of the <code>dbm</code> interface.
+  </dl>
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-gdbm.html">gdbm</a></tt>:</b>
+    <dd>GNU database interface, based on the <code>dbm</code> interface.
+  </dl>
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-shelve.html">shelve</a></tt>:</b>
+    <dd>General object persistence built on top of 
+                     the Python <code>dbm</code> interface.
+  </dl>
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-whichdb.html">whichdb</a></tt>:</b>
+    <dd>Utility module used to determine the type of an
+                      existing database.
+  </dl>
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.9 mmap  "
+  href="module-mmap.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Optional Operating System"
+  href="someos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.11 dbhash  "
+  href="module-dbhash.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-mmap.html">7.9 mmap  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="someos.html">7. Optional Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-dbhash.html">7.11 dbhash  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

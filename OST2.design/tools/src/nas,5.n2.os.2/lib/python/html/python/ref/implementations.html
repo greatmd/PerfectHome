@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="ref.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="ref.html" title='Python Reference Manual' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="notation.html" />
+<link rel="prev" href="introduction.html" />
+<link rel="parent" href="introduction.html" />
+<link rel="next" href="notation.html" />
+<meta name='aesop' content='information' />
+<title>1.1 Alternate Implementations</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="1. Introduction"
+  href="introduction.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="1. Introduction"
+  href="introduction.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="1.2 Notation"
+  href="notation.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="introduction.html">1. Introduction</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="introduction.html">1. Introduction</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="notation.html">1.2 Notation</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION003100000000000000000"></A><A NAME="implementations"></A>
+<BR>
+1.1 Alternate Implementations
+</H1>
+
+<P>
+Though there is one Python implementation which is by far the most
+popular, there are some alternate implementations which are of
+particular interest to different audiences.
+
+<P>
+Known implementations include:
+
+<P>
+<DL COMPACT>
+<DT>CPython</DT>
+<DD>This is the original and most-maintained implementation of Python,
+written in C.  New language features generally appear here first.
+
+<P>
+</DD>
+<DT>Jython</DT>
+<DD>Python implemented in Java.  This implementation can be used as a
+scripting language for Java applications, or can be used to create
+applications using the Java class libraries.  It is also often used to
+create tests for Java libraries.  More information can be found at
+<a class="ulink" href="http://www.jython.org/"
+  >the Jython website</a>.
+
+<P>
+</DD>
+<DT>Python for .NET</DT>
+<DD>This implementation actually uses the CPython implementation, but is a
+managed .NET application and makes .NET libraries available.  This was
+created by Brian Lloyd.  For more information, see the <a class="ulink" href="http://www.zope.org/Members/Brian/PythonNet"
+  >Python
+for .NET home page</a>.
+
+<P>
+</DD>
+<DT>IronPython</DT>
+<DD>An alternate Python for .NET.  Unlike Python.NET, this is a complete
+Python implementation that generates IL, and compiles Python code
+directly to .NET assemblies.  It was created by Jim Hugunin, the
+original creator of Jython.  For more information, see <a class="ulink" href="http://workspaces.gotdotnet.com/ironpython"
+  >the
+IronPython website</a>.
+
+<P>
+</DD>
+<DT>PyPy</DT>
+<DD>An implementation of Python written in Python; even the bytecode
+interpreter is written in Python.  This is executed using CPython as
+the underlying interpreter.  One of the goals of the project is to
+encourage experimentation with the language itself by making it easier
+to modify the interpreter (since it is written in Python).  Additional
+information is available on <a class="ulink" href="http://codespeak.net/pypy/"
+  >the PyPy project's home
+page</a>.
+</DD>
+</DL>
+
+<P>
+Each of these implementations varies in some way from the language as
+documented in this manual, or introduces specific information beyond
+what's covered in the standard Python documentation.  Please refer to
+the implementation-specific documentation to determine what else you
+need to know about the specific implementation you're using.
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="1. Introduction"
+  href="introduction.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="1. Introduction"
+  href="introduction.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="1.2 Notation"
+  href="notation.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="introduction.html">1. Introduction</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="introduction.html">1. Introduction</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="notation.html">1.2 Notation</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

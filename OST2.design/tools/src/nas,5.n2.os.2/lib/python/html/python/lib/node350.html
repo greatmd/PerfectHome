@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node351.html" />
+<link rel="prev" href="node349.html" />
+<link rel="parent" href="node345.html" />
+<link rel="next" href="node351.html" />
+<meta name='aesop' content='information' />
+<title>6.29.5.5 SocketHandler</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.29.5.4 TimedRotatingFileHandler"
+  href="node349.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.29.5 Handler Objects"
+  href="node345.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.29.5.6 DatagramHandler"
+  href="node351.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node349.html">6.29.5.4 TimedRotatingFileHandler</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="node345.html">6.29.5 Handler Objects</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node351.html">6.29.5.6 DatagramHandler</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION0082955000000000000000">
+6.29.5.5 SocketHandler</A>
+</H3>
+
+<P>
+The <tt class="class">SocketHandler</tt> class sends logging output to a network
+socket. The base class uses a TCP socket.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-2519' xml:id='l2h-2519' class="class">SocketHandler</tt></b>(</nobr></td>
+  <td><var>host, port</var>)</td></tr></table></dt>
+<dd>
+Returns a new instance of the <tt class="class">SocketHandler</tt> class intended to
+communicate with a remote machine whose address is given by <var>host</var>
+and <var>port</var>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2520' xml:id='l2h-2520' class="method">close</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Closes the socket.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2521' xml:id='l2h-2521' class="method">handleError</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2522' xml:id='l2h-2522' class="method">emit</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Pickles the record's attribute dictionary and writes it to the socket in
+binary format. If there is an error with the socket, silently drops the
+packet. If the connection was previously lost, re-establishes the connection.
+To unpickle the record at the receiving end into a <tt class="class">LogRecord</tt>, use the
+<tt class="function">makeLogRecord()</tt> function.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2523' xml:id='l2h-2523' class="method">handleError</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Handles an error which has occurred during <tt class="method">emit()</tt>. The
+most likely cause is a lost connection. Closes the socket so that
+we can retry on the next event.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2524' xml:id='l2h-2524' class="method">makeSocket</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+This is a factory method which allows subclasses to define the precise
+type of socket they want. The default implementation creates a TCP
+socket (<tt class="constant">socket.SOCK_STREAM</tt>).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2525' xml:id='l2h-2525' class="method">makePickle</tt></b>(</nobr></td>
+  <td><var>record</var>)</td></tr></table></dt>
+<dd>
+Pickles the record's attribute dictionary in binary format with a length
+prefix, and returns it ready for transmission across the socket.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2526' xml:id='l2h-2526' class="method">send</tt></b>(</nobr></td>
+  <td><var>packet</var>)</td></tr></table></dt>
+<dd>
+Send a pickled string <var>packet</var> to the socket. This function allows
+for partial sends which can happen when the network is busy.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.29.5.4 TimedRotatingFileHandler"
+  href="node349.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.29.5 Handler Objects"
+  href="node345.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.29.5.6 DatagramHandler"
+  href="node351.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node349.html">6.29.5.4 TimedRotatingFileHandler</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="node345.html">6.29.5 Handler Objects</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node351.html">6.29.5.6 DatagramHandler</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

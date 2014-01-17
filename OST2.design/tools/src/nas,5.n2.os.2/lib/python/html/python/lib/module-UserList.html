@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-UserString.html" />
+<link rel="prev" href="module-UserDict.html" />
+<link rel="parent" href="python.html" />
+<link rel="next" href="module-UserString.html" />
+<meta name='aesop' content='information' />
+<title>3.8 UserList -- Class wrapper for list objects</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.7 UserDict  "
+  href="module-UserDict.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3. Python Runtime Services"
+  href="python.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.9 UserString  "
+  href="module-UserString.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-UserDict.html">3.7 UserDict  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="python.html">3. Python Runtime Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-UserString.html">3.9 UserString  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION005800000000000000000">
+3.8 <tt class="module">UserList</tt> --
+         Class wrapper for list objects</A>
+</H1>
+
+<P>
+<A NAME="module-UserList"></A>
+
+<P>
+<span class="note"><b class="label">Note:</b>
+This module is available for backward compatibility only.  If
+you are writing code that does not need to work with versions of
+Python earlier than Python 2.2, please consider subclassing directly
+from the built-in <tt class="class">list</tt> type.</span>
+
+<P>
+This module defines a class that acts as a wrapper around
+list objects.  It is a useful base class for
+your own list-like classes, which can inherit from
+them and override existing methods or add new ones.  In this way one
+can add new behaviors to lists.
+
+<P>
+The <tt class="module">UserList</tt> module defines the <tt class="class">UserList</tt> class:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-483' xml:id='l2h-483' class="class">UserList</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>list</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Class that simulates a list.  The instance's
+contents are kept in a regular list, which is accessible via the
+<tt class="member">data</tt> attribute of <tt class="class">UserList</tt> instances.  The instance's
+contents are initially set to a copy of <var>list</var>, defaulting to the
+empty list <code>[]</code>.  <var>list</var> can be either a regular Python list,
+or an instance of <tt class="class">UserList</tt> (or a subclass).
+</dl>
+
+<P>
+In addition to supporting the methods and operations of mutable
+sequences (see section <A href="typesseq.html#typesseq">2.3.6</A>), <tt class="class">UserList</tt> instances
+provide the following attribute:
+
+<P>
+<dl><dt><b><tt id='l2h-484' xml:id='l2h-484' class="member">data</tt></b></dt>
+<dd>
+A real Python list object used to store the contents of the
+<tt class="class">UserList</tt> class.
+</dl>
+
+<P>
+<strong>Subclassing requirements:</strong>
+Subclasses of <tt class="class">UserList</tt> are expect to offer a constructor which
+can be called with either no arguments or one argument.  List
+operations which return a new sequence attempt to create an instance
+of the actual implementation class.  To do so, it assumes that the
+constructor can be called with a single parameter, which is a sequence
+object used as a data source.
+
+<P>
+If a derived class does not wish to comply with this requirement, all
+of the special methods supported by this class will need to be
+overridden; please consult the sources for information about the
+methods which need to be provided in that case.
+
+<P>
+
+<span class="versionnote">Changed in version 2.0:
+Python versions 1.5.2 and 1.6 also required that the
+                constructor be callable with no parameters, and offer
+                a mutable <tt class="member">data</tt> attribute.  Earlier versions
+                of Python did not attempt to create instances of the
+                derived class.</span>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.7 UserDict  "
+  href="module-UserDict.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3. Python Runtime Services"
+  href="python.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.9 UserString  "
+  href="module-UserString.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-UserDict.html">3.7 UserDict  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="python.html">3. Python Runtime Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-UserString.html">3.9 UserString  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

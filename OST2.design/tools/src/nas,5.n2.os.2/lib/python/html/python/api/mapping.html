@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="api.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="api.html" title='Python/C API Reference Manual' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="iterator.html" />
+<link rel="prev" href="sequence.html" />
+<link rel="parent" href="abstract.html" />
+<link rel="next" href="iterator.html" />
+<meta name='aesop' content='information' />
+<title>6.4 Mapping Protocol </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.3 Sequence Protocol"
+  href="sequence.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Abstract Objects Layer"
+  href="abstract.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.5 Iterator Protocol"
+  href="iterator.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="sequence.html">6.3 Sequence Protocol</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="abstract.html">6. Abstract Objects Layer</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="iterator.html">6.5 Iterator Protocol</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008400000000000000000"></A><A NAME="mapping"></A>
+<BR>
+6.4 Mapping Protocol 
+</H1>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-334' xml:id='l2h-334' class="cfunction">PyMapping_Check</tt></b>(</nobr></td><td>PyObject *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return <code>1</code> if the object provides mapping protocol, and
+  <code>0</code> otherwise.  This function always succeeds.
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-335' xml:id='l2h-335' class="cfunction">PyMapping_Length</tt></b>(</nobr></td><td>PyObject *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Returns the number of keys in object <var>o</var> on success, and
+  <code>-1</code> on failure.  For objects that do not provide mapping
+  protocol, this is equivalent to the Python expression
+  "<tt class="samp">len(<var>o</var>)</tt>".<a id='l2h-336' xml:id='l2h-336'></a></dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-337' xml:id='l2h-337' class="cfunction">PyMapping_DelItemString</tt></b>(</nobr></td><td>PyObject *<var>o</var>, char *<var>key</var>)</td></tr></table></dt>
+<dd>
+  Remove the mapping for object <var>key</var> from the object <var>o</var>.
+  Return <code>-1</code> on failure.  This is equivalent to the Python
+  statement "<tt class="samp">del <var>o</var>[<var>key</var>]</tt>".
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-338' xml:id='l2h-338' class="cfunction">PyMapping_DelItem</tt></b>(</nobr></td><td>PyObject *<var>o</var>, PyObject *<var>key</var>)</td></tr></table></dt>
+<dd>
+  Remove the mapping for object <var>key</var> from the object <var>o</var>.
+  Return <code>-1</code> on failure.  This is equivalent to the Python
+  statement "<tt class="samp">del <var>o</var>[<var>key</var>]</tt>".
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-339' xml:id='l2h-339' class="cfunction">PyMapping_HasKeyString</tt></b>(</nobr></td><td>PyObject *<var>o</var>, char *<var>key</var>)</td></tr></table></dt>
+<dd>
+  On success, return <code>1</code> if the mapping object has the key
+  <var>key</var> and <code>0</code> otherwise.  This is equivalent to the Python
+  expression "<tt class="samp"><var>o</var>.has_key(<var>key</var>)</tt>".  This function always
+  succeeds.
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-340' xml:id='l2h-340' class="cfunction">PyMapping_HasKey</tt></b>(</nobr></td><td>PyObject *<var>o</var>, PyObject *<var>key</var>)</td></tr></table></dt>
+<dd>
+  Return <code>1</code> if the mapping object has the key <var>key</var> and
+  <code>0</code> otherwise.  This is equivalent to the Python expression
+  "<tt class="samp"><var>o</var>.has_key(<var>key</var>)</tt>".  This function always succeeds.
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-341' xml:id='l2h-341' class="cfunction">PyMapping_Keys</tt></b>(</nobr></td><td>PyObject *<var>o</var>)</td></tr></table></dt>
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+  On success, return a list of the keys in object <var>o</var>.  On
+  failure, return <tt class="constant">NULL</tt>. This is equivalent to the Python expression
+  "<tt class="samp"><var>o</var>.keys()</tt>".
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-342' xml:id='l2h-342' class="cfunction">PyMapping_Values</tt></b>(</nobr></td><td>PyObject *<var>o</var>)</td></tr></table></dt>
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+  On success, return a list of the values in object <var>o</var>.  On
+  failure, return <tt class="constant">NULL</tt>. This is equivalent to the Python expression
+  "<tt class="samp"><var>o</var>.values()</tt>".
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-343' xml:id='l2h-343' class="cfunction">PyMapping_Items</tt></b>(</nobr></td><td>PyObject *<var>o</var>)</td></tr></table></dt>
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+  On success, return a list of the items in object <var>o</var>, where each
+  item is a tuple containing a key-value pair.  On failure, return
+  <tt class="constant">NULL</tt>. This is equivalent to the Python expression
+  "<tt class="samp"><var>o</var>.items()</tt>".
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-344' xml:id='l2h-344' class="cfunction">PyMapping_GetItemString</tt></b>(</nobr></td><td>PyObject *<var>o</var>, char *<var>key</var>)</td></tr></table></dt>
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+  Return element of <var>o</var> corresponding to the object <var>key</var> or
+  <tt class="constant">NULL</tt> on failure. This is the equivalent of the Python expression
+  "<tt class="samp"><var>o</var>[<var>key</var>]</tt>".
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-345' xml:id='l2h-345' class="cfunction">PyMapping_SetItemString</tt></b>(</nobr></td><td>PyObject *<var>o</var>, char *<var>key</var>,
+                                                PyObject *<var>v</var>)</td></tr></table></dt>
+<dd>
+  Map the object <var>key</var> to the value <var>v</var> in object <var>o</var>.
+  Returns <code>-1</code> on failure.  This is the equivalent of the Python
+  statement "<tt class="samp"><var>o</var>[<var>key</var>] = <var>v</var></tt>".
+</dd></dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.3 Sequence Protocol"
+  href="sequence.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Abstract Objects Layer"
+  href="abstract.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.5 Iterator Protocol"
+  href="iterator.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="sequence.html">6.3 Sequence Protocol</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="abstract.html">6. Abstract Objects Layer</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="iterator.html">6.5 Iterator Protocol</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

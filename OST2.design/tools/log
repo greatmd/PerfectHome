@@ -1,0 +1,1117 @@
+PNR target module spc
+Enter /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys
+Information: License queuing is enabled. (ICCSH-001)
+
+                          IC Compiler (TM)
+                         IC Compiler-PC (TM)
+                         IC Compiler-XP (TM)
+                         IC Compiler-DP (TM)
+                         IC Compiler-AG (TM)
+
+          Version H-2013.03-ICC for RHEL64 -- Mar 05, 2013
+
+Zroute is the default router for ICC, ICC-PC, ICC-DP and ICC-AG in IC Compiler.
+         Classic router will continue to be fully supported.
+
+               Copyright (c) 1988-2013 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+Initializing gui preferences from file  /rsghome/greatmd/.synopsys_icc_prefs.tcl
+# ========== Copyright Header Begin ==========================================
+# Autor : Donguk Moon (dongukmoon@stanford.edu)
+# Purpose 
+#  - place and route for SPARC core
+# Progress:
+# 12/09/2013 : Library setup and consistency checking
+# ========== Copyright Header End ============================================
+sh date
+Sun Dec 29 21:04:42 PST 2013
+sh hostname
+rsg-master.stanford.edu
+sh uptime
+ 21:04:42 up 68 days, 15:25, 70 users,  load average: 0.19, 0.23, 0.17
+remove_design -all
+1
+set dv_root [sh echo \$DV_ROOT]
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design
+set syn_home [sh echo \$SYN_LIB]
+/hd/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn
+#########################################################################
+## Library Prepraation
+## 1. setup for logical and physical library
+## 2. load tlu_plus file => this is from Syonpsys EDK (TODO: not accurate)
+## 3. checking library/tlu consistancy 
+#########################################################################
+source -echo -verbose $dv_root/design/sys/synopsys/script/target_lib.scr
+# ========== Copyright Header Begin ==========================================
+# 
+# OpenSPARC T2 Processor File: target_lib.scr
+# Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+# 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#
+# * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For the avoidance of doubt, and except that if any non-GPL license 
+# choice is available it will apply instead, Sun elects to use only 
+# the General Public License version 2 (GPLv2) at this time for any 
+# software where a choice of GPL license versions is made 
+# available with the language indicating that GPLv2 or any later version 
+# may be used, or where a choice of which version of the GPL is applied is 
+# otherwise unspecified. 
+#
+# Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+# CA 95054 USA or visit www.sun.com if you need additional information or 
+# have any questions. 
+# 
+# ========== Copyright Header End ============================================
+echo "INFO: target library version $syn_home"
+INFO: target library version /hd/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn
+set gate_lib_file tcbn28hpmbwp35tt1v25c_ccs.db
+tcbn28hpmbwp35tt1v25c_ccs.db
+set link_library $gate_lib_file
+tcbn28hpmbwp35tt1v25c_ccs.db
+set target_library $gate_lib_file 
+tcbn28hpmbwp35tt1v25c_ccs.db
+set lib_dir_md /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+set std_lib_dir_md $lib_dir_md/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+#set wire_library_file   {lsi_10k.db}
+#set wire_library   lsi_10k
+#set wire_model_name      05x05
+#set wireload_mode      top
+set search_path [concat $search_path $syn_home $std_lib_dir_md]
+. /hd/cad/synopsys/icc/H-2013.03/libraries/syn /hd/cad/synopsys/icc/H-2013.03/minpower/syn /hd/cad/synopsys/icc/H-2013.03/dw/syn_ver /hd/cad/synopsys/icc/H-2013.03/dw/sim_ver /hd/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+set link_library [concat * $link_library ]
+* tcbn28hpmbwp35tt1v25c_ccs.db
+set symbol_library {}
+set dont_use_cells 1
+1
+set dont_use_cell_list {}
+## Donguk : following is added for PNR 
+# .tf file 
+set technology_file $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+# reference library
+set mw_reference_library [concat   $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28   ]
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28
+#TLU+ Files
+set max_tluplus $dv_root/pnr_lib/1p9m.tluplus
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+#set max_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+#set min_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+if {[file exists pnr]} {
+   sh rm -rf pnr
+}
+sh mkdir pnr
+cd pnr 
+if {[file exists mw_lib]} {
+   sh rm -rf mw_lib
+}
+create_mw_lib mw_lib -technology $technology_file -mw_reference_library $mw_reference_library
+Start to load technology file /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf.
+Warning: Layer 'AP' is missing the attribute 'minArea'. (line 728) (TFCHK-012)
+Warning: ContactCode 'VIA12_square' has undefined or zero enclosures. (line 745). (TFCHK-073)
+Warning: ContactCode 'VIA12_slot' has undefined or zero enclosures. (line 762). (TFCHK-073)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitMinResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitNomResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitMaxResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitMinResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitNomResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitMaxResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitMinResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitNomResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitMaxResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitMinResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitNomResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitMaxResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitMinResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitNomResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitMaxResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitMinResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitNomResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitMaxResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitMinResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitNomResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitMaxResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitMinResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitNomResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitMaxResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitMinResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitNomResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitMaxResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitMinResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitNomResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitMaxResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitMinResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitNomResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitMaxResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitMinResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitNomResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitMaxResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitMinResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitNomResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitMaxResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitMinResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitNomResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitMaxResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitMinResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitNomResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitMaxResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitMinResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitNomResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitMaxResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitMinResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitNomResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitMaxResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitMinResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitNomResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitMaxResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitMinResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitNomResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitMaxResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitMinResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitNomResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitMaxResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitMinResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitNomResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitMaxResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitMinResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitNomResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitMaxResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitMinResistance'. (line 3762) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitNomResistance'. (line 3762) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitMaxResistance'. (line 3762) (TFCHK-014)
+Information: ContactCode 'VIAGEN9AP' has a minimum cut spacing 1 that is less than the cut layer minimum spacing 2. (line 3762) (TFCHK-072)
+Warning: Layer 'M1' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.15. (TFCHK-049)
+Warning: Layer 'M2' has a pitch 0.135 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M3' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.295 or 0.15. (TFCHK-049)
+Warning: Layer 'M4' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M5' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.295 or 0.15. (TFCHK-049)
+Warning: Layer 'M6' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M7' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.335. (TFCHK-049)
+Warning: Layer 'M8' has a pitch 0.8 that does not match the recommended wire-to-via pitch 0.86. (TFCHK-049)
+Warning: Layer 'M9' has a pitch 0.8 that does not match the recommended wire-to-via pitch 2.6. (TFCHK-049)
+Warning: Layer 'AP' has a pitch 4.5 that does not match the recommended wire-to-via pitch 5. (TFCHK-049)
+Warning: Layer 'M3' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M4' has a pitch 0.1 that does not match the doubled pitch 0.27 or tripled pitch 0.405. (TFCHK-050)
+Warning: Layer 'M5' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M6' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M7' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M8' has a pitch 0.8 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M9' has a pitch 0.8 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'AP' has a pitch 4.5 that does not match the doubled pitch 1.6 or tripled pitch 2.4. (TFCHK-050)
+Warning: CapModel sections are missing. Capacitance models should be loaded with a TLU+ file later. (TFCHK-084)
+Technology file /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf has been loaded successfully.
+open_mw_lib mw_lib
+{mw_lib}
+set_tlu_plus_files                      -max_tluplus $max_tluplus 
+Information: No layer mapping file is specified. Assume layer names are the same between the technology library and the ITF. (RCEX-071)
+1
+check_library
+ViewDB Library /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db loaded by check_library
+
+#BEGIN_XCHECK_LIBRARY
+
+Logic Library:    tcbn28hpmbwp35tt1v25c_ccs 
+Physical Library: /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28 
+check_library options: 	
+Version: 				H-2013.03-ICC
+Check date and time:	Sun Dec 29 21:04:44 2013
+
+          List of logic library and file names
+------------------------------------------------------------------------------
+Logic library name           Logic library file name
+------------------------------------------------------------------------------
+tcbn28hpmbwp35tt1v25c_ccs    /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db
+------------------------------------------------------------------------------
+
+#BEGIN_XCHECK_LOGICCELLS
+
+Number of cells missing in logic library:	41 (out of 1303)
+
+Information: List of cells missing in logic library (LIBCHK-210)
+-------------------------------------------------------------------------
+Cell name                  Cell type             Physical library
+-------------------------------------------------------------------------
+LVLHLCLOD2BWP35            Core                  tsmc28
+LVLHLCLOD4BWP35            Core                  tsmc28
+LVLHLCLOD8BWP35            Core                  tsmc28
+LVLHLD1BWP35               Core                  tsmc28
+LVLHLD2BWP35               Core                  tsmc28
+LVLHLD4BWP35               Core                  tsmc28
+LVLHLD8BWP35               Core                  tsmc28
+LVLLHCD1BWP35              Core                  tsmc28
+LVLLHCD2BWP35              Core                  tsmc28
+LVLLHCD4BWP35              Core                  tsmc28
+LVLLHCD8BWP35              Core                  tsmc28
+LVLLHCLOD1BWP35            Core                  tsmc28
+LVLLHCLOD2BWP35            Core                  tsmc28
+LVLLHCLOD4BWP35            Core                  tsmc28
+LVLLHCLOD8BWP35            Core                  tsmc28
+LVLLHD1BWP35               Core                  tsmc28
+LVLLHD2BWP35               Core                  tsmc28
+LVLLHD4BWP35               Core                  tsmc28
+LVLLHD8BWP35               Core                  tsmc28
+LVLHLCD1BWP35              Core                  tsmc28
+LVLHLCD2BWP35              Core                  tsmc28
+LVLHLCD4BWP35              Core                  tsmc28
+LVLHLCD8BWP35              Core                  tsmc28
+LVLHLCLOD1BWP35            Core                  tsmc28
+ISOHID1BWP35               Core                  tsmc28
+ISOHID2BWP35               Core                  tsmc28
+ISOHID4BWP35               Core                  tsmc28
+ISOHID8BWP35               Core                  tsmc28
+ISOLOD1BWP35               Core                  tsmc28
+ISOLOD2BWP35               Core                  tsmc28
+ISOLOD4BWP35               Core                  tsmc28
+ISOLOD8BWP35               Core                  tsmc28
+TS6N28HPMA256X32M2SWBSO    Unknown               tsmc28
+TS6N28HPMA64X32M2SWBSO     Unknown               tsmc28
+TS1N28HPMB256X32M4SWBASO   Unknown               tsmc28
+TS1N28HPMB64X32M4SWBASO    Unknown               tsmc28
+TSDN28HPMA64X32M4F         Unknown               tsmc28
+TS6N28HPMA64X32M2F         Unknown               tsmc28
+TS1N28HPMB256X32M4S        Unknown               tsmc28
+TS6N28HPMA40X32M2F         Unknown               tsmc28
+TS1N28HPMB64X26M4S         Unknown               tsmc28
+-------------------------------------------------------------------------
+
+Information: List of physical only cells (LIBCHK-119)
+-------------------------------------------------------------------------
+Cell name                  Cell type             Physical library
+-------------------------------------------------------------------------
+TAPCELLBWP35               PGPinOnly             tsmc28
+FILL3BWP35                 PGPinOnly             tsmc28
+FILL4BWP35                 PGPinOnly             tsmc28
+FILL64BWP35                PGPinOnly             tsmc28
+FILL8BWP35                 PGPinOnly             tsmc28
+FILL16BWP35                PGPinOnly             tsmc28
+FILL2BWP35                 PGPinOnly             tsmc28
+FILL32BWP35                PGPinOnly             tsmc28
+BOUNDARY_LEFTBWP35         PGPinOnly             tsmc28
+BOUNDARY_RIGHTBWP35        PGPinOnly             tsmc28
+-------------------------------------------------------------------------
+
+#END_XCHECK_LOGICCELLS
+
+#BEGIN_XCHECK_PHYSICALCELLS
+
+Number of cells missing in physical library:	0 (out of 1354)
+
+#END_XCHECK_PHYSICALCELLS
+
+#BEGIN_XCHECK_PINS
+
+Number of cells with missing or mismatched pins in libraries:	0
+
+#END_XCHECK_PINS
+
+#BEGIN_XCHECK_CELLANTENNADIODETYPE
+
+Number of cells with inconsistent antenna_diode_type:	0
+
+#END_XCHECK_CELLANTENNADIODETYPE
+
+Logic vs. physical library check summary:
+Number of cells missing in logic library:	41 
+Information: Logic library is INCONSISTENT with physical library (LIBCHK-220)
+
+#END_XCHECK_LIBRARY
+
+0
+check_tlu_plus_files
+
+Sanity check for TLU+ vs MW-Tech files:
+ max_tlu+: /rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+ min_tlu+: **NONE**
+ mapping_file: default
+ max_emul_tlu+: **NONE**
+ min_emul_tlu+: **NONE**
+ MW design lib: mw_lib
+
+--------- Sanity Check on TLUPlus Files -------------
+INFO: mapping file is not provided
+INFO: ITF and Milkyway TF layer names should be the same
+1. Checking the conducting layer names in ITF and mapping file ... 
+[ Passed! ]
+2. Checking the via layer names in ITF and mapping file ... 
+[ Passed! ]
+3. Checking the consistency of Min Width and Min Spacing between MW-tech and ITF ... 
+[ Passed! ]
+----------------- Check Ends ------------------
+1
+#########################################################################
+## Loading synthesized netlist for SPC
+#########################################################################
+read_verilog -dirty_netlist ../../dec/synopsys/gate/dec.vSyn
+Loading db file '/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db'
+Information: Using CCS timing libraries. (TIM-024)
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/dec/synopsys/gate/dec.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:00, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/dec/synopsys/gate/dec.vSyn
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 1 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:00, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'dec.CEL' now...
+Total number of cell instances: 2209
+Total number of nets: 2844
+Total number of ports: 990 (include 0 PG ports)
+Total number of hierarchical cell instances: 4
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../exu/synopsys/gate/exu.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/exu/synopsys/gate/exu.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/exu/synopsys/gate/exu.vSyn
+Warning: Cell 'n2_irf_mp_128x72_cust.CEL' is created for undefined module 'n2_irf_mp_128x72_cust'. (MWNL-294)
+Warning: Cell 'cl_dp1_zdt64_8x.CEL' is created for undefined module 'cl_dp1_zdt64_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc5_64x.CEL' is created for undefined module 'cl_dp1_penc5_64x'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc4_8x.CEL' is created for undefined module 'cl_dp1_penc4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff8_8x.CEL' is created for undefined module 'cl_dp1_muxbuff8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc5_8x.CEL' is created for undefined module 'cl_dp1_penc5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc6_8x.CEL' is created for undefined module 'cl_dp1_penc6_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc2_8x.CEL' is created for undefined module 'cl_dp1_penc2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff7_8x.CEL' is created for undefined module 'cl_dp1_muxbuff7_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc3_8x.CEL' is created for undefined module 'cl_dp1_penc3_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec8_8x.CEL' is created for undefined module 'cl_dp1_pdec8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc7_8x.CEL' is created for undefined module 'cl_dp1_penc7_8x'. (MWNL-294)
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 14 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:00, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'exu.CEL' now...
+Total number of cell instances: 8952
+Total number of nets: 9858
+Total number of ports: 919 (include 0 PG ports)
+Total number of hierarchical cell instances: 43
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:01, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../fgu/synopsys/gate/fgu.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/fgu/synopsys/gate/fgu.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:01
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/fgu/synopsys/gate/fgu.vSyn
+Warning: Cell 'n2_frf_mp_256x78_cust.CEL' is created for undefined module 'n2_frf_mp_256x78_cust'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc2_8x.CEL' is created for undefined module 'cl_dp1_penc2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff4_8x.CEL' is created for undefined module 'cl_dp1_muxbuff4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc3_8x.CEL' is created for undefined module 'cl_dp1_penc3_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff2_8x.CEL' is created for undefined module 'cl_dp1_muxbuff2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec8_8x.CEL' is created for undefined module 'cl_dp1_pdec8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc4_8x.CEL' is created for undefined module 'cl_dp1_penc4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc8_8x.CEL' is created for undefined module 'cl_dp1_penc8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc5_8x.CEL' is created for undefined module 'cl_dp1_penc5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc6_8x.CEL' is created for undefined module 'cl_dp1_penc6_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff6_8x.CEL' is created for undefined module 'cl_dp1_muxbuff6_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc7_8x.CEL' is created for undefined module 'cl_dp1_penc7_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_add136_8x.CEL' is created for undefined module 'cl_dp1_add136_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_boothenc_4x.CEL' is created for undefined module 'cl_dp1_boothenc_4x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff5_8x.CEL' is created for undefined module 'cl_dp1_muxbuff5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff3_8x.CEL' is created for undefined module 'cl_dp1_muxbuff3_8x'. (MWNL-294)
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec4_8x.CEL' is created for undefined module 'cl_dp1_pdec4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_zdt64_8x.CEL' is created for undefined module 'cl_dp1_zdt64_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 20 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:04, CPU =    0:00:02
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'fgu.CEL' now...
+Total number of cell instances: 49444
+Total number of nets: 52089
+Total number of ports: 935 (include 0 PG ports)
+Total number of hierarchical cell instances: 371
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:01, CPU =    0:00:01
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../gkt/synopsys/gate/gkt.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/gkt/synopsys/gate/gkt.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/gkt/synopsys/gate/gkt.vSyn
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff2_8x.CEL' is created for undefined module 'cl_dp1_muxbuff2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff3_8x.CEL' is created for undefined module 'cl_dp1_muxbuff3_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff8_8x.CEL' is created for undefined module 'cl_dp1_muxbuff8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc2_8x.CEL' is created for undefined module 'cl_dp1_penc2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff4_8x.CEL' is created for undefined module 'cl_dp1_muxbuff4_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 7 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:00, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'gkt.CEL' now...
+Total number of cell instances: 5853
+Total number of nets: 6437
+Total number of ports: 974 (include 0 PG ports)
+Total number of hierarchical cell instances: 44
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../ifu/ifu_cmu/synopsys/gate/ifu_cmu.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/ifu/ifu_cmu/synopsys/gate/ifu_cmu.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:00, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/ifu/ifu_cmu/synopsys/gate/ifu_cmu.vSyn
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc2_8x.CEL' is created for undefined module 'cl_dp1_penc2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff8_8x.CEL' is created for undefined module 'cl_dp1_muxbuff8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec8_8x.CEL' is created for undefined module 'cl_dp1_pdec8_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 5 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:01, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'ifu_cmu.CEL' now...
+Total number of cell instances: 5022
+Total number of nets: 5373
+Total number of ports: 810 (include 0 PG ports)
+Total number of hierarchical cell instances: 45
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../ifu/ifu_ftu/synopsys/gate/ifu_ftu.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/ifu/ifu_ftu/synopsys/gate/ifu_ftu.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:00, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/ifu/ifu_ftu/synopsys/gate/ifu_ftu.vSyn
+Warning: Cell 'n2_icd_sp_16p5kb_cust.CEL' is created for undefined module 'n2_icd_sp_16p5kb_cust'. (MWNL-294)
+Warning: Cell 'n2_ict_sp_1920b_cust.CEL' is created for undefined module 'n2_ict_sp_1920b_cust'. (MWNL-294)
+Warning: Cell 'n2_dva_dp_32x32_cust.CEL' is created for undefined module 'n2_dva_dp_32x32_cust'. (MWNL-294)
+Warning: Cell 'n2_tlb_tl_64x59_cust.CEL' is created for undefined module 'n2_tlb_tl_64x59_cust'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff3_8x.CEL' is created for undefined module 'cl_dp1_muxbuff3_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff4_8x.CEL' is created for undefined module 'cl_dp1_muxbuff4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff2_8x.CEL' is created for undefined module 'cl_dp1_muxbuff2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc2_8x.CEL' is created for undefined module 'cl_dp1_penc2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff8_8x.CEL' is created for undefined module 'cl_dp1_muxbuff8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff6_8x.CEL' is created for undefined module 'cl_dp1_muxbuff6_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff5_8x.CEL' is created for undefined module 'cl_dp1_muxbuff5_8x'. (MWNL-294)
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec8_8x.CEL' is created for undefined module 'cl_dp1_pdec8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc3_8x.CEL' is created for undefined module 'cl_dp1_penc3_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff7_8x.CEL' is created for undefined module 'cl_dp1_muxbuff7_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc4_8x.CEL' is created for undefined module 'cl_dp1_penc4_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 17 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:02, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'ifu_ftu.CEL' now...
+Total number of cell instances: 13076
+Total number of nets: 15057
+Total number of ports: 1409 (include 0 PG ports)
+Total number of hierarchical cell instances: 183
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../ifu/ifu_ibu/synopsys/gate/ifu_ibu.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/ifu/ifu_ibu/synopsys/gate/ifu_ibu.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/ifu/ifu_ibu/synopsys/gate/ifu_ibu.vSyn
+Warning: Cell 'cl_dp1_muxbuff7_8x.CEL' is created for undefined module 'cl_dp1_muxbuff7_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff5_8x.CEL' is created for undefined module 'cl_dp1_muxbuff5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 4 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:01, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'ifu_ibu.CEL' now...
+Total number of cell instances: 15013
+Total number of nets: 16104
+Total number of ports: 1012 (include 0 PG ports)
+Total number of hierarchical cell instances: 145
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../lsu/synopsys/gate/lsu.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/lsu/synopsys/gate/lsu.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/lsu/synopsys/gate/lsu.vSyn
+Warning: Cell 'n2_dca_sp_9kb_cust.CEL' is created for undefined module 'n2_dca_sp_9kb_cust'. (MWNL-294)
+Warning: Cell 'n2_dva_dp_32x32_cust.CEL' is created for undefined module 'n2_dva_dp_32x32_cust'. (MWNL-294)
+Warning: Cell 'n2_com_dp_32x152_cust.CEL' is created for undefined module 'n2_com_dp_32x152_cust'. (MWNL-294)
+Warning: Cell 'n2_stb_cm_64x45_cust.CEL' is created for undefined module 'n2_stb_cm_64x45_cust'. (MWNL-294)
+Warning: Cell 'n2_com_dp_64x84_cust.CEL' is created for undefined module 'n2_com_dp_64x84_cust'. (MWNL-294)
+Warning: Cell 'n2_dta_sp_1920b_cust.CEL' is created for undefined module 'n2_dta_sp_1920b_cust'. (MWNL-294)
+Warning: Cell 'n2_tlb_tl_128x59_cust.CEL' is created for undefined module 'n2_tlb_tl_128x59_cust'. (MWNL-294)
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc2_8x.CEL' is created for undefined module 'cl_dp1_penc2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc3_8x.CEL' is created for undefined module 'cl_dp1_penc3_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec4_8x.CEL' is created for undefined module 'cl_dp1_pdec4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff2_8x.CEL' is created for undefined module 'cl_dp1_muxbuff2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff5_8x.CEL' is created for undefined module 'cl_dp1_muxbuff5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc8_8x.CEL' is created for undefined module 'cl_dp1_penc8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec8_8x.CEL' is created for undefined module 'cl_dp1_pdec8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff8_8x.CEL' is created for undefined module 'cl_dp1_muxbuff8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff8_32x.CEL' is created for undefined module 'cl_dp1_muxbuff8_32x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff4_8x.CEL' is created for undefined module 'cl_dp1_muxbuff4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc4_8x.CEL' is created for undefined module 'cl_dp1_penc4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc5_8x.CEL' is created for undefined module 'cl_dp1_penc5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff3_8x.CEL' is created for undefined module 'cl_dp1_muxbuff3_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 22 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:02, CPU =    0:00:01
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'lsu.CEL' now...
+Total number of cell instances: 26381
+Total number of nets: 28376
+Total number of ports: 1670 (include 0 PG ports)
+Total number of hierarchical cell instances: 250
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:01, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../mmu/synopsys/gate/mmu.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/mmu/synopsys/gate/mmu.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/mmu/synopsys/gate/mmu.vSyn
+Warning: Cell 'n2_com_dp_32x84_cust.CEL' is created for undefined module 'n2_com_dp_32x84_cust'. (MWNL-294)
+Warning: Cell 'n2_com_dp_32x72_cust.CEL' is created for undefined module 'n2_com_dp_32x72_cust'. (MWNL-294)
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff4_8x.CEL' is created for undefined module 'cl_dp1_muxbuff4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc7_8x.CEL' is created for undefined module 'cl_dp1_penc7_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff8_8x.CEL' is created for undefined module 'cl_dp1_muxbuff8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec8_8x.CEL' is created for undefined module 'cl_dp1_pdec8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff2_8x.CEL' is created for undefined module 'cl_dp1_muxbuff2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc4_8x.CEL' is created for undefined module 'cl_dp1_penc4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc5_8x.CEL' is created for undefined module 'cl_dp1_penc5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc2_8x.CEL' is created for undefined module 'cl_dp1_penc2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec4_8x.CEL' is created for undefined module 'cl_dp1_pdec4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc3_8x.CEL' is created for undefined module 'cl_dp1_penc3_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 14 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:02, CPU =    0:00:01
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'mmu.CEL' now...
+Total number of cell instances: 22136
+Total number of nets: 23569
+Total number of ports: 852 (include 0 PG ports)
+Total number of hierarchical cell instances: 199
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../pku/synopsys/gate/pku.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/pku/synopsys/gate/pku.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/pku/synopsys/gate/pku.vSyn
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 1 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:00, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'pku.CEL' now...
+Total number of cell instances: 7315
+Total number of nets: 7735
+Total number of ports: 643 (include 0 PG ports)
+Total number of hierarchical cell instances: 27
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../pmu/synopsys/gate/pmu.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/pmu/synopsys/gate/pmu.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/pmu/synopsys/gate/pmu.vSyn
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc8_8x.CEL' is created for undefined module 'cl_dp1_penc8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc2_8x.CEL' is created for undefined module 'cl_dp1_penc2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff8_8x.CEL' is created for undefined module 'cl_dp1_muxbuff8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc3_8x.CEL' is created for undefined module 'cl_dp1_penc3_8x'. (MWNL-294)
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 6 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:00, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'pmu.CEL' now...
+Total number of cell instances: 6335
+Total number of nets: 6565
+Total number of ports: 261 (include 0 PG ports)
+Total number of hierarchical cell instances: 30
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../../tlu/synopsys/gate/tlu.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/tlu/synopsys/gate/tlu.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:01
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/tlu/synopsys/gate/tlu.vSyn
+Warning: Cell 'n2_com_dp_32x152_cust.CEL' is created for undefined module 'n2_com_dp_32x152_cust'. (MWNL-294)
+Warning: Cell 'n2_com_dp_32x72_cust.CEL' is created for undefined module 'n2_com_dp_32x72_cust'. (MWNL-294)
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc5_8x.CEL' is created for undefined module 'cl_dp1_penc5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc7_8x.CEL' is created for undefined module 'cl_dp1_penc7_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc2_8x.CEL' is created for undefined module 'cl_dp1_penc2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff4_8x.CEL' is created for undefined module 'cl_dp1_muxbuff4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc8_8x.CEL' is created for undefined module 'cl_dp1_penc8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc4_8x.CEL' is created for undefined module 'cl_dp1_penc4_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff5_8x.CEL' is created for undefined module 'cl_dp1_muxbuff5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc3_8x.CEL' is created for undefined module 'cl_dp1_penc3_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_pdec8_8x.CEL' is created for undefined module 'cl_dp1_pdec8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff8_8x.CEL' is created for undefined module 'cl_dp1_muxbuff8_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff2_8x.CEL' is created for undefined module 'cl_dp1_muxbuff2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff3_8x.CEL' is created for undefined module 'cl_dp1_muxbuff3_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff6_8x.CEL' is created for undefined module 'cl_dp1_muxbuff6_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 17 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:04, CPU =    0:00:01
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'tlu.CEL' now...
+Total number of cell instances: 36050
+Total number of nets: 38567
+Total number of ports: 1796 (include 0 PG ports)
+Total number of hierarchical cell instances: 289
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+read_verilog -dirty_netlist ../gate/spc.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys/gate/spc.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys/gate/spc.vSyn
+Warning: Cell 'gkt.CEL' is created for undefined module 'gkt'. (MWNL-294)
+Warning: Cell 'fgu.CEL' is created for undefined module 'fgu'. (MWNL-294)
+Warning: Cell 'ifu_ibu.CEL' is created for undefined module 'ifu_ibu'. (MWNL-294)
+Warning: Cell 'ifu_ftu.CEL' is created for undefined module 'ifu_ftu'. (MWNL-294)
+Warning: Cell 'ifu_cmu.CEL' is created for undefined module 'ifu_cmu'. (MWNL-294)
+Warning: Cell 'dec.CEL' is created for undefined module 'dec'. (MWNL-294)
+Warning: Cell 'pku.CEL' is created for undefined module 'pku'. (MWNL-294)
+Warning: Cell 'exu.CEL' is created for undefined module 'exu'. (MWNL-294)
+Warning: Cell 'tlu.CEL' is created for undefined module 'tlu'. (MWNL-294)
+Warning: Cell 'lsu.CEL' is created for undefined module 'lsu'. (MWNL-294)
+Warning: Cell 'spu.CEL' is created for undefined module 'spu'. (MWNL-294)
+Warning: Cell 'mmu.CEL' is created for undefined module 'mmu'. (MWNL-294)
+Warning: Cell 'pmu.CEL' is created for undefined module 'pmu'. (MWNL-294)
+Warning: Cell 'cl_dp1_l1hdr_8x.CEL' is created for undefined module 'cl_dp1_l1hdr_8x'. (MWNL-294)
+Warning: Cell 'cl_u1_inv_1x.CEL' is created for undefined module 'cl_u1_inv_1x'. (MWNL-294)
+Warning: Cell 'cl_u1_nor3_1x.CEL' is created for undefined module 'cl_u1_nor3_1x'. (MWNL-294)
+Warning: Cell 'cl_u1_buf_1x.CEL' is created for undefined module 'cl_u1_buf_1x'. (MWNL-294)
+Warning: Cell 'cl_u1_nand3_1x.CEL' is created for undefined module 'cl_u1_nand3_1x'. (MWNL-294)
+Warning: Cell 'cl_u1_nand2_1x.CEL' is created for undefined module 'cl_u1_nand2_1x'. (MWNL-294)
+Warning: Cell 'cl_sc1_aomux2_1x.CEL' is created for undefined module 'cl_sc1_aomux2_1x'. (MWNL-294)
+Warning: Cell 'cl_u1_nor2_1x.CEL' is created for undefined module 'cl_u1_nor2_1x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc3_8x.CEL' is created for undefined module 'cl_dp1_penc3_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc5_8x.CEL' is created for undefined module 'cl_dp1_penc5_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_muxbuff2_8x.CEL' is created for undefined module 'cl_dp1_muxbuff2_8x'. (MWNL-294)
+Warning: Cell 'cl_dp1_penc6_8x.CEL' is created for undefined module 'cl_dp1_penc6_8x'. (MWNL-294)
+Warning: Cell 'cl_sc1_l1hdr_8x.CEL' is created for undefined module 'cl_sc1_l1hdr_8x'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 26 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:01, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'spc.CEL' now...
+Total number of cell instances: 3680
+Total number of nets: 5083
+Total number of ports: 477 (include 0 PG ports)
+Total number of hierarchical cell instances: 85
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+#read_ddc ../../dec/synopsys/gate/dec.ddc
+#read_ddc ../../exu/synopsys/gate/exu.ddc
+#read_ddc ../../fgu/synopsys/gate/fgu.ddc
+#read_ddc ../../gkt/synopsys/gate/gkt.ddc
+#read_ddc ../../ifu/ifu_cmu/synopsys/gate/ifu_cmu.ddc
+#read_ddc ../../ifu/ifu_ftu/synopsys/gate/ifu_ftu.ddc
+#read_ddc ../../ifu/ifu_ibu/synopsys/gate/ifu_ibu.ddc
+#read_ddc ../../lsu/synopsys/gate/lsu.ddc
+#read_ddc ../../mmu/synopsys/gate/mmu.ddc
+#read_ddc ../../pku/synopsys/gate/pku.ddc
+#read_ddc ../../pmu/synopsys/gate/pmu.ddc
+#read_ddc ../../tlu/synopsys/gate/tlu.ddc
+#read_ddc ../gate/spc.ddc
+set top_module spc
+spc
+current_design $top_module
+spc
+uniquify
+Loading db file '/hd/cad/synopsys/icc/H-2013.03/libraries/syn/gtech.db'
+Loading db file '/hd/cad/synopsys/icc/H-2013.03/libraries/syn/standard.sldb'
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Error: The design is not uniquified. (MWDC-101)
+Un-uniquified modules are mb2_clkgen_pm1_c_0(0x1501) mb2_clkgen_c_0(0x1502) mb1_clkgen_pm1_c_0(0x1503) mb1_clkgen_c_0(0x1504) mb0_clkgen_pm1_c_0(0x1505) mb0_clkgen_c_0(0x1506) mdp_i_ls_mux_store_c0_0(0x1507) mdp_i_fp_mux_rs2_c0_0(0x1508) mdp_i_fp_mux_rs1_c0_0(0x1509) mdp_i_ls_mux_addr_h_c0_0(0x150a) mdp_i_ls_mux_addr_l_c0_0(0x150b) mdp_i_fp_mux_gsr_c0_0(0x150c) mdp_i_fp_mux_rs2_early1_c0_0(0x150d) mdp_i_fp_mux_rs2_early0_c0_0(0x150e) mdp_i_fp_mux_rs1_early1_c0_0(0x150f) mdp_i_fp_mux_rs1_early0_c0_0(0x1510) clk_spc_xcluster_header_clk_stopper_clken_gated_inv(0x1514) clk_spc_xcluster_header_clk_stopper_clk_inv(0x1516) clk_spc_xcluster_header_clk_stop_syncff_sel_inv(0x1517) clk_spc_xcluster_header_control_sig_sync_wmr_syncff_sel_inv(0x1519) clk_spc_xcluster_header_clk_stop_syncff_sync_mux1(0x1518) clk_spc_xcluster_header_control_sig_sync_wmr_syncff_sync_mux1(0x151a) clk_spc_xcluster_header_control_sig_sync_cmp_slow_sync_en_syncff_sel_inv(0x151b) clk_spc_xcluster_header_control_sig_sync_cmp_slow_sync_en_syncff_sync_mux1(0x151c) clk_spc_xcluster_header_control_sig_sync_slow_cmp_sync_en_syncff_sel_inv(0x151d) clk_spc_xcluster_header_control_sig_sync_slow_cmp_sync_en_syncff_sync_mux1(0x151e) clk_spc_xcluster_header_aclk_buf(0x151f) clk_spc_xcluster_header_bclk_buf(0x1520) clk_spc_xcluster_header_pce_ov_buf(0x1521) clk_spc_xcluster_header_wmr_protect_buf(0x1522) clk_spc_xcluster_header_clk_stopper_clk_nand(0x1515) clk_spc_xcluster_header_scan_en_gated_nand(0x1523) clk_spc_xcluster_header_scan_en_gated_inv(0x1524) clk_spc_xcluster_header_tcu_atpg_mode_inv(0x1525) clk_spc_xcluster_header_wmr_protect_inv(0x1526) clk_spc_xcluster_header_aclk_wmr_gate(0x1527) clk_spc_xcluster_header_aclk_wmr_inv(0x1528) clk_spc_xcluster_header_scan_chain_mux(0x1529) clk_spc_xcluster_header_div_bypass_inv(0x152a) clk_spc_xcluster_header_cluster_div_inv(0x152b) clk_spc_xcluster_header_sel0_n_gen(0x152c) clk_spc_xcluster_header_sel0_gen(0x152d) clk_spc_xcluster_header_clk_stopper_clken_nor(0x1513) clk_spc_xcluster_header_sel2_n_gen(0x152e) clk_spc_xcluster_header_sel1_gen(0x152f) clk_spc_xcluster_header_div_r_buf(0x1530) clk_spc_xcluster_header_div_r_sync_gen_nor(0x1531) clk_spc_xcluster_header_div_r_sync_gen_inv(0x1532) clk_spc_xcluster_header_alatch_in(0x1533) clk_spc_xcluster_header_nor_gclk_reset(0x1534) clk_spc_xcluster_header_inv_gclk_reset(0x1535) clk_spc_xcluster_header_final_mux(0x1536) clk_spc_xcluster_header_clk_stop_stg2_inv(0x1537) clk_spc_xcluster_header_cclk_nand(0x1538) clk_spc_xcluster_header_cclk_inv(0x1539) clk_spc_xcluster_header_array_wr_inhibit1_inv(0x153b) clk_spc_xcluster_header_array_wr_inhibit2_buf(0x153c) clk_spc_xcluster_header_cluster_arst_inv(0x153d) clk_spc_xcluster_header_array_wr_inhibit_inv(0x153f) dmo_dmo_flop_c0_0(0x1512) msf1_bank0_lat_c0_0(0x1540) msf0_bank5_lat_c0_0(0x1541) msf0_bank4_lat_c0_0(0x1542) msf0_bank3_lat_c0_0(0x1543) msf0_bank2_lat_c0_0(0x1544) msf0_bank1_lat_c0_0(0x1545) msf0_bank0_lat_c0_0(0x1546) exu1(0x154c) exu0(0x154d)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Error: The design is not uniquified. (MWDC-101)
+Un-uniquified modules are mb2_clkgen_pm1_c_0(0x1501) mb2_clkgen_c_0(0x1502) mb1_clkgen_pm1_c_0(0x1503) mb1_clkgen_c_0(0x1504) mb0_clkgen_pm1_c_0(0x1505) mb0_clkgen_c_0(0x1506) mdp_i_ls_mux_store_c0_0(0x1507) mdp_i_fp_mux_rs2_c0_0(0x1508) mdp_i_fp_mux_rs1_c0_0(0x1509) mdp_i_ls_mux_addr_h_c0_0(0x150a) mdp_i_ls_mux_addr_l_c0_0(0x150b) mdp_i_fp_mux_gsr_c0_0(0x150c) mdp_i_fp_mux_rs2_early1_c0_0(0x150d) mdp_i_fp_mux_rs2_early0_c0_0(0x150e) mdp_i_fp_mux_rs1_early1_c0_0(0x150f) mdp_i_fp_mux_rs1_early0_c0_0(0x1510) clk_spc_xcluster_header_clk_stopper_clken_gated_inv(0x1514) clk_spc_xcluster_header_clk_stopper_clk_inv(0x1516) clk_spc_xcluster_header_clk_stop_syncff_sel_inv(0x1517) clk_spc_xcluster_header_control_sig_sync_wmr_syncff_sel_inv(0x1519) clk_spc_xcluster_header_clk_stop_syncff_sync_mux1(0x1518) clk_spc_xcluster_header_control_sig_sync_wmr_syncff_sync_mux1(0x151a) clk_spc_xcluster_header_control_sig_sync_cmp_slow_sync_en_syncff_sel_inv(0x151b) clk_spc_xcluster_header_control_sig_sync_cmp_slow_sync_en_syncff_sync_mux1(0x151c) clk_spc_xcluster_header_control_sig_sync_slow_cmp_sync_en_syncff_sel_inv(0x151d) clk_spc_xcluster_header_control_sig_sync_slow_cmp_sync_en_syncff_sync_mux1(0x151e) clk_spc_xcluster_header_aclk_buf(0x151f) clk_spc_xcluster_header_bclk_buf(0x1520) clk_spc_xcluster_header_pce_ov_buf(0x1521) clk_spc_xcluster_header_wmr_protect_buf(0x1522) clk_spc_xcluster_header_clk_stopper_clk_nand(0x1515) clk_spc_xcluster_header_scan_en_gated_nand(0x1523) clk_spc_xcluster_header_scan_en_gated_inv(0x1524) clk_spc_xcluster_header_tcu_atpg_mode_inv(0x1525) clk_spc_xcluster_header_wmr_protect_inv(0x1526) clk_spc_xcluster_header_aclk_wmr_gate(0x1527) clk_spc_xcluster_header_aclk_wmr_inv(0x1528) clk_spc_xcluster_header_scan_chain_mux(0x1529) clk_spc_xcluster_header_div_bypass_inv(0x152a) clk_spc_xcluster_header_cluster_div_inv(0x152b) clk_spc_xcluster_header_sel0_n_gen(0x152c) clk_spc_xcluster_header_sel0_gen(0x152d) clk_spc_xcluster_header_clk_stopper_clken_nor(0x1513) clk_spc_xcluster_header_sel2_n_gen(0x152e) clk_spc_xcluster_header_sel1_gen(0x152f) clk_spc_xcluster_header_div_r_buf(0x1530) clk_spc_xcluster_header_div_r_sync_gen_nor(0x1531) clk_spc_xcluster_header_div_r_sync_gen_inv(0x1532) clk_spc_xcluster_header_alatch_in(0x1533) clk_spc_xcluster_header_nor_gclk_reset(0x1534) clk_spc_xcluster_header_inv_gclk_reset(0x1535) clk_spc_xcluster_header_final_mux(0x1536) clk_spc_xcluster_header_clk_stop_stg2_inv(0x1537) clk_spc_xcluster_header_cclk_nand(0x1538) clk_spc_xcluster_header_cclk_inv(0x1539) clk_spc_xcluster_header_array_wr_inhibit1_inv(0x153b) clk_spc_xcluster_header_array_wr_inhibit2_buf(0x153c) clk_spc_xcluster_header_cluster_arst_inv(0x153d) clk_spc_xcluster_header_array_wr_inhibit_inv(0x153f) dmo_dmo_flop_c0_0(0x1512) msf1_bank0_lat_c0_0(0x1540) msf0_bank5_lat_c0_0(0x1541) msf0_bank4_lat_c0_0(0x1542) msf0_bank3_lat_c0_0(0x1543) msf0_bank2_lat_c0_0(0x1544) msf0_bank1_lat_c0_0(0x1545) msf0_bank0_lat_c0_0(0x1546) exu1(0x154c) exu0(0x154d)
+Error: Fail to rebuild timing design from database (UID-841)
+0
+link
+1
+#quit
+icc_shell> start_gui
+icc_shell>  + VUE INFO: Please click Verification->Hercules VUE in LayoutWindow menu
+to launch VUE.
+
+ + VUE INFO: Found a usable port: 2345
+
+Information: Loaded Hercules extension from /cad/synopsys/hercules/B-2008.09-SP4 (GUI-024)
+Information: Visibility is turned ON for cells and cell contents because the task is set to Block Implementation (GUI-026)
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+Preparing data for query................... 
+icc_shell> change_working_design_stack {fgu.CEL;1}
+icc_shell> change_working_design_stack {spc.CEL;1}
+icc_shell> echange_working_design_stack {gkt.CEL;1}
+icc_shell> change_working_design_stack {spc.CEL;1}
+icc_shell> xchange_working_design_stack {ifu_ibu.CEL;1}
+icc_shell> change_working_design_stack {spc.CEL;1}
+icc_shell> Killed 

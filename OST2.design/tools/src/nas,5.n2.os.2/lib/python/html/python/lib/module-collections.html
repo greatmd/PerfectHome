@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-heapq.html" />
+<link rel="prev" href="module-bisect.html" />
+<link rel="parent" href="misc.html" />
+<link rel="next" href="deque-recipes.html" />
+<meta name='aesop' content='information' />
+<title>5.12 collections -- High-performance container datatypes</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.11.1 Examples"
+  href="bisect-example.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5. Miscellaneous Services"
+  href="misc.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.12.1 Recipes"
+  href="deque-recipes.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="bisect-example.html">5.11.1 Examples</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="misc.html">5. Miscellaneous Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="deque-recipes.html">5.12.1 Recipes</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0071200000000000000000">
+5.12 <tt class="module">collections</tt> --
+         High-performance container datatypes</A>
+</H1>
+
+<P>
+<A NAME="module-collections"></A>
+
+<span class="versionnote">New in version 2.4.</span>
+
+<P>
+This module implements high-performance container datatypes.  Currently, the
+only datatype is a deque.  Future additions may include B-trees
+and Fibonacci heaps.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1337' xml:id='l2h-1337' class="function">deque</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>iterable</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  Returns a new deque objected initialized left-to-right (using
+  <tt class="method">append()</tt>) with data from <var>iterable</var>.  If <var>iterable</var>
+  is not specified, the new deque is empty.
+
+<P>
+Deques are a generalization of stacks and queues (the name is pronounced
+  ``deck'' and is short for ``double-ended queue'').  Deques support
+  thread-safe, memory efficient appends and pops from either side of the deque
+  with approximately the same <code>O(1)</code> performance in either direction.
+
+<P>
+Though <tt class="class">list</tt> objects support similar operations, they are optimized
+  for fast fixed-length operations and incur <code>O(n)</code> memory movement costs
+  for "<tt class="samp">pop(0)</tt>" and "<tt class="samp">insert(0, v)</tt>" operations which change both the
+  size and position of the underlying data representation.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dl>
+
+<P>
+Deque objects support the following methods:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1338' xml:id='l2h-1338' class="method">append</tt></b>(</nobr></td>
+  <td><var>x</var>)</td></tr></table></dt>
+<dd>
+   Add <var>x</var> to the right side of the deque.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1339' xml:id='l2h-1339' class="method">appendleft</tt></b>(</nobr></td>
+  <td><var>x</var>)</td></tr></table></dt>
+<dd>
+   Add <var>x</var> to the left side of the deque.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1340' xml:id='l2h-1340' class="method">clear</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+   Remove all elements from the deque leaving it with length 0.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1341' xml:id='l2h-1341' class="method">extend</tt></b>(</nobr></td>
+  <td><var>iterable</var>)</td></tr></table></dt>
+<dd>
+   Extend the right side of the deque by appending elements from
+   the iterable argument.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1342' xml:id='l2h-1342' class="method">extendleft</tt></b>(</nobr></td>
+  <td><var>iterable</var>)</td></tr></table></dt>
+<dd>
+   Extend the left side of the deque by appending elements from
+   <var>iterable</var>.  Note, the series of left appends results in
+   reversing the order of elements in the iterable argument.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1343' xml:id='l2h-1343' class="method">pop</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+   Remove and return an element from the right side of the deque.
+   If no elements are present, raises a <tt class="exception">IndexError</tt>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1344' xml:id='l2h-1344' class="method">popleft</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+   Remove and return an element from the left side of the deque.
+   If no elements are present, raises a <tt class="exception">IndexError</tt>.   
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1345' xml:id='l2h-1345' class="method">rotate</tt></b>(</nobr></td>
+  <td><var>n</var>)</td></tr></table></dt>
+<dd>
+   Rotate the deque <var>n</var> steps to the right.  If <var>n</var> is
+   negative, rotate to the left.  Rotating one step to the right
+   is equivalent to:  "<tt class="samp">d.appendleft(d.pop())</tt>". 
+</dl>
+
+<P>
+In addition to the above, deques support iteration, pickling, "<tt class="samp">len(d)</tt>",
+"<tt class="samp">reversed(d)</tt>", "<tt class="samp">copy.copy(d)</tt>", "<tt class="samp">copy.deepcopy(d)</tt>",
+membership testing with the <tt class="keyword">in</tt> operator, and subscript references
+such as "<tt class="samp">d[-1]</tt>".
+
+<P>
+Example:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; from collections import deque
+&gt;&gt;&gt; d = deque('ghi')                 # make a new deque with three items
+&gt;&gt;&gt; for elem in d:                   # iterate over the deque's elements
+...     print elem.upper()	
+G
+H
+I
+
+&gt;&gt;&gt; d.append('j')                    # add a new entry to the right side
+&gt;&gt;&gt; d.appendleft('f')                # add a new entry to the left side
+&gt;&gt;&gt; d                                # show the representation of the deque
+deque(['f', 'g', 'h', 'i', 'j'])
+
+&gt;&gt;&gt; d.pop()                          # return and remove the rightmost item
+'j'
+&gt;&gt;&gt; d.popleft()                      # return and remove the leftmost item
+'f'
+&gt;&gt;&gt; list(d)                          # list the contents of the deque
+['g', 'h', 'i']
+&gt;&gt;&gt; d[0]                             # peek at leftmost item
+'g'
+&gt;&gt;&gt; d[-1]                            # peek at rightmost item
+'i'
+
+&gt;&gt;&gt; list(reversed(d))                # list the contents of a deque in reverse
+['i', 'h', 'g']
+&gt;&gt;&gt; 'h' in d                         # search the deque
+True
+&gt;&gt;&gt; d.extend('jkl')                  # add multiple elements at once
+&gt;&gt;&gt; d
+deque(['g', 'h', 'i', 'j', 'k', 'l'])
+&gt;&gt;&gt; d.rotate(1)                      # right rotation
+&gt;&gt;&gt; d
+deque(['l', 'g', 'h', 'i', 'j', 'k'])
+&gt;&gt;&gt; d.rotate(-1)                     # left rotation
+&gt;&gt;&gt; d
+deque(['g', 'h', 'i', 'j', 'k', 'l'])
+
+&gt;&gt;&gt; deque(reversed(d))               # make a new deque in reverse order
+deque(['l', 'k', 'j', 'i', 'h', 'g'])
+&gt;&gt;&gt; d.clear()                        # empty the deque
+&gt;&gt;&gt; d.pop()                          # cannot pop from an empty deque
+Traceback (most recent call last):
+  File "&lt;pyshell#6&gt;", line 1, in -toplevel-
+    d.pop()
+IndexError: pop from an empty deque
+
+&gt;&gt;&gt; d.extendleft('abc')              # extendleft() reverses the input order
+&gt;&gt;&gt; d
+deque(['c', 'b', 'a'])
+</pre></div>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="deque-recipes.html">5.12.1 Recipes</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.11.1 Examples"
+  href="bisect-example.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5. Miscellaneous Services"
+  href="misc.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.12.1 Recipes"
+  href="deque-recipes.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="bisect-example.html">5.11.1 Examples</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="misc.html">5. Miscellaneous Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="deque-recipes.html">5.12.1 Recipes</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

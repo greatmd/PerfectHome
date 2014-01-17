@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="doctest-DocTestRunner.html" />
+<link rel="parent" href="doctest-advanced-api.html" />
+<link rel="next" href="doctest-debugging.html" />
+<meta name='aesop' content='information' />
+<title>5.2.6.6 OutputChecker objects</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.2.6.5 DocTestRunner objects"
+  href="doctest-DocTestRunner.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.2.6 Advanced API"
+  href="doctest-advanced-api.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.2.7 Debugging"
+  href="doctest-debugging.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="doctest-DocTestRunner.html">5.2.6.5 DocTestRunner objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="doctest-advanced-api.html">5.2.6 Advanced API</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="doctest-debugging.html">5.2.7 Debugging</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION007266000000000000000"></A><A NAME="doctest-OutputChecker"></A>
+<BR>
+5.2.6.6 OutputChecker objects
+</H3>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-1107' xml:id='l2h-1107' class="class">OutputChecker</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+    A class used to check the whether the actual output from a doctest
+    example matches the expected output.  <tt class="class">OutputChecker</tt>
+    defines two methods: <tt class="method">check_output</tt>, which compares a given
+    pair of outputs, and returns true if they match; and
+    <tt class="method">output_difference</tt>, which returns a string describing the
+    differences between two outputs.
+    
+<span class="versionnote">New in version 2.4.</span>
+
+</dl>
+
+<P>
+<tt class="class">OutputChecker</tt> defines the following methods:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1108' xml:id='l2h-1108' class="method">check_output</tt></b>(</nobr></td>
+  <td><var>want, got, optionflags</var>)</td></tr></table></dt>
+<dd>
+    Return <code>True</code> iff the actual output from an example
+    (<var>got</var>) matches the expected output (<var>want</var>).  These
+    strings are always considered to match if they are identical; but
+    depending on what option flags the test runner is using, several
+    non-exact match types are also possible.  See
+    section&nbsp;<A href="doctest-options.html#doctest-options">5.2.3</A> for more information about option
+    flags.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1109' xml:id='l2h-1109' class="method">output_difference</tt></b>(</nobr></td>
+  <td><var>example, got, optionflags</var>)</td></tr></table></dt>
+<dd>
+    Return a string describing the differences between the expected
+    output for a given example (<var>example</var>) and the actual output
+    (<var>got</var>).  <var>optionflags</var> is the set of option flags used to
+    compare <var>want</var> and <var>got</var>.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.2.6.5 DocTestRunner objects"
+  href="doctest-DocTestRunner.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.2.6 Advanced API"
+  href="doctest-advanced-api.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.2.7 Debugging"
+  href="doctest-debugging.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="doctest-DocTestRunner.html">5.2.6.5 DocTestRunner objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="doctest-advanced-api.html">5.2.6 Advanced API</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="doctest-debugging.html">5.2.7 Debugging</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

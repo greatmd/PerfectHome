@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-rlcompleter.html" />
+<link rel="prev" href="module-tarfile.html" />
+<link rel="parent" href="someos.html" />
+<link rel="next" href="readline-example.html" />
+<meta name='aesop' content='information' />
+<title>7.20 readline -- GNU readline interface</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.19.3 Examples"
+  href="tar-examples.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Optional Operating System"
+  href="someos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.20.1 Example"
+  href="readline-example.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="tar-examples.html">7.19.3 Examples</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="someos.html">7. Optional Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="readline-example.html">7.20.1 Example</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0092000000000000000000">
+7.20 <tt class="module">readline</tt> --
+         GNU readline interface</A>
+</H1>
+
+<P>
+<A NAME="module-readline"></A>  
+<p class="availability">Availability: <span
+ class="platform">Unix</span>.</p>
+
+<P>
+The <tt class="module">readline</tt> module defines a number of functions used either
+directly or from the <tt class="module"><a href="module-rlcompleter.html">rlcompleter</a></tt> module to facilitate
+completion and history file read and write from the Python
+interpreter.
+
+<P>
+The <tt class="module">readline</tt> module defines the following functions:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2941' xml:id='l2h-2941' class="function">parse_and_bind</tt></b>(</nobr></td>
+  <td><var>string</var>)</td></tr></table></dt>
+<dd>
+Parse and execute single line of a readline init file.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2942' xml:id='l2h-2942' class="function">get_line_buffer</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the current contents of the line buffer.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2943' xml:id='l2h-2943' class="function">insert_text</tt></b>(</nobr></td>
+  <td><var>string</var>)</td></tr></table></dt>
+<dd>
+Insert text into the command line.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2944' xml:id='l2h-2944' class="function">read_init_file</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>filename</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Parse a readline initialization file.
+The default filename is the last filename used.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2945' xml:id='l2h-2945' class="function">read_history_file</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>filename</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Load a readline history file.
+The default filename is <span class="file">~/.history</span>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2946' xml:id='l2h-2946' class="function">write_history_file</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>filename</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Save a readline history file.
+The default filename is <span class="file">~/.history</span>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2947' xml:id='l2h-2947' class="function">clear_history</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Clear the current history.  (Note: this function is not available if
+the installed version of GNU readline doesn't support it.)
+
+<span class="versionnote">New in version 2.4.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2948' xml:id='l2h-2948' class="function">get_history_length</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the desired length of the history file.  Negative values imply
+unlimited history file size.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2949' xml:id='l2h-2949' class="function">set_history_length</tt></b>(</nobr></td>
+  <td><var>length</var>)</td></tr></table></dt>
+<dd>
+Set the number of lines to save in the history file.
+<tt class="function">write_history_file()</tt> uses this value to truncate the
+history file when saving.  Negative values imply unlimited history
+file size.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2950' xml:id='l2h-2950' class="function">get_current_history_length</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the number of lines currently in the history.  (This is different
+from <tt class="function">get_history_length()</tt>, which returns the maximum number of
+lines that will be written to a history file.)  
+<span class="versionnote">New in version 2.3.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2951' xml:id='l2h-2951' class="function">get_history_item</tt></b>(</nobr></td>
+  <td><var>index</var>)</td></tr></table></dt>
+<dd>
+Return the current contents of history item at <var>index</var>.
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2952' xml:id='l2h-2952' class="function">remove_history_item</tt></b>(</nobr></td>
+  <td><var>pos</var>)</td></tr></table></dt>
+<dd>
+Remove history item specified by its position from the history.
+
+<span class="versionnote">New in version 2.4.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2953' xml:id='l2h-2953' class="function">replace_history_item</tt></b>(</nobr></td>
+  <td><var>pos, line</var>)</td></tr></table></dt>
+<dd>
+Replace history item specified by its position with the given line.
+
+<span class="versionnote">New in version 2.4.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2954' xml:id='l2h-2954' class="function">redisplay</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Change what's displayed on the screen to reflect the current contents
+of the line buffer.  
+<span class="versionnote">New in version 2.3.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2955' xml:id='l2h-2955' class="function">set_startup_hook</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>function</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Set or remove the startup_hook function.  If <var>function</var> is specified,
+it will be used as the new startup_hook function; if omitted or
+<code>None</code>, any hook function already installed is removed.  The
+startup_hook function is called with no arguments just
+before readline prints the first prompt.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2956' xml:id='l2h-2956' class="function">set_pre_input_hook</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>function</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Set or remove the pre_input_hook function.  If <var>function</var> is specified,
+it will be used as the new pre_input_hook function; if omitted or
+<code>None</code>, any hook function already installed is removed.  The
+pre_input_hook function is called with no arguments after the first prompt
+has been printed and just before readline starts reading input characters.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2957' xml:id='l2h-2957' class="function">set_completer</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>function</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Set or remove the completer function.  If <var>function</var> is specified,
+it will be used as the new completer function; if omitted or
+<code>None</code>, any completer function already installed is removed.  The
+completer function is called as <code><var>function</var>(<var>text</var>,
+<var>state</var>)</code>, for <var>state</var> in <code>0</code>, <code>1</code>, <code>2</code>, ...,
+until it returns a non-string value.  It should return the next
+possible completion starting with <var>text</var>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2958' xml:id='l2h-2958' class="function">get_completer</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Get the completer function, or <code>None</code> if no completer function
+has been set.  
+<span class="versionnote">New in version 2.3.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2959' xml:id='l2h-2959' class="function">get_begidx</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Get the beginning index of the readline tab-completion scope.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2960' xml:id='l2h-2960' class="function">get_endidx</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Get the ending index of the readline tab-completion scope.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2961' xml:id='l2h-2961' class="function">set_completer_delims</tt></b>(</nobr></td>
+  <td><var>string</var>)</td></tr></table></dt>
+<dd>
+Set the readline word delimiters for tab-completion.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2962' xml:id='l2h-2962' class="function">get_completer_delims</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Get the readline word delimiters for tab-completion.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2963' xml:id='l2h-2963' class="function">add_history</tt></b>(</nobr></td>
+  <td><var>line</var>)</td></tr></table></dt>
+<dd>
+Append a line to the history buffer, as if it was the last line typed.
+</dl>
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-rlcompleter.html">rlcompleter</a></tt>:</b>
+    <dd>Completion of Python identifiers at the
+                          interactive prompt.
+  </dl>
+</div>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="readline-example.html">7.20.1 Example</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.19.3 Examples"
+  href="tar-examples.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Optional Operating System"
+  href="someos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.20.1 Example"
+  href="readline-example.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="tar-examples.html">7.19.3 Examples</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="someos.html">7. Optional Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="readline-example.html">7.20.1 Example</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

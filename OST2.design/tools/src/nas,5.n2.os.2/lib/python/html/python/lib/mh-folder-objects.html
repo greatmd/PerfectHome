@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="mh-message-objects.html" />
+<link rel="prev" href="mh-objects.html" />
+<link rel="parent" href="module-mhlib.html" />
+<link rel="next" href="mh-message-objects.html" />
+<meta name='aesop' content='information' />
+<title>12.5.2 Folder Objects </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.5.1 MH Objects"
+  href="mh-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.5 mhlib  "
+  href="module-mhlib.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.5.3 Message Objects"
+  href="mh-message-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="mh-objects.html">12.5.1 MH Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-mhlib.html">12.5 mhlib  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="mh-message-objects.html">12.5.3 Message Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0014520000000000000000"></A><A NAME="mh-folder-objects"></A>
+<BR>
+12.5.2 Folder Objects 
+</H2>
+
+<P>
+<tt class="class">Folder</tt> instances represent open folders and have the following
+methods:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3987' xml:id='l2h-3987' class="method">error</tt></b>(</nobr></td>
+  <td><var>format</var><big>[</big><var>, ...</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Print an error message - can be overridden.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3988' xml:id='l2h-3988' class="method">getfullname</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the folder's full pathname.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3989' xml:id='l2h-3989' class="method">getsequencesfilename</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the full pathname of the folder's sequences file.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3990' xml:id='l2h-3990' class="method">getmessagefilename</tt></b>(</nobr></td>
+  <td><var>n</var>)</td></tr></table></dt>
+<dd>
+Return the full pathname of message <var>n</var> of the folder.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3991' xml:id='l2h-3991' class="method">listmessages</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return a list of messages in the folder (as numbers).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3992' xml:id='l2h-3992' class="method">getcurrent</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the current message number.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3993' xml:id='l2h-3993' class="method">setcurrent</tt></b>(</nobr></td>
+  <td><var>n</var>)</td></tr></table></dt>
+<dd>
+Set the current message number to <var>n</var>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3994' xml:id='l2h-3994' class="method">parsesequence</tt></b>(</nobr></td>
+  <td><var>seq</var>)</td></tr></table></dt>
+<dd>
+Parse msgs syntax into list of messages.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3995' xml:id='l2h-3995' class="method">getlast</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Get last message, or <code>0</code> if no messages are in the folder.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3996' xml:id='l2h-3996' class="method">setlast</tt></b>(</nobr></td>
+  <td><var>n</var>)</td></tr></table></dt>
+<dd>
+Set last message (internal use only).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3997' xml:id='l2h-3997' class="method">getsequences</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return dictionary of sequences in folder.  The sequence names are used 
+as keys, and the values are the lists of message numbers in the
+sequences.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3998' xml:id='l2h-3998' class="method">putsequences</tt></b>(</nobr></td>
+  <td><var>dict</var>)</td></tr></table></dt>
+<dd>
+Return dictionary of sequences in folder name: list.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3999' xml:id='l2h-3999' class="method">removemessages</tt></b>(</nobr></td>
+  <td><var>list</var>)</td></tr></table></dt>
+<dd>
+Remove messages in list from folder.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4000' xml:id='l2h-4000' class="method">refilemessages</tt></b>(</nobr></td>
+  <td><var>list, tofolder</var>)</td></tr></table></dt>
+<dd>
+Move messages in list to other folder.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4001' xml:id='l2h-4001' class="method">movemessage</tt></b>(</nobr></td>
+  <td><var>n, tofolder, ton</var>)</td></tr></table></dt>
+<dd>
+Move one message to a given destination in another folder.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4002' xml:id='l2h-4002' class="method">copymessage</tt></b>(</nobr></td>
+  <td><var>n, tofolder, ton</var>)</td></tr></table></dt>
+<dd>
+Copy one message to a given destination in another folder.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.5.1 MH Objects"
+  href="mh-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.5 mhlib  "
+  href="module-mhlib.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.5.3 Message Objects"
+  href="mh-message-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="mh-objects.html">12.5.1 MH Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-mhlib.html">12.5 mhlib  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="mh-message-objects.html">12.5.3 Message Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

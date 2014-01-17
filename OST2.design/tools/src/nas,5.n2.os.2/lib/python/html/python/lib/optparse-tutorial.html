@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="optparse-reference-guide.html" />
+<link rel="prev" href="optparse-background.html" />
+<link rel="parent" href="module-optparse.html" />
+<link rel="next" href="optparse-understanding-option-actions.html" />
+<meta name='aesop' content='information' />
+<title>6.21.2 Tutorial</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.1.3 What are positional"
+  href="optparse-what-positional-arguments-for.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21 optparse  "
+  href="module-optparse.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.2.1 Understanding option actions"
+  href="optparse-understanding-option-actions.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-what-positional-arguments-for.html">6.21.1.3 What are positional</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-optparse.html">6.21 optparse  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-understanding-option-actions.html">6.21.2.1 Understanding option actions</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0082120000000000000000"></A><A NAME="optparse-tutorial"></A>
+<BR>
+6.21.2 Tutorial
+</H2>
+
+<P>
+While <tt class="module">optparse</tt> is quite flexible and powerful, it's also straightforward to
+use in most cases.  This section covers the code patterns that are
+common to any <tt class="module">optparse</tt>-based program.
+
+<P>
+First, you need to import the OptionParser class; then, early in the
+main program, create an OptionParser instance:
+<div class="verbatim"><pre>
+from optparse import OptionParser
+[...]
+parser = OptionParser()
+</pre></div>
+
+<P>
+Then you can start defining options.  The basic syntax is:
+<div class="verbatim"><pre>
+parser.add_option(opt_str, ...,
+                  attr=value, ...)
+</pre></div>
+
+<P>
+Each option has one or more option strings, such as <code>"-f"</code> or
+<code>"-file"</code>, and several option attributes that tell <tt class="module">optparse</tt> what to
+expect and what to do when it encounters that option on the command
+line.
+
+<P>
+Typically, each option will have one short option string and one long
+option string, e.g.:
+<div class="verbatim"><pre>
+parser.add_option("-f", "--file", ...)
+</pre></div>
+
+<P>
+You're free to define as many short option strings and as many long
+option strings as you like (including zero), as long as there is at
+least one option string overall.
+
+<P>
+The option strings passed to <tt class="method">add_option()</tt> are effectively labels for
+the option defined by that call.  For brevity, we will frequently refer
+to <em>encountering an option</em> on the command line; in reality, <tt class="module">optparse</tt>
+encounters <em>option strings</em> and looks up options from them.
+
+<P>
+Once all of your options are defined, instruct <tt class="module">optparse</tt> to parse your
+program's command line:
+<div class="verbatim"><pre>
+(options, args) = parser.parse_args()
+</pre></div>
+
+<P>
+(If you like, you can pass a custom argument list to <tt class="method">parse_args()</tt>,
+but that's rarely necessary: by default it uses <code>sys.argv[1:]</code>.)
+
+<P>
+<tt class="method">parse_args()</tt> returns two values:
+
+<UL>
+<LI> 
+<code>options</code>, an object containing values for all of your options--e.g. if <code>"-file"</code> takes a single string argument, then
+<code>options.file</code> will be the filename supplied by the user, or
+<code>None</code> if the user did not supply that option
+
+<P>
+</LI>
+<LI> 
+<code>args</code>, the list of positional arguments leftover after parsing
+options
+
+<P>
+</LI>
+</UL>
+
+<P>
+This tutorial section only covers the four most important option
+attributes: <tt class="member">action</tt>, <tt class="member">type</tt>, <tt class="member">dest</tt> (destination), and <tt class="member">help</tt>.
+Of these, <tt class="member">action</tt> is the most fundamental.
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="optparse-understanding-option-actions.html">6.21.2.1 Understanding option actions</a>
+<LI><A href="optparse-store-action.html">6.21.2.2 The store action</a>
+<LI><A href="optparse-handling-boolean-options.html">6.21.2.3 Handling boolean (flag) options</a>
+<LI><A href="optparse-other-actions.html">6.21.2.4 Other actions</a>
+<LI><A href="optparse-default-values.html">6.21.2.5 Default values</a>
+<LI><A href="optparse-generating-help.html">6.21.2.6 Generating help</a>
+<LI><A href="optparse-printing-version-string.html">6.21.2.7 Printing a version string</a>
+<LI><A href="optparse-how-optparse-handles-errors.html">6.21.2.8 How <tt class="module">optparse</tt> handles errors</a>
+<LI><A href="optparse-putting-it-all-together.html">6.21.2.9 Putting it all together</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.1.3 What are positional"
+  href="optparse-what-positional-arguments-for.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21 optparse  "
+  href="module-optparse.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.2.1 Understanding option actions"
+  href="optparse-understanding-option-actions.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-what-positional-arguments-for.html">6.21.1.3 What are positional</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-optparse.html">6.21 optparse  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-understanding-option-actions.html">6.21.2.1 Understanding option actions</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

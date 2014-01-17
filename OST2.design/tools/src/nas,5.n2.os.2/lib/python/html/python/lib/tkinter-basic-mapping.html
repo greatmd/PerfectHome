@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node721.html" />
+<link rel="prev" href="node719.html" />
+<link rel="parent" href="module-Tkinter.html" />
+<link rel="next" href="node721.html" />
+<meta name='aesop' content='information' />
+<title>16.1.4 Mapping Basic Tk into Tkinter </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="16.1.3 A (Very) Quick"
+  href="node719.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="16.1 Tkinter  "
+  href="module-Tkinter.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="16.1.5 How Tk and"
+  href="node721.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node719.html">16.1.3 A (Very) Quick</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-Tkinter.html">16.1 Tkinter  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node721.html">16.1.5 How Tk and</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0018140000000000000000"></A><A NAME="tkinter-basic-mapping"></A>
+<BR>
+16.1.4 Mapping Basic Tk into Tkinter
+            
+</H2>
+
+<P>
+Class commands in Tk correspond to class constructors in Tkinter.
+
+<P>
+<div class="verbatim"><pre>
+    button .fred                =====&gt;  fred = Button()
+</pre></div>
+
+<P>
+The master of an object is implicit in the new name given to it at
+creation time.  In Tkinter, masters are specified explicitly.
+
+<P>
+<div class="verbatim"><pre>
+    button .panel.fred          =====&gt;  fred = Button(panel)
+</pre></div>
+
+<P>
+The configuration options in Tk are given in lists of hyphened tags
+followed by values.  In Tkinter, options are specified as
+keyword-arguments in the instance constructor, and keyword-args for
+configure calls or as instance indices, in dictionary style, for
+established instances.  See section&nbsp;<A href="tkinter-setting-options.html#tkinter-setting-options">16.1.6</A> on
+setting options.
+
+<P>
+<div class="verbatim"><pre>
+    button .fred -fg red        =====&gt;  fred = Button(panel, fg = "red")
+    .fred configure -fg red     =====&gt;  fred["fg"] = red
+                                OR ==&gt;  fred.config(fg = "red")
+</pre></div>
+
+<P>
+In Tk, to perform an action on a widget, use the widget name as a
+command, and follow it with an action name, possibly with arguments
+(options).  In Tkinter, you call methods on the class instance to
+invoke actions on the widget.  The actions (methods) that a given
+widget can perform are listed in the Tkinter.py module.
+
+<P>
+<div class="verbatim"><pre>
+    .fred invoke                =====&gt;  fred.invoke()
+</pre></div>
+
+<P>
+To give a widget to the packer (geometry manager), you call pack with
+optional arguments.  In Tkinter, the Pack class holds all this
+functionality, and the various forms of the pack command are
+implemented as methods.  All widgets in <tt class="module"><a href="module-Tkinter.html">Tkinter</a></tt> are
+subclassed from the Packer, and so inherit all the packing
+methods. See the <tt class="module"><a href="module-Tix.html">Tix</a></tt> module documentation for additional
+information on the Form geometry manager.
+
+<P>
+<div class="verbatim"><pre>
+    pack .fred -side left       =====&gt;  fred.pack(side = "left")
+</pre></div>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="16.1.3 A (Very) Quick"
+  href="node719.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="16.1 Tkinter  "
+  href="module-Tkinter.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="16.1.5 How Tk and"
+  href="node721.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node719.html">16.1.3 A (Very) Quick</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-Tkinter.html">16.1 Tkinter  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node721.html">16.1.5 How Tk and</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

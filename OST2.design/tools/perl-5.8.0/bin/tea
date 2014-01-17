@@ -1,0 +1,102 @@
+#!/import/bw/tools/local/perl-5.8.0/bin/perl
+
+eval 'exec /import/bw/tools/local/perl-5.8.0/bin/perl  -S $0 ${1+"$@"}'
+    if 0; # not running under some shell
+#########################################################################
+#        This Perl script is Copyright (c) 2000, Peter J Billam         #
+#               c/o P J B Computing, www.pjb.com.au                     #
+#                                                                       #
+#     This program is free software; you can redistribute it and/or     #
+#            modify it under the same terms as Perl itself.             #
+#########################################################################
+use Crypt::Tea;
+
+while ($ARGV[$[] =~ /^-/) {
+	if ($ARGV[$[] =~ /^-c/)      { $encrypt='yes'; shift;
+	} elsif ($ARGV[$[] =~ /^-s/) { $sign='yes'; shift;
+	} elsif ($ARGV[$[] =~ /^-j/) { print &tea_in_javascript;  exit 1;
+	} else { print <<EOT; exit;
+usage:
+   tea -c filename   # encrypts filename
+   tea filename      # decrypts filename
+   tea -s filename   # calculates ascii digital signature for filename
+   tea -j            # outputs JavaScript code to do compatible encryption
+   tea -h            # prints this message
+
+For encryption and decryption, you will be asked for a password.
+It should be a sufficiently longish string; say 17 random 8-bit bytes.
+Version 1.43,
+#COMMENT#
+
+EOT
+	}
+}
+#    tea -c3 filename  # triple-encrypts filename
+#    tea -3 filename   # triple-decrypts filename
+# for single encryption, or 3 times that to justify triple encryption.
+
+undef $/; my $text = <>; $/="\n";
+if ($sign) { print &asciidigest ($text) . "\n"; exit 0; }
+
+open(TTY,  ">/dev/tty")  || die "Can't write /dev/tty: $!\n";
+open(TTYIN, "</dev/tty") || die "Can't read /dev/tty: $!\n";
+print TTY 'Password: '; my $key = <TTYIN>;
+close TTY; close TTYIN;
+$key =~ s/[\r\n]*$//;
+exit unless $key;
+
+if ($encrypt) {
+	print &encrypt ($text, $key), "\n";
+} else {
+	print &decrypt ($text, $key);
+}
+exit 0;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+tea - Perl script to give command-line access to Crypt::Tea.pm
+
+=head1 SYNOPSIS
+
+  tea -c filename   # encrypts filename
+  tea filename      # decrypts filename
+  tea -s filename   # calculates ascii digital signature for filename
+  tea -j            # outputs JavaScript doing compatible encryption
+  tea -h            # prints this message
+
+For encryption and decryption, you will be asked for a password.
+It should be a sufficiently longish string; say 17 random 8-bit bytes.
+
+=head1 DESCRIPTION
+
+This script uses the Crypt::Tea.pm module to offer TEA, the Tiny
+Encryption Algorithm, and some Modes of Use based on CBC, compatibly in
+both Perl and JavaScript.
+
+The various options offer encryption, decryption and digest, and all
+cyphertext is ascii-encoded to prevent munging. Another option returns
+JavaScript code which offers identical functions in JS, and this can
+be used by GCIs to feed to the browser.  Triple encryption will be
+offered later.
+
+Version 1.42,
+#COMMENT#
+
+=head1 AUTHOR
+
+Peter J Billam <computing@pjb.com.au>
+
+=head1 CREDITS
+
+Based on Crypt::Tea.pm
+
+=head1 SEE ALSO
+
+http://www.pjb.com.au/, http://www.cpan.org, perl(1).
+
+=cut
+

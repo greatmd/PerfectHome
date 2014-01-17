@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-logging.html" />
+<link rel="prev" href="module-locale.html" />
+<link rel="parent" href="allos.html" />
+<link rel="next" href="node327.html" />
+<meta name='aesop' content='information' />
+<title>6.28 gettext -- Multilingual internationalization services</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.27.3 Access to message"
+  href="locale-gettext.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.28.1 GNU gettext API"
+  href="node327.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="locale-gettext.html">6.27.3 Access to message</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node327.html">6.28.1 GNU gettext API</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0082800000000000000000">
+6.28 <tt class="module">gettext</tt> --
+         Multilingual internationalization services</A>
+</H1>
+
+<P>
+<A NAME="module-gettext"></A>
+
+<P>
+The <tt class="module">gettext</tt> module provides internationalization (I18N) and
+localization (L10N) services for your Python modules and applications.
+It supports both the GNU <code>gettext</code> message catalog API and a
+higher level, class-based API that may be more appropriate for Python
+files.  The interface described below allows you to write your
+module and application messages in one natural language, and provide a
+catalog of translated messages for running under different natural
+languages.
+
+<P>
+Some hints on localizing your Python modules and applications are also
+given.
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="node327.html">6.28.1 GNU <b class="program">gettext</b> API</a>
+<LI><A href="node328.html">6.28.2 Class-based API</a>
+<UL>
+<LI><A href="node329.html">6.28.2.1 The <tt class="class">NullTranslations</tt> class</a>
+<LI><A href="node330.html">6.28.2.2 The <tt class="class">GNUTranslations</tt> class</a>
+<LI><A href="node331.html">6.28.2.3 Solaris message catalog support</a>
+<LI><A href="node332.html">6.28.2.4 The Catalog constructor</a>
+</ul>
+<LI><A href="node333.html">6.28.3 Internationalizing your programs and modules</a>
+<UL>
+<LI><A href="node334.html">6.28.3.1 Localizing your module</a>
+<LI><A href="node335.html">6.28.3.2 Localizing your application</a>
+<LI><A href="node336.html">6.28.3.3 Changing languages on the fly</a>
+<LI><A href="node337.html">6.28.3.4 Deferred translations</a>
+<LI><A href="node338.html">6.28.3.5 <tt class="function">gettext()</tt> vs. <tt class="function">lgettext()</tt></a>
+</ul>
+<LI><A href="node339.html">6.28.4 Acknowledgements</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.27.3 Access to message"
+  href="locale-gettext.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.28.1 GNU gettext API"
+  href="node327.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="locale-gettext.html">6.27.3 Access to message</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node327.html">6.28.1 GNU gettext API</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

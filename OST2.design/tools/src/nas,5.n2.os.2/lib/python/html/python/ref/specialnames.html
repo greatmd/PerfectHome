@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="ref.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="ref.html" title='Python Reference Manual' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="types.html" />
+<link rel="parent" href="datamodel.html" />
+<link rel="next" href="customization.html" />
+<meta name='aesop' content='information' />
+<title>3.3 Special method names</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.2 The standard type"
+  href="types.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3. Data model"
+  href="datamodel.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.3.1 Basic customization"
+  href="customization.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="types.html">3.2 The standard type</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="datamodel.html">3. Data model</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="customization.html">3.3.1 Basic customization</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION005300000000000000000"></A><A NAME="specialnames"></A>
+<BR>
+3.3 Special method names
+</H1>
+
+<P>
+A class can implement certain operations that are invoked by special
+syntax (such as arithmetic operations or subscripting and slicing) by
+defining methods with special names.<a id='l2h-169' xml:id='l2h-169'></a>This is Python's approach to <i class="dfn">operator overloading</i>, allowing
+classes to define their own behavior with respect to language
+operators.  For instance, if a class defines
+a method named <tt class="method">__getitem__()</tt>, and <code>x</code> is an instance of
+this class, then <code>x[i]</code> is equivalent to
+<code>x.__getitem__(i)</code>.  Except where mentioned, attempts to execute
+an operation raise an exception when no appropriate method is defined.
+<a id='l2h-171' xml:id='l2h-171'></a>
+<P>
+When implementing a class that emulates any built-in type, it is
+important that the emulation only be implemented to the degree that it
+makes sense for the object being modelled.  For example, some
+sequences may work well with retrieval of individual elements, but
+extracting a slice may not make sense.  (One example of this is the
+<tt class="class">NodeList</tt> interface in the W3C's Document Object Model.)
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="customization.html">3.3.1 Basic customization</a>
+<LI><A href="attribute-access.html">3.3.2 Customizing attribute access</a>
+<UL>
+<LI><A href="new-style-attribute-access.html">3.3.2.1 More attribute access for new-style classes</a>
+<LI><A href="descriptors.html">3.3.2.2 Implementing Descriptors</a>
+<LI><A href="descriptor-invocation.html">3.3.2.3 Invoking Descriptors</a>
+<LI><A href="slots.html">3.3.2.4 __slots__</a>
+</ul>
+<LI><A href="metaclasses.html">3.3.3 Customizing class creation</a>
+<LI><A href="callable-types.html">3.3.4 Emulating callable objects</a>
+<LI><A href="sequence-types.html">3.3.5 Emulating container types</a>
+<LI><A href="sequence-methods.html">3.3.6 Additional methods for emulation of sequence types</a>
+<LI><A href="numeric-types.html">3.3.7 Emulating numeric types</a>
+<LI><A href="coercion-rules.html">3.3.8 Coercion rules</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.2 The standard type"
+  href="types.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3. Data model"
+  href="datamodel.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.3.1 Basic customization"
+  href="customization.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="types.html">3.2 The standard type</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="datamodel.html">3. Data model</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="customization.html">3.3.1 Basic customization</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

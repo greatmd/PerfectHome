@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="weakref-example.html" />
+<link rel="parent" href="module-weakref.html" />
+<link rel="next" href="module-fpectl.html" />
+<meta name='aesop' content='information' />
+<title>3.3.3 Weak References in Extension Types </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.3.2 Example"
+  href="weakref-example.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3.3 weakref  "
+  href="module-weakref.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.4 fpectl  "
+  href="module-fpectl.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="weakref-example.html">3.3.2 Example</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-weakref.html">3.3 weakref  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-fpectl.html">3.4 fpectl  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION005330000000000000000"></A><A NAME="weakref-extension"></A>
+<BR>
+3.3.3 Weak References in Extension Types
+            
+</H2>
+
+<P>
+One of the goals of the implementation is to allow any type to
+participate in the weak reference mechanism without incurring the
+overhead on those objects which do not benefit by weak referencing
+(such as numbers).
+
+<P>
+For an object to be weakly referencable, the extension must include a
+<tt class="ctype">PyObject*</tt> field in the instance structure for the use of the
+weak reference mechanism; it must be initialized to <tt class="constant">NULL</tt> by the
+object's constructor.  It must also set the <tt class="member">tp_weaklistoffset</tt>
+field of the corresponding type object to the offset of the field.
+Also, it needs to add <tt class="constant">Py_TPFLAGS_HAVE_WEAKREFS</tt> to the
+tp_flags slot.  For example, the instance type is defined with the
+following structure:
+
+<P>
+<div class="verbatim"><pre>
+typedef struct {
+    PyObject_HEAD
+    PyClassObject *in_class;       /* The class object */
+    PyObject      *in_dict;        /* A dictionary */
+    PyObject      *in_weakreflist; /* List of weak references */
+} PyInstanceObject;
+</pre></div>
+
+<P>
+The statically-declared type object for instances is defined this way:
+
+<P>
+<div class="verbatim"><pre>
+PyTypeObject PyInstance_Type = {
+    PyObject_HEAD_INIT(&amp;PyType_Type)
+    0,
+    "module.instance",
+
+    /* Lots of stuff omitted for brevity... */
+
+    Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_WEAKREFS   /* tp_flags */
+    0,                                          /* tp_doc */
+    0,                                          /* tp_traverse */
+    0,                                          /* tp_clear */
+    0,                                          /* tp_richcompare */
+    offsetof(PyInstanceObject, in_weakreflist), /* tp_weaklistoffset */
+};
+</pre></div>
+
+<P>
+The type constructor is responsible for initializing the weak reference
+list to <tt class="constant">NULL</tt>:
+
+<P>
+<div class="verbatim"><pre>
+static PyObject *
+instance_new() {
+    /* Other initialization stuff omitted for brevity */
+
+    self-&gt;in_weakreflist = NULL;
+
+    return (PyObject *) self;
+}
+</pre></div>
+
+<P>
+The only further addition is that the destructor needs to call the
+weak reference manager to clear any weak references.  This should be
+done before any other parts of the destruction have occurred, but is
+only required if the weak reference list is non-<tt class="constant">NULL</tt>:
+
+<P>
+<div class="verbatim"><pre>
+static void
+instance_dealloc(PyInstanceObject *inst)
+{
+    /* Allocate temporaries if needed, but do not begin
+       destruction just yet.
+     */
+
+    if (inst-&gt;in_weakreflist != NULL)
+        PyObject_ClearWeakRefs((PyObject *) inst);
+
+    /* Proceed with object destruction normally. */
+}
+</pre></div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.3.2 Example"
+  href="weakref-example.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3.3 weakref  "
+  href="module-weakref.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.4 fpectl  "
+  href="module-fpectl.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="weakref-example.html">3.3.2 Example</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-weakref.html">3.3 weakref  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-fpectl.html">3.4 fpectl  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

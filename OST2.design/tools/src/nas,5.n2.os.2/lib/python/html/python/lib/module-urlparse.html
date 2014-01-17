@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-SocketServer.html" />
+<link rel="prev" href="module-telnetlib.html" />
+<link rel="parent" href="internet.html" />
+<link rel="next" href="module-SocketServer.html" />
+<meta name='aesop' content='information' />
+<title>11.15 urlparse -- Parse URLs into components</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.14.2 Telnet Example"
+  href="telnet-example.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11. Internet Protocols and"
+  href="internet.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.16 SocketServer  "
+  href="module-SocketServer.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="telnet-example.html">11.14.2 Telnet Example</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="internet.html">11. Internet Protocols and</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-SocketServer.html">11.16 SocketServer  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00131500000000000000000">
+11.15 <tt class="module">urlparse</tt> --
+         Parse URLs into components</A>
+</H1>
+<A NAME="module-urlparse"></A>
+<P>
+
+<P>
+<a id='l2h-3546' xml:id='l2h-3546'></a>
+<a id='l2h-3538' xml:id='l2h-3538'></a><a id='l2h-3539' xml:id='l2h-3539'></a>
+<P>
+This module defines a standard interface to break Uniform Resource
+Locator (URL) strings up in components (addressing scheme, network
+location, path etc.), to combine the components back into a URL
+string, and to convert a ``relative URL'' to an absolute URL given a
+``base URL.''
+
+<P>
+The module has been designed to match the Internet RFC on Relative
+Uniform Resource Locators (and discovered a bug in an earlier
+draft!).
+
+<P>
+It defines the following functions:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3540' xml:id='l2h-3540' class="function">urlparse</tt></b>(</nobr></td>
+  <td><var>urlstring</var><big>[</big><var>, default_scheme</var><big>[</big><var>, allow_fragments</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Parse a URL into 6 components, returning a 6-tuple: (addressing
+scheme, network location, path, parameters, query, fragment
+identifier).  This corresponds to the general structure of a URL:
+<code><var>scheme</var>://<var>netloc</var>/<var>path</var>;<var>parameters</var>?<var>query</var>#<var>fragment</var></code>.
+Each tuple item is a string, possibly empty.
+The components are not broken up in smaller parts (e.g. the network
+location is a single string), and % escapes are not expanded.
+The delimiters as shown above are not part of the tuple items,
+except for a leading slash in the <var>path</var> component, which is
+retained if present.
+
+<P>
+Example:
+
+<P>
+<div class="verbatim"><pre>
+urlparse('http://www.cwi.nl:80/%7Eguido/Python.html')
+</pre></div>
+
+<P>
+yields the tuple
+
+<P>
+<div class="verbatim"><pre>
+('http', 'www.cwi.nl:80', '/%7Eguido/Python.html', '', '', '')
+</pre></div>
+
+<P>
+If the <var>default_scheme</var> argument is specified, it gives the
+default addressing scheme, to be used only if the URL string does not
+specify one.  The default value for this argument is the empty string.
+
+<P>
+If the <var>allow_fragments</var> argument is zero, fragment identifiers
+are not allowed, even if the URL's addressing scheme normally does
+support them.  The default value for this argument is <code>1</code>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3541' xml:id='l2h-3541' class="function">urlunparse</tt></b>(</nobr></td>
+  <td><var>tuple</var>)</td></tr></table></dt>
+<dd>
+Construct a URL string from a tuple as returned by <code>urlparse()</code>.
+This may result in a slightly different, but equivalent URL, if the
+URL that was parsed originally had redundant delimiters, e.g. a ? with
+an empty query (the draft states that these are equivalent).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3542' xml:id='l2h-3542' class="function">urlsplit</tt></b>(</nobr></td>
+  <td><var>urlstring</var><big>[</big><var>,
+                           default_scheme</var><big>[</big><var>, allow_fragments</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+This is similar to <tt class="function">urlparse()</tt>, but does not split the
+params from the URL.  This should generally be used instead of
+<tt class="function">urlparse()</tt> if the more recent URL syntax allowing
+parameters to be applied to each segment of the <var>path</var> portion of
+the URL (see <a class="rfc" id='rfcref-90402' xml:id='rfcref-90402'
+href="http://www.faqs.org/rfcs/rfc2396.html">RFC 2396</a>) is wanted.  A separate function is needed to
+separate the path segments and parameters.  This function returns a
+5-tuple: (addressing scheme, network location, path, query, fragment
+identifier).
+
+<span class="versionnote">New in version 2.2.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3543' xml:id='l2h-3543' class="function">urlunsplit</tt></b>(</nobr></td>
+  <td><var>tuple</var>)</td></tr></table></dt>
+<dd>
+Combine the elements of a tuple as returned by <tt class="function">urlsplit()</tt>
+into a complete URL as a string.
+
+<span class="versionnote">New in version 2.2.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3544' xml:id='l2h-3544' class="function">urljoin</tt></b>(</nobr></td>
+  <td><var>base, url</var><big>[</big><var>, allow_fragments</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Construct a full (``absolute'') URL by combining a ``base URL''
+(<var>base</var>) with a ``relative URL'' (<var>url</var>).  Informally, this
+uses components of the base URL, in particular the addressing scheme,
+the network location and (part of) the path, to provide missing
+components in the relative URL.
+
+<P>
+Example:
+
+<P>
+<div class="verbatim"><pre>
+urljoin('http://www.cwi.nl/%7Eguido/Python.html', 'FAQ.html')
+</pre></div>
+
+<P>
+yields the string
+
+<P>
+<div class="verbatim"><pre>
+'http://www.cwi.nl/%7Eguido/FAQ.html'
+</pre></div>
+
+<P>
+The <var>allow_fragments</var> argument has the same meaning as for
+<code>urlparse()</code>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3545' xml:id='l2h-3545' class="function">urldefrag</tt></b>(</nobr></td>
+  <td><var>url</var>)</td></tr></table></dt>
+<dd>
+If <var>url</var> contains a fragment identifier, returns a modified
+version of <var>url</var> with no fragment identifier, and the fragment
+identifier as a separate string.  If there is no fragment identifier
+in <var>url</var>, returns <var>url</var> unmodified and an empty string.
+</dl>
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seerfc">
+    <dt><a href="http://www.faqs.org/rfcs/rfc1738.html"
+        title="Uniform Resource Locators (URL)"
+        >RFC 1738, <em>Uniform Resource Locators (URL)</em></a>
+    <dd>
+        This specifies the formal syntax and semantics of absolute
+        URLs.
+  </dl>
+  <dl compact="compact" class="seerfc">
+    <dt><a href="http://www.faqs.org/rfcs/rfc1808.html"
+        title="Relative Uniform Resource Locators"
+        >RFC 1808, <em>Relative Uniform Resource Locators</em></a>
+    <dd>
+        This Request For Comments includes the rules for joining an
+        absolute and a relative URL, including a fair number of
+        ``Abnormal Examples'' which govern the treatment of border
+        cases.
+  </dl>
+  <dl compact="compact" class="seerfc">
+    <dt><a href="http://www.faqs.org/rfcs/rfc2396.html"
+        title="Uniform Resource Identifiers (URI): Generic Syntax"
+        >RFC 2396, <em>Uniform Resource Identifiers (URI): Generic Syntax</em></a>
+    <dd>
+        Document describing the generic syntactic requirements for
+        both Uniform Resource Names (URNs) and Uniform Resource
+        Locators (URLs).
+  </dl>
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.14.2 Telnet Example"
+  href="telnet-example.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11. Internet Protocols and"
+  href="internet.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.16 SocketServer  "
+  href="module-SocketServer.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="telnet-example.html">11.14.2 Telnet Example</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="internet.html">11. Internet Protocols and</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-SocketServer.html">11.16 SocketServer  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-mmap.html" />
+<link rel="prev" href="module-dummythreading.html" />
+<link rel="parent" href="someos.html" />
+<link rel="next" href="QueueObjects.html" />
+<meta name='aesop' content='information' />
+<title>7.8 Queue -- A synchronized queue class</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.7 dummy_threading  "
+  href="module-dummythreading.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Optional Operating System"
+  href="someos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.8.1 Queue Objects"
+  href="QueueObjects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-dummythreading.html">7.7 dummy_threading  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="someos.html">7. Optional Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="QueueObjects.html">7.8.1 Queue Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009800000000000000000">
+7.8 <tt class="module">Queue</tt> --
+         A synchronized queue class</A>
+</H1>
+
+<P>
+<A NAME="module-Queue"></A>
+
+<P>
+The <tt class="module">Queue</tt> module implements a multi-producer, multi-consumer
+FIFO queue.  It is especially useful in threads programming when
+information must be exchanged safely between multiple threads.  The
+<tt class="class">Queue</tt> class in this module implements all the required locking
+semantics.  It depends on the availability of thread support in
+Python.
+
+<P>
+The <tt class="module">Queue</tt> module defines the following class and exception:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-2752' xml:id='l2h-2752' class="class">Queue</tt></b>(</nobr></td>
+  <td><var>maxsize</var>)</td></tr></table></dt>
+<dd>
+Constructor for the class.  <var>maxsize</var> is an integer that sets the
+upperbound limit on the number of items that can be placed in the
+queue.  Insertion will block once this size has been reached, until
+queue items are consumed.  If <var>maxsize</var> is less than or equal to
+zero, the queue size is infinite.
+</dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-2753' xml:id='l2h-2753' class="exception">Empty</tt></b></dt>
+<dd>
+Exception raised when non-blocking <tt class="method">get()</tt> (or
+<tt class="method">get_nowait()</tt>) is called on a <tt class="class">Queue</tt> object which is
+empty.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-2754' xml:id='l2h-2754' class="exception">Full</tt></b></dt>
+<dd>
+Exception raised when non-blocking <tt class="method">put()</tt> (or
+<tt class="method">put_nowait()</tt>) is called on a <tt class="class">Queue</tt> object which is
+full.
+</dd></dl>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="QueueObjects.html">7.8.1 Queue Objects</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.7 dummy_threading  "
+  href="module-dummythreading.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Optional Operating System"
+  href="someos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.8.1 Queue Objects"
+  href="QueueObjects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-dummythreading.html">7.7 dummy_threading  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="someos.html">7. Optional Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="QueueObjects.html">7.8.1 Queue Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="testcase-objects.html" />
+<link rel="prev" href="legacy-unit-tests.html" />
+<link rel="parent" href="module-unittest.html" />
+<link rel="next" href="testcase-objects.html" />
+<meta name='aesop' content='information' />
+<title>5.3.4 Classes and functions </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.3.3 Re-using old test"
+  href="legacy-unit-tests.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.3 unittest  "
+  href="module-unittest.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.3.5 TestCase Objects"
+  href="testcase-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="legacy-unit-tests.html">5.3.3 Re-using old test</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-unittest.html">5.3 unittest  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="testcase-objects.html">5.3.5 TestCase Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION007340000000000000000"></A><A NAME="unittest-contents"></A>
+<BR>
+5.3.4 Classes and functions
+            
+</H2>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-1128' xml:id='l2h-1128' class="class">TestCase</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Instances of the <tt class="class">TestCase</tt> class represent the smallest
+  testable units in a set of tests.  This class is intended to be used
+  as a base class, with specific tests being implemented by concrete
+  subclasses.  This class implements the interface needed by the test
+  runner to allow it to drive the test, and methods that the test code
+  can use to check for and report various kinds of failures.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-1129' xml:id='l2h-1129' class="class">FunctionTestCase</tt></b>(</nobr></td>
+  <td><var>testFunc</var><big>[</big><var>,
+                  setUp</var><big>[</big><var>, tearDown</var><big>[</big><var>, description</var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  This class implements the portion of the <tt class="class">TestCase</tt> interface
+  which allows the test runner to drive the test, but does not provide
+  the methods which test code can use to check and report errors.
+  This is used to create test cases using legacy test code, allowing
+  it to be integrated into a <tt class="module"><a href="module-unittest.html">unittest</a></tt>-based test
+  framework.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-1130' xml:id='l2h-1130' class="class">TestSuite</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>tests</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  This class represents an aggregation of individual tests cases and
+  test suites.  The class presents the interface needed by the test
+  runner to allow it to be run as any other test case, but all the
+  contained tests and test suites are executed.  Additional methods
+  are provided to add test cases and suites to the aggregation.  If
+  <var>tests</var> is given, it must be a sequence of individual tests that
+  will be added to the suite.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-1131' xml:id='l2h-1131' class="class">TestLoader</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  This class is responsible for loading tests according to various
+  criteria and returning them wrapped in a <tt class="class">TestSuite</tt>.
+  It can load all tests within a given module or <tt class="class">TestCase</tt>
+  class.  When loading from a module, it considers all
+  <tt class="class">TestCase</tt>-derived classes.  For each such class, it creates
+  an instance for each method with a name beginning with the string
+  "<tt class="samp">test</tt>".
+</dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1132' xml:id='l2h-1132'>defaultTestLoader</tt></b></dt>
+<dd>
+  Instance of the <tt class="class">TestLoader</tt> class which can be shared.  If no
+  customization of the <tt class="class">TestLoader</tt> is needed, this instance can
+  always be used instead of creating new instances.
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-1133' xml:id='l2h-1133' class="class">TextTestRunner</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>stream</var><big>[</big><var>,
+                  descriptions</var><big>[</big><var>, verbosity</var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  A basic test runner implementation which prints results on standard
+  output.  It has a few configurable parameters, but is essentially
+  very simple.  Graphical applications which run test suites should
+  provide alternate implementations.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1134' xml:id='l2h-1134' class="function">main</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>module</var><big>[</big><var>,
+                 defaultTest</var><big>[</big><var>, argv</var><big>[</big><var>,
+                 testRunner</var><big>[</big><var>, testRunner</var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  A command-line program that runs a set of tests; this is primarily
+  for making test modules conveniently executable.  The simplest use
+  for this function is:
+
+<P>
+<div class="verbatim"><pre>
+if __name__ == '__main__':
+    unittest.main()
+</pre></div>
+</dl>
+
+<P>
+In some cases, the existing tests may have be written using the
+<tt class="module"><a href="module-doctest.html">doctest</a></tt> module.  If so, that module provides a 
+<tt class="class">DocTestSuite</tt> class that can automatically build
+<tt class="class">unittest.TestSuite</tt> instances from the existing test code.
+
+<span class="versionnote">New in version 2.3.</span>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.3.3 Re-using old test"
+  href="legacy-unit-tests.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.3 unittest  "
+  href="module-unittest.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.3.5 TestCase Objects"
+  href="testcase-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="legacy-unit-tests.html">5.3.3 Re-using old test</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-unittest.html">5.3 unittest  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="testcase-objects.html">5.3.5 TestCase Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

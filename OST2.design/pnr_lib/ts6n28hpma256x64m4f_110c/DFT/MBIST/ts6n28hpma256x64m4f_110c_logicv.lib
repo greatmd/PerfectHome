@@ -1,0 +1,135 @@
+//*******************************************************************************
+//*
+//*STATEMENT OF USE
+//*
+//*This information contains confidential and proprietary information of TSMC.
+//*No part of this information may be reproduced, transmitted, transcribed,
+//*stored in a retrieval system, or translated into any human or computer
+//*language, in any form or by any means, electronic, mechanical, magnetic,
+//*optical, chemical, manual, or otherwise, without the prior written permission
+//*of TSMC. This information was prepared for informational purpose and is for
+//*use by TSMC's customers only. TSMC reserves the right to make changes in the
+//*information at any time and without notice.
+//*
+//*******************************************************************************
+//*******************************************************************************
+//*        Software         : TSMC MEMORY COMPILER tsn28hpm2prf_2011.06.06.110c */
+//*        Technology       : TSMC 28nm CMOS LOGIC High Performance Mobile 1P10M HKMG CU_ELK 0.9V */
+//*        Memory Type      : TSMC 28nm High Performance Mobile Two Port Register File */
+//*                         : with d240 bit cell SVT periphery */
+//*        Library Name     : ts6n28hpma256x64m4f (user specify : TS6N28HPMA256X64M4F) */
+//*        Library Version  : 110c */
+//*        Generated Time   : 2013/09/17, 17:42:29 */
+//*******************************************************************************
+MemoryTemplate (TS6N28HPMA256X64M4F) {
+
+    CellName        : TS6N28HPMA256X64M4F;
+    ShadowRead 	    : On;
+    ShadowWrite     : On;
+    ShadowWriteOK   : On;
+    Algorithm       : SMarchCHKBvcd;
+    logicalPorts    : 1R1W;
+    NumberOfWords   : 256;
+    MinHold         : 0.5;
+    MilliWattsPerMegaHertz : 0.015;
+    TransparentMode : None;  // User options for DFT:
+		 	 	    // AsyncMux:    for low speed scan
+				    // SyncMux:     for at-speed scan
+				    // AsyncWriteThru: if there is AWT in this memory
+
+    Port (RCT[1:0])   {
+        Direction: Input;
+        Function: None;
+        SafeValue:   0;
+    }
+
+    Port (WCT[1:0])   {
+        Direction: Input;
+        Function: None;
+        SafeValue:   0;
+    }
+
+    Port (KP[2:0])   {
+        Direction: Input;
+        Function: None;
+        SafeValue:   0;
+    }
+
+
+
+
+
+
+
+    Port (CLKW)  {
+        Function: Clock;
+        LogicalPort:	A;
+    }
+    
+    Port (CLKR)  {
+        Function: Clock;
+        LogicalPort:	B;
+    }
+    
+    Port (REB)  {
+        Function: ReadEnable;
+        Polarity: ActiveLow;	
+        LogicalPort:	B;
+    }
+    
+    Port (WEB) {
+        Function: WriteEnable; 
+        Polarity: ActiveLow;
+        LogicalPort:	A;
+    }
+    
+    port (AA[7:0]) {
+        function:    address;
+        LogicalPort:	A;
+    }
+    
+    port (AB[7:0]) {
+        function:    address;
+        LogicalPort:	B;
+    }
+    
+    
+    Port (D[63:0]) { 
+        Function: Data; 
+        Direction:   Input;
+        LogicalPort:	A;
+    }
+    
+    Port (Q[63:0]) { 
+        Function: Data; 
+        LogicalPort:	B;
+        Direction:   Output; 
+    }
+
+
+    
+// 64 rows by 4 columns.
+    AddressCounter {
+        Function ( ColumnAddress ) {
+            LogicalAddressMap {
+                ColumnAddress[1:0]:Address[1:0];  // 4 columns
+            }
+            CountRange [0:3];
+        }
+
+	
+        Function  ( RowAddress ) {
+            LogicalAddressMap {
+                RowAddress[5:0]:Address[7:2];  // 64 rows
+            }
+            CountRange [0:63];
+        }
+    }
+    
+ 
+ 
+    OperationSet : syncWR;
+    bitGrouping : 1;
+    
+}
+

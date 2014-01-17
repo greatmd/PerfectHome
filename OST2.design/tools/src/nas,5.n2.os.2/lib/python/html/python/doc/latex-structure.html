@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="doc.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="doc.html" title='Documenting Python' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="latex-environments.html" />
+<link rel="prev" href="latex-syntax.html" />
+<link rel="parent" href="latex-primer.html" />
+<link rel="next" href="latex-environments.html" />
+<meta name='aesop' content='information' />
+<title>4.2 Hierarchical Structure </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="4.1 Syntax"
+  href="latex-syntax.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="4 LaTeX Primer"
+  href="latex-primer.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="4.3 Common Environments"
+  href="latex-environments.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Documenting Python</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="latex-syntax.html">4.1 Syntax</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="latex-primer.html">4 LaTeX Primer</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="latex-environments.html">4.3 Common Environments</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000520000000000000000"></A><A NAME="latex-structure"></A>
+<BR>
+4.2 Hierarchical Structure 
+</H2>
+
+<P>
+<span class="LaTeX">LaTeX</span> expects documents to be arranged in a conventional,
+    hierarchical way, with chapters, sections, sub-sections,
+    appendixes, and the like.  These are marked using macros rather
+    than environments, probably because the end of a section can be
+    safely inferred when a section of equal or higher level starts.
+
+<P>
+There are six ``levels'' of sectioning in the document classes
+    used for Python documentation, and the deepest two
+    levels<A NAME="tex2html1"
+  HREF="#foot193"><SUP>1</SUP></A> are not used.  The levels are:
+
+<P>
+<div class="center"><table class="realtable">
+  <thead>
+    <tr>
+      <th class="center">Level</th>
+      <th class="left"  >Macro Name</th>
+      <th class="center">Notes</th>
+      </tr>
+    </thead>
+  <tbody>
+    <tr><td class="center" valign="baseline">1</td>
+        <td class="left"  ><tt class='macro'>&#92;chapter</tt></td>
+        <td class="center">(1)</td></tr>
+    <tr><td class="center" valign="baseline">2</td>
+        <td class="left"  ><tt class='macro'>&#92;section</tt></td>
+        <td class="center"></td></tr>
+    <tr><td class="center" valign="baseline">3</td>
+        <td class="left"  ><tt class='macro'>&#92;subsection</tt></td>
+        <td class="center"></td></tr>
+    <tr><td class="center" valign="baseline">4</td>
+        <td class="left"  ><tt class='macro'>&#92;subsubsection</tt></td>
+        <td class="center"></td></tr>
+    <tr><td class="center" valign="baseline">5</td>
+        <td class="left"  ><tt class='macro'>&#92;paragraph</tt></td>
+        <td class="center">(2)</td></tr>
+    <tr><td class="center" valign="baseline">6</td>
+        <td class="left"  ><tt class='macro'>&#92;subparagraph</tt></td>
+        <td class="center"></td></tr></tbody>
+</table></div>
+
+<P>
+Notes:
+
+<P>
+<DL>
+<DT><STRONG>(1)</STRONG></DT>
+<DD>Only used for the <code>manual</code> documents, as described in
+      section <A href="classes.html#classes">5</A>, ``Document Classes.''
+      
+</DD>
+<DT><STRONG>(2)</STRONG></DT>
+<DD>Not the same as a paragraph of text; nobody seems to use this.
+    
+</DD>
+</DL>
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot193">... levels</A><A
+ href="latex-structure.html#tex2html1"><SUP>1</SUP></A></DT>
+<DD>The deepest levels have the highest numbers in the
+      table.
+
+</DD>
+</DL>
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="4.1 Syntax"
+  href="latex-syntax.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="4 LaTeX Primer"
+  href="latex-primer.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="4.3 Common Environments"
+  href="latex-environments.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Documenting Python</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="latex-syntax.html">4.1 Syntax</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="latex-primer.html">4 LaTeX Primer</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="latex-environments.html">4.3 Common Environments</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

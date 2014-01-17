@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="node596.html" />
+<link rel="parent" href="module-email.html" />
+<link rel="next" href="module-mailcap.html" />
+<meta name='aesop' content='information' />
+<title>12.2.13 Examples</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.2.12 Differences from mimelib"
+  href="node596.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.2 email  "
+  href="module-email.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.3 mailcap  "
+  href="module-mailcap.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node596.html">12.2.12 Differences from mimelib</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-email.html">12.2 email  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-mailcap.html">12.3 mailcap  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00142130000000000000000">
+12.2.13 Examples</A>
+</H2>
+
+<P>
+Here are a few examples of how to use the <tt class="module">email</tt> package to
+read, write, and send simple email messages, as well as more complex
+MIME messages.
+
+<P>
+First, let's see how to create and send a simple text message:
+
+<P>
+<div class="verbatim">
+<pre># Import smtplib for the actual sending function
+import smtplib
+
+# Import the email modules we'll need
+from email.MIMEText import MIMEText
+
+# Open a plain text file for reading.  For this example, assume that
+# the text file contains only ASCII characters.
+fp = open(textfile, 'rb')
+# Create a text/plain message
+msg = MIMEText(fp.read())
+fp.close()
+
+# me == the sender's email address
+# you == the recipient's email address
+msg['Subject'] = 'The contents of %s' % textfile
+msg['From'] = me
+msg['To'] = you
+
+# Send the message via our own SMTP server, but don't include the
+# envelope header.
+s = smtplib.SMTP()
+s.connect()
+s.sendmail(me, [you], msg.as_string())
+s.close()
+</pre>
+<div class="footer">
+<a href="email-simple.txt" type="text/plain">Download as text (original file name: <span class="file">email-simple.py</span>).</a>
+</div></div>
+
+<P>
+Here's an example of how to send a MIME message containing a bunch of
+family pictures that may be residing in a directory:
+
+<P>
+<div class="verbatim">
+<pre># Import smtplib for the actual sending function
+import smtplib
+
+# Here are the email pacakge modules we'll need
+from email.MIMEImage import MIMEImage
+from email.MIMEMultipart import MIMEMultipart
+
+COMMASPACE = ', '
+
+# Create the container (outer) email message.
+msg = MIMEMultipart()
+msg['Subject'] = 'Our family reunion'
+# me == the sender's email address
+# family = the list of all recipients' email addresses
+msg['From'] = me
+msg['To'] = COMMASPACE.join(family)
+msg.preamble = 'Our family reunion'
+# Guarantees the message ends in a newline
+msg.epilogue = ''
+
+# Assume we know that the image files are all in PNG format
+for file in pngfiles:
+    # Open the files in binary mode.  Let the MIMEImage class automatically
+    # guess the specific image type.
+    fp = open(file, 'rb')
+    img = MIMEImage(fp.read())
+    fp.close()
+    msg.attach(img)
+
+# Send the email via our own SMTP server.
+s = smtplib.SMTP()
+s.connect()
+s.sendmail(me, family, msg.as_string())
+s.close()
+</pre>
+<div class="footer">
+<a href="email-mime.txt" type="text/plain">Download as text (original file name: <span class="file">email-mime.py</span>).</a>
+</div></div>
+
+<P>
+Here's an example of how to send the entire contents of a directory as
+an email message:
+<A NAME="tex2html137"
+  HREF="#foot58630"><SUP>12.5</SUP></A>
+<P>
+<div class="verbatim">
+<pre>#!/usr/bin/env python
+
+"""Send the contents of a directory as a MIME message.
+
+Usage: dirmail [options] from to [to ...]*
+
+Options:
+    -h / -&#45;help
+        Print this message and exit.
+
+    -d directory
+    -&#45;directory=directory
+        Mail the contents of the specified directory, otherwise use the
+        current directory.  Only the regular files in the directory are sent,
+        and we don't recurse to subdirectories.
+
+`from' is the email address of the sender of the message.
+
+`to' is the email address of the recipient of the message, and multiple
+recipients may be given.
+
+The email is sent by forwarding to your local SMTP server, which then does the
+normal delivery process.  Your local machine must be running an SMTP server.
+"""
+
+import sys
+import os
+import getopt
+import smtplib
+# For guessing MIME type based on file name extension
+import mimetypes
+
+from email import Encoders
+from email.Message import Message
+from email.MIMEAudio import MIMEAudio
+from email.MIMEBase import MIMEBase
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEImage import MIMEImage
+from email.MIMEText import MIMEText
+
+COMMASPACE = ', '
+
+def usage(code, msg=''):
+    print &gt;&#62; sys.stderr, __doc__
+    if msg:
+        print &gt;&#62; sys.stderr, msg
+    sys.exit(code)
+
+def main():
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], 'hd:', ['help', 'directory='])
+    except getopt.error, msg:
+        usage(1, msg)
+
+    dir = os.curdir
+    for opt, arg in opts:
+        if opt in ('-h', '-&#45;help'):
+            usage(0)
+        elif opt in ('-d', '-&#45;directory'):
+            dir = arg
+
+    if len(args) &lt; 2:
+        usage(1)
+
+    sender = args[0]
+    recips = args[1:]
+
+    # Create the enclosing (outer) message
+    outer = MIMEMultipart()
+    outer['Subject'] = 'Contents of directory %s' % os.path.abspath(dir)
+    outer['To'] = COMMASPACE.join(recips)
+    outer['From'] = sender
+    outer.preamble = 'You will not see this in a MIME-aware mail reader.&#92;n'
+    # To guarantee the message ends with a newline
+    outer.epilogue = ''
+
+    for filename in os.listdir(dir):
+        path = os.path.join(dir, filename)
+        if not os.path.isfile(path):
+            continue
+        # Guess the content type based on the file's extension.  Encoding
+        # will be ignored, although we should check for simple things like
+        # gzip'd or compressed files.
+        ctype, encoding = mimetypes.guess_type(path)
+        if ctype is None or encoding is not None:
+            # No guess could be made, or the file is encoded (compressed), so
+            # use a generic bag-of-bits type.
+            ctype = 'application/octet-stream'
+        maintype, subtype = ctype.split('/', 1)
+        if maintype == 'text':
+            fp = open(path)
+            # Note: we should handle calculating the charset
+            msg = MIMEText(fp.read(), _subtype=subtype)
+            fp.close()
+        elif maintype == 'image':
+            fp = open(path, 'rb')
+            msg = MIMEImage(fp.read(), _subtype=subtype)
+            fp.close()
+        elif maintype == 'audio':
+            fp = open(path, 'rb')
+            msg = MIMEAudio(fp.read(), _subtype=subtype)
+            fp.close()
+        else:
+            fp = open(path, 'rb')
+            msg = MIMEBase(maintype, subtype)
+            msg.set_payload(fp.read())
+            fp.close()
+            # Encode the payload using Base64
+            Encoders.encode_base64(msg)
+        # Set the filename parameter
+        msg.add_header('Content-Disposition', 'attachment', filename=filename)
+        outer.attach(msg)
+
+    # Now send the message
+    s = smtplib.SMTP()
+    s.connect()
+    s.sendmail(sender, recips, outer.as_string())
+    s.close()
+
+if __name__ == '__main__':
+    main()
+</pre>
+<div class="footer">
+<a href="email-dir.txt" type="text/plain">Download as text (original file name: <span class="file">email-dir.py</span>).</a>
+</div></div>
+
+<P>
+And finally, here's an example of how to unpack a MIME message like
+the one above, into a directory of files:
+
+<P>
+<div class="verbatim">
+<pre>#!/usr/bin/env python
+
+"""Unpack a MIME message into a directory of files.
+
+Usage: unpackmail [options] msgfile
+
+Options:
+    -h / -&#45;help
+        Print this message and exit.
+
+    -d directory
+    -&#45;directory=directory
+        Unpack the MIME message into the named directory, which will be
+        created if it doesn't already exist.
+
+msgfile is the path to the file containing the MIME message.
+"""
+
+import sys
+import os
+import getopt
+import errno
+import mimetypes
+import email
+
+def usage(code, msg=''):
+    print &gt;&#62; sys.stderr, __doc__
+    if msg:
+        print &gt;&#62; sys.stderr, msg
+    sys.exit(code)
+
+def main():
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], 'hd:', ['help', 'directory='])
+    except getopt.error, msg:
+        usage(1, msg)
+
+    dir = os.curdir
+    for opt, arg in opts:
+        if opt in ('-h', '-&#45;help'):
+            usage(0)
+        elif opt in ('-d', '-&#45;directory'):
+            dir = arg
+
+    try:
+        msgfile = args[0]
+    except IndexError:
+        usage(1)
+
+    try:
+        os.mkdir(dir)
+    except OSError, e:
+        # Ignore directory exists error
+        if e.errno &lt;&gt; errno.EEXIST: raise
+
+    fp = open(msgfile)
+    msg = email.message_from_file(fp)
+    fp.close()
+
+    counter = 1
+    for part in msg.walk():
+        # multipart/* are just containers
+        if part.get_content_maintype() == 'multipart':
+            continue
+        # Applications should really sanitize the given filename so that an
+        # email message can't be used to overwrite important files
+        filename = part.get_filename()
+        if not filename:
+            ext = mimetypes.guess_extension(part.get_type())
+            if not ext:
+                # Use a generic bag-of-bits extension
+                ext = '.bin'
+            filename = 'part-%03d%s' % (counter, ext)
+        counter += 1
+        fp = open(os.path.join(dir, filename), 'wb')
+        fp.write(part.get_payload(decode=1))
+        fp.close()
+
+if __name__ == '__main__':
+    main()
+</pre>
+<div class="footer">
+<a href="email-unpack.txt" type="text/plain">Download as text (original file name: <span class="file">email-unpack.py</span>).</a>
+</div></div>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot58630">... message:</A><A
+ HREF="node597.html#tex2html137"><SUP>12.5</SUP></A></DT>
+<DD>Thanks to Matthew Dixon Cowles for the original inspiration
+          and examples.
+
+</DD>
+</DL>
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.2.12 Differences from mimelib"
+  href="node596.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.2 email  "
+  href="module-email.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.3 mailcap  "
+  href="module-mailcap.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node596.html">12.2.12 Differences from mimelib</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-email.html">12.2 email  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-mailcap.html">12.3 mailcap  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

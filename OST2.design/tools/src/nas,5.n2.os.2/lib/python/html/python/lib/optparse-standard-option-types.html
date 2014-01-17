@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="optparse-parsing-arguments.html" />
+<link rel="prev" href="optparse-option-attributes.html" />
+<link rel="parent" href="optparse-reference-guide.html" />
+<link rel="next" href="optparse-parsing-arguments.html" />
+<meta name='aesop' content='information' />
+<title>6.21.3.6 Standard option types</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.5 Option attributes"
+  href="optparse-option-attributes.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.3.7 Parsing arguments"
+  href="optparse-parsing-arguments.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-option-attributes.html">6.21.3.5 Option attributes</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-parsing-arguments.html">6.21.3.7 Parsing arguments</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION0082136000000000000000"></A><A NAME="optparse-standard-option-types"></A>
+<BR>
+6.21.3.6 Standard option types
+</H3>
+
+<P>
+<tt class="module">optparse</tt> has six built-in option types: <code>string</code>, <code>int</code>, <code>long</code>,
+<code>choice</code>, <code>float</code> and <code>complex</code>.  If you need to add new option
+types, see section&nbsp;<A HREF="#optparse-extending"><tex2html_cross_ref_visible_mark></A>, Extending <tt class="module">optparse</tt>.
+
+<P>
+Arguments to string options are not checked or converted in any way: the
+text on the command line is stored in the destination (or passed to the
+callback) as-is.
+
+<P>
+Integer arguments are passed to <code>int()</code> to convert them to Python
+integers.  If <code>int()</code> fails, so will <tt class="module">optparse</tt>, although with a more
+useful error message.  (Internally, <tt class="module">optparse</tt> raises OptionValueError;
+OptionParser catches this exception higher up and terminates your
+program with a useful error message.)
+
+<P>
+Likewise, <code>float</code> arguments are passed to <code>float()</code> for conversion,
+<code>long</code> arguments to <code>long()</code>, and <code>complex</code> arguments to
+<code>complex()</code>.  Apart from that, they are handled identically to integer
+arguments.
+
+<P>
+<code>choice</code> options are a subtype of <code>string</code> options.  The <code>choices</code>
+option attribute (a sequence of strings) defines the set of allowed
+option arguments.  <code>optparse.check_choice()</code> compares
+user-supplied option arguments against this master list and raises
+OptionValueError if an invalid string is given.
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.5 Option attributes"
+  href="optparse-option-attributes.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.3.7 Parsing arguments"
+  href="optparse-parsing-arguments.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-option-attributes.html">6.21.3.5 Option attributes</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-parsing-arguments.html">6.21.3.7 Parsing arguments</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

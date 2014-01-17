@@ -1,0 +1,12 @@
+package Tk::Config;
+require Exporter;
+use base qw(Exporter);
+$VERSION = '800.023';
+$inc = '-I/usr/openwin/include';
+$define = '';
+$xlib = '-L/usr/openwin/lib';
+$xinc = '-I/usr/openwin/include';
+$gccopt = '';
+$win_arch = 'x';
+@EXPORT = qw($VERSION $inc $define $xlib $xinc $gccopt $win_arch);
+1;

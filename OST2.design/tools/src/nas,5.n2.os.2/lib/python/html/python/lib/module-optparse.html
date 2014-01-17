@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-tempfile.html" />
+<link rel="prev" href="module-getopt.html" />
+<link rel="parent" href="allos.html" />
+<link rel="next" href="optparse-background.html" />
+<meta name='aesop' content='information' />
+<title>6.21 optparse -- More powerful command line option parser</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.20 getopt  "
+  href="module-getopt.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.1 Background"
+  href="optparse-background.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-getopt.html">6.20 getopt  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-background.html">6.21.1 Background</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0082100000000000000000">
+6.21 <tt class="module">optparse</tt> -- More powerful command line option parser</A>
+</H1>
+<A NAME="module-optparse"></A>
+
+<span class="versionnote">New in version 2.3.</span>
+
+<P>
+<code>optparse</code> is a more convenient, flexible, and powerful library for
+parsing command-line options than <code>getopt</code>.  <code>optparse</code> uses a more
+declarative style of command-line parsing: you create an instance of
+<tt class="class">OptionParser</tt>, populate it with options, and parse the command line.
+<code>optparse</code> allows users to specify options in the conventional GNU/POSIX
+syntax, and additionally generates usage and help messages for you.
+
+<P>
+Here's an example of using <code>optparse</code> in a simple script:
+<div class="verbatim"><pre>
+from optparse import OptionParser
+[...]
+parser = OptionParser()
+parser.add_option("-f", "--file", dest="filename",
+                  help="write report to FILE", metavar="FILE")
+parser.add_option("-q", "--quiet",
+                  action="store_false", dest="verbose", default=True,
+                  help="don't print status messages to stdout")
+
+(options, args) = parser.parse_args()
+</pre></div>
+
+<P>
+With these few lines of code, users of your script can now do the
+``usual thing'' on the command-line, for example:
+<div class="verbatim"><pre>
+&lt;yourscript&gt; --file=outfile -q
+</pre></div>
+
+<P>
+As it parses the command line, <code>optparse</code> sets attributes of the
+<code>options</code> object returned by <tt class="method">parse_args()</tt> based on user-supplied
+command-line values.  When <tt class="method">parse_args()</tt> returns from parsing this
+command line, <code>options.filename</code> will be <code>"outfile"</code> and
+<code>options.verbose</code> will be <code>False</code>.  <code>optparse</code> supports both long
+and short options, allows short options to be merged together, and
+allows options to be associated with their arguments in a variety of
+ways.  Thus, the following command lines are all equivalent to the above
+example:
+<div class="verbatim"><pre>
+&lt;yourscript&gt; -f outfile --quiet
+&lt;yourscript&gt; --quiet --file outfile
+&lt;yourscript&gt; -q -foutfile
+&lt;yourscript&gt; -qfoutfile
+</pre></div>
+
+<P>
+Additionally, users can run one of
+<div class="verbatim"><pre>
+&lt;yourscript&gt; -h
+&lt;yourscript&gt; --help
+</pre></div>
+
+<P>
+and <code>optparse</code> will print out a brief summary of your script's
+options:
+<div class="verbatim"><pre>
+usage: &lt;yourscript&gt; [options]
+
+options:
+  -h, --help            show this help message and exit
+  -f FILE, --file=FILE  write report to FILE
+  -q, --quiet           don't print status messages to stdout
+</pre></div>
+
+<P>
+where the value of <em>yourscript</em> is determined at runtime (normally
+from <code>sys.argv[0]</code>).
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="optparse-background.html">6.21.1 Background</a>
+<UL>
+<LI><A href="optparse-terminology.html">6.21.1.1 Terminology</a>
+<LI><A href="optparse-what-options-for.html">6.21.1.2 What are options for?</a>
+<LI><A href="optparse-what-positional-arguments-for.html">6.21.1.3 What are positional arguments for?</a>
+</ul>
+<LI><A href="optparse-tutorial.html">6.21.2 Tutorial</a>
+<UL>
+<LI><A href="optparse-understanding-option-actions.html">6.21.2.1 Understanding option actions</a>
+<LI><A href="optparse-store-action.html">6.21.2.2 The store action</a>
+<LI><A href="optparse-handling-boolean-options.html">6.21.2.3 Handling boolean (flag) options</a>
+<LI><A href="optparse-other-actions.html">6.21.2.4 Other actions</a>
+<LI><A href="optparse-default-values.html">6.21.2.5 Default values</a>
+<LI><A href="optparse-generating-help.html">6.21.2.6 Generating help</a>
+<LI><A href="optparse-printing-version-string.html">6.21.2.7 Printing a version string</a>
+<LI><A href="optparse-how-optparse-handles-errors.html">6.21.2.8 How <tt class="module">optparse</tt> handles errors</a>
+<LI><A href="optparse-putting-it-all-together.html">6.21.2.9 Putting it all together</a>
+</ul>
+<LI><A href="optparse-reference-guide.html">6.21.3 Reference Guide</a>
+<UL>
+<LI><A href="optparse-creating-parser.html">6.21.3.1 Creating the parser</a>
+<LI><A href="optparse-populating-parser.html">6.21.3.2 Populating the parser</a>
+<LI><A href="optparse-defining-options.html">6.21.3.3 Defining options</a>
+<LI><A href="optparse-standard-option-actions.html">6.21.3.4 Standard option actions</a>
+<LI><A href="optparse-option-attributes.html">6.21.3.5 Option attributes</a>
+<LI><A href="optparse-standard-option-types.html">6.21.3.6 Standard option types</a>
+<LI><A href="optparse-parsing-arguments.html">6.21.3.7 Parsing arguments</a>
+<LI><A href="optparse-querying-manipulating-option-parser.html">6.21.3.8 Querying and manipulating your option parser</a>
+<LI><A href="optparse-conflicts-between-options.html">6.21.3.9 Conflicts between options</a>
+<LI><A href="optparse-other-methods.html">6.21.3.10 Other methods</a>
+</ul>
+<LI><A href="optparse-option-callbacks.html">6.21.4 Option Callbacks</a>
+<UL>
+<LI><A href="optparse-defining-callback-option.html">6.21.4.1 Defining a callback option</a>
+<LI><A href="optparse-how-callbacks-called.html">6.21.4.2 How callbacks are called</a>
+<LI><A href="optparse-raising-errors-in-callback.html">6.21.4.3 Raising errors in a callback</a>
+<LI><A href="optparse-callback-example-1.html">6.21.4.4 Callback example 1: trivial callback</a>
+<LI><A href="optparse-callback-example-2.html">6.21.4.5 Callback example 2: check option order</a>
+<LI><A href="optparse-callback-example-3.html">6.21.4.6 Callback example 3: check option order (generalized)</a>
+<LI><A href="optparse-callback-example-4.html">6.21.4.7 Callback example 4: check arbitrary condition</a>
+<LI><A href="optparse-callback-example-5.html">6.21.4.8 Callback example 5: fixed arguments</a>
+<LI><A href="optparse-callback-example-6.html">6.21.4.9 Callback example 6: variable arguments</a>
+</ul>
+<LI><A href="optparse-extending-optparse.html">6.21.5 Extending <tt class="module">optparse</tt></a>
+<UL>
+<LI><A href="optparse-adding-new-types.html">6.21.5.1 Adding new types</a>
+<LI><A href="optparse-adding-new-actions.html">6.21.5.2 Adding new actions</a>
+<LI><A href="optparse-other-reasons-to-extend-optparse.html">6.21.5.3 Other reasons to extend <tt class="module">optparse</tt></a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.20 getopt  "
+  href="module-getopt.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.1 Background"
+  href="optparse-background.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-getopt.html">6.20 getopt  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-background.html">6.21.1 Background</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

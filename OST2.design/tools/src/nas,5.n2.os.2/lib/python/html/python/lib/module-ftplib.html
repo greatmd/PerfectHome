@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-gopherlib.html" />
+<link rel="prev" href="module-httplib.html" />
+<link rel="parent" href="internet.html" />
+<link rel="next" href="ftp-objects.html" />
+<meta name='aesop' content='information' />
+<title>11.7 ftplib -- FTP protocol client</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.6.3 Examples"
+  href="httplib-examples.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11. Internet Protocols and"
+  href="internet.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.7.1 FTP Objects"
+  href="ftp-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="httplib-examples.html">11.6.3 Examples</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="internet.html">11. Internet Protocols and</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="ftp-objects.html">11.7.1 FTP Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0013700000000000000000">
+11.7 <tt class="module">ftplib</tt> --
+         FTP protocol client</A>
+</H1>
+
+<P>
+<A NAME="module-ftplib"></A>
+
+<P>
+<a id='l2h-3333' xml:id='l2h-3333'></a><a id='l2h-3341' xml:id='l2h-3341'></a>
+
+<P>
+This module defines the class <tt class="class">FTP</tt> and a few related items.
+The <tt class="class">FTP</tt> class implements the client side of the FTP
+protocol.  You can use this to write Python
+programs that perform a variety of automated FTP jobs, such as
+mirroring other ftp servers.  It is also used by the module
+<tt class="module"><a href="module-urllib.html">urllib</a></tt> to handle URLs that use FTP.  For more information
+on FTP (File Transfer Protocol), see Internet <a class="rfc" id='rfcref-90129' xml:id='rfcref-90129'
+href="http://www.faqs.org/rfcs/rfc959.html">RFC 959</a>.
+
+<P>
+Here's a sample session using the <tt class="module">ftplib</tt> module:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; from ftplib import FTP
+&gt;&gt;&gt; ftp = FTP('ftp.cwi.nl')   # connect to host, default port
+&gt;&gt;&gt; ftp.login()               # user anonymous, passwd anonymous@
+&gt;&gt;&gt; ftp.retrlines('LIST')     # list directory contents
+total 24418
+drwxrwsr-x   5 ftp-usr  pdmaint     1536 Mar 20 09:48 .
+dr-xr-srwt 105 ftp-usr  pdmaint     1536 Mar 21 14:32 ..
+-rw-r--r--   1 ftp-usr  pdmaint     5305 Mar 20 09:48 INDEX
+ .
+ .
+ .
+&gt;&gt;&gt; ftp.retrbinary('RETR README', open('README', 'wb').write)
+'226 Transfer complete.'
+&gt;&gt;&gt; ftp.quit()
+</pre></div>
+
+<P>
+The module defines the following items:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-3334' xml:id='l2h-3334' class="class">FTP</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>host</var><big>[</big><var>, user</var><big>[</big><var>,
+                       passwd</var><big>[</big><var>, acct</var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Return a new instance of the <tt class="class">FTP</tt> class.  When
+<var>host</var> is given, the method call <code>connect(<var>host</var>)</code> is
+made.  When <var>user</var> is given, additionally the method call
+<code>login(<var>user</var>, <var>passwd</var>, <var>acct</var>)</code> is made (where
+<var>passwd</var> and <var>acct</var> default to the empty string when not given).
+</dl>
+
+<P>
+<dl><dt><b><tt id='l2h-3335' xml:id='l2h-3335'>all_errors</tt></b></dt>
+<dd>
+The set of all exceptions (as a tuple) that methods of <tt class="class">FTP</tt>
+instances may raise as a result of problems with the FTP connection
+(as opposed to programming errors made by the caller).  This set
+includes the four exceptions listed below as well as
+<tt class="exception">socket.error</tt> and <tt class="exception">IOError</tt>.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-3336' xml:id='l2h-3336' class="exception">error_reply</tt></b></dt>
+<dd>
+Exception raised when an unexpected reply is received from the server.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-3337' xml:id='l2h-3337' class="exception">error_temp</tt></b></dt>
+<dd>
+Exception raised when an error code in the range 400-499 is received.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-3338' xml:id='l2h-3338' class="exception">error_perm</tt></b></dt>
+<dd>
+Exception raised when an error code in the range 500-599 is received.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-3339' xml:id='l2h-3339' class="exception">error_proto</tt></b></dt>
+<dd>
+Exception raised when a reply is received from the server that does
+not begin with a digit in the range 1-5.
+</dd></dl>
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-netrc.html">netrc</a></tt>:</b>
+    <dd>Parser for the <span class="file">.netrc</span> file format.  The file
+                    <span class="file">.netrc</span> is typically used by FTP clients to
+                    load user authentication information before prompting
+                    the user.
+  </dl>
+  <div class="seetext"><p>The file <span class="file">Tools/scripts/ftpmirror.py</span><a id='l2h-3340' xml:id='l2h-3340'></a>
+           in the Python source distribution is a script that can mirror
+           FTP sites, or portions thereof, using the <tt class="module">ftplib</tt> module.
+           It can be used as an extended example that applies this module.</p></div>
+</div>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="ftp-objects.html">11.7.1 FTP Objects</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.6.3 Examples"
+  href="httplib-examples.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11. Internet Protocols and"
+  href="internet.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.7.1 FTP Objects"
+  href="ftp-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="httplib-examples.html">11.6.3 Examples</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="internet.html">11. Internet Protocols and</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="ftp-objects.html">11.7.1 FTP Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="whatsnew24.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="whatsnew24.html" title='What's New in Python 2.4' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node3.html" />
+<link rel="prev" href="contents.html" />
+<link rel="parent" href="whatsnew24.html" />
+<link rel="next" href="node3.html" />
+<meta name='aesop' content='information' />
+<title>1 PEP 218: Built-In Set Objects</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="Contents"
+  href="contents.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="2 PEP 237: Unifying"
+  href="node3.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="contents.html">Contents</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node3.html">2 PEP 237: Unifying</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000200000000000000000">
+1 PEP 218: Built-In Set Objects</A>
+</H1>
+
+<P>
+Python 2.3 introduced the <tt class="module">sets</tt> module.  C implementations of
+set data types have now been added to the Python core as two new
+built-in types, <tt class="function">set(<var>iterable</var>)</tt> and
+<tt class="function">frozenset(<var>iterable</var>)</tt>.  They provide high speed
+operations for membership testing, for eliminating duplicates from
+sequences, and for mathematical operations like unions, intersections,
+differences, and symmetric differences.
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; a = set('abracadabra')              # form a set from a string
+&gt;&gt;&gt; 'z' in a                            # fast membership testing
+False
+&gt;&gt;&gt; a                                   # unique letters in a
+set(['a', 'r', 'b', 'c', 'd'])
+&gt;&gt;&gt; ''.join(a)                          # convert back into a string
+'arbcd'
+
+&gt;&gt;&gt; b = set('alacazam')                 # form a second set
+&gt;&gt;&gt; a - b                               # letters in a but not in b
+set(['r', 'd', 'b'])
+&gt;&gt;&gt; a | b                               # letters in either a or b
+set(['a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'])
+&gt;&gt;&gt; a &amp; b                               # letters in both a and b
+set(['a', 'c'])
+&gt;&gt;&gt; a ^ b                               # letters in a or b but not both
+set(['r', 'd', 'b', 'm', 'z', 'l'])
+
+&gt;&gt;&gt; a.add('z')                          # add a new element
+&gt;&gt;&gt; a.update('wxy')                     # add multiple new elements
+&gt;&gt;&gt; a
+set(['a', 'c', 'b', 'd', 'r', 'w', 'y', 'x', 'z'])       
+&gt;&gt;&gt; a.remove('x')                       # take one element out
+&gt;&gt;&gt; a
+set(['a', 'c', 'b', 'd', 'r', 'w', 'y', 'z'])
+</pre></div>
+
+<P>
+The <tt class="function">frozenset</tt> type is an immutable version of <tt class="function">set</tt>.
+Since it is immutable and hashable, it may be used as a dictionary key or
+as a member of another set.  
+
+<P>
+The <tt class="module">sets</tt> module remains in the standard library, and may be
+useful if you wish to subclass the <tt class="class">Set</tt> or <tt class="class">ImmutableSet</tt>
+classes.  There are currently no plans to deprecate the module.
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+<dl compact="compact" class="seerfc">
+    <dt><a href="http://www.python.org/peps/pep-0218.html"
+        title="Adding a Built-In Set Object Type"
+        >PEP 218, <em>Adding a Built-In Set Object Type</em></a>
+    <dd>Originally proposed by
+Greg Wilson and ultimately implemented by Raymond Hettinger.
+  </dl>
+</div>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="Contents"
+  href="contents.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="2 PEP 237: Unifying"
+  href="node3.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="contents.html">Contents</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node3.html">2 PEP 237: Unifying</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 1.01.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

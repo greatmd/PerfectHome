@@ -1,0 +1,974 @@
+
+                          IC Compiler (TM)
+                         IC Compiler-PC (TM)
+                         IC Compiler-XP (TM)
+                         IC Compiler-DP (TM)
+                         IC Compiler-AG (TM)
+
+          Version H-2013.03-ICC for RHEL64 -- Mar 05, 2013
+
+Zroute is the default router for ICC, ICC-PC, ICC-DP and ICC-AG in IC Compiler.
+         Classic router will continue to be fully supported.
+
+               Copyright (c) 1988-2013 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+Initializing gui preferences from file  /rsghome/greatmd/.synopsys_icc_prefs.tcl
+# ========== Copyright Header Begin ==========================================
+# Autor : Donguk Moon (dongukmoon@stanford.edu)
+# Purpose 
+#  - place and route for SPARC core
+# Progress:
+# 12/09/2013 : Library setup and consistency checking
+# ========== Copyright Header End ============================================
+sh date
+Sat Jan  4 18:10:29 PST 2014
+sh hostname
+rsg1.stanford.edu
+sh uptime
+ 18:10:29 up 74 days, 12:31,  6 users,  load average: 0.08, 0.02, 0.01
+remove_design -all
+1
+set dv_root [sh echo \$DV_ROOT]
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design
+set syn_home [sh echo \$SYN_LIB]
+/hd/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn
+## goto spc directory:
+set block  spc
+spc
+set blk_dir $dv_root/design/sys/iop/$block/synopsys
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys
+echo "PNR target module" $block
+PNR target module spc
+echo "Enter $blk_dir"
+Enter /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys
+cd $blk_dir
+## create pnr directory
+sh mkdir pnr
+Error: mkdir: cannot create directory `pnr': File exists
+	Use error_info for more info. (CMD-013)
+cd pnr 
+set top_module spc
+spc
+#########################################################################
+## Library Prepraation
+## 1. setup for logical and physical library
+## 2. load tlu_plus file => this is from Syonpsys EDK (TODO: not accurate)
+## 3. checking library/tlu consistancy 
+#########################################################################
+source -echo -verbose $dv_root/design/sys/synopsys/script/pnr_lib_setup.tcl
+#########################################################################
+## Library Prepraation
+## 1. setup for logical and physical library
+## 2. load tlu_plus file => this is from Syonpsys EDK (TODO: not accurate)
+## 3. checking library/tlu consistancy 
+#########################################################################
+source -echo -verbose $dv_root/design/sys/synopsys/script/target_lib.scr
+# ========== Copyright Header Begin ==========================================
+# 
+# OpenSPARC T2 Processor File: target_lib.scr
+# Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+# 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#
+# * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For the avoidance of doubt, and except that if any non-GPL license 
+# choice is available it will apply instead, Sun elects to use only 
+# the General Public License version 2 (GPLv2) at this time for any 
+# software where a choice of GPL license versions is made 
+# available with the language indicating that GPLv2 or any later version 
+# may be used, or where a choice of which version of the GPL is applied is 
+# otherwise unspecified. 
+#
+# Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+# CA 95054 USA or visit www.sun.com if you need additional information or 
+# have any questions. 
+# 
+# ========== Copyright Header End ============================================
+echo "INFO: target library version $syn_home"
+INFO: target library version /hd/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn
+set gate_lib_file tcbn28hpmbwp35tt1v25c_ccs.db
+tcbn28hpmbwp35tt1v25c_ccs.db
+set link_library $gate_lib_file
+tcbn28hpmbwp35tt1v25c_ccs.db
+set target_library $gate_lib_file 
+tcbn28hpmbwp35tt1v25c_ccs.db
+set lib_dir_md /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+set std_lib_dir_md $lib_dir_md/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+#set wire_library_file   {lsi_10k.db}
+#set wire_library   lsi_10k
+#set wire_model_name      05x05
+#set wireload_mode      top
+set search_path [concat $search_path $syn_home $std_lib_dir_md]
+. /hd/cad/synopsys/icc/H-2013.03/libraries/syn /hd/cad/synopsys/icc/H-2013.03/minpower/syn /hd/cad/synopsys/icc/H-2013.03/dw/syn_ver /hd/cad/synopsys/icc/H-2013.03/dw/sim_ver /hd/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+set link_library [concat * $link_library ]
+* tcbn28hpmbwp35tt1v25c_ccs.db
+set_min_library tcbn28hpmbwp35tt1v25c_ccs.db -min_version tcbn28hpmbwp35ff0p99v0c_ccs.db 
+Loading db file '/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db'
+Information: Using CCS timing libraries. (TIM-024)
+Loading db file '/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35ff0p99v0c_ccs.db'
+1
+set symbol_library {}
+set dont_use_cells 1
+1
+set dont_use_cell_list {}
+## Donguk : following is added for PNR 
+# .tf file 
+set technology_file $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+# reference library
+set mw_reference_library [concat   $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28   ]
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28
+#TLU+ Files
+set max_tluplus $dv_root/pnr_lib/1p9m.tluplus
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+set min_tluplus $dv_root/pnr_lib/1p9m.tluplus
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+#set max_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+#set min_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+## Delete previous milkyway db
+if {[file exists mw_lib]} {
+   sh rm -rf mw_lib
+}
+create_mw_lib mw_lib -technology $technology_file -mw_reference_library $mw_reference_library
+Start to load technology file /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf.
+Warning: Layer 'AP' is missing the attribute 'minArea'. (line 728) (TFCHK-012)
+Warning: ContactCode 'VIA12_square' has undefined or zero enclosures. (line 745). (TFCHK-073)
+Warning: ContactCode 'VIA12_slot' has undefined or zero enclosures. (line 762). (TFCHK-073)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitMinResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitNomResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitMaxResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitMinResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitNomResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitMaxResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitMinResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitNomResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitMaxResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitMinResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitNomResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitMaxResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitMinResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitNomResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitMaxResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitMinResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitNomResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitMaxResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitMinResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitNomResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitMaxResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitMinResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitNomResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitMaxResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitMinResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitNomResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitMaxResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitMinResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitNomResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitMaxResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitMinResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitNomResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitMaxResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitMinResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitNomResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitMaxResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitMinResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitNomResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitMaxResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitMinResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitNomResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitMaxResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitMinResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitNomResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitMaxResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitMinResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitNomResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitMaxResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitMinResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitNomResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitMaxResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitMinResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitNomResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitMaxResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitMinResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitNomResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitMaxResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitMinResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitNomResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitMaxResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitMinResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitNomResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitMaxResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitMinResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitNomResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitMaxResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitMinResistance'. (line 3762) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitNomResistance'. (line 3762) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitMaxResistance'. (line 3762) (TFCHK-014)
+Information: ContactCode 'VIAGEN9AP' has a minimum cut spacing 1 that is less than the cut layer minimum spacing 2. (line 3762) (TFCHK-072)
+Warning: Layer 'M1' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.15. (TFCHK-049)
+Warning: Layer 'M2' has a pitch 0.135 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M3' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.295 or 0.15. (TFCHK-049)
+Warning: Layer 'M4' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M5' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.295 or 0.15. (TFCHK-049)
+Warning: Layer 'M6' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M7' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.335. (TFCHK-049)
+Warning: Layer 'M8' has a pitch 0.8 that does not match the recommended wire-to-via pitch 0.86. (TFCHK-049)
+Warning: Layer 'M9' has a pitch 0.8 that does not match the recommended wire-to-via pitch 2.6. (TFCHK-049)
+Warning: Layer 'AP' has a pitch 4.5 that does not match the recommended wire-to-via pitch 5. (TFCHK-049)
+Warning: Layer 'M3' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M4' has a pitch 0.1 that does not match the doubled pitch 0.27 or tripled pitch 0.405. (TFCHK-050)
+Warning: Layer 'M5' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M6' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M7' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M8' has a pitch 0.8 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M9' has a pitch 0.8 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'AP' has a pitch 4.5 that does not match the doubled pitch 1.6 or tripled pitch 2.4. (TFCHK-050)
+Warning: CapModel sections are missing. Capacitance models should be loaded with a TLU+ file later. (TFCHK-084)
+Technology file /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf has been loaded successfully.
+open_mw_lib mw_lib
+{mw_lib}
+#TODO: might need tech2itf map file
+set_tlu_plus_files  -max_tluplus $max_tluplus -min_tluplus $min_tluplus    
+Information: No layer mapping file is specified. Assume layer names are the same between the technology library and the ITF. (RCEX-071)
+1
+check_library
+
+#BEGIN_XCHECK_LIBRARY
+
+Logic Library:    tcbn28hpmbwp35tt1v25c_ccs 
+Physical Library: /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28 
+check_library options: 	
+Version: 				H-2013.03-ICC
+Check date and time:	Sat Jan  4 18:10:43 2014
+
+          List of logic library and file names
+------------------------------------------------------------------------------
+Logic library name           Logic library file name
+------------------------------------------------------------------------------
+tcbn28hpmbwp35tt1v25c_ccs    /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db
+------------------------------------------------------------------------------
+
+#BEGIN_XCHECK_LOGICCELLS
+
+Number of cells missing in logic library:	41 (out of 1303)
+
+Information: List of cells missing in logic library (LIBCHK-210)
+-------------------------------------------------------------------------
+Cell name                  Cell type             Physical library
+-------------------------------------------------------------------------
+LVLHLCLOD2BWP35            Core                  tsmc28
+LVLHLCLOD4BWP35            Core                  tsmc28
+LVLHLCLOD8BWP35            Core                  tsmc28
+LVLHLD1BWP35               Core                  tsmc28
+LVLHLD2BWP35               Core                  tsmc28
+LVLHLD4BWP35               Core                  tsmc28
+LVLHLD8BWP35               Core                  tsmc28
+LVLLHCD1BWP35              Core                  tsmc28
+LVLLHCD2BWP35              Core                  tsmc28
+LVLLHCD4BWP35              Core                  tsmc28
+LVLLHCD8BWP35              Core                  tsmc28
+LVLLHCLOD1BWP35            Core                  tsmc28
+LVLLHCLOD2BWP35            Core                  tsmc28
+LVLLHCLOD4BWP35            Core                  tsmc28
+LVLLHCLOD8BWP35            Core                  tsmc28
+LVLLHD1BWP35               Core                  tsmc28
+LVLLHD2BWP35               Core                  tsmc28
+LVLLHD4BWP35               Core                  tsmc28
+LVLLHD8BWP35               Core                  tsmc28
+LVLHLCD1BWP35              Core                  tsmc28
+LVLHLCD2BWP35              Core                  tsmc28
+LVLHLCD4BWP35              Core                  tsmc28
+LVLHLCD8BWP35              Core                  tsmc28
+LVLHLCLOD1BWP35            Core                  tsmc28
+ISOHID1BWP35               Core                  tsmc28
+ISOHID2BWP35               Core                  tsmc28
+ISOHID4BWP35               Core                  tsmc28
+ISOHID8BWP35               Core                  tsmc28
+ISOLOD1BWP35               Core                  tsmc28
+ISOLOD2BWP35               Core                  tsmc28
+ISOLOD4BWP35               Core                  tsmc28
+ISOLOD8BWP35               Core                  tsmc28
+TS6N28HPMA256X32M2SWBSO    Unknown               tsmc28
+TS6N28HPMA64X32M2SWBSO     Unknown               tsmc28
+TS1N28HPMB256X32M4SWBASO   Unknown               tsmc28
+TS1N28HPMB64X32M4SWBASO    Unknown               tsmc28
+TSDN28HPMA64X32M4F         Unknown               tsmc28
+TS6N28HPMA64X32M2F         Unknown               tsmc28
+TS1N28HPMB256X32M4S        Unknown               tsmc28
+TS6N28HPMA40X32M2F         Unknown               tsmc28
+TS1N28HPMB64X26M4S         Unknown               tsmc28
+-------------------------------------------------------------------------
+
+Information: List of physical only cells (LIBCHK-119)
+-------------------------------------------------------------------------
+Cell name                  Cell type             Physical library
+-------------------------------------------------------------------------
+TAPCELLBWP35               PGPinOnly             tsmc28
+FILL3BWP35                 PGPinOnly             tsmc28
+FILL4BWP35                 PGPinOnly             tsmc28
+FILL64BWP35                PGPinOnly             tsmc28
+FILL8BWP35                 PGPinOnly             tsmc28
+FILL16BWP35                PGPinOnly             tsmc28
+FILL2BWP35                 PGPinOnly             tsmc28
+FILL32BWP35                PGPinOnly             tsmc28
+BOUNDARY_LEFTBWP35         PGPinOnly             tsmc28
+BOUNDARY_RIGHTBWP35        PGPinOnly             tsmc28
+-------------------------------------------------------------------------
+
+#END_XCHECK_LOGICCELLS
+
+#BEGIN_XCHECK_PHYSICALCELLS
+
+Number of cells missing in physical library:	0 (out of 1354)
+
+#END_XCHECK_PHYSICALCELLS
+
+#BEGIN_XCHECK_PINS
+
+Number of cells with missing or mismatched pins in libraries:	0
+
+#END_XCHECK_PINS
+
+#BEGIN_XCHECK_CELLANTENNADIODETYPE
+
+Number of cells with inconsistent antenna_diode_type:	0
+
+#END_XCHECK_CELLANTENNADIODETYPE
+
+Logic vs. physical library check summary:
+Number of cells missing in logic library:	41 
+Information: Logic library is INCONSISTENT with physical library (LIBCHK-220)
+
+#END_XCHECK_LIBRARY
+
+0
+check_tlu_plus_files
+
+Sanity check for TLU+ vs MW-Tech files:
+ max_tlu+: /rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+ min_tlu+: /rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+ mapping_file: default
+ max_emul_tlu+: **NONE**
+ min_emul_tlu+: **NONE**
+ MW design lib: mw_lib
+
+--------- Sanity Check on TLUPlus Files -------------
+INFO: mapping file is not provided
+INFO: ITF and Milkyway TF layer names should be the same
+1. Checking the conducting layer names in ITF and mapping file ... 
+[ Passed! ]
+2. Checking the via layer names in ITF and mapping file ... 
+[ Passed! ]
+3. Checking the consistency of Min Width and Min Spacing between MW-tech and ITF ... 
+[ Passed! ]
+----------------- Check Ends ------------------
+1
+1
+#########################################################################
+## Loading synthesized netlist and .sdc for SPC
+#########################################################################
+#source -echo -verbose $dv_root/design/sys/synopsys/script/pnr_spc_netlist.tcl
+read_verilog -dirty_netlist ../gate/spc_all.vSyn
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys/gate/spc_all.vSyn
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:06, CPU =    0:00:05
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+Compiling source file /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys/gate/spc_all.vSyn
+Warning: Cell 'spu.CEL' is created for undefined module 'spu'. (MWNL-294)
+Warning: Cell 'n2_frf_mp_256x78_cust.CEL' is created for undefined module 'n2_frf_mp_256x78_cust'. (MWNL-294)
+Warning: Cell 'n2_com_dp_32x84_cust.CEL' is created for undefined module 'n2_com_dp_32x84_cust'. (MWNL-294)
+Warning: Cell 'n2_com_dp_32x72_cust.CEL' is created for undefined module 'n2_com_dp_32x72_cust'. (MWNL-294)
+Warning: Cell 'n2_dca_sp_9kb_cust.CEL' is created for undefined module 'n2_dca_sp_9kb_cust'. (MWNL-294)
+Warning: Cell 'n2_dva_dp_32x32_cust.CEL' is created for undefined module 'n2_dva_dp_32x32_cust'. (MWNL-294)
+Warning: Cell 'n2_com_dp_32x152_cust.CEL' is created for undefined module 'n2_com_dp_32x152_cust'. (MWNL-294)
+Warning: Cell 'n2_stb_cm_64x45_cust.CEL' is created for undefined module 'n2_stb_cm_64x45_cust'. (MWNL-294)
+Warning: Cell 'n2_com_dp_64x84_cust.CEL' is created for undefined module 'n2_com_dp_64x84_cust'. (MWNL-294)
+Warning: Cell 'n2_dta_sp_1920b_cust.CEL' is created for undefined module 'n2_dta_sp_1920b_cust'. (MWNL-294)
+Warning: Cell 'n2_tlb_tl_128x59_cust.CEL' is created for undefined module 'n2_tlb_tl_128x59_cust'. (MWNL-294)
+Warning: Cell 'n2_irf_mp_128x72_cust.CEL' is created for undefined module 'n2_irf_mp_128x72_cust'. (MWNL-294)
+Warning: Cell 'n2_icd_sp_16p5kb_cust.CEL' is created for undefined module 'n2_icd_sp_16p5kb_cust'. (MWNL-294)
+Warning: Cell 'n2_ict_sp_1920b_cust.CEL' is created for undefined module 'n2_ict_sp_1920b_cust'. (MWNL-294)
+Warning: Cell 'n2_tlb_tl_64x59_cust.CEL' is created for undefined module 'n2_tlb_tl_64x59_cust'. (MWNL-294)
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 15 black boxes found. Use -verbose option for detail information.
+
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:10, CPU =    0:00:08
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'spc.CEL' now...
+Total number of cell instances: 213768
+Total number of nets: 217165
+Total number of ports: 477 (include 0 PG ports)
+Total number of hierarchical cell instances: 37
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:06, CPU =    0:00:05
+Information: Read verilog completed successfully.
+1
+current_design $top_module
+spc
+import_fp_black_boxes [get_cells -hierarchical -filter "is_logical_black_box==true && black_box_type==Missing"]
+Warning: A MIM group of plan groups has been detected which has no specified Master plan
+ group.  The first plan group encountered will be used as the master plan group.
+ Use select_mim_master_instance if you want to specify a particular plan group to be the MIM master plan group. (FPHDM-0059)
+     plan group: mmu/mra0
+     plan group: mmu/mra1
+Committing MIM Master black box mmu/mra0  (0x641301)
+Creating Soft Macro cell n2_com_dp_32x84_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_com_dp_32x84_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance mmu/mra0... Elapsed =    0:00:00, CPU =    0:00:00
+Instance mmu/mra0 created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "mmu/mra0"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committing MIM Non-Master black box mmu/mra1  (0x641300)
+Creating soft macro cell instance mmu/mra1... Elapsed =    0:00:00, CPU =    0:00:00
+Instance mmu/mra1 created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "mmu/mra1"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 273 hier nets
+Warning: A MIM group of plan groups has been detected which has no specified Master plan
+ group.  The first plan group encountered will be used as the master plan group.
+ Use select_mim_master_instance if you want to specify a particular plan group to be the MIM master plan group. (FPHDM-0059)
+     plan group: tlu/tsa0
+     plan group: tlu/tsa1
+     plan group: lsu/cpq
+Committing MIM Master black box tlu/tsa0  (0x641302)
+Creating Soft Macro cell n2_com_dp_32x152_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_com_dp_32x152_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance tlu/tsa0... Elapsed =    0:00:00, CPU =    0:00:00
+Instance tlu/tsa0 created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "tlu/tsa0"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committing MIM Non-Master black box tlu/tsa1  (0x641304)
+Creating soft macro cell instance tlu/tsa1... Elapsed =    0:00:00, CPU =    0:00:00
+Instance tlu/tsa1 created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "tlu/tsa1"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committing MIM Non-Master black box lsu/cpq  (0x641303)
+Creating soft macro cell instance lsu/cpq... Elapsed =    0:00:00, CPU =    0:00:00
+Instance lsu/cpq created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "lsu/cpq"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 907 hier nets
+Warning: A MIM group of plan groups has been detected which has no specified Master plan
+ group.  The first plan group encountered will be used as the master plan group.
+ Use select_mim_master_instance if you want to specify a particular plan group to be the MIM master plan group. (FPHDM-0059)
+     plan group: lsu/lru
+     plan group: lsu/dva
+     plan group: ifu_ftu/ftu_icv_cust
+Committing MIM Master black box lsu/lru  (0x641306)
+Creating Soft Macro cell n2_dva_dp_32x32_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_dva_dp_32x32_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance lsu/lru... Elapsed =    0:00:00, CPU =    0:00:00
+Instance lsu/lru created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "lsu/lru"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committing MIM Non-Master black box lsu/dva  (0x641305)
+Creating soft macro cell instance lsu/dva... Elapsed =    0:00:00, CPU =    0:00:00
+Instance lsu/dva created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "lsu/dva"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committing MIM Non-Master black box ifu_ftu/ftu_icv_cust  (0x641307)
+Creating soft macro cell instance ifu_ftu/ftu_icv_cust... Elapsed =    0:00:00, CPU =    0:00:00
+Warning: During commit of plan group ifu_ftu/ftu_icv_cust, it was detected that the plan group version of the block contained a port scan_out, but the generated soft macro version of the block did not.  This is likely a tool-error. See man page for this Error code. (AXU-0013)
+Instance ifu_ftu/ftu_icv_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "ifu_ftu/ftu_icv_cust"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 196 hier nets
+Warning: A MIM group of plan groups has been detected which has no specified Master plan
+ group.  The first plan group encountered will be used as the master plan group.
+ Use select_mim_master_instance if you want to specify a particular plan group to be the MIM master plan group. (FPHDM-0059)
+     plan group: tlu/tca
+     plan group: mmu/scp0
+     plan group: mmu/scp1
+Committing MIM Master black box tlu/tca  (0x641309)
+Creating Soft Macro cell n2_com_dp_32x72_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_com_dp_32x72_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance tlu/tca... Elapsed =    0:00:00, CPU =    0:00:00
+Instance tlu/tca created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "tlu/tca"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committing MIM Non-Master black box mmu/scp0  (0x64130a)
+Creating soft macro cell instance mmu/scp0... Elapsed =    0:00:00, CPU =    0:00:00
+Instance mmu/scp0 created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "mmu/scp0"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committing MIM Non-Master black box mmu/scp1  (0x641308)
+Creating soft macro cell instance mmu/scp1... Elapsed =    0:00:00, CPU =    0:00:00
+Instance mmu/scp1 created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "mmu/scp1"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 382 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Creating Soft Macro cell spu.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell spu created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance spu... Elapsed =    0:00:00, CPU =    0:00:00
+Instance spu created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "spu"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 2 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Creating Soft Macro cell n2_irf_mp_128x72_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_irf_mp_128x72_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance exu1/irf... Elapsed =    0:00:00, CPU =    0:00:00
+Instance exu1/irf created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "exu1/irf"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 408 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:01, CPU =    0:00:00
+Processing MIM descendant black box exu0/irf
+Creating soft macro cell instance exu0/irf... Elapsed =    0:00:00, CPU =    0:00:00
+Instance exu0/irf created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "exu0/irf"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 408 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Creating Soft Macro cell n2_icd_sp_16p5kb_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_icd_sp_16p5kb_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance ifu_ftu/ftu_icd_cust... Elapsed =    0:00:00, CPU =    0:00:00
+Instance ifu_ftu/ftu_icd_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "ifu_ftu/ftu_icd_cust"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 188 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Creating Soft Macro cell n2_ict_sp_1920b_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_ict_sp_1920b_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance ifu_ftu/ftu_ict_cust... Elapsed =    0:00:00, CPU =    0:00:00
+Instance ifu_ftu/ftu_ict_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "ifu_ftu/ftu_ict_cust"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 52 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:01, CPU =    0:00:00
+Creating Soft Macro cell n2_tlb_tl_64x59_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_tlb_tl_64x59_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance ifu_ftu/ftu_itb_cust... Elapsed =    0:00:00, CPU =    0:00:00
+Instance ifu_ftu/ftu_itb_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "ifu_ftu/ftu_itb_cust"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 489 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Creating Soft Macro cell n2_frf_mp_256x78_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_frf_mp_256x78_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance fgu/frf... Elapsed =    0:00:00, CPU =    0:00:00
+Instance fgu/frf created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "fgu/frf"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 344 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Creating Soft Macro cell n2_dta_sp_1920b_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_dta_sp_1920b_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance lsu/dta... Elapsed =    0:00:00, CPU =    0:00:00
+Instance lsu/dta created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "lsu/dta"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 47 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:01, CPU =    0:00:00
+Creating Soft Macro cell n2_stb_cm_64x45_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_stb_cm_64x45_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance lsu/stb_cam... Elapsed =    0:00:00, CPU =    0:00:00
+Instance lsu/stb_cam created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "lsu/stb_cam"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 118 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Creating Soft Macro cell n2_tlb_tl_128x59_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_tlb_tl_128x59_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance lsu/tlb... Elapsed =    0:00:00, CPU =    0:00:00
+Instance lsu/tlb created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "lsu/tlb"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 370 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:00, CPU =    0:00:00
+Creating Soft Macro cell n2_com_dp_64x84_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_com_dp_64x84_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance lsu/stb_ram... Elapsed =    0:00:00, CPU =    0:00:00
+Instance lsu/stb_ram created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "lsu/stb_ram"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 184 hier nets
+Iterating on non-MIM plan groups to commit: Elapsed =    0:00:01, CPU =    0:00:00
+Creating Soft Macro cell n2_dca_sp_9kb_cust.... Elapsed =    0:00:00, CPU =    0:00:00
+Cell n2_dca_sp_9kb_cust created. Elapsed =    0:00:00, CPU =    0:00:00
+Setting cell utilization: 1.0000 
+Creating soft macro cell instance lsu/dca... Elapsed =    0:00:00, CPU =    0:00:00
+Instance lsu/dca created. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box "lsu/dca"
+Commit for this plan group complete. Elapsed =    0:00:00, CPU =    0:00:00
+Committed black box to soft macro 
+Clean up 380 hier nets
+1
+source -echo -verbose $dv_root/design/sys/synopsys/script/pnr_bb_sizing.tcl
+## Black box sizing for spc
+estimate_fp_black_boxes -sm_size {40 40} -fixed_shape {spu}
+1
+estimate_fp_black_boxes -sm_size {80 80} -fixed_shape {ifu_ftu/ftu_itb_cust}
+1
+estimate_fp_black_boxes -sm_size {160 160} -fixed_shape {ifu_ftu/ftu_ict_cust}
+1
+estimate_fp_black_boxes -sm_size {400 400} -fixed_shape {ifu_ftu/ftu_icd_cust}
+1
+estimate_fp_black_boxes -sm_size {40 40} -fixed_shape {ifu_ftu/ftu_icv_cust}
+1
+estimate_fp_black_boxes -sm_size {150 150} -fixed_shape {exu0/irf}
+1
+estimate_fp_black_boxes -sm_size {150 150} -fixed_shape {exu1/irf}
+1
+estimate_fp_black_boxes -sm_size {120 120} -fixed_shape {fgu/frf}
+1
+estimate_fp_black_boxes -sm_size {40 120} -fixed_shape {mmu/mra0}
+1
+estimate_fp_black_boxes -sm_size {40 120} -fixed_shape {mmu/mra1}
+1
+estimate_fp_black_boxes -sm_size {40 80} -fixed_shape {mmu/scp0}
+1
+estimate_fp_black_boxes -sm_size {40 80} -fixed_shape {mmu/scp1}
+1
+estimate_fp_black_boxes -sm_size {280 280} -fixed_shape {lsu/dca}
+1
+estimate_fp_black_boxes -sm_size {160 160} -fixed_shape {lsu/dta}
+1
+estimate_fp_black_boxes -sm_size {80 120} -fixed_shape {lsu/stb_ram}
+1
+estimate_fp_black_boxes -sm_size {80 80} -fixed_shape {lsu/stb_cam}
+1
+estimate_fp_black_boxes -sm_size {160 80} -fixed_shape {lsu/tlb}
+1
+estimate_fp_black_boxes -sm_size {40 40} -fixed_shape {lsu/lru}
+1
+estimate_fp_black_boxes -sm_size {40 40} -fixed_shape {lsu/dva}
+1
+estimate_fp_black_boxes -sm_size {80 120} -fixed_shape {lsu/cpq}
+1
+estimate_fp_black_boxes -sm_size {80 120} -fixed_shape {tlu/tsa0}
+1
+estimate_fp_black_boxes -sm_size {80 120} -fixed_shape {tlu/tsa1}
+1
+estimate_fp_black_boxes -sm_size {40 80} -fixed_shape {tlu/tca}
+1
+1
+#uniquify_fp_mw_cel -store_mim_property [get_cells {exu0 exu1}]
+#read_sdc -version 1.9 ../sdc/spc.sdc
+#link
+#save_mw -hierarchy -as floorplan_bb
+#########################################################################
+## Design Planning
+## 0. convert black boxes to soft macros
+## 1. black box size estimation
+## 2. power/ground pin derivation (tie-off pins will be handled by std tie-off celss)
+## 3. spc pin constraints
+## 4. create initial floorplan
+## 5. create plan groups and shape them
+## 6. virtual flat placement
+## 7, Power Network Synthesis
+##    Inter Plan group routing : all metal layers upto M9
+##    Intra Plan group routing : metal layers upto M5
+#########################################################################
+icc_shell> start_gui
+icc_shell>  + VUE INFO: Please click Verification->Hercules VUE in LayoutWindow menu
+to launch VUE.
+
+ + VUE INFO: Found a usable port: 2345
+
+Information: Loaded Hercules extension from /cad/synopsys/hercules/B-2008.09-SP4 (GUI-024)
+Information: Visibility is turned ON for cells and cell contents because the task is set to Block Implementation (GUI-026)
+Preparing data for query................... 
+icc_shell> get_mw
+get_mw_cel  get_mw_cels 
+icc_shell> get_mw_cels
+{spu n2_frf_mp_256x78_cust n2_com_dp_32x84_cust n2_com_dp_32x72_cust n2_dca_sp_9kb_cust n2_dva_dp_32x32_cust n2_com_dp_32x152_cust n2_stb_cm_64x45_cust n2_com_dp_64x84_cust n2_dta_sp_1920b_cust n2_tlb_tl_128x59_cust n2_irf_mp_128x72_cust n2_icd_sp_16p5kb_cust n2_ict_sp_1920b_cust n2_tlb_tl_64x59_cust spc}
+icc_shell> open_mw
+open_mw_cel open_mw_lib 
+icc_shell> open_mw_cel n2[K[Kspu
+Error: Design 'spu.CEL;0' is an open design. (MWUI-010)
+icc_shell> open_mw_cel spu[K[K[K
+Error: Required argument 'design_name' was not found (CMD-007)
+icc_shell> open_mw_cel 
+Error: Required argument 'design_name' was not found (CMD-007)
+icc_shell> open_mw_cel n2_frf_mp_256x78_cust
+Error: Design 'n2_frf_mp_256x78_cust.CEL;0' is an open design. (MWUI-010)
+icc_shell> curre
+current_design      current_design_name current_instance    current_mw_cel      current_mw_lib      current_scenario    
+icc_shell> current_des
+current_design      current_design_name 
+icc_shell> current_design
+spc
+icc_shell> current_mw_cel {n2_com_dp_32x152_cust.CEL;2}
+Information: Performing CEL netlist consistency check. (MWDC-118)
+Information: CEL consistency check PASSED. (MWDC-119)
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: Cannot enable UPF tracking feature for a design that is created by disabling the UPF tracking feature. (MV-774)
+Preparing data for query................... 
+icc_shell> gui_set_current_task -name {Design Planning}
+Information: Visibility is turned OFF for cells and cell contents because the task is set to Design Planning (GUI-026)
+icc_shell> change_working_design_stack {spc.CEL;1}
+icc_shell> creat_[Ke_qt
+create_qtm_clock           create_qtm_delay_arc       create_qtm_generated_clock create_qtm_load_type       create_qtm_path_type       
+create_qtm_constraint_arc  create_qtm_drive_type      create_qtm_insertion_delay create_qtm_model           create_qtm_port            
+icc_shell> create_qtm_model qmt[K[Ktm_spu
+1
+icc_shell> set_qtm
+set_qtm_global_parameter set_qtm_port_drive       set_qtm_port_load        set_qtm_technology       
+icc_shell> set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+1
+icc_shell> set_qtm_global_parameter -param setup -lib_cell  DFND1BWP35 -pin D5[P [P [P [P [P [P [P [P [P [P [1@D [1@F [1@Q [1@D [1@2 [1@B [1@W [1@P [1@3 [1@5  -pi
+1
+icc_shell> set_qtm_global_parameter -param setup -lib_cell  DFQD2BWP35 -pin D[P [P [P [P [P [1@h [1@o [1@l [1@d 
+1
+icc_shell> set_qtm_global_parameter -param hold -lib_cell  DFQD2BWP35 -pin DD[KQ[P [P [P [P [1@c [1@l [1@k [1@_ [1@t [1@o [1@_ [1@o [1@u [1@t [1@p [1@u [1@t 
+1
+icc_shell> report_qtm_model 
+
+****************************************
+Report : qtm_model
+Design : qtm_spu
+****************************************
+create_qtm_model qtm_spu
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q
+report_qtm_model
+1
+icc_shell> report_qtm_model[12Gset_qtm_global_parameter -param clk_to_output -lib_cell  DFQD2BWP35 -pin Q[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kclock l2clk
+Error: "Must specify one of '-lib_cell', or '-value' options. (QTB-033)
+0
+icc_shell> set_qtm_global_parameter -clock l2clk[12Greport_qtm_model[K[12Gset_qtm_global_parameter -param clk_to_output -lib_cell  DFQD2BWP35 -pin Q[K[K[K[K[K-cl[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[P-[Pl-lib_cell  DFQD2BWP35 -clock [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kspu -clk[K[Klock l2clk
+1
+icc_shell> set_qtm_global_parameter -lib_cell spu -clock l2clka
+1
+icc_shell> lib_ce[K[K[K[K[K[Kget_lib
+get_lib           get_lib_attribute get_lib_cells     get_lib_pins      get_libs          
+icc_shell> get_lib_cells 
+Loading db file '/hd/cad/synopsys/icc/H-2013.03/libraries/syn/gtech.db'
+Loading db file '/hd/cad/synopsys/icc/H-2013.03/libraries/syn/standard.sldb'
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Error: The design is not uniquified. (MWDC-101)
+Un-uniquified modules are exu1(0x1515) exu0(0x1517)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Error: The design is not uniquified. (MWDC-101)
+Un-uniquified modules are exu1(0x1515) exu0(0x1517)
+Error: Can't find lib_cells matching '*'. (UID-109)
+icc_shell> report_qtm_model 
+
+****************************************
+Report : qtm_model
+Design : qtm_spu
+****************************************
+create_qtm_model qtm_spu
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q
+report_qtm_model
+set_qtm_global_parameter -lib_cell spu -clock l2clk
+set_qtm_global_parameter -lib_cell spu -clock l2clka
+report_qtm_model
+1
+icc_shell> current
+current_design      current_design_name current_instance    current_mw_cel      current_mw_lib      current_scenario    
+icc_shell> current_de
+current_design      current_design_name 
+icc_shell> current_design spu
+spu
+icc_shell> report_qtm_model 
+
+****************************************
+Report : qtm_model
+Design : qtm_spu
+****************************************
+create_qtm_model qtm_spu
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q
+report_qtm_model
+set_qtm_global_parameter -lib_cell spu -clock l2clk
+set_qtm_global_parameter -lib_cell spu -clock l2clka
+report_qtm_model
+report_qtm_model
+1
+icc_shell> report_qtm_model[12G[Kcreate_qt
+create_qtm_clock           create_qtm_delay_arc       create_qtm_generated_clock create_qtm_load_type       create_qtm_path_type       
+create_qtm_constraint_arc  create_qtm_drive_type      create_qtm_insertion_delay create_qtm_model           create_qtm_port            
+icc_shell> create_qtm_model spu
+1
+icc_shell> report_qtm
+
+****************************************
+Report : qtm_model
+Design : qtm_spu
+****************************************
+create_qtm_model qtm_spu
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q
+report_qtm_model
+set_qtm_global_parameter -lib_cell spu -clock l2clk
+set_qtm_global_parameter -lib_cell spu -clock l2clka
+report_qtm_model
+report_qtm_model
+
+****************************************
+Report : qtm_model
+Design : spu
+****************************************
+create_qtm_model spu
+report_qtm_model
+1
+icc_shell> report_qtm_model 
+
+****************************************
+Report : qtm_model
+Design : qtm_spu
+****************************************
+create_qtm_model qtm_spu
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q
+report_qtm_model
+set_qtm_global_parameter -lib_cell spu -clock l2clk
+set_qtm_global_parameter -lib_cell spu -clock l2clka
+report_qtm_model
+report_qtm_model
+
+****************************************
+Report : qtm_model
+Design : spu
+****************************************
+create_qtm_model spu
+report_qtm_model
+report_qtm_model
+1
+icc_shell> set_qtm_global_parameter -param setup -lib_cell  DFQD2BWP35 -pin D -clock l2ck
+1
+icc_shell> ls
+.			  .nfs0000000003f88c6400001812	legalizer_debug_plots
+..			  default.vpad			mw_lib
+.__tmp_pns_undo_file.tcl  icc_gui.output		pna_output
+icc_shell> get _por
+get_port  get_ports 
+icc_shell> get_ports
+{const_cpuid[1] const_cpuid[0] tcu_shscanid[2] tcu_shscanid[1] tcu_shscanid[0] scan_out[1] scan_out[0] scan_in[1] scan_in[0] cpx_spc_data_cx[4] cpx_spc_data_cx[3] cpx_spc_data_cx[2] cpx_spc_data_cx[1] cpx_spc_data_cx[0] dmo_dout[35] dmo_dout[34] dmo_dout[33] dmo_dout[32] dmo_dout[31] dmo_dout[30] dmo_dout[29] dmo_dout[28] dmo_dout[27] dmo_dout[26] dmo_dout[25] dmo_dout[24] dmo_dout[23] dmo_dout[22] dmo_dout[21] dmo_dout[20] dmo_dout[19] dmo_dout[18] dmo_dout[17] dmo_dout[16] dmo_dout[15] dmo_dout[14] dmo_dout[13] dmo_dout[12] dmo_dout[11] dmo_dout[10] dmo_dout[9] dmo_dout[8] dmo_dout[7] dmo_dout[6] dmo_dout[5] dmo_dout[4] dmo_dout[3] dmo_dout[2] dmo_dout[1] dmo_dout[0] dmo_din[35] dmo_din[34] dmo_din[33] dmo_din[32] dmo_din[31] dmo_din[30] dmo_din[29] dmo_din[28] dmo_din[27] dmo_din[26] dmo_din[25] dmo_din[24] dmo_din[23] dmo_din[22] dmo_din[21] dmo_din[20] dmo_din[19] dmo_din[18] dmo_din[17] dmo_din[16] dmo_din[15] dmo_din[14] dmo_din[13] dmo_din[12] dmo_din[11] dmo_din[10] dmo_din[9] dmo_din[8] dmo_din[7] dmo_din[6] dmo_din[5] dmo_din[4] dmo_din[3] dmo_din[2] dmo_din[1] dmo_din[0] const_cpuid[2] cpx_spc_data_cx[82] cpx_spc_data_cx[81] cpx_spc_data_cx[80] cpx_spc_data_cx[79] cpx_spc_data_cx[78] cpx_spc_data_cx[77] cpx_spc_data_cx[76] cpx_spc_data_cx[75] cpx_spc_data_cx[74] cpx_spc_data_cx[73] cpx_spc_data_cx[72] cpx_spc_data_cx[71] cpx_spc_data_cx[70] ...}
+icc_shell> get_in[K[K[K[K[K[Kinpu[K[K[K[Kget_port
+get_port  get_ports 
+icc_shell> get_ports -filter [@port_direction ==in} in}[P@[1@{@
+{const_cpuid[1] const_cpuid[0] tcu_shscanid[2] tcu_shscanid[1] tcu_shscanid[0] scan_in[1] scan_in[0] cpx_spc_data_cx[4] cpx_spc_data_cx[3] cpx_spc_data_cx[2] cpx_spc_data_cx[1] cpx_spc_data_cx[0] dmo_din[35] dmo_din[34] dmo_din[33] dmo_din[32] dmo_din[31] dmo_din[30] dmo_din[29] dmo_din[28] dmo_din[27] dmo_din[26] dmo_din[25] dmo_din[24] dmo_din[23] dmo_din[22] dmo_din[21] dmo_din[20] dmo_din[19] dmo_din[18] dmo_din[17] dmo_din[16] dmo_din[15] dmo_din[14] dmo_din[13] dmo_din[12] dmo_din[11] dmo_din[10] dmo_din[9] dmo_din[8] dmo_din[7] dmo_din[6] dmo_din[5] dmo_din[4] dmo_din[3] dmo_din[2] dmo_din[1] dmo_din[0] const_cpuid[2] cpx_spc_data_cx[82] cpx_spc_data_cx[81] cpx_spc_data_cx[80] cpx_spc_data_cx[79] cpx_spc_data_cx[78] cpx_spc_data_cx[77] cpx_spc_data_cx[76] cpx_spc_data_cx[75] cpx_spc_data_cx[74] cpx_spc_data_cx[73] cpx_spc_data_cx[72] cpx_spc_data_cx[71] cpx_spc_data_cx[70] cpx_spc_data_cx[69] cpx_spc_data_cx[68] cpx_spc_data_cx[67] cpx_spc_data_cx[66] cpx_spc_data_cx[65] cpx_spc_data_cx[64] cpx_spc_data_cx[63] cpx_spc_data_cx[62] cpx_spc_data_cx[61] cpx_spc_data_cx[60] cpx_spc_data_cx[59] cpx_spc_data_cx[58] cpx_spc_data_cx[57] cpx_spc_data_cx[56] cpx_spc_data_cx[55] cpx_spc_data_cx[54] cpx_spc_data_cx[53] cpx_spc_data_cx[52] cpx_spc_data_cx[51] cpx_spc_data_cx[50] cpx_spc_data_cx[49] cpx_spc_data_cx[48] cpx_spc_data_cx[47] cpx_spc_data_cx[46] cpx_spc_data_cx[45] cpx_spc_data_cx[44] cpx_spc_data_cx[43] cpx_spc_data_cx[42] cpx_spc_data_cx[41] cpx_spc_data_cx[40] cpx_spc_data_cx[39] cpx_spc_data_cx[38] cpx_spc_data_cx[37] cpx_spc_data_cx[36] cpx_spc_data_cx[35] cpx_spc_data_cx[34] cpx_spc_data_cx[33] cpx_spc_data_cx[32] ...}
+icc_shell> get_ports -filter {@port_direction == in}}[K}[Ko}u}t}
+{scan_out[1] scan_out[0] dmo_dout[35] dmo_dout[34] dmo_dout[33] dmo_dout[32] dmo_dout[31] dmo_dout[30] dmo_dout[29] dmo_dout[28] dmo_dout[27] dmo_dout[26] dmo_dout[25] dmo_dout[24] dmo_dout[23] dmo_dout[22] dmo_dout[21] dmo_dout[20] dmo_dout[19] dmo_dout[18] dmo_dout[17] dmo_dout[16] dmo_dout[15] dmo_dout[14] dmo_dout[13] dmo_dout[12] dmo_dout[11] dmo_dout[10] dmo_dout[9] dmo_dout[8] dmo_dout[7] dmo_dout[6] dmo_dout[5] dmo_dout[4] dmo_dout[3] dmo_dout[2] dmo_dout[1] dmo_dout[0] spc_pcx_req_pq[5] spc_pcx_req_pq[4] spc_pcx_req_pq[3] spc_pcx_req_pq[2] spc_pcx_req_pq[1] spc_pcx_req_pq[0] spc_pcx_data_pa[65] spc_pcx_data_pa[64] spc_pcx_data_pa[63] spc_pcx_data_pa[62] spc_pcx_data_pa[61] spc_pcx_data_pa[60] spc_pcx_data_pa[59] spc_pcx_data_pa[58] spc_pcx_data_pa[57] spc_pcx_data_pa[56] spc_pcx_data_pa[55] spc_pcx_data_pa[54] spc_pcx_data_pa[53] spc_pcx_data_pa[52] spc_pcx_data_pa[51] spc_pcx_data_pa[50] spc_pcx_data_pa[49] spc_pcx_data_pa[48] spc_pcx_data_pa[47] spc_pcx_data_pa[46] spc_pcx_data_pa[45] spc_pcx_data_pa[44] spc_pcx_data_pa[43] spc_pcx_data_pa[42] spc_pcx_data_pa[41] spc_pcx_data_pa[40] spc_pcx_data_pa[39] spc_pcx_data_pa[38] spc_pcx_data_pa[37] spc_pcx_data_pa[36] spc_pcx_data_pa[35] spc_pcx_data_pa[34] spc_pcx_data_pa[33] spc_pcx_data_pa[32] spc_pcx_data_pa[31] spc_pcx_data_pa[30] spc_pcx_data_pa[29] spc_pcx_data_pa[28] spc_pcx_data_pa[27] spc_pcx_data_pa[26] spc_pcx_data_pa[25] spc_pcx_data_pa[24] spc_pcx_data_pa[23] spc_pcx_data_pa[22] spc_pcx_data_pa[21] spc_pcx_data_pa[20] spc_pcx_data_pa[19] spc_pcx_data_pa[18] spc_pcx_data_pa[17] spc_pcx_data_pa[16] spc_pcx_data_pa[15] spc_pcx_data_pa[14] spc_pcx_data_pa[13] spc_pcx_data_pa[12] spc_pcx_data_pa[11] spc_pcx_data_pa[10] ...}
+icc_shell> get_ports -filter {@port_direction == out}}[K}[K}[Ki}n}o}u}t}
+Warning: No port objects matched '*' (SEL-004)
+icc_shell> get_ports -filter {@port_direction == inout}}[K}[K}[K}[K}[K  }u }n }k }o }w }n }
+Warning: No port objects matched '*' (SEL-004)
+icc_shell> get_ports -filter {@port_direction == unkown } }[K }[K }[K }[K }[K }[Ki }n }o }u }t }
+Warning: No port objects matched '*' (SEL-004)
+icc_shell> get_ports -filter {@port_direction == inout } }[K }[K }[K }[K }[Ko }u }t }
+{scan_out[1] scan_out[0] dmo_dout[35] dmo_dout[34] dmo_dout[33] dmo_dout[32] dmo_dout[31] dmo_dout[30] dmo_dout[29] dmo_dout[28] dmo_dout[27] dmo_dout[26] dmo_dout[25] dmo_dout[24] dmo_dout[23] dmo_dout[22] dmo_dout[21] dmo_dout[20] dmo_dout[19] dmo_dout[18] dmo_dout[17] dmo_dout[16] dmo_dout[15] dmo_dout[14] dmo_dout[13] dmo_dout[12] dmo_dout[11] dmo_dout[10] dmo_dout[9] dmo_dout[8] dmo_dout[7] dmo_dout[6] dmo_dout[5] dmo_dout[4] dmo_dout[3] dmo_dout[2] dmo_dout[1] dmo_dout[0] spc_pcx_req_pq[5] spc_pcx_req_pq[4] spc_pcx_req_pq[3] spc_pcx_req_pq[2] spc_pcx_req_pq[1] spc_pcx_req_pq[0] spc_pcx_data_pa[65] spc_pcx_data_pa[64] spc_pcx_data_pa[63] spc_pcx_data_pa[62] spc_pcx_data_pa[61] spc_pcx_data_pa[60] spc_pcx_data_pa[59] spc_pcx_data_pa[58] spc_pcx_data_pa[57] spc_pcx_data_pa[56] spc_pcx_data_pa[55] spc_pcx_data_pa[54] spc_pcx_data_pa[53] spc_pcx_data_pa[52] spc_pcx_data_pa[51] spc_pcx_data_pa[50] spc_pcx_data_pa[49] spc_pcx_data_pa[48] spc_pcx_data_pa[47] spc_pcx_data_pa[46] spc_pcx_data_pa[45] spc_pcx_data_pa[44] spc_pcx_data_pa[43] spc_pcx_data_pa[42] spc_pcx_data_pa[41] spc_pcx_data_pa[40] spc_pcx_data_pa[39] spc_pcx_data_pa[38] spc_pcx_data_pa[37] spc_pcx_data_pa[36] spc_pcx_data_pa[35] spc_pcx_data_pa[34] spc_pcx_data_pa[33] spc_pcx_data_pa[32] spc_pcx_data_pa[31] spc_pcx_data_pa[30] spc_pcx_data_pa[29] spc_pcx_data_pa[28] spc_pcx_data_pa[27] spc_pcx_data_pa[26] spc_pcx_data_pa[25] spc_pcx_data_pa[24] spc_pcx_data_pa[23] spc_pcx_data_pa[22] spc_pcx_data_pa[21] spc_pcx_data_pa[20] spc_pcx_data_pa[19] spc_pcx_data_pa[18] spc_pcx_data_pa[17] spc_pcx_data_pa[16] spc_pcx_data_pa[15] spc_pcx_data_pa[14] spc_pcx_data_pa[13] spc_pcx_data_pa[12] spc_pcx_data_pa[11] spc_pcx_data_pa[10] ...}
+icc_shell> get_ports -filter {@port_direction == out }[50G[2@inout }[50G[2Pout }[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcurrent_d
+current_design      current_design_name 
+icc_shell> current_design
+spu
+icc_shell> curretn_de[K[K[K[K[K[K[K[K[K[Kcurrent_d
+current_design      current_design_name 
+icc_shell> current_design dec
+dec
+icc_shell> current_design dec[K[12Gget_ports -filter {@port_direction == out }
+{scan_out[1] scan_out[0] dmo_dout[35] dmo_dout[34] dmo_dout[33] dmo_dout[32] dmo_dout[31] dmo_dout[30] dmo_dout[29] dmo_dout[28] dmo_dout[27] dmo_dout[26] dmo_dout[25] dmo_dout[24] dmo_dout[23] dmo_dout[22] dmo_dout[21] dmo_dout[20] dmo_dout[19] dmo_dout[18] dmo_dout[17] dmo_dout[16] dmo_dout[15] dmo_dout[14] dmo_dout[13] dmo_dout[12] dmo_dout[11] dmo_dout[10] dmo_dout[9] dmo_dout[8] dmo_dout[7] dmo_dout[6] dmo_dout[5] dmo_dout[4] dmo_dout[3] dmo_dout[2] dmo_dout[1] dmo_dout[0] spc_pcx_req_pq[5] spc_pcx_req_pq[4] spc_pcx_req_pq[3] spc_pcx_req_pq[2] spc_pcx_req_pq[1] spc_pcx_req_pq[0] spc_pcx_data_pa[65] spc_pcx_data_pa[64] spc_pcx_data_pa[63] spc_pcx_data_pa[62] spc_pcx_data_pa[61] spc_pcx_data_pa[60] spc_pcx_data_pa[59] spc_pcx_data_pa[58] spc_pcx_data_pa[57] spc_pcx_data_pa[56] spc_pcx_data_pa[55] spc_pcx_data_pa[54] spc_pcx_data_pa[53] spc_pcx_data_pa[52] spc_pcx_data_pa[51] spc_pcx_data_pa[50] spc_pcx_data_pa[49] spc_pcx_data_pa[48] spc_pcx_data_pa[47] spc_pcx_data_pa[46] spc_pcx_data_pa[45] spc_pcx_data_pa[44] spc_pcx_data_pa[43] spc_pcx_data_pa[42] spc_pcx_data_pa[41] spc_pcx_data_pa[40] spc_pcx_data_pa[39] spc_pcx_data_pa[38] spc_pcx_data_pa[37] spc_pcx_data_pa[36] spc_pcx_data_pa[35] spc_pcx_data_pa[34] spc_pcx_data_pa[33] spc_pcx_data_pa[32] spc_pcx_data_pa[31] spc_pcx_data_pa[30] spc_pcx_data_pa[29] spc_pcx_data_pa[28] spc_pcx_data_pa[27] spc_pcx_data_pa[26] spc_pcx_data_pa[25] spc_pcx_data_pa[24] spc_pcx_data_pa[23] spc_pcx_data_pa[22] spc_pcx_data_pa[21] spc_pcx_data_pa[20] spc_pcx_data_pa[19] spc_pcx_data_pa[18] spc_pcx_data_pa[17] spc_pcx_data_pa[16] spc_pcx_data_pa[15] spc_pcx_data_pa[14] spc_pcx_data_pa[13] spc_pcx_data_pa[12] spc_pcx_data_pa[11] spc_pcx_data_pa[10] ...}
+icc_shell> get_ports -filter {@port_direction == out }[12Gcurrent_design dec[K[12Gget_ports -filter {@port_direction == out } [1@d-[1@e-[1@c-[1@/-[1@*-[1@ -
+Warning: No port objects matched 'dec/*' (SEL-004)
+icc_shell> get_ports dec/* -filter {@port_direction == out }/[P*
+Warning: No port objects matched 'dec*' (SEL-004)
+icc_shell> exit
+
+Thank you...
+Exit IC Compiler!

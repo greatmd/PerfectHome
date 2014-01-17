@@ -1,0 +1,146 @@
+# ========== Copyright Header Begin ==========================================
+# 
+# OpenSPARC T2 Processor File: uniquify_module,1.0
+# Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+# 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#
+# * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For the avoidance of doubt, and except that if any non-GPL license 
+# choice is available it will apply instead, Sun elects to use only 
+# the General Public License version 2 (GPLv2) at this time for any 
+# software where a choice of GPL license versions is made 
+# available with the language indicating that GPLv2 or any later version 
+# may be used, or where a choice of which version of the GPL is applied is 
+# otherwise unspecified. 
+#
+# Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+# CA 95054 USA or visit www.sun.com if you need additional information or 
+# have any questions. 
+# 
+# ========== Copyright Header End ============================================
+#! /usr/bin/perl 
+
+sub Help;
+
+MAIN:
+  {
+  #// Help
+  if($#ARGV==-1){Help;exit(-1);}
+
+ $netlist ;
+ $top = "spc";
+
+
+ for(my $i=0;$i<$#ARGV+1;$i++)
+    {
+    if($ARGV[$i] eq "-netlist")
+      {
+      if($i==$#ARGV){printf ("  Missing value for: %s\n",$ARGV[$i]);exit(-1);}
+      $netlist=$ARGV[$i+1];
+      $i++;
+      }
+    elsif($ARGV[$i] eq "-top")
+      {
+      if($i==$#ARGV){printf("  Missing value for: %s\n",$ARGV[$i]);exit(-1);}
+      $top=$ARGV[$i+1];
+      $i++;
+      }
+    elsif($ARGV[$i] eq "-h")
+      {
+      Help;
+      exit(-1);
+      }
+
+    else
+      {
+      printf("  Invalid argument: %s\n",$ARGV[$i]);
+      exit(-1);
+      }
+    }
+
+
+
+system("mv $netlist $netlist.org");
+
+open(f1,"<$netlist.org");
+open(f2,">$netlist") ;
+
+@arr = <f1> ;
+%modh = ();
+
+foreach $elem (@arr) {
+
+$_ = $elem ;
+if(/^module/) {
+($jnk,$modl,$jnk2) = split (/ /) ;
+
+if($modl ne $top) {
+$modh{$modl} = 1 ;
+  }
+}
+else {
+ }
+
+}
+
+foreach $elem (@arr) {
+$_ = $elem ;
+
+if(/^module/ ) {
+($jnk,$name,$jnk2) = split (/ /) ;
+if($modh{$name} == 1) {
+$nname = "$top"."_syn_"."$name";
+s/$name/$nname/ ;
+print f2 ;
+}
+else { print f2 ; }
+}
+elsif(/  .* \(/) {
+s/^  //;
+($name,$jnk2) = split (/ /) ;
+if($modh{$name} == 1) {
+$nname = "$top"."_syn_"."$name";
+s/$name/$nname/ ;
+print f2 ;
+}
+else {
+print f2 ;
+}
+}
+else {
+print f2 ;
+}
+
+}
+
+close (f2);
+close (f1) ;
+ exit(0);
+}
+
+
+sub Help
+{
+    printf("uniquify_module \n");
+    printf("----------\n");
+    printf("Utility  to uniqfy the module names in gate level netlist \n");
+    printf("   -netlist  <path to netlist>              : required, netlist files\n");
+    printf("   -top <module>                            : required, top module \n");
+    printf("   -h                                       : optional, help\n");
+}
+
+

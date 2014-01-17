@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="ref.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="ref.html" title='Python Reference Manual' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="class.html" />
+<link rel="prev" href="try.html" />
+<link rel="parent" href="compound.html" />
+<link rel="next" href="class.html" />
+<meta name='aesop' content='information' />
+<title>7.5 Function definitions</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.4 The try statement"
+  href="try.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Compound statements"
+  href="compound.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.6 Class definitions"
+  href="class.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="try.html">7.4 The try statement</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="compound.html">7. Compound statements</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="class.html">7.6 Class definitions</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009500000000000000000"></A><A NAME="function"></A>
+<BR>
+7.5 Function definitions
+</H1>
+<a id='l2h-606' xml:id='l2h-606'></a><a id='l2h-607' xml:id='l2h-607'></a>
+<P>
+A function definition defines a user-defined function object (see
+section&nbsp;<A href="types.html#types">3.2</A>):
+<a id='l2h-608' xml:id='l2h-608'></a><a id='l2h-609' xml:id='l2h-609'></a>
+<P>
+<dl><dd class="grammar">
+<div class="productions">
+<table>
+<tr>
+    <td><a id='tok-funcdef' xml:id='tok-funcdef'>funcdef</a></td>
+    <td>::=</td>
+    <td>[<a class='grammartoken' href="function.html#tok-decorators">decorators</a>] "def" <a class='grammartoken' href="function.html#tok-funcname">funcname</a> "(" [<a class='grammartoken' href="function.html#tok-parameter_list">parameter_list</a>] ")"
+              ":" <a class='grammartoken' href="compound.html#tok-suite">suite</a></td></tr>
+  <tr>
+    <td><a id='tok-decorators' xml:id='tok-decorators'>decorators</a></td>
+    <td>::=</td>
+    <td><a class='grammartoken' href="function.html#tok-decorator">decorator</a>+</td></tr>
+  <tr>
+    <td><a id='tok-decorator' xml:id='tok-decorator'>decorator</a></td>
+    <td>::=</td>
+    <td>"@" <a class='grammartoken' href="function.html#tok-dotted_name">dotted_name</a> ["(" [<a class='grammartoken' href="calls.html#tok-argument_list">argument_list</a> [","]] ")"] NEWLINE</td></tr>
+  <tr>
+    <td><a id='tok-dotted_name' xml:id='tok-dotted_name'>dotted_name</a></td>
+    <td>::=</td>
+    <td><a class='grammartoken' href="identifiers.html#tok-identifier">identifier</a> ("." <a class='grammartoken' href="identifiers.html#tok-identifier">identifier</a>)*</td></tr>
+  <tr>
+    <td><a id='tok-parameter_list' xml:id='tok-parameter_list'>parameter_list</a></td>
+    <td>::=</td>
+    <td>(<a class='grammartoken' href="function.html#tok-defparameter">defparameter</a> ",")*</td></tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><code>(&nbsp;&nbsp;"*" <a class='grammartoken' href="identifiers.html#tok-identifier">identifier</a> [, "**" <a class='grammartoken' href="identifiers.html#tok-identifier">identifier</a>]</code></td></tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><code>&nbsp;| "**" <a class='grammartoken' href="identifiers.html#tok-identifier">identifier</a></code></td></tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><code>&nbsp;| <a class='grammartoken' href="function.html#tok-defparameter">defparameter</a> [","] )</code></td></tr>
+  <tr>
+    <td><a id='tok-defparameter' xml:id='tok-defparameter'>defparameter</a></td>
+    <td>::=</td>
+    <td><a class='grammartoken' href="function.html#tok-parameter">parameter</a> ["=" <a class='grammartoken' href="Booleans.html#tok-expression">expression</a>]</td></tr>
+  <tr>
+    <td><a id='tok-sublist' xml:id='tok-sublist'>sublist</a></td>
+    <td>::=</td>
+    <td><a class='grammartoken' href="function.html#tok-parameter">parameter</a> ("," <a class='grammartoken' href="function.html#tok-parameter">parameter</a>)* [","]</td></tr>
+  <tr>
+    <td><a id='tok-parameter' xml:id='tok-parameter'>parameter</a></td>
+    <td>::=</td>
+    <td><a class='grammartoken' href="identifiers.html#tok-identifier">identifier</a> | "(" <a class='grammartoken' href="function.html#tok-sublist">sublist</a> ")"</td></tr>
+  <tr>
+    <td><a id='tok-funcname' xml:id='tok-funcname'>funcname</a></td>
+    <td>::=</td>
+    <td><a class='grammartoken' href="identifiers.html#tok-identifier">identifier</a></td></tr>
+</table>
+</div>
+<a class="grammar-footer"
+  href="grammar.txt" type="text/plain"
+  >Download entire grammar as text.</a>
+</dd></dl>
+
+<P>
+A function definition is an executable statement.  Its execution binds
+the function name in the current local namespace to a function object
+(a wrapper around the executable code for the function).  This
+function object contains a reference to the current global namespace
+as the global namespace to be used when the function is called.
+<a id='l2h-610' xml:id='l2h-610'></a><a id='l2h-611' xml:id='l2h-611'></a>
+<P>
+The function definition does not execute the function body; this gets
+executed only when the function is called.
+
+<P>
+A function definition may be wrapped by one or more decorator expressions.
+Decorator expressions are evaluated when the function is defined, in the scope
+that contains the function definition.  The result must be a callable,
+which is invoked with the function object as the only argument.
+The returned value is bound to the function name instead of the function
+object.  Multiple decorators are applied in nested fashion.
+For example, the following code:
+
+<P>
+<div class="verbatim"><pre>
+@f1(arg)
+@f2
+def func(): pass
+</pre></div>
+
+<P>
+is equivalent to:
+
+<P>
+<div class="verbatim"><pre>
+def func(): pass
+func = f1(arg)(f2(func))
+</pre></div>
+
+<P>
+When one or more top-level parameters have the form <var>parameter</var>
+<code>=</code> <var>expression</var>, the function is said to have ``default
+parameter values.''  For a parameter with a
+default value, the corresponding argument may be omitted from a call,
+in which case the parameter's default value is substituted.  If a
+parameter has a default value, all following parameters must also have
+a default value -- this is a syntactic restriction that is not
+expressed by the grammar.
+<a id='l2h-612' xml:id='l2h-612'></a>
+<P>
+<strong>Default parameter values are evaluated when the function
+definition is executed.</strong>  This means that the expression is evaluated
+once, when the function is defined, and that that same
+``pre-computed'' value is used for each call.  This is especially
+important to understand when a default parameter is a mutable object,
+such as a list or a dictionary: if the function modifies the object
+(e.g. by appending an item to a list), the default value is in effect
+modified.  This is generally not what was intended.  A way around this 
+is to use <code>None</code> as the default, and explicitly test for it in
+the body of the function, e.g.:
+
+<P>
+<div class="verbatim"><pre>
+def whats_on_the_telly(penguin=None):
+    if penguin is None:
+        penguin = []
+    penguin.append("property of the zoo")
+    return penguin
+</pre></div>
+
+<P>
+Function call semantics are described in more detail in
+section&nbsp;<A href="calls.html#calls">5.3.4</A>.
+A function call always assigns values to all parameters mentioned in
+the parameter list, either from position arguments, from keyword
+arguments, or from default values.  If the form ``<code>*identifier</code>''
+is present, it is initialized to a tuple receiving any excess
+positional parameters, defaulting to the empty tuple.  If the form
+``<code>**identifier</code>'' is present, it is initialized to a new
+dictionary receiving any excess keyword arguments, defaulting to a
+new empty dictionary.
+
+<P>
+It is also possible to create anonymous functions (functions not bound
+to a name), for immediate use in expressions.  This uses lambda forms,
+described in section&nbsp;<A href="lambdas.html#lambda">5.11</A>.  Note that the lambda form is
+merely a shorthand for a simplified function definition; a function
+defined in a ``<tt class="keyword">def</tt>'' statement can be passed around or
+assigned to another name just like a function defined by a lambda
+form.  The ``<tt class="keyword">def</tt>'' form is actually more powerful since it
+allows the execution of multiple statements.
+<a id='l2h-613' xml:id='l2h-613'></a>
+<P>
+<strong>Programmer's note:</strong> Functions are first-class objects.  A
+``<code>def</code>'' form executed inside a function definition defines a
+local function that can be returned or passed around.  Free variables
+used in the nested function can access the local variables of the
+function containing the def.  See section&nbsp;<A href="naming.html#naming">4.1</A> for details.
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.4 The try statement"
+  href="try.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Compound statements"
+  href="compound.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.6 Class definitions"
+  href="class.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="try.html">7.4 The try statement</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="compound.html">7. Compound statements</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="class.html">7.6 Class definitions</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

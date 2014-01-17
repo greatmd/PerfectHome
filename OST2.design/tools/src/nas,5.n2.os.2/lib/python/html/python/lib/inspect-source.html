@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="inspect-classes-functions.html" />
+<link rel="prev" href="inspect-types.html" />
+<link rel="parent" href="module-inspect.html" />
+<link rel="next" href="inspect-classes-functions.html" />
+<meta name='aesop' content='information' />
+<title>3.11.2 Retrieving source code </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.11.1 Types and members"
+  href="inspect-types.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3.11 inspect  "
+  href="module-inspect.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.11.3 Classes and functions"
+  href="inspect-classes-functions.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="inspect-types.html">3.11.1 Types and members</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-inspect.html">3.11 inspect  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="inspect-classes-functions.html">3.11.3 Classes and functions</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0051120000000000000000"></A><A NAME="inspect-source"></A>
+<BR>
+3.11.2 Retrieving source code
+            
+</H2>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-585' xml:id='l2h-585' class="function">getdoc</tt></b>(</nobr></td>
+  <td><var>object</var>)</td></tr></table></dt>
+<dd>
+  Get the documentation string for an object.
+  All tabs are expanded to spaces.  To clean up docstrings that are
+  indented to line up with blocks of code, any whitespace than can be
+  uniformly removed from the second line onwards is removed.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-586' xml:id='l2h-586' class="function">getcomments</tt></b>(</nobr></td>
+  <td><var>object</var>)</td></tr></table></dt>
+<dd>
+  Return in a single string any lines of comments immediately preceding
+  the object's source code (for a class, function, or method), or at the
+  top of the Python source file (if the object is a module).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-587' xml:id='l2h-587' class="function">getfile</tt></b>(</nobr></td>
+  <td><var>object</var>)</td></tr></table></dt>
+<dd>
+  Return the name of the (text or binary) file in which an object was
+  defined.  This will fail with a <tt class="exception">TypeError</tt> if the object
+  is a built-in module, class, or function.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-588' xml:id='l2h-588' class="function">getmodule</tt></b>(</nobr></td>
+  <td><var>object</var>)</td></tr></table></dt>
+<dd>
+  Try to guess which module an object was defined in.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-589' xml:id='l2h-589' class="function">getsourcefile</tt></b>(</nobr></td>
+  <td><var>object</var>)</td></tr></table></dt>
+<dd>
+  Return the name of the Python source file in which an object was
+  defined.  This will fail with a <tt class="exception">TypeError</tt> if the object
+  is a built-in module, class, or function.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-590' xml:id='l2h-590' class="function">getsourcelines</tt></b>(</nobr></td>
+  <td><var>object</var>)</td></tr></table></dt>
+<dd>
+  Return a list of source lines and starting line number for an object.
+  The argument may be a module, class, method, function, traceback, frame,
+  or code object.  The source code is returned as a list of the lines
+  corresponding to the object and the line number indicates where in the
+  original source file the first line of code was found.  An
+  <tt class="exception">IOError</tt> is raised if the source code cannot be retrieved.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-591' xml:id='l2h-591' class="function">getsource</tt></b>(</nobr></td>
+  <td><var>object</var>)</td></tr></table></dt>
+<dd>
+  Return the text of the source code for an object.
+  The argument may be a module, class, method, function, traceback, frame,
+  or code object.  The source code is returned as a single string.  An
+  <tt class="exception">IOError</tt> is raised if the source code cannot be retrieved.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.11.1 Types and members"
+  href="inspect-types.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3.11 inspect  "
+  href="module-inspect.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.11.3 Classes and functions"
+  href="inspect-classes-functions.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="inspect-types.html">3.11.1 Types and members</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-inspect.html">3.11 inspect  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="inspect-classes-functions.html">3.11.3 Classes and functions</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

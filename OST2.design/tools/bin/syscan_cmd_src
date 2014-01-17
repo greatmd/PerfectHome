@@ -1,0 +1,29 @@
+use warnings;
+use strict;
+use Getopt::Long ;
+
+
+my $numArgs = $#ARGV + 1;
+
+
+    my $build_args = "";
+    my $read_line = "";
+
+    open(syscan_file_write, ">syscan_cmd_exec");
+
+    print syscan_file_write "#!/bin/csh -f\n\n";
+    print syscan_file_write "syscan \\\n";
+    foreach my $x (0 .. $#ARGV) {
+		print syscan_file_write "\t$ARGV[$x] \\\n";
+    }
+    print syscan_file_write "\n";
+
+    close(syscan_file_write);
+
+
+    `chmod 777 syscan_cmd_exec`;
+    system(syscan_cmd_exec);
+
+
+
+

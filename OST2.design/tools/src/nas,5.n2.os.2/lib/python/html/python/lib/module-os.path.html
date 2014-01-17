@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-dircache.html" />
+<link rel="prev" href="module-os.html" />
+<link rel="parent" href="allos.html" />
+<link rel="next" href="module-dircache.html" />
+<meta name='aesop' content='information' />
+<title>6.2 os.path -- Common pathname manipulations</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.1.7 Miscellaneous Functions"
+  href="os-miscfunc.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.3 dircache  "
+  href="module-dircache.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="os-miscfunc.html">6.1.7 Miscellaneous Functions</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-dircache.html">6.3 dircache  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008200000000000000000">
+6.2 <tt class="module">os.path</tt> --
+         Common pathname manipulations</A>
+</H1>
+<A NAME="module-os.path"></A>
+<P>
+
+<P>
+This module implements some useful functions on pathnames.
+<a id='l2h-1765' xml:id='l2h-1765'></a>
+
+<P>
+<span class="warning"><b class="label">Warning:</b>
+On Windows, many of these functions do not properly
+support UNC pathnames.  <tt class="function">splitunc()</tt> and <tt class="function">ismount()</tt>
+do handle them correctly.</span>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1735' xml:id='l2h-1735' class="function">abspath</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return a normalized absolutized version of the pathname <var>path</var>.
+On most platforms, this is equivalent to
+<code>normpath(join(os.getcwd(), <var>path</var>))</code>.
+
+<span class="versionnote">New in version 1.5.2.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1736' xml:id='l2h-1736' class="function">basename</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return the base name of pathname <var>path</var>.  This is the second half
+of the pair returned by <code>split(<var>path</var>)</code>.  Note that the
+result of this function is different from the
+<span class="Unix">Unix</span> <b class="program">basename</b> program; where <b class="program">basename</b> for
+<code>'/foo/bar/'</code> returns <code>'bar'</code>, the <tt class="function">basename()</tt>
+function returns an empty string (<code>''</code>).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1737' xml:id='l2h-1737' class="function">commonprefix</tt></b>(</nobr></td>
+  <td><var>list</var>)</td></tr></table></dt>
+<dd>
+Return the longest path prefix (taken character-by-character) that is a
+prefix of all paths in 
+<var>list</var>.  If <var>list</var> is empty, return the empty string
+(<code>''</code>).  Note that this may return invalid paths because it works a
+character at a time.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1738' xml:id='l2h-1738' class="function">dirname</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return the directory name of pathname <var>path</var>.  This is the first
+half of the pair returned by <code>split(<var>path</var>)</code>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1739' xml:id='l2h-1739' class="function">exists</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if <var>path</var> refers to an existing path.
+Returns <code>False</code> for broken symbolic links.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1740' xml:id='l2h-1740' class="function">lexists</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if <var>path</var> refers to an existing path.
+Returns <code>True</code> for broken symbolic links.  
+Equivalent to <tt class="function">exists()</tt> on platforms lacking
+<tt class="function">os.lstat()</tt>.
+
+<span class="versionnote">New in version 2.4.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1741' xml:id='l2h-1741' class="function">expanduser</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+On <span class="Unix">Unix</span>, return the argument with an initial component of "<tt class="samp">~</tt>" or
+"<tt class="samp">~<var>user</var></tt>" replaced by that <var>user</var>'s home directory.
+An initial "<tt class="samp">~</tt>" is replaced by the environment variable
+<a class="envvar" id='l2h-1766' xml:id='l2h-1766'>HOME</a> if it is set; otherwise the current user's home directory
+is looked up in the password directory through the built-in module
+<tt class="module"><a href="module-pwd.html">pwd</a></tt><a id='l2h-1767' xml:id='l2h-1767'></a>.
+An initial "<tt class="samp">~<var>user</var></tt>" is looked up directly in the
+password directory.
+
+<P>
+On Windows, only "<tt class="samp">~</tt>" is supported; it is replaced by the
+environment variable <a class="envvar" id='l2h-1768' xml:id='l2h-1768'>HOME</a> or by a combination of
+<a class="envvar" id='l2h-1769' xml:id='l2h-1769'>HOMEDRIVE</a> and <a class="envvar" id='l2h-1770' xml:id='l2h-1770'>HOMEPATH</a>.
+
+<P>
+If the expansion fails or if the
+path does not begin with a tilde, the path is returned unchanged.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1742' xml:id='l2h-1742' class="function">expandvars</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return the argument with environment variables expanded.  Substrings
+of the form "<tt class="samp">$<var>name</var></tt>" or "<tt class="samp">${<var>name</var>}</tt>" are
+replaced by the value of environment variable <var>name</var>.  Malformed
+variable names and references to non-existing variables are left
+unchanged.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1743' xml:id='l2h-1743' class="function">getatime</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return the time of last access of <var>path</var>.  The return
+value is a number giving the number of seconds since the epoch (see the 
+<tt class="module"><a href="module-time.html">time</a></tt> module).  Raise <tt class="exception">os.error</tt> if the file does
+not exist or is inaccessible.
+
+<span class="versionnote">New in version 1.5.2.</span>
+
+<span class="versionnote">Changed in version 2.3:
+If <tt class="function">os.stat_float_times()</tt> returns True, the result is a floating point number.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1744' xml:id='l2h-1744' class="function">getmtime</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return the time of last modification of <var>path</var>.  The return
+value is a number giving the number of seconds since the epoch (see the 
+<tt class="module"><a href="module-time.html">time</a></tt> module).  Raise <tt class="exception">os.error</tt> if the file does
+not exist or is inaccessible.
+
+<span class="versionnote">New in version 1.5.2.</span>
+
+<span class="versionnote">Changed in version 2.3:
+If <tt class="function">os.stat_float_times()</tt> returns True, the result is a floating point number.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1745' xml:id='l2h-1745' class="function">getctime</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return the system's ctime which, on some systems (like <span class="Unix">Unix</span>) is the
+time of the last change, and, on others (like Windows), is the
+creation time for <var>path</var>.  The return
+value is a number giving the number of seconds since the epoch (see the 
+<tt class="module"><a href="module-time.html">time</a></tt> module).  Raise <tt class="exception">os.error</tt> if the file does
+not exist or is inaccessible.
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1746' xml:id='l2h-1746' class="function">getsize</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return the size, in bytes, of <var>path</var>.  Raise
+<tt class="exception">os.error</tt> if the file does not exist or is inaccessible.
+
+<span class="versionnote">New in version 1.5.2.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1747' xml:id='l2h-1747' class="function">isabs</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if <var>path</var> is an absolute pathname (begins with a
+slash).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1748' xml:id='l2h-1748' class="function">isfile</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if <var>path</var> is an existing regular file.  This follows
+symbolic links, so both <tt class="function">islink()</tt> and <tt class="function">isfile()</tt>
+can be true for the same path.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1749' xml:id='l2h-1749' class="function">isdir</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if <var>path</var> is an existing directory.  This follows
+symbolic links, so both <tt class="function">islink()</tt> and <tt class="function">isdir()</tt> can
+be true for the same path.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1750' xml:id='l2h-1750' class="function">islink</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if <var>path</var> refers to a directory entry that is a
+symbolic link.  Always <code>False</code> if symbolic links are not supported.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1751' xml:id='l2h-1751' class="function">ismount</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if pathname <var>path</var> is a <i class="dfn">mount point</i>: a point in
+a file system where a different file system has been mounted.  The
+function checks whether <var>path</var>'s parent, <span class="file"><var>path</var>/..</span>, is
+on a different device than <var>path</var>, or whether <span class="file"><var>path</var>/..</span>
+and <var>path</var> point to the same i-node on the same device -- this
+should detect mount points for all <span class="Unix">Unix</span> and POSIX variants.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1752' xml:id='l2h-1752' class="function">join</tt></b>(</nobr></td>
+  <td><var>path1</var><big>[</big><var>, path2</var><big>[</big><var>, ...</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Joins one or more path components intelligently.  If any component is
+an absolute path, all previous components are thrown away, and joining
+continues.  The return value is the concatenation of <var>path1</var>, and
+optionally <var>path2</var>, etc., with exactly one directory separator
+(<code>os.sep</code>) inserted between components, unless <var>path2</var> is
+empty.  Note that on Windows, since there is a current directory for
+each drive, <tt class="function">os.path.join("c:", "foo")</tt> represents a path
+relative to the current directory on drive <span class="file">C:</span> (<span class="file">c:foo</span>), not
+<span class="file">c:&#92;&#92;foo</span>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1753' xml:id='l2h-1753' class="function">normcase</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Normalize the case of a pathname.  On <span class="Unix">Unix</span>, this returns the path
+unchanged; on case-insensitive filesystems, it converts the path to
+lowercase.  On Windows, it also converts forward slashes to backward
+slashes.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1754' xml:id='l2h-1754' class="function">normpath</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Normalize a pathname.  This collapses redundant separators and
+up-level references so that <code>A//B</code>, <code>A/./B</code> and
+<code>A/foo/../B</code> all become <code>A/B</code>.  It does not normalize the
+case (use <tt class="function">normcase()</tt> for that).  On Windows, it converts
+forward slashes to backward slashes. It should be understood that this may
+change the meaning of the path if it contains symbolic links! 
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1755' xml:id='l2h-1755' class="function">realpath</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Return the canonical path of the specified filename, eliminating any
+symbolic links encountered in the path.
+Availability:  <span class="Unix">Unix</span>.
+
+<span class="versionnote">New in version 2.2.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1756' xml:id='l2h-1756' class="function">samefile</tt></b>(</nobr></td>
+  <td><var>path1, path2</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if both pathname arguments refer to the same file or
+directory (as indicated by device number and i-node number).
+Raise an exception if a <tt class="function">os.stat()</tt> call on either pathname
+fails.
+Availability:  Macintosh, <span class="Unix">Unix</span>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1757' xml:id='l2h-1757' class="function">sameopenfile</tt></b>(</nobr></td>
+  <td><var>fp1, fp2</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if the file objects <var>fp1</var> and <var>fp2</var> refer to the
+same file.  The two file objects may represent different file
+descriptors.
+Availability:  Macintosh, <span class="Unix">Unix</span>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1758' xml:id='l2h-1758' class="function">samestat</tt></b>(</nobr></td>
+  <td><var>stat1, stat2</var>)</td></tr></table></dt>
+<dd>
+Return <code>True</code> if the stat tuples <var>stat1</var> and <var>stat2</var> refer to
+the same file.  These structures may have been returned by
+<tt class="function">fstat()</tt>, <tt class="function">lstat()</tt>, or <tt class="function">stat()</tt>.  This
+function implements the underlying comparison used by
+<tt class="function">samefile()</tt> and <tt class="function">sameopenfile()</tt>.
+Availability:  Macintosh, <span class="Unix">Unix</span>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1759' xml:id='l2h-1759' class="function">split</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Split the pathname <var>path</var> into a pair, <code>(<var>head</var>,
+<var>tail</var>)</code> where <var>tail</var> is the last pathname component and
+<var>head</var> is everything leading up to that.  The <var>tail</var> part will
+never contain a slash; if <var>path</var> ends in a slash, <var>tail</var> will
+be empty.  If there is no slash in <var>path</var>, <var>head</var> will be
+empty.  If <var>path</var> is empty, both <var>head</var> and <var>tail</var> are
+empty.  Trailing slashes are stripped from <var>head</var> unless it is the
+root (one or more slashes only).  In nearly all cases,
+<code>join(<var>head</var>, <var>tail</var>)</code> equals <var>path</var> (the only
+exception being when there were multiple slashes separating <var>head</var>
+from <var>tail</var>).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1760' xml:id='l2h-1760' class="function">splitdrive</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Split the pathname <var>path</var> into a pair <code>(<var>drive</var>,
+<var>tail</var>)</code> where <var>drive</var> is either a drive specification or the
+empty string.  On systems which do not use drive specifications,
+<var>drive</var> will always be the empty string.  In all cases,
+<code><var>drive</var> + <var>tail</var></code> will be the same as <var>path</var>.
+
+<span class="versionnote">New in version 1.3.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1761' xml:id='l2h-1761' class="function">splitext</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Split the pathname <var>path</var> into a pair <code>(<var>root</var>, <var>ext</var>)</code> 
+such that <code><var>root</var> + <var>ext</var> == <var>path</var></code>,
+and <var>ext</var> is empty or begins with a period and contains
+at most one period.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1762' xml:id='l2h-1762' class="function">splitunc</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></table></dt>
+<dd>
+Split the pathname <var>path</var> into a pair <code>(<var>unc</var>, <var>rest</var>)</code>
+so that <var>unc</var> is the UNC mount point (such as <code>r'&#92;&#92;host&#92;mount'</code>),
+if present, and <var>rest</var> the rest of the path (such as 
+<code>r'&#92;path&#92;file.ext'</code>).  For paths containing drive letters, <var>unc</var>
+will always be the empty string.
+Availability:  Windows.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1763' xml:id='l2h-1763' class="function">walk</tt></b>(</nobr></td>
+  <td><var>path, visit, arg</var>)</td></tr></table></dt>
+<dd>
+Calls the function <var>visit</var> with arguments
+<code>(<var>arg</var>, <var>dirname</var>, <var>names</var>)</code> for each directory in the
+directory tree rooted at <var>path</var> (including <var>path</var> itself, if it
+is a directory).  The argument <var>dirname</var> specifies the visited
+directory, the argument <var>names</var> lists the files in the directory
+(gotten from <code>os.listdir(<var>dirname</var>)</code>).
+The <var>visit</var> function may modify <var>names</var> to
+influence the set of directories visited below <var>dirname</var>, e.g. to
+avoid visiting certain parts of the tree.  (The object referred to by
+<var>names</var> must be modified in place, using <tt class="keyword">del</tt> or slice
+assignment.)
+
+<P>
+<div class="note"><b class="label">Note:</b>
+Symbolic links to directories are not treated as subdirectories, and
+that <tt class="function">walk()</tt> therefore will not visit them. To visit linked
+directories you must identify them with
+<code>os.path.islink(<var>file</var>)</code> and
+<code>os.path.isdir(<var>file</var>)</code>, and invoke <tt class="function">walk()</tt> as
+necessary.
+</div>
+
+<P>
+<span class="note"><b class="label">Note:</b>
+The newer <tt class="function"><tt class="module"><a href="module-os.html">os</a></tt>.walk()</tt> generator supplies
+      similar functionality and can be easier to use.</span>
+</dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1764' xml:id='l2h-1764'>supports_unicode_filenames</tt></b></dt>
+<dd>
+True if arbitrary Unicode strings can be used as file names (within
+limitations imposed by the file system), and if
+<tt class="function">os.listdir()</tt> returns Unicode strings for a Unicode
+argument.
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dd></dl>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.1.7 Miscellaneous Functions"
+  href="os-miscfunc.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.3 dircache  "
+  href="module-dircache.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="os-miscfunc.html">6.1.7 Miscellaneous Functions</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-dircache.html">6.3 dircache  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

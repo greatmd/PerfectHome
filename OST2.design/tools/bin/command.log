@@ -1,0 +1,277 @@
+#@ # 
+#@ # Running icc_shell Version F-2011.09-ICC-SP1 for linux -- Sep 29, 2011
+#@ # Date:   Fri Jan 10 21:28:05 2014
+#@ # Run by: greatmd@rsg1.stanford.edu
+#@ 
+
+sh date
+sh hostname
+sh uptime
+remove_design -all
+set dv_root [sh echo \$DV_ROOT]
+set syn_home [sh echo \$SYN_LIB]
+## goto spc directory:
+set block  spc
+set blk_dir $dv_root/design/sys/iop/$block/synopsys
+echo "PNR target module" $block
+echo "Enter $blk_dir"
+cd $blk_dir
+## create pnr directory
+#sh mkdir pnr
+cd pnr
+set top_module spc
+#########################################################################
+## Library Prepraation
+## 1. setup for logical and physical library
+## 2. load tlu_plus file => this is from Syonpsys EDK (TODO: not accurate)
+## 3. checking library/tlu consistancy
+#########################################################################
+source -echo -verbose $dv_root/design/sys/synopsys/script/pnr_lib_setup.tcl
+#@ #########################################################################
+#@ ## Library Prepraation
+#@ ## 1. setup for logical and physical library
+#@ ## 2. load tlu_plus file => this is from Syonpsys EDK (TODO: not accurate)
+#@ ## 3. checking library/tlu consistancy 
+#@ #########################################################################
+#@ 
+#@ source -echo -verbose $dv_root/design/sys/synopsys/script/target_lib.scr
+#@ # ========== Copyright Header Begin ==========================================
+#@ # 
+#@ # OpenSPARC T2 Processor File: target_lib.scr
+#@ # Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+#@ # 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#@ #
+#@ # * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#@ #
+#@ # This program is free software; you can redistribute it and/or modify
+#@ # it under the terms of the GNU General Public License as published by
+#@ # the Free Software Foundation; version 2 of the License.
+#@ #
+#@ # This program is distributed in the hope that it will be useful,
+#@ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+#@ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#@ # GNU General Public License for more details.
+#@ #
+#@ # You should have received a copy of the GNU General Public License
+#@ # along with this program; if not, write to the Free Software
+#@ # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#@ #
+#@ # For the avoidance of doubt, and except that if any non-GPL license 
+#@ # choice is available it will apply instead, Sun elects to use only 
+#@ # the General Public License version 2 (GPLv2) at this time for any 
+#@ # software where a choice of GPL license versions is made 
+#@ # available with the language indicating that GPLv2 or any later version 
+#@ # may be used, or where a choice of which version of the GPL is applied is 
+#@ # otherwise unspecified. 
+#@ #
+#@ # Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+#@ # CA 95054 USA or visit www.sun.com if you need additional information or 
+#@ # have any questions. 
+#@ # 
+#@ # ========== Copyright Header End ============================================
+#@ echo "INFO: target library version $syn_home"
+#@ 
+#@ set gate_lib_file tcbn28hpmbwp35tt1v25c_ccs.db
+#@ set link_library $gate_lib_file
+#@ set target_library $gate_lib_file 
+#@ 
+#@ set lib_dir_md /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+#@ set std_lib_dir_md $lib_dir_md/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+#@ 
+#@ #set wire_library_file   {lsi_10k.db}
+#@ #set wire_library   lsi_10k
+#@ #set wire_model_name      05x05
+#@ #set wireload_mode      top
+#@ 
+#@ set search_path [concat $search_path $syn_home $std_lib_dir_md $dv_root/design/sys/iop/spc/synopsys/bb/qtm/]
+#@ set link_library [concat * $link_library ]
+#@ 
+#@ #set_min_library tcbn28hpmbwp35tt1v25c_ccs.db -min_version tcbn28hpmbwp35ff0p99v0c_ccs.db 
+#@ set symbol_library {}
+#@ set dont_use_cells 1
+#@ set dont_use_cell_list {}
+#@ 
+#@ ## Donguk : following is added for PNR 
+#@ #lappend link_library "n2_frf_mp_256x78_cust.db"
+#@ 
+#@ # .tf file 
+#@ set technology_file $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+#@ # reference library
+#@ set mw_reference_library [concat   $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28   ]
+#@ #TLU+ Files
+#@ set max_tluplus $dv_root/pnr_lib/1p9m.tluplus
+#@ set min_tluplus $dv_root/pnr_lib/1p9m.tluplus
+#@ #set max_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+#@ #set min_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+#@ 
+#@ # -- End source /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/synopsys/script/target_lib.scr
+
+#@ 
+#@ 
+#@ ## Delete previous milkyway db
+#@ #if {[file exists mw_lib]} {
+#@ #  sh rm -rf mw_lib
+#@ #}
+#@ #  create_mw_lib mw_lib -technology $technology_file -mw_reference_library $mw_reference_library
+#@ open_mw_lib mw_lib
+#@ 
+#@ #TODO: might need tech2itf map file
+#@ set_tlu_plus_files  -max_tluplus $max_tluplus -min_tluplus $min_tluplus    
+#@ 
+#@ check_library
+#@ set lc_check_lib_mw_libs "/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28"
+
+#@ check_tlu_plus_files
+#@ # -- End source /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/synopsys/script/pnr_lib_setup.tcl
+
+set bbs {n2_frf_mp_256x78_cust n2_com_dp_32x84_cust n2_com_dp_32x72_cust n2_dca_sp_9kb_cust n2_dva_dp_32x32_cust n2_com_dp_32x152_cust n2_stb_cm_64x45_cust n2_com_dp_64x84_cust n2_dta_sp_1920b_cust n2_tlb_tl_128x59_cust n2_irf_mp_128x72_cust n2_icd_sp_16p5kb_cust n2_ict_sp_1920b_cust n2_tlb_tl_64x59_cust}
+foreach bb_each $bbs {
+lappend link_library "$bb_each.db"
+echo "$bb_each.db"
+#set_dont_touch $bb_each
+}
+#########################################################################
+## Loading synthesized netlist and .sdc for SPC
+#########################################################################
+#source -echo -verbose $dv_root/design/sys/synopsys/script/pnr_spc_netlist.tcl
+read_verilog -dirty_netlist ../gate/spc_all.vSyn
+import_fp_black_boxes [get_cells -hierarchical -filter "is_logical_black_box==true && black_box_type==Missing"]
+source -echo -verbose $dv_root/design/sys/synopsys/script/pnr_bb_sizing.tcl
+#@ ## Black box sizing for spc
+#@ estimate_fp_black_boxes -sm_size {40 40} -fixed_shape {spu}
+#@ estimate_fp_black_boxes -sm_size {80 80} -fixed_shape {ifu_ftu/ftu_itb_cust}
+#@ estimate_fp_black_boxes -sm_size {160 160} -fixed_shape {ifu_ftu/ftu_ict_cust}
+#@ estimate_fp_black_boxes -sm_size {400 400} -fixed_shape {ifu_ftu/ftu_icd_cust}
+#@ estimate_fp_black_boxes -sm_size {40 40} -fixed_shape {ifu_ftu/ftu_icv_cust}
+#@ estimate_fp_black_boxes -sm_size {150 150} -fixed_shape {exu0/irf}
+#@ estimate_fp_black_boxes -sm_size {150 150} -fixed_shape {exu1/irf}
+#@ estimate_fp_black_boxes -sm_size {120 120} -fixed_shape {fgu/frf}
+#@ estimate_fp_black_boxes -sm_size {40 120} -fixed_shape {mmu/mra0}
+#@ estimate_fp_black_boxes -sm_size {40 120} -fixed_shape {mmu/mra1}
+#@ estimate_fp_black_boxes -sm_size {40 80} -fixed_shape {mmu/scp0}
+#@ estimate_fp_black_boxes -sm_size {40 80} -fixed_shape {mmu/scp1}
+#@ estimate_fp_black_boxes -sm_size {280 280} -fixed_shape {lsu/dca}
+#@ estimate_fp_black_boxes -sm_size {160 160} -fixed_shape {lsu/dta}
+#@ estimate_fp_black_boxes -sm_size {80 120} -fixed_shape {lsu/stb_ram}
+#@ estimate_fp_black_boxes -sm_size {80 80} -fixed_shape {lsu/stb_cam}
+#@ estimate_fp_black_boxes -sm_size {160 80} -fixed_shape {lsu/tlb}
+#@ estimate_fp_black_boxes -sm_size {40 40} -fixed_shape {lsu/lru}
+#@ estimate_fp_black_boxes -sm_size {40 40} -fixed_shape {lsu/dva}
+#@ estimate_fp_black_boxes -sm_size {80 120} -fixed_shape {lsu/cpq}
+#@ estimate_fp_black_boxes -sm_size {80 120} -fixed_shape {tlu/tsa0}
+#@ estimate_fp_black_boxes -sm_size {80 120} -fixed_shape {tlu/tsa1}
+#@ estimate_fp_black_boxes -sm_size {40 80} -fixed_shape {tlu/tca}
+#@ 
+#@ 
+#@ # -- End source /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/synopsys/script/pnr_bb_sizing.tcl
+
+uniquify_fp_mw_cel
+read_sdc -version 1.9 ../sdc/spc.sdc
+#@ define_proc_attributes all_physical_only_cells -info "Get the collection of physical only cells" -define_args {
+#@ { -coordinates "coordinates of bounding box" "llx lly urx ury" string {optional}} 
+#@ { -lib_cells "get cells related to these objects" "objects" list {optional}} 
+#@ { -cell_name "list of cell name patterns and collections" "patterns" list {optional}} 
+#@ { "" "Existing collection" "arguments" list {optional}} 
+#@ }
+#@ define_proc_attributes all_physical_only_nets  -info "Get the collection of physical only nets" -define_args {
+#@ { "" "list of cell name patterns and collections" "arguments" list {optional}} 
+#@ } 
+#@ define_proc_attributes all_drc_violated_nets -info "Returns all DRC violated nets" -define_args { 
+#@ { -max_capacitance "max Cap DRC violated nets" "" string {optional}} 
+#@ { -max_transition "max transition time DRC violated nets" "" string {optional}} 
+#@ { -max_fanout "max fanout DRC violated nets" "" string {optional}}
+#@ { -threshold "Captures all values more than or equal to threshold" "threshold" string {optional}} 
+#@ { -bound "Captures all values less than or equal to bound bound" "upper" string {optional}} 
+#@ { "" "objects patterns OR collection" "arguments"  list {optional}} 
+#@ }
+#@ define_proc_attributes all_fanin -info "return pins or cells in transitive fanin" -define_args { 
+#@ { -to "set of sink ports, pins, or nets" "sink_list" list {optional}} 
+#@ { -startpoints_only  "return only the timing startpoints" "" string {optional}} 
+#@ { -exclude_bboxes "black-boxes are not included in return-set" "" string {optional}} 
+#@ { -break_on_bboxes  "traversal stops at black-boxes" "" string {optional}} 
+#@ { -only_cells "only cells are included in the return-set" "" string {optional}} 
+#@ { -flat "trace entire design instead of just current hierarchy" "" string {optional}} 
+#@ { -levels "maximum number of levels of logic to traverse" "n" string {optional}} 
+#@ { -trace_arcs "Type of network arcs to trace. Values: timing, all" "arc_type" string {optional}}
+#@ }
+#@ define_proc_attributes all_high_fanout -info "Returns all high fanout objects" -define_args { 
+#@ { -nets "high fanout nets" "" string {optional}} 
+#@ { -threshold "high fanout threshold: value>=0" "threshold" string {optional}} 
+#@ { -through_buf_inv "treat buffers and inverters as transparent -check for transitive fanout" "" string {optional}} 
+#@ { "" "objects patterns OR collection" "arguments" string {optional}} 
+#@ }
+#@ define_proc_attributes all_ideal_nets -info "Returns all ideal nets" -define_args { 
+#@ { "" "objects patterns OR collection" "arguments" string {optional}} 
+#@ }
+#@ define_proc_attributes all_inputs -info "return input ports" -define_args { 
+#@ { -clock "ports with input delay relative to clock" "clock" string {optional}} 
+#@ { -edge_triggered "ports with non-level-sensitive input delay" "" string {optional}} 
+#@ { -level_sensitive "ports with level-sensitive input delay" "" string {optional}} 
+#@ }
+#@ define_proc_attributes all_outputs -info "return output ports" -define_args { 
+#@ { -clock "ports with output delay relative to clock" "clock" string {optional}} 
+#@ { -edge_triggered "ports with non-level-sensitive output delay" "" string {optional}} 
+#@ { -level_sensitive "ports with level-sensitive output delay" "" string {optional}} 
+#@ }
+#@ define_proc_attributes all_threestate -info "Returns all threestate objects" -define_args { 
+#@ { -nets "threestate nets" "" string {optional}} 
+#@ { "" "objects patterns OR collection" "arguments" string {optional}} 
+#@ }
+#@ define_proc_attributes all_dont_touch -info "Returns all dont touch objects" -define_args { 
+#@ { -nets "Dont touch nets" "" string {optional}} 
+#@ { -cells "Dont touch cells" "" string {optional}} 
+#@ { "" "Dont touch patterns OR collections" "patterns" string {optional}} 
+#@ }
+#@ define_proc_attributes all_size_only_cells -info "Returns all size_only cells" -define_args { 
+#@ { "" "Object patterns OD collections" "patterns" string {optional}} 
+#@ }
+#@ define_proc_attributes all_clocks -info "return all clocks in the current design"  
+#@ define_proc_attributes all_designs -info "return all designs" 
+#@ define_proc_attributes all_registers  -info "create a collection of register cells or pins" -define_args { 
+#@ { -no_hierarchy "only search the top level of hierarchy" "" string {optional}} 
+#@ {-rise_clock "return registers triggered by rise edge of this clock" "rise_clock" string {optional}}
+#@ {-fall_clock "return registers triggered by rise edge of this clock" "fall_clock" string {optional}}
+#@ { -clock "return registers of this clock" "clock" string {optional}} 
+#@ { -cells "return cells - this is the default" "" string {optional}} 
+#@ { -data_pins "return data_pins" "" string {optional}} 
+#@ { -clock_pins "return clock_pins" "" string {optional}} 
+#@ { -slave_clock_pins "return slave_clock_pin" "" string {optional}} 
+#@ { -inverted_output "return FF's with inverted output phase" "" string {optional}} 
+#@ { -output_pins "return output_pins" "" string {optional}} 
+#@ { -level_sensitive "only consider level sensitive registers" "" string {optional}} 
+#@ { -edge_triggered "only consider edge triggered register" "" string {optional}} 
+#@ { -master_slave "only consider master/slave registers" "" string {optional}} 
+#@ }
+#@ define_proc_attributes all_critical_cells -info "return critical cells" -define_args { 
+#@ { -slack_range "critical range to select cells:value>=0" "range_value" string {optional}} 
+#@ }
+#@ define_proc_attributes all_critical_pins -info "return critical pins" -define_args { 
+#@ { -slack_range "critical range to select cells:value>=0" "range_value" string {optional}} 
+#@ { -type "pintype: Values: endpoint, startpoint" "pin_type" string {optional}} 
+#@ }
+#@ define_proc_attributes get_magnet_cells -info "return magnet cells collection" -define_args {
+#@ { -stop_by_sequential_cells "don't pull sequential cells" "" string {optional}} 
+#@ { -exclude_buffers "skip through buffers in levels" "" string {optional}} 
+#@ { -exclude_cells "list of excluded cells list" "" string {optional}}
+#@ { -logical_level "number of logical levels to pull for placement" "integer" string {optional}} 
+#@ { -stop_points "list of stop points where to stop magnetizing paths" "object_list" list {optional}} 
+#@ { "" "a list of magnet objects" "magnet_objects" list {optional}} 
+#@ }
+#@ define_proc_attributes all_fanout -info "return pins or cells in transitive fanout" -define_args {
+#@ {-clock_tree "return all clock tree components in design" "" string {optional}}
+#@ {-from "set of source ports, pins, or nets" "source_list" list {optional}}
+#@ {-endpoints_only "return only the timing endpoints" "" string {optional}}
+#@ {-exclude_bboxes "black-boxes are not included in return-set" "" string {optional}}
+#@ {-break_on_bboxes "traversal stops at black-boxes" "" string {optional}}
+#@ {-only_cells "only cells are included in the return-set" "" string {optional}}
+#@ {-flat "trace entire design instead of just current hierarchy" "" string {optional}}
+#@ {-levels "maximum number of levels of logic to traverse" "n" string {optional}}
+#@ {-trace_arcs "Type of network arcs to trace. Values: timing, all" "arc_type" string {optional}}
+#@ }
+#@ define_proc_attributes all_physical_only_ports -info " Get the collection of physical only ports" -define_args {
+#@ {"" "list of cell name patterns and collections" "arguments" list {optional}}
+#@ }
+#@ # -- End source /cad/synopsys/icc/2011.09-SP1/auxx/syn/all_command_option_def.tcl
+
+link
+exit

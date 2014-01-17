@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="api.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="api.html" title='Python/C API Reference Manual' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="gen-objects.html" />
+<link rel="parent" href="otherObjects.html" />
+<link rel="next" href="initialization.html" />
+<meta name='aesop' content='information' />
+<title>7.5.12 DateTime Objects </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.5.11 Generator Objects"
+  href="gen-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.5 Other Objects"
+  href="otherObjects.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="8. Initialization, Finalization, and"
+  href="initialization.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="gen-objects.html">7.5.11 Generator Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="otherObjects.html">7.5 Other Objects</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="initialization.html">8. Initialization, Finalization, and</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0095120000000000000000"></A><A NAME="datetime-objects"></A>
+<BR>
+7.5.12 DateTime Objects 
+</H2>
+
+<P>
+Various date and time objects are supplied by the <tt class="module">datetime</tt>
+module.  Before using any of these functions, the header file
+<span class="file">datetime.h</span> must be included in your source (note that this is
+not include by <span class="file">Python.h</span>), and macro <tt class="cfunction">PyDateTime_IMPORT()</tt>
+must be invoked.  The macro arranges to put a pointer to a C structure
+in a static variable <code>PyDateTimeAPI</code>, which is used by the following
+macros.
+
+<P>
+Type-check macros:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-746' xml:id='l2h-746' class="cfunction">PyDate_Check</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_DateType</tt> or
+  a subtype of <tt class="cdata">PyDateTime_DateType</tt>.  <var>ob</var> must not be
+  <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-747' xml:id='l2h-747' class="cfunction">PyDate_CheckExact</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_DateType</tt>.
+  <var>ob</var> must not be <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-748' xml:id='l2h-748' class="cfunction">PyDateTime_Check</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_DateTimeType</tt> or
+  a subtype of <tt class="cdata">PyDateTime_DateTimeType</tt>.  <var>ob</var> must not be
+  <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-749' xml:id='l2h-749' class="cfunction">PyDateTime_CheckExact</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_DateTimeType</tt>.
+  <var>ob</var> must not be <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-750' xml:id='l2h-750' class="cfunction">PyTime_Check</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_TimeType</tt> or
+  a subtype of <tt class="cdata">PyDateTime_TimeType</tt>.  <var>ob</var> must not be
+  <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-751' xml:id='l2h-751' class="cfunction">PyTime_CheckExact</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_TimeType</tt>.
+  <var>ob</var> must not be <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-752' xml:id='l2h-752' class="cfunction">PyDelta_Check</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_DeltaType</tt> or
+  a subtype of <tt class="cdata">PyDateTime_DeltaType</tt>.  <var>ob</var> must not be
+  <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-753' xml:id='l2h-753' class="cfunction">PyDelta_CheckExact</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_DeltaType</tt>.
+  <var>ob</var> must not be <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-754' xml:id='l2h-754' class="cfunction">PyTZInfo_Check</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_TZInfoType</tt> or
+  a subtype of <tt class="cdata">PyDateTime_TZInfoType</tt>.  <var>ob</var> must not be
+  <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-755' xml:id='l2h-755' class="cfunction">PyTZInfo_CheckExact</tt></b>(</nobr></td><td>PyObject *<var>ob</var>)</td></tr></table></dt>
+<dd>
+  Return true if <var>ob</var> is of type <tt class="cdata">PyDateTime_TZInfoType</tt>.
+  <var>ob</var> must not be <tt class="constant">NULL</tt>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+Macros to create objects:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-756' xml:id='l2h-756' class="cfunction">PyDate_FromDate</tt></b>(</nobr></td><td>int <var>year</var>, int <var>month</var>, int <var>day</var>)</td></tr></table></dt>
+<dd>
+  Return a <code>datetime.date</code> object with the specified year, month
+  and day.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-757' xml:id='l2h-757' class="cfunction">PyDateTime_FromDateAndTime</tt></b>(</nobr></td><td>int <var>year</var>, int <var>month</var>,
+        int <var>day</var>, int <var>hour</var>, int <var>minute</var>, int <var>second</var>, int <var>usecond</var>)</td></tr></table></dt>
+<dd>
+  Return a <code>datetime.datetime</code> object with the specified year, month,
+  day, hour, minute, second and microsecond.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-758' xml:id='l2h-758' class="cfunction">PyTime_FromTime</tt></b>(</nobr></td><td>int <var>hour</var>, int <var>minute</var>,
+        int <var>second</var>, int <var>usecond</var>)</td></tr></table></dt>
+<dd>
+  Return a <code>datetime.time</code> object with the specified hour, minute,
+  second and microsecond.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-759' xml:id='l2h-759' class="cfunction">PyDelta_FromDSU</tt></b>(</nobr></td><td>int <var>days</var>, int <var>seconds</var>,
+        int <var>useconds</var>)</td></tr></table></dt>
+<dd>
+  Return a <code>datetime.timedelta</code> object representing the given number
+  of days, seconds and microseconds.  Normalization is performed so that
+  the resulting number of microseconds and seconds lie in the ranges
+  documented for <code>datetime.timedelta</code> objects.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+Macros to extract fields from date objects.  The argument must be an
+instance of <tt class="cdata">PyDateTime_Date</tt>, including subclasses (such as
+<tt class="cdata">PyDateTime_DateTime</tt>).  The argument must not be <tt class="constant">NULL</tt>, and
+the type is not checked:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-760' xml:id='l2h-760' class="cfunction">PyDateTime_GET_YEAR</tt></b>(</nobr></td><td>PyDateTime_Date *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the year, as a positive int.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-761' xml:id='l2h-761' class="cfunction">PyDateTime_GET_MONTH</tt></b>(</nobr></td><td>PyDateTime_Date *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the month, as an int from 1 through 12.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-762' xml:id='l2h-762' class="cfunction">PyDateTime_GET_DAY</tt></b>(</nobr></td><td>PyDateTime_Date *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the day, as an int from 1 through 31.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+Macros to extract fields from datetime objects.  The argument must be an
+instance of <tt class="cdata">PyDateTime_DateTime</tt>, including subclasses.
+The argument must not be <tt class="constant">NULL</tt>, and the type is not checked:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-763' xml:id='l2h-763' class="cfunction">PyDateTime_DATE_GET_HOUR</tt></b>(</nobr></td><td>PyDateTime_DateTime *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the hour, as an int from 0 through 23.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-764' xml:id='l2h-764' class="cfunction">PyDateTime_DATE_GET_MINUTE</tt></b>(</nobr></td><td>PyDateTime_DateTime *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the minute, as an int from 0 through 59.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-765' xml:id='l2h-765' class="cfunction">PyDateTime_DATE_GET_SECOND</tt></b>(</nobr></td><td>PyDateTime_DateTime *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the second, as an int from 0 through 59.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-766' xml:id='l2h-766' class="cfunction">PyDateTime_DATE_GET_MICROSECOND</tt></b>(</nobr></td><td>PyDateTime_DateTime *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the microsecond, as an int from 0 through 999999.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+Macros to extract fields from time objects.  The argument must be an
+instance of <tt class="cdata">PyDateTime_Time</tt>, including subclasses.
+The argument must not be <tt class="constant">NULL</tt>, and the type is not checked:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-767' xml:id='l2h-767' class="cfunction">PyDateTime_TIME_GET_HOUR</tt></b>(</nobr></td><td>PyDateTime_Time *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the hour, as an int from 0 through 23.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-768' xml:id='l2h-768' class="cfunction">PyDateTime_TIME_GET_MINUTE</tt></b>(</nobr></td><td>PyDateTime_Time *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the minute, as an int from 0 through 59.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-769' xml:id='l2h-769' class="cfunction">PyDateTime_TIME_GET_SECOND</tt></b>(</nobr></td><td>PyDateTime_Time *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the second, as an int from 0 through 59.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-770' xml:id='l2h-770' class="cfunction">PyDateTime_TIME_GET_MICROSECOND</tt></b>(</nobr></td><td>PyDateTime_Time *<var>o</var>)</td></tr></table></dt>
+<dd>
+  Return the microsecond, as an int from 0 through 999999.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+Macros for the convenience of modules implementing the DB API:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-771' xml:id='l2h-771' class="cfunction">PyDateTime_FromTimestamp</tt></b>(</nobr></td><td>PyObject *<var>args</var>)</td></tr></table></dt>
+<dd>
+  Create and return a new <code>datetime.datetime</code> object given an argument
+  tuple suitable for passing to <code>datetime.datetime.fromtimestamp()</code>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-772' xml:id='l2h-772' class="cfunction">PyDate_FromTimestamp</tt></b>(</nobr></td><td>PyObject *<var>args</var>)</td></tr></table></dt>
+<dd>
+  Create and return a new <code>datetime.date</code> object given an argument
+  tuple suitable for passing to <code>datetime.date.fromtimestamp()</code>.
+  
+<span class="versionnote">New in version 2.4.</span>
+
+</dd></dl>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.5.11 Generator Objects"
+  href="gen-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.5 Other Objects"
+  href="otherObjects.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="8. Initialization, Finalization, and"
+  href="initialization.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="gen-objects.html">7.5.11 Generator Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="otherObjects.html">7.5 Other Objects</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="initialization.html">8. Initialization, Finalization, and</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

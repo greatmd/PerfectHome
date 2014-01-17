@@ -1,0 +1,86 @@
+#! /bin/sh
+#
+# .local_perlmod_wrapper
+#
+
+
+die () {
+    message="$1"
+    echo "$tool -> .local_perlmod_wrapper: $message Exiting ..."
+    exit 1 
+}
+
+############################ main ##############################
+
+tool=`basename $0`
+ARGV="$*"
+TRE_ROOT=$DV_ROOT/tools/perlmod
+TRE_TOOL2TOOLSET=${TRE_TOOL2TOOLSET:=$TRE_ROOT/tool2toolset}
+
+### Get toolset (a.k.a. package) name from the "tool2toolset" file
+
+toolset=`awk '{if($1 == var)print $2}' var=$tool $TRE_TOOL2TOOLSET`
+if [ -z "$toolset" ] ; then
+    die "flow not found!" 
+else 
+    TOOLSET=`echo $toolset |tr '[a-z]' '[A-Z]'`
+fi
+
+### Version may be set either by TRE or by environment variable 
+### 'VERSION_$TOOLSET', if case TRE_ENTRY is set to '/'. 
+### Either way, the version MUST be set.
+
+eval vers=\$VERSION_$TOOLSET
+
+if [ ! -z "$vers" ] && [ "$TRE_ENTRY" = '/' ] ; then
+    version=$vers
+elif [ ! -z "$TRE_SEARCH" ] && [ ! -z "$TRE_ENTRY" ] ; then
+if [ `uname -s` = "Linux" ]; then
+    version=`$DV_ROOT/tools/Linux/x86_64/configsrch $toolset $TRE_ENTRY` || die "configsrch failed!"
+fi
+if [ `uname -s` = "SunOS" ]; then
+    version=`$DV_ROOT/tools/bin/configsrch $toolset $TRE_ENTRY` || die "configsrch failed!"
+fi
+    version=`echo $version |awk '{print $1}'`
+    eval VERSION_$TOOLSET=\$version
+    eval export VERSION_$TOOLSET
+else
+    die "TRE_SEARCH & TRE_ENTRY are not set."
+fi    
+
+###  VERSION_$TOOLSET **MUST** be set, even if TRE is not used.
+
+if [ -z "$version" ] ; then
+    die "No version set for flow '$toolset'."
+fi
+
+###  try to execute the toolset member tool 
+### (the version is passed in VERSION_$TOOLSET)
+
+# necessary for the moment
+tool=midas
+
+# For versions at or before 3.09, use DiagBuild as the toolset
+major=`echo $version | sed 's/\..*//'`
+minor=`echo $version | sed 's/^.*\.//'`
+if [ $major -le 3 ] && [ $minor -le 9 ] ; then
+  toolset='DiagBuild'
+fi
+
+version=3.32
+
+exe=$TRE_ROOT/$toolset/$version/bin/$tool
+libpath=$TRE_ROOT/$toolset/$version/lib/site_perl/5.8.0
+
+if [ -z "$PERL5LIB" ] ; then
+  PERL5LIB=$libpath
+else
+  PERL5LIB=$libpath:$PERL5LIB
+fi
+export PERL5LIB
+
+if [ -x $exe ] ; then
+    exec $exe "$@"
+else
+    die "Executable $exe not found!"
+fi

@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node350.html" />
+<link rel="prev" href="node348.html" />
+<link rel="parent" href="node345.html" />
+<link rel="next" href="node350.html" />
+<meta name='aesop' content='information' />
+<title>6.29.5.4 TimedRotatingFileHandler</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.29.5.3 RotatingFileHandler"
+  href="node348.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.29.5 Handler Objects"
+  href="node345.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.29.5.5 SocketHandler"
+  href="node350.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node348.html">6.29.5.3 RotatingFileHandler</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="node345.html">6.29.5 Handler Objects</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node350.html">6.29.5.5 SocketHandler</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION0082954000000000000000">
+6.29.5.4 TimedRotatingFileHandler</A>
+</H3>
+
+<P>
+The <tt class="class">TimedRotatingFileHandler</tt> class supports rotation of disk log files
+at certain timed intervals.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-2516' xml:id='l2h-2516' class="class">TimedRotatingFileHandler</tt></b>(</nobr></td>
+  <td><var>filename
+                                            </var><big>[</big><var>,when
+                                            </var><big>[</big><var>,interval
+                                            </var><big>[</big><var>,backupCount</var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+
+<P>
+Returns a new instance of the <tt class="class">TimedRotatingFileHandler</tt> class. The
+specified file is opened and used as the stream for logging. On rotating
+it also sets the filename suffix. Rotating happens based on the product
+of <var>when</var> and <var>interval</var>.
+
+<P>
+You can use the <var>when</var> to specify the type of <var>interval</var>. The
+list of possible values is, note that they are not case sensitive:
+
+<P>
+<div class="center"><table class="realtable">
+  <thead>
+    <tr>
+      <th class="left"  >Value</th>
+      <th class="left"  >Type of interval</th>
+      </tr>
+    </thead>
+  <tbody>
+    <tr><td class="left"   valign="baseline">S</td>
+        <td class="left"  >Seconds</td></tr>
+    <tr><td class="left"   valign="baseline">M</td>
+        <td class="left"  >Minutes</td></tr>
+    <tr><td class="left"   valign="baseline">H</td>
+        <td class="left"  >Hours</td></tr>
+    <tr><td class="left"   valign="baseline">D</td>
+        <td class="left"  >Days</td></tr>
+    <tr><td class="left"   valign="baseline">W</td>
+        <td class="left"  >Week day (0=Monday)</td></tr>
+    <tr><td class="left"   valign="baseline">midnight</td>
+        <td class="left"  >Roll over at midnight</td></tr></tbody>
+</table></div>
+
+<P>
+If <var>backupCount</var> is non-zero, the system will save old log files by
+appending the extensions ".1", ".2" etc., to the filename. For example,
+with a <var>backupCount</var> of 5 and a base file name of <span class="file">app.log</span>,
+you would get <span class="file">app.log</span>, <span class="file">app.log.1</span>, <span class="file">app.log.2</span>, up to
+<span class="file">app.log.5</span>. The file being written to is always <span class="file">app.log</span>.
+When this file is filled, it is closed and renamed to <span class="file">app.log.1</span>,
+and if files <span class="file">app.log.1</span>, <span class="file">app.log.2</span>, etc. exist, then they
+are renamed to <span class="file">app.log.2</span>, <span class="file">app.log.3</span> etc. respectively.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2517' xml:id='l2h-2517' class="method">doRollover</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Does a rollover, as described above.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2518' xml:id='l2h-2518' class="method">emit</tt></b>(</nobr></td>
+  <td><var>record</var>)</td></tr></table></dt>
+<dd>
+Outputs the record to the file, catering for rollover as described
+above.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.29.5.3 RotatingFileHandler"
+  href="node348.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.29.5 Handler Objects"
+  href="node345.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.29.5.5 SocketHandler"
+  href="node350.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node348.html">6.29.5.3 RotatingFileHandler</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="node345.html">6.29.5 Handler Objects</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node350.html">6.29.5.5 SocketHandler</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

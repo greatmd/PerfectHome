@@ -1,0 +1,348 @@
+/rsgs/scratch0/linhai88/OST2/OST2.model/cmp1/rel-0.1/config.v
++define+OPENSPARC_CMP+
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/+
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../common/verilog/checkers+
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../common/verilog/misc+
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../common/coverage+
++libext+.v+
+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/cmp_top.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/verif_args.v
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/analog/n2_esd_core_cust_l/n2_esd_core_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/analog/n2_pcmb_cust_l/n2_pcmb_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/analog/n2_pcma_cust_l/n2_pcma_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/analog/n2_tmpd_cust_l/n2_tmpd_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/analog/n2_rng_cust_l/n2_rng_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/analog/n2_revid_cust_l/n2_revid_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/clk/n2_clk_gl_cust_l/n2_clk_gl_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/clk/n2_clk_pgrid_cust_l/n2_clk_spc_cmp_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/mp/n2_frf_mp_256x78_cust_l/n2_frf_mp_256x78_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/tisram/core/n2_icd_sp_16p5kb_cust_l/n2_icd_sp_16p5kb_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/tisram/core/n2_ict_sp_1920b_cust_l/n2_ict_sp_1920b_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/dp/n2_dva_dp_32x32_cust_l/n2_dva_dp_32x32_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/tlbs/n2_tlb_tl_64x59_cust_l/n2_tlb_tl_64x59_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/mp/n2_irf_mp_128x72_cust_l/n2_irf_mp_128x72_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/compiler/physical/n2_com_dp_32x152_cust_l/n2_com_dp_32x152_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/compiler/physical/n2_com_dp_32x72_cust_l/n2_com_dp_32x72_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/tisram/core/n2_dca_sp_9kb_cust_l/n2_dca_sp_9kb_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/tisram/core/n2_dta_sp_1920b_cust_l/n2_dta_sp_1920b_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/tlbs/n2_tlb_tl_128x59_cust_l/n2_tlb_tl_128x59_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/cams/n2_stb_cm_64x45_cust_l/n2_stb_cm_64x45_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/dp/n2_arf_dp_16x128_cust_l/n2_arf_dp_16x128_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/compiler/physical/n2_com_dp_64x84_cust_l/n2_com_dp_64x84_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/mp/n2_mam_mp_160x66_cust_l/n2_mam_mp_160x66_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/mp/n2_rrf_mp_64x32_cust_l/n2_rrf_mp_64x32_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/compiler/physical/n2_com_dp_32x84_cust_l/n2_com_dp_32x84_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/clk/n2_clk_pgrid_cust_l/n2_clk_ccx_cmp_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/clk/n2_flop_bank_cust_l/n2_flop_bank_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/tisram/soc/n2_l2t_sp_28kb_cust_l/n2_l2t_sp_28kb_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/dp/n2_l2t_dp_32x128_cust_l/n2_l2t_dp_32x128_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/cams/n2_com_cm_32x40_cust_l/n2_com_cm_32x40_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/cams/n2_com_cm_8x40_cust_l/n2_com_cm_8x40_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/dp/n2_l2t_dp_16x160_cust_l/n2_l2t_dp_16x160_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/dp/n2_l2t_dp_32x160_cust_l/n2_l2t_dp_32x160_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/n2sram/cams/n2_com_cm_64x64_cust_l/n2_com_cm_64x64_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/clk/n2_clk_pgrid_cust_l/n2_clk_l2t_cmp_cust/rtl
+-y /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/clk/n2_clk_pgrid_cust_l/n2_clk_l2b_cmp_cust/rtl
+-v /scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/analog/n2_core_pll_cust_l/n2_core_pll_cust/rtl/n2_core_pll_cust.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../common/verilog/misc/l2_scrub.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../design/sys/iop/cpu/rtl/cpu.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../libs/tisram/soc/n2_l2d_sp_512kb_cust_l/n2_l2d_sp_512kb_cust/rtl/n2_l2d_sp_512kb_cust.v
+/scratch0/linhai88/OST2/OST2.design/libs/clk/rtl/clkgen_spc_cmp.v
+/scratch0/linhai88/OST2/OST2.design/libs/clk/rtl/clkgen_ccx_cmp.v
+/scratch0/linhai88/OST2/OST2.design/libs/clk/rtl/clkgen_l2t_cmp.v
+/scratch0/linhai88/OST2/OST2.design/libs/clk/rtl/clkgen_l2b_cmp.v
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/cmp/../../../design/sys/iop/cpu/rtl+
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2b/rtl/l2b.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2b/rtl/l2b_ecc39_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2b/rtl/l2b_evict_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2b/rtl/l2b_fillbf_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2b/rtl/l2b_l2defu_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2b/rtl/l2b_mb0_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2b/rtl/l2b_rdmard_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2b/rtl/l2b_siu_dp.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_arb_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_arbadr_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_arbdat_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_arbdec_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_csr_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_csreg_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_decc_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_deccck_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_dir_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_dirbuf_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_dirout_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_dirrep_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_dirtop_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_dirvec_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_dmo_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_dmorpt_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_ecc24b_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_ecc30b_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_ecc39_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_ecc39a_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_evctag_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_ffrpt_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_filbuf_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_iqu_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_ique_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_l2drpt_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_mb0_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_mb2_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_mbist_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_misbuf_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_mrep4x6_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_mrep8x16_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_mrep16x8_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_mrep2x64_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_mrep32x3_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_oqu_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_oque_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_pgen32b_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_rdmarpt_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_rdmat_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_rep_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_shdwscn_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_snp_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_snpd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_tag_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_tagd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_tagdp_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_taghdr_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_tagl_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_usaloc_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_vlddir_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_vuad_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_vuadcl_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_vuadio_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_vuadpm_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_wbuf_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/l2t/rtl/l2t_wbufrpt_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx_arb.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx_arc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx_ard_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx_l1clkhdr_ctl_macro.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx_new_macro.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx_rep.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx_srq_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx_trep.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/ccx_tstg.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_bfd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_bfg_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_dpa.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_dpsa.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_dpsb.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_dpsc.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_dpsd.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_dpse.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_dpsf.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_dpsg.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_mal_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_mar_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_mbl_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_mbr_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_mcl_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_mcr_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_ob1_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_ob2_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/cpx_rep_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/inv_diode_macro.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_bfd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_bfg_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_dpa.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_dpsa.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_dpsb.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_dpsc.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_dpsd.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_dpse.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_dpsf.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_dpsg.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_dpsh.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_mal_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_mar_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_mbl_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_mbr_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_mcl_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_mcr_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_ob1_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/ccx/rtl/pcx_rep_dp.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/rtl/spc.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/rtl/dmo_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/rtl/spc_lb_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/rtl/spc_mb0_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/rtl/spc_mb1_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/rtl/spc_mb2_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/rtl/spc_msf0_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/rtl/spc_msf1_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/rtl/spc_rep1_dp.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/dec/rtl/dec.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/dec/rtl/dec_dcd_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/dec/rtl/dec_ded_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/dec/rtl/dec_del_ctl.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/exu/rtl/exu.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/exu/rtl/exu_ecc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/exu/rtl/exu_ect_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/exu/rtl/exu_edp_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/exu/rtl/exu_mdp_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/exu/rtl/exu_rml_ctl.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fac_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fad_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fdc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fdd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fec_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fgd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fic_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fpc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fpe_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fpf_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_fpy_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/fgu/rtl/fgu_rep_dp.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/gkt/rtl/gkt.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/gkt/rtl/gkt_ipc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/gkt/rtl/gkt_ipd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/gkt/rtl/gkt_leg_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/gkt/rtl/gkt_pqm_ctl.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_cmu.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_cmu_cmt_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_cmu_csm_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_cmu_lsi_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_cmu_lsi_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_cmu_msb_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_cmu_msb_dp.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_agc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_agd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_asi_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_byp_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_cms_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_ctx_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_err_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_ftp_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_itc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_itd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_red_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_tfc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ftu_tsm_ctl.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ibu.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ibu_ibf_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/ifu/rtl/ifu_ibu_ibq_ctl.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_adc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_arc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_ard_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_asc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_asd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_cic_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_cid_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_dac_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_dcc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_dcd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_dcp_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_dcs_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_lmc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_lmd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_lru8_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_pic_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_pid_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_red_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_rep_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_sbc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_sbd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_sbs_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_sec_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_sed_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_spd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_tgc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_tgd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_tlc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/lsu/rtl/lsu_tld_dp.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_asd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_ase_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_asi_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_eem_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_htc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_htd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_mbd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_mec_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_mel_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_mem_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_sed_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_seg_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_sel_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_tmc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_trc_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_trs_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/mmu/rtl/mmu_tsm_ctl.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/pku/rtl/pku.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/pku/rtl/pku_pck_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/pku/rtl/pku_pkd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/pku/rtl/pku_swl_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/pmu/rtl/pmu.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/pmu/rtl/pmu_pct_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/pmu/rtl/pmu_pdp_dp.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/spu/rtl/spu.v
+/scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_asi_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_cel_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_cep_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_cer_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_cth_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_cxi_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_dfd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_ecd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_ecg_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_eem_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_fls_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_mbd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_npc_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_pct_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_ras_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_ssd_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_sse_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_tel_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_tic_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_trl_ctl.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_tsb_dp.v
+-v /scratch0/linhai88/OST2/OST2.design/design/sys/iop/spc/tlu/rtl/tlu_tsd_dp.v
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/reg_slam/+
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/reg_slam/reg_slam.v
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/err_sync/+
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/err_sync/err_sync.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/err_sync/err.v
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/ldst_sync/+
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/ldst_sync/ldst_sync.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/ldst_sync/ldst_l2.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/ldst_sync/ldst_lsu.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/ldst_sync/ldst_ncu.v
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/int_sync/+
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/int_sync/int_sync.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/int_sync/int.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/int_sync/core_sync.v
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/tlb_sync/+
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/tlb_sync/tlb_sync.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/tlb_sync/dtlb_wr.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/tlb_sync/itlb_wr.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/tlb_sync/tlb_fifo.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/tlb_sync/dtlb_rd.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/tlb_sync/itlb_rd.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/tlb_sync/tlb_misc.v
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/nas_car/+
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/nas_car/nas_probes.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/nas_car/nas_top.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/nas_car/nas_pipe.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/nas_car/nas_core.v
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/misc/+
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/misc/../../vera/include+
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/misc/fifo.v
++incdir+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/monitors/+
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/monitors/monitors.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/monitors/lru_mon.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/monitors/lsu_mon.v
+/scratch0/linhai88/OST2/OST2.design/verif/env/common/verilog/monitors/global_chkr.v
+/rsgs/scratch0/linhai88/OST2/OST2.model/cmp1/rel-0.1/cmp1_top_shell.v

@@ -1,0 +1,467 @@
+
+MC2 : Memory Compiler Software, 2013/09/17, 17:42:29
+MC2 : Compiled on Jul 22 2011 at 13:54:23
+MC2 : Compiled on Linux 2.4.21-47.EL x86_64 x86_64 (64 bits)
+MC2 : Running on Linux 2.6.18-194.17.1.el5_lustre.1.8.5 x86_64
+MC2 : Version 2011.06.06 (c) Interra Systems Inc.
+
+
+INFO  (MC, 604): Reading file 'ts6n28hpma256x64m4f.cfg' ... 
+INFO  (MC, 606): Parsed configuration file 'ts6n28hpma256x64m4f.cfg' successfully. 
+INFO  (MC, 801): The compiler was built using MC2 Version 2011.06.06 
+INFO  (MC, 606): Parsed global file from the archive successfully. 
+INFO  (MC, 606): Global and configuration files analyzed successfully. 
+WARN  (MC, 402): License not available for MC2-tsn28hpm2prf-CPV. 
+INFO  (MC, 606): Netlister disabled because MC2-tsn28hpm2prf-CPV license is not present. 
+        
+INFO  (MC, 802): Overwriting PVT with default values. 
+INFO  (MC, 802): Set voltage for slow with default value. 
+INFO  (MC, 802): Set voltage for typical with default value. 
+INFO  (MC, 802): Set voltage for fast with default value. 
+INFO  (MC, 802): Set voltage for custom corner 1 with default value. 
+INFO  (MC, 802): Set voltage for custom corner 2 with default value. 
+INFO  (MC, 802): Set voltage for custom corner 3 with default value. 
+INFO  (MC, 802): Set voltage for custom corner 4 with default value. 
+INFO  (MC, 802): Set voltage for custom corner 5 with default value. 
+INFO  (MC, 802): Set voltage for custom corner 6 with default value. 
+INFO  (MC, 802): Set voltage for custom corner 7 with default value. 
+INFO  (MC, 802): Set voltage for custom corner 8 with default value. 
+INFO  (MC, 802): Set temperature for slow with default value. 
+INFO  (MC, 802): Set temperature for typical with default value. 
+INFO  (MC, 802): Set temperature for fast with default value. 
+INFO  (MC, 802): Set temperature for custom corner 1 with default value. 
+INFO  (MC, 802): Set temperature for custom corner 2 with default value. 
+INFO  (MC, 802): Set temperature for custom corner 3 with default value. 
+INFO  (MC, 802): Set temperature for custom corner 4 with default value. 
+INFO  (MC, 802): Set temperature for custom corner 5 with default value. 
+INFO  (MC, 802): Set temperature for custom corner 6 with default value. 
+INFO  (MC, 802): Set temperature for custom corner 7 with default value. 
+INFO  (MC, 802): Set temperature for custom corner 8 with default value. 
+INFO  (MC, 802): Set process for custom corner 1 with default value. 
+INFO  (MC, 802): Set process for custom corner 2 with default value. 
+INFO  (MC, 802): Set process for custom corner 3 with default value. 
+INFO  (MC, 802): Set process for custom corner 4 with default value. 
+INFO  (MC, 802): Set process for custom corner 5 with default value. 
+INFO  (MC, 802): Set process for custom corner 6 with default value. 
+INFO  (MC, 802): Set process for custom corner 7 with default value. 
+INFO  (MC, 802): Set process for custom corner 8 with default value. 
+INFO  (MC, 606): Reading placement file from archive ... 
+WARN  (MC, 402): Geometric block contains export statements. 
+INFO  (MC, 606): Placement file analyzed successfully. 
+INFO  (MC, 800): Created directory 'ts6n28hpma256x64m4f_110c' 
+INFO  (MC, 800): Created directory 'ts6n28hpma256x64m4f_110c/LOG' 
+INFO  (MC, 801): Running spice delay calculator for slow process. 
+INFO  (MC, 801): Running spice delay calculator for typical process. 
+INFO  (MC, 801): Running spice delay calculator for fast process. 
+INFO  (MC, 801): Tiling ... 
+    ProgramData
+    {
+        0, 2865, 0;
+        DI_PIN
+    };
+    ProgramData
+    {
+        0, 4025, 0;
+        DO_PIN
+    };
+    ProgramData
+    {
+        0, 3310, 375;
+        DM_TIEL
+    };
+    ProgramData
+    {
+        0, 2610, 375;
+        BWEB_TIEL
+    };
+    ProgramData
+    {
+        0, 280, 375;
+        BWEBM_TIEL
+    };
+    ProgramData
+    {
+        0, 7655, 0;
+        RCT<0>_PIN
+    };
+    ProgramData
+    {
+        0, 7345, 0;
+        RCT<1>_PIN
+    };
+    ProgramData
+    {
+        0, 23460, 0;
+        WCT<0>_PIN
+    };
+    ProgramData
+    {
+        0, 23770, 0;
+        WCT<1>_PIN
+    };
+    ProgramData
+    {
+        0, 11485, 0;
+        KP<0>_PIN
+    };
+    ProgramData
+    {
+        0, 13860, 0;
+        KP<1>_PIN
+    };
+    ProgramData
+    {
+        0, 13240, 0;
+        KP<2>_PIN
+    };
+    ProgramData
+    {
+        0, 12105, 0;
+        REB_PIN
+    };
+    ProgramData
+    {
+        0, 19760, 0;
+        WEB_PIN
+    };
+    ProgramData
+    {
+        0, 14170, 0;
+        CLKR_PIN
+    };
+    ProgramData
+    {
+        0, 18160, 0;
+        CLKW_PIN
+    };
+    ProgramData
+    {
+        0, 22810, 0;
+        AA<0>_PIN
+    };
+    ProgramData
+    {
+        0, 9055, 0;
+        AB<0>_PIN
+    };
+    ProgramData
+    {
+        0, 22500, 0;
+        AA<1>_PIN
+    };
+    ProgramData
+    {
+        0, 9365, 0;
+        AB<1>_PIN
+    };
+    ProgramData
+    {
+        0, 25140, 0;
+        AA<2>_PIN
+    };
+    ProgramData
+    {
+        0, 6725, 0;
+        AB<2>_PIN
+    };
+    ProgramData
+    {
+        0, 29340, 0;
+        AA<3>_PIN
+    };
+    ProgramData
+    {
+        0, 2525, 0;
+        AB<3>_PIN
+    };
+    ProgramData
+    {
+        0, 26390, 0;
+        AA<4>_PIN
+    };
+    ProgramData
+    {
+        0, 5475, 0;
+        AB<4>_PIN
+    };
+    ProgramData
+    {
+        0, 29030, 0;
+        AA<5>_PIN
+    };
+    ProgramData
+    {
+        0, 2835, 0;
+        AB<5>_PIN
+    };
+    ProgramData
+    {
+        0, 25450, 0;
+        AA<7>_PIN
+    };
+    ProgramData
+    {
+        0, 6415, 0;
+        AB<7>_PIN
+    };
+    ProgramData
+    {
+        0, 21560, 0;
+        AA<8>_PIN
+    };
+    ProgramData
+    {
+        0, 10305, 0;
+        AB<8>_PIN
+    };
+    ProgramData
+    {
+        0, 12935, 375;
+        DSLP_TIEL
+    };
+    ProgramData
+    {
+        0, 18475, 375;
+        SLP_TIEL
+    };
+    ProgramData
+    {
+        0, 11800, 375;
+        SD_TIEL
+    };
+    ProgramData
+    {
+        0, 13555, 375;
+        BIST_TIEL
+    };
+    ProgramData
+    {
+        0, 12775, 375;
+        REBM_TIEL
+    };
+    ProgramData
+    {
+        0, 19190, 375;
+        WEBM_TIEL
+    };
+    ProgramData
+    {
+        0, 18785, 375;
+        TM_TIEL
+    };
+    ProgramData
+    {
+        0, 22940, 375;
+        AMA<0>_TIEL
+    };
+    ProgramData
+    {
+        0, 9025, 375;
+        AMB<0>_TIEL
+    };
+    ProgramData
+    {
+        0, 22190, 375;
+        AMA<1>_TIEL
+    };
+    ProgramData
+    {
+        0, 9775, 375;
+        AMB<1>_TIEL
+    };
+    ProgramData
+    {
+        0, 25110, 375;
+        AMA<2>_TIEL
+    };
+    ProgramData
+    {
+        0, 6855, 375;
+        AMB<2>_TIEL
+    };
+    ProgramData
+    {
+        0, 29750, 375;
+        AMA<3>_TIEL
+    };
+    ProgramData
+    {
+        0, 2215, 375;
+        AMB<3>_TIEL
+    };
+    ProgramData
+    {
+        0, 26080, 375;
+        AMA<4>_TIEL
+    };
+    ProgramData
+    {
+        0, 5885, 375;
+        AMB<4>_TIEL
+    };
+    ProgramData
+    {
+        0, 29000, 375;
+        AMA<5>_TIEL
+    };
+    ProgramData
+    {
+        0, 2965, 375;
+        AMB<5>_TIEL
+    };
+    ProgramData
+    {
+        0, 26700, 375;
+        AA<6>_TIEL
+    };
+    ProgramData
+    {
+        0, 5265, 375;
+        AB<6>_TIEL
+    };
+    ProgramData
+    {
+        0, 26830, 375;
+        AMA<6>_TIEL
+    };
+    ProgramData
+    {
+        0, 5135, 375;
+        AMB<6>_TIEL
+    };
+    ProgramData
+    {
+        0, 25860, 375;
+        AMA<7>_TIEL
+    };
+    ProgramData
+    {
+        0, 6105, 375;
+        AMB<7>_TIEL
+    };
+    ProgramData
+    {
+        0, 21970, 375;
+        AMA<8>_TIEL
+    };
+    ProgramData
+    {
+        0, 9995, 375;
+        AMB<8>_TIEL
+    };
+    ProgramData
+    {
+        0, 21350, 375;
+        AA<9>_TIEL
+    };
+    ProgramData
+    {
+        0, 10615, 375;
+        AB<9>_TIEL
+    };
+    ProgramData
+    {
+        0, 21220, 375;
+        AMA<9>_TIEL
+    };
+    ProgramData
+    {
+        0, 10745, 375;
+        AMB<9>_TIEL
+    };
+INFO  (MC, 800): Created directory 'ts6n28hpma256x64m4f_110c/LEF' 
+INFO  (MC, 800): Writing abstract cell in LEF ... 
+INFO  (MC, 801): IP tagging TOP... 
+INFO  (MC, 801): Running spice delay calculator for slow process custom corner 1. 
+INFO  (MC, 801): Running spice delay calculator for slow process custom corner 2. 
+INFO  (MC, 801): Running spice delay calculator for slow process custom corner 3. 
+INFO  (MC, 801): Running spice delay calculator for typical process custom corner 4. 
+INFO  (MC, 801): Running spice delay calculator for typical process custom corner 5. 
+INFO  (MC, 801): Running spice delay calculator for fast process custom corner 6. 
+INFO  (MC, 801): Running spice delay calculator for fast process custom corner 7. 
+INFO  (MC, 801): Running spice delay calculator for fast process custom corner 8. 
+INFO  (MC, 800): Expanding Text Datasheet template from archive to 'ts6n28hpma256x64m4f_110c/DATASHEET/ts6n28hpma256x64m4f_110c_ss0p81vm40c.ds'
+        ... 
+INFO  (MC, 800): Created directory 'ts6n28hpma256x64m4f_110c/DATASHEET' 
+INFO  (MC, 800): Expanding Text Datasheet template from archive to 'ts6n28hpma256x64m4f_110c/DATASHEET/ts6n28hpma256x64m4f_110c_ss0p81v125c.ds'
+        ... 
+INFO  (MC, 800): Expanding Text Datasheet template from archive to 'ts6n28hpma256x64m4f_110c/DATASHEET/ts6n28hpma256x64m4f_110c_ss0p81v0c.ds'
+        ... 
+INFO  (MC, 800): Expanding Text Datasheet template from archive to 'ts6n28hpma256x64m4f_110c/DATASHEET/ts6n28hpma256x64m4f_110c_tt0p9v25c.ds'
+        ... 
+INFO  (MC, 800): Expanding Text Datasheet template from archive to 'ts6n28hpma256x64m4f_110c/DATASHEET/ts6n28hpma256x64m4f_110c_tt0p9v85c.ds'
+        ... 
+INFO  (MC, 800): Expanding Text Datasheet template from archive to 'ts6n28hpma256x64m4f_110c/DATASHEET/ts6n28hpma256x64m4f_110c_ff0p99v125c.ds'
+        ... 
+INFO  (MC, 800): Expanding Text Datasheet template from archive to 'ts6n28hpma256x64m4f_110c/DATASHEET/ts6n28hpma256x64m4f_110c_ff0p99vm40c.ds'
+        ... 
+INFO  (MC, 800): Expanding Text Datasheet template from archive to 'ts6n28hpma256x64m4f_110c/DATASHEET/ts6n28hpma256x64m4f_110c_ff0p99v0c.ds'
+        ... 
+INFO  (MC, 800): Expanding NLDM template from archive to 
+        'ts6n28hpma256x64m4f_110c/NLDM/ts6n28hpma256x64m4f_110c_ss0p81vm40c.lib' 
+        ... 
+INFO  (MC, 800): Created directory 'ts6n28hpma256x64m4f_110c/NLDM' 
+INFO  (MC, 800): Expanding NLDM template from archive to 
+        'ts6n28hpma256x64m4f_110c/NLDM/ts6n28hpma256x64m4f_110c_ss0p81v125c.lib' 
+        ... 
+INFO  (MC, 800): Expanding NLDM template from archive to 
+        'ts6n28hpma256x64m4f_110c/NLDM/ts6n28hpma256x64m4f_110c_ss0p81v0c.lib' 
+        ... 
+INFO  (MC, 800): Expanding NLDM template from archive to 
+        'ts6n28hpma256x64m4f_110c/NLDM/ts6n28hpma256x64m4f_110c_tt0p9v25c.lib' 
+        ... 
+INFO  (MC, 800): Expanding NLDM template from archive to 
+        'ts6n28hpma256x64m4f_110c/NLDM/ts6n28hpma256x64m4f_110c_tt0p9v85c.lib' 
+        ... 
+INFO  (MC, 800): Expanding NLDM template from archive to 
+        'ts6n28hpma256x64m4f_110c/NLDM/ts6n28hpma256x64m4f_110c_ff0p99v125c.lib' 
+        ... 
+INFO  (MC, 800): Expanding NLDM template from archive to 
+        'ts6n28hpma256x64m4f_110c/NLDM/ts6n28hpma256x64m4f_110c_ff0p99vm40c.lib' 
+        ... 
+INFO  (MC, 800): Expanding NLDM template from archive to 
+        'ts6n28hpma256x64m4f_110c/NLDM/ts6n28hpma256x64m4f_110c_ff0p99v0c.lib' 
+        ... 
+INFO  (MC, 800): Expanding Verilog template from archive to 'ts6n28hpma256x64m4f_110c/VERILOG/ts6n28hpma256x64m4f_110c_ss0p81vm40c.v'
+        ... 
+INFO  (MC, 800): Created directory 'ts6n28hpma256x64m4f_110c/VERILOG' 
+INFO  (MC, 800): Expanding Verilog template from archive to 'ts6n28hpma256x64m4f_110c/VERILOG/ts6n28hpma256x64m4f_110c_ss0p81v125c.v'
+        ... 
+INFO  (MC, 800): Expanding Verilog template from archive to 
+        'ts6n28hpma256x64m4f_110c/VERILOG/ts6n28hpma256x64m4f_110c_ss0p81v0c.v' 
+        ... 
+INFO  (MC, 800): Expanding Verilog template from archive to 
+        'ts6n28hpma256x64m4f_110c/VERILOG/ts6n28hpma256x64m4f_110c_tt0p9v25c.v' 
+        ... 
+INFO  (MC, 800): Expanding Verilog template from archive to 
+        'ts6n28hpma256x64m4f_110c/VERILOG/ts6n28hpma256x64m4f_110c_tt0p9v85c.v' 
+        ... 
+INFO  (MC, 800): Expanding Verilog template from archive to 'ts6n28hpma256x64m4f_110c/VERILOG/ts6n28hpma256x64m4f_110c_ff0p99v125c.v'
+        ... 
+INFO  (MC, 800): Expanding Verilog template from archive to 'ts6n28hpma256x64m4f_110c/VERILOG/ts6n28hpma256x64m4f_110c_ff0p99vm40c.v'
+        ... 
+INFO  (MC, 800): Expanding Verilog template from archive to 
+        'ts6n28hpma256x64m4f_110c/VERILOG/ts6n28hpma256x64m4f_110c_ff0p99v0c.v' 
+        ... 
+INFO  (MC, 800): Expanding LEF template from archive to 
+        'ts6n28hpma256x64m4f_110c/LEF/ts6n28hpma256x64m4f_110c.alef' ... 
+INFO  (MC, 800): Expanding LVS HCELL template from archive to 
+        'ts6n28hpma256x64m4f_110c/SPICE/ts6n28hpma256x64m4f_110c.hcell' ... 
+INFO  (MC, 800): Created directory 'ts6n28hpma256x64m4f_110c/SPICE' 
+INFO  (MC, 800): Expanding TetraMax ATPG Scan model template from archive to 
+        'ts6n28hpma256x64m4f_110c/DFT/ATPG/ts6n28hpma256x64m4f_110c_tmax.v' ... 
+        
+INFO  (MC, 800): Created directory 'ts6n28hpma256x64m4f_110c/DFT/ATPG' 
+INFO  (MC, 800): Expanding FastScan ATPG Scan model template from archive to 
+        'ts6n28hpma256x64m4f_110c/DFT/ATPG/ts6n28hpma256x64m4f_110c_fscan.lib' 
+        ... 
+INFO  (MC, 800): Expanding LogicVision MBist Model template from archive to 
+        'ts6n28hpma256x64m4f_110c/DFT/MBIST/ts6n28hpma256x64m4f_110c_logicv.lib' 
+        ... 
+INFO  (MC, 800): Created directory 'ts6n28hpma256x64m4f_110c/DFT/MBIST' 
+INFO  (MC, 800): Expanding Synopsys for FFG Leakage template from archive to 'ts6n28hpma256x64m4f_110c/NLDM/ts6n28hpma256x64m4f_110c_ffg0p99v125c.lib'
+        ... 
+INFO  (MC, 800): Writing file 'lastrun.cfg' ... 
+INFO  (MC, 701): Number of errors : 0, Number of warnings : 0 
+INFO  (MC, 701): Normal Termination. 
+INFO  (MC, 701): See the log file for details. 

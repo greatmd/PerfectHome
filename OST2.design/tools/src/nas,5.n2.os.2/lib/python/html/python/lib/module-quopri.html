@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-uu.html" />
+<link rel="prev" href="module-binhex.html" />
+<link rel="parent" href="netdata.html" />
+<link rel="next" href="module-uu.html" />
+<meta name='aesop' content='information' />
+<title>12.15 quopri -- Encode and decode MIME quoted-printable data</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.14.1 Notes"
+  href="binhex-notes.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12. Internet Data Handling"
+  href="netdata.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.16 uu  "
+  href="module-uu.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="binhex-notes.html">12.14.1 Notes</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="netdata.html">12. Internet Data Handling</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-uu.html">12.16 uu  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00141500000000000000000">
+12.15 <tt class="module">quopri</tt> --
+         Encode and decode MIME quoted-printable data</A>
+</H1>
+
+<P>
+<A NAME="module-quopri"></A>
+
+<P>
+This module performs quoted-printable transport encoding and decoding,
+as defined in <a class="rfc" id='rfcref-91270' xml:id='rfcref-91270'
+href="http://www.faqs.org/rfcs/rfc1521.html">RFC 1521</a>: ``MIME (Multipurpose Internet Mail
+Extensions) Part One: Mechanisms for Specifying and Describing the
+Format of Internet Message Bodies''.  The quoted-printable encoding is
+designed for data where there are relatively few nonprintable
+characters; the base64 encoding scheme available via the
+<tt class="module"><a href="module-base64.html">base64</a></tt> module is more compact if there are many such
+characters, as when sending a graphics file.
+<a id='l2h-4150' xml:id='l2h-4150'></a><a id='l2h-4155' xml:id='l2h-4155'></a>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4151' xml:id='l2h-4151' class="function">decode</tt></b>(</nobr></td>
+  <td><var>input, output</var><big>[</big><var>,header</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Decode the contents of the <var>input</var> file and write the resulting
+decoded binary data to the <var>output</var> file.
+<var>input</var> and <var>output</var> must either be file objects or objects that
+mimic the file object interface. <var>input</var> will be read until
+<code><var>input</var>.readline()</code> returns an empty string.
+If the optional argument <var>header</var> is present and true, underscore
+will be decoded as space. This is used to decode
+``Q''-encoded headers as described in <a class="rfc" id='rfcref-91273' xml:id='rfcref-91273'
+href="http://www.faqs.org/rfcs/rfc1522.html">RFC 1522</a>: ``MIME (Multipurpose Internet Mail Extensions)
+Part Two: Message Header Extensions for Non-ASCII Text''.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4152' xml:id='l2h-4152' class="function">encode</tt></b>(</nobr></td>
+  <td><var>input, output, quotetabs</var>)</td></tr></table></dt>
+<dd>
+Encode the contents of the <var>input</var> file and write the resulting
+quoted-printable data to the <var>output</var> file.
+<var>input</var> and <var>output</var> must either be file objects or objects that
+mimic the file object interface. <var>input</var> will be read until
+<code><var>input</var>.readline()</code> returns an empty string.
+<var>quotetabs</var> is a flag which controls whether to encode embedded
+spaces and tabs; when true it encodes such embedded whitespace, and
+when false it leaves them unencoded.  Note that spaces and tabs
+appearing at the end of lines are always encoded, as per <a class="rfc" id='rfcref-91275' xml:id='rfcref-91275'
+href="http://www.faqs.org/rfcs/rfc1521.html">RFC 1521</a>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4153' xml:id='l2h-4153' class="function">decodestring</tt></b>(</nobr></td>
+  <td><var>s</var><big>[</big><var>,header</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Like <tt class="function">decode()</tt>, except that it accepts a source string and
+returns the corresponding decoded string.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4154' xml:id='l2h-4154' class="function">encodestring</tt></b>(</nobr></td>
+  <td><var>s</var><big>[</big><var>, quotetabs</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Like <tt class="function">encode()</tt>, except that it accepts a source string and
+returns the corresponding encoded string.  <var>quotetabs</var> is optional
+(defaulting to 0), and is passed straight through to
+<tt class="function">encode()</tt>.
+</dl>
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-mimify.html">mimify</a></tt>:</b>
+    <dd>General utilities for processing of MIME messages.
+  </dl>
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-base64.html">base64</a></tt>:</b>
+    <dd>Encode and decode MIME base64 data.
+  </dl>
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.14.1 Notes"
+  href="binhex-notes.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12. Internet Data Handling"
+  href="netdata.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.16 uu  "
+  href="module-uu.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="binhex-notes.html">12.14.1 Notes</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="netdata.html">12. Internet Data Handling</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-uu.html">12.16 uu  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

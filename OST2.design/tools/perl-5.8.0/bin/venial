@@ -1,0 +1,12 @@
+#!/import/bw/tools/local/perl-5.8.0/bin/perl -w
+
+eval 'exec /import/bw/tools/local/perl-5.8.0/bin/perl -w -S $0 ${1+"$@"}'
+    if 0; # not running under some shell
+
+use strict;
+use warnings;
+use lib '.';
+
+use ScanTest 'LibraryFlow';
+
+&ScanTest::LibraryFlow::LibraryFlow;

@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="doctest-options.html" />
+<link rel="parent" href="doctest-how-it-works.html" />
+<link rel="next" href="doctest-basic-api.html" />
+<meta name='aesop' content='information' />
+<title>5.2.3.6 Warnings</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.2.3.5 Option Flags and"
+  href="doctest-options.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.2.3 How It Works"
+  href="doctest-how-it-works.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.2.4 Basic API"
+  href="doctest-basic-api.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="doctest-options.html">5.2.3.5 Option Flags and</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="doctest-how-it-works.html">5.2.3 How It Works</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="doctest-basic-api.html">5.2.4 Basic API</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION007236000000000000000"></A><A NAME="doctest-warnings"></A>
+<BR>
+5.2.3.6 Warnings
+</H3>
+
+<P>
+<tt class="module"><a href="module-doctest.html">doctest</a></tt> is serious about requiring exact matches in expected
+output.  If even a single character doesn't match, the test fails.  This
+will probably surprise you a few times, as you learn exactly what Python
+does and doesn't guarantee about output.  For example, when printing a
+dict, Python doesn't guarantee that the key-value pairs will be printed
+in any particular order, so a test like
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; foo()
+{"Hermione": "hippogryph", "Harry": "broomstick"}
+</pre></div>
+
+<P>
+is vulnerable!  One workaround is to do
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; foo() == {"Hermione": "hippogryph", "Harry": "broomstick"}
+True
+</pre></div>
+
+<P>
+instead.  Another is to do
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; d = foo().items()
+&gt;&gt;&gt; d.sort()
+&gt;&gt;&gt; d
+[('Harry', 'broomstick'), ('Hermione', 'hippogryph')]
+</pre></div>
+
+<P>
+There are others, but you get the idea.
+
+<P>
+Another bad idea is to print things that embed an object address, like
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; id(1.0) # certain to fail some of the time
+7948648
+&gt;&gt;&gt; class C: pass
+&gt;&gt;&gt; C()   # the default repr() for instances embeds an address
+&lt;__main__.C instance at 0x00AC18F0&gt;
+</pre></div>
+
+<P>
+The <tt class="constant">ELLIPSIS</tt> directive gives a nice approach for the last
+example:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; C() #doctest: +ELLIPSIS
+&lt;__main__.C instance at 0x...&gt;
+</pre></div>
+
+<P>
+Floating-point numbers are also subject to small output variations across
+platforms, because Python defers to the platform C library for float
+formatting, and C libraries vary widely in quality here.
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; 1./7  # risky
+0.14285714285714285
+&gt;&gt;&gt; print 1./7 # safer
+0.142857142857
+&gt;&gt;&gt; print round(1./7, 6) # much safer
+0.142857
+</pre></div>
+
+<P>
+Numbers of the form <code>I/2.**J</code> are safe across all platforms, and I
+often contrive doctest examples to produce numbers of that form:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; 3./4  # utterly safe
+0.75
+</pre></div>
+
+<P>
+Simple fractions are also easier for people to understand, and that makes
+for better documentation.
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.2.3.5 Option Flags and"
+  href="doctest-options.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.2.3 How It Works"
+  href="doctest-how-it-works.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.2.4 Basic API"
+  href="doctest-basic-api.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="doctest-options.html">5.2.3.5 Option Flags and</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="doctest-how-it-works.html">5.2.3 How It Works</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="doctest-basic-api.html">5.2.4 Basic API</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

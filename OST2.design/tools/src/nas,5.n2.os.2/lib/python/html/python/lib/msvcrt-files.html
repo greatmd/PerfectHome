@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="msvcrt-console.html" />
+<link rel="prev" href="module-msvcrt.html" />
+<link rel="parent" href="module-msvcrt.html" />
+<link rel="next" href="msvcrt-console.html" />
+<meta name='aesop' content='information' />
+<title>22.1.1 File Operations </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="22.1 msvcrt - Useful"
+  href="module-msvcrt.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="22.1 msvcrt - Useful"
+  href="module-msvcrt.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="22.1.2 Console I/O"
+  href="msvcrt-console.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-msvcrt.html">22.1 msvcrt - Useful</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-msvcrt.html">22.1 msvcrt - Useful</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="msvcrt-console.html">22.1.2 Console I/O</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0024110000000000000000"></A><A NAME="msvcrt-files"></A>
+<BR>
+22.1.1 File Operations 
+</H2>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5240' xml:id='l2h-5240' class="function">locking</tt></b>(</nobr></td>
+  <td><var>fd, mode, nbytes</var>)</td></tr></table></dt>
+<dd>
+  Lock part of a file based on file descriptor <var>fd</var> from the C
+  runtime.  Raises <tt class="exception">IOError</tt> on failure.  The locked region
+  of the file extends from the current file position for <var>nbytes</var>
+  bytes, and may continue beyond the end of the file.  <var>mode</var> must
+  be one of the <tt class="constant">LK_<var>*</var></tt> constants listed below.
+  Multiple regions in a file may be locked at the same time, but may
+  not overlap.  Adjacent regions are not merged; they must be unlocked
+  individually.
+</dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5241' xml:id='l2h-5241'>LK_LOCK</tt></b></dt>
+<dd>
+<dt><b><tt id='l2h-5247' xml:id='l2h-5247'>LK_RLCK</tt></b></dt><dd>
+  Locks the specified bytes. If the bytes cannot be locked, the
+  program immediately tries again after 1 second.  If, after 10
+  attempts, the bytes cannot be locked, <tt class="exception">IOError</tt> is
+  raised.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5242' xml:id='l2h-5242'>LK_NBLCK</tt></b></dt>
+<dd>
+<dt><b><tt id='l2h-5248' xml:id='l2h-5248'>LK_NBRLCK</tt></b></dt><dd>
+  Locks the specified bytes. If the bytes cannot be locked,
+  <tt class="exception">IOError</tt> is raised.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5243' xml:id='l2h-5243'>LK_UNLCK</tt></b></dt>
+<dd>
+  Unlocks the specified bytes, which must have been previously locked. 
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5244' xml:id='l2h-5244' class="function">setmode</tt></b>(</nobr></td>
+  <td><var>fd, flags</var>)</td></tr></table></dt>
+<dd>
+  Set the line-end translation mode for the file descriptor <var>fd</var>.
+  To set it to text mode, <var>flags</var> should be <tt class="constant">os.O_TEXT</tt>;
+  for binary, it should be <tt class="constant">os.O_BINARY</tt>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5245' xml:id='l2h-5245' class="function">open_osfhandle</tt></b>(</nobr></td>
+  <td><var>handle, flags</var>)</td></tr></table></dt>
+<dd>
+  Create a C runtime file descriptor from the file handle
+  <var>handle</var>.  The <var>flags</var> parameter should be a bit-wise OR of
+  <tt class="constant">os.O_APPEND</tt>, <tt class="constant">os.O_RDONLY</tt>, and
+  <tt class="constant">os.O_TEXT</tt>.  The returned file descriptor may be used as a
+  parameter to <tt class="function">os.fdopen()</tt> to create a file object.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5246' xml:id='l2h-5246' class="function">get_osfhandle</tt></b>(</nobr></td>
+  <td><var>fd</var>)</td></tr></table></dt>
+<dd>
+  Return the file handle for the file descriptor <var>fd</var>.  Raises
+  <tt class="exception">IOError</tt> if <var>fd</var> is not recognized.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="22.1 msvcrt - Useful"
+  href="module-msvcrt.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="22.1 msvcrt - Useful"
+  href="module-msvcrt.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="22.1.2 Console I/O"
+  href="msvcrt-console.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-msvcrt.html">22.1 msvcrt - Useful</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-msvcrt.html">22.1 msvcrt - Useful</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="msvcrt-console.html">22.1.2 Console I/O</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

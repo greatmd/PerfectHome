@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-glob.html" />
+<link rel="prev" href="module-tempfile.html" />
+<link rel="parent" href="allos.html" />
+<link rel="next" href="module-glob.html" />
+<meta name='aesop' content='information' />
+<title>6.23 errno -- Standard errno system symbols</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.22 tempfile  "
+  href="module-tempfile.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.24 glob  "
+  href="module-glob.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-tempfile.html">6.22 tempfile  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-glob.html">6.24 glob  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0082300000000000000000">
+6.23 <tt class="module">errno</tt> --
+         Standard errno system symbols</A>
+</H1>
+
+<P>
+<A NAME="module-errno"></A>
+
+<P>
+This module makes available standard <code>errno</code> system symbols.
+The value of each symbol is the corresponding integer value.
+The names and descriptions are borrowed from <span class="file">linux/include/errno.h</span>,
+which should be pretty all-inclusive.
+
+<P>
+<dl><dt><b><tt id='l2h-2215' xml:id='l2h-2215'>errorcode</tt></b></dt>
+<dd>
+  Dictionary providing a mapping from the errno value to the string
+  name in the underlying system.  For instance,
+  <code>errno.errorcode[errno.EPERM]</code> maps to <code>'EPERM'</code>.
+</dd></dl>
+
+<P>
+To translate a numeric error code to an error message, use
+<tt class="function">os.strerror()</tt>.
+
+<P>
+Of the following list, symbols that are not used on the current
+platform are not defined by the module.  The specific list of defined
+symbols is available as <code>errno.errorcode.keys()</code>.  Symbols
+available can include:
+
+<P>
+<dl><dt><b><tt id='l2h-2216' xml:id='l2h-2216'>EPERM</tt></b></dt>
+<dd> Operation not permitted </dd></dl>
+<dl><dt><b><tt id='l2h-2217' xml:id='l2h-2217'>ENOENT</tt></b></dt>
+<dd> No such file or directory </dd></dl>
+<dl><dt><b><tt id='l2h-2218' xml:id='l2h-2218'>ESRCH</tt></b></dt>
+<dd> No such process </dd></dl>
+<dl><dt><b><tt id='l2h-2219' xml:id='l2h-2219'>EINTR</tt></b></dt>
+<dd> Interrupted system call </dd></dl>
+<dl><dt><b><tt id='l2h-2220' xml:id='l2h-2220'>EIO</tt></b></dt>
+<dd> I/O error </dd></dl>
+<dl><dt><b><tt id='l2h-2221' xml:id='l2h-2221'>ENXIO</tt></b></dt>
+<dd> No such device or address </dd></dl>
+<dl><dt><b><tt id='l2h-2222' xml:id='l2h-2222'>E2BIG</tt></b></dt>
+<dd> Arg list too long </dd></dl>
+<dl><dt><b><tt id='l2h-2223' xml:id='l2h-2223'>ENOEXEC</tt></b></dt>
+<dd> Exec format error </dd></dl>
+<dl><dt><b><tt id='l2h-2224' xml:id='l2h-2224'>EBADF</tt></b></dt>
+<dd> Bad file number </dd></dl>
+<dl><dt><b><tt id='l2h-2225' xml:id='l2h-2225'>ECHILD</tt></b></dt>
+<dd> No child processes </dd></dl>
+<dl><dt><b><tt id='l2h-2226' xml:id='l2h-2226'>EAGAIN</tt></b></dt>
+<dd> Try again </dd></dl>
+<dl><dt><b><tt id='l2h-2227' xml:id='l2h-2227'>ENOMEM</tt></b></dt>
+<dd> Out of memory </dd></dl>
+<dl><dt><b><tt id='l2h-2228' xml:id='l2h-2228'>EACCES</tt></b></dt>
+<dd> Permission denied </dd></dl>
+<dl><dt><b><tt id='l2h-2229' xml:id='l2h-2229'>EFAULT</tt></b></dt>
+<dd> Bad address </dd></dl>
+<dl><dt><b><tt id='l2h-2230' xml:id='l2h-2230'>ENOTBLK</tt></b></dt>
+<dd> Block device required </dd></dl>
+<dl><dt><b><tt id='l2h-2231' xml:id='l2h-2231'>EBUSY</tt></b></dt>
+<dd> Device or resource busy </dd></dl>
+<dl><dt><b><tt id='l2h-2232' xml:id='l2h-2232'>EEXIST</tt></b></dt>
+<dd> File exists </dd></dl>
+<dl><dt><b><tt id='l2h-2233' xml:id='l2h-2233'>EXDEV</tt></b></dt>
+<dd> Cross-device link </dd></dl>
+<dl><dt><b><tt id='l2h-2234' xml:id='l2h-2234'>ENODEV</tt></b></dt>
+<dd> No such device </dd></dl>
+<dl><dt><b><tt id='l2h-2235' xml:id='l2h-2235'>ENOTDIR</tt></b></dt>
+<dd> Not a directory </dd></dl>
+<dl><dt><b><tt id='l2h-2236' xml:id='l2h-2236'>EISDIR</tt></b></dt>
+<dd> Is a directory </dd></dl>
+<dl><dt><b><tt id='l2h-2237' xml:id='l2h-2237'>EINVAL</tt></b></dt>
+<dd> Invalid argument </dd></dl>
+<dl><dt><b><tt id='l2h-2238' xml:id='l2h-2238'>ENFILE</tt></b></dt>
+<dd> File table overflow </dd></dl>
+<dl><dt><b><tt id='l2h-2239' xml:id='l2h-2239'>EMFILE</tt></b></dt>
+<dd> Too many open files </dd></dl>
+<dl><dt><b><tt id='l2h-2240' xml:id='l2h-2240'>ENOTTY</tt></b></dt>
+<dd> Not a typewriter </dd></dl>
+<dl><dt><b><tt id='l2h-2241' xml:id='l2h-2241'>ETXTBSY</tt></b></dt>
+<dd> Text file busy </dd></dl>
+<dl><dt><b><tt id='l2h-2242' xml:id='l2h-2242'>EFBIG</tt></b></dt>
+<dd> File too large </dd></dl>
+<dl><dt><b><tt id='l2h-2243' xml:id='l2h-2243'>ENOSPC</tt></b></dt>
+<dd> No space left on device </dd></dl>
+<dl><dt><b><tt id='l2h-2244' xml:id='l2h-2244'>ESPIPE</tt></b></dt>
+<dd> Illegal seek </dd></dl>
+<dl><dt><b><tt id='l2h-2245' xml:id='l2h-2245'>EROFS</tt></b></dt>
+<dd> Read-only file system </dd></dl>
+<dl><dt><b><tt id='l2h-2246' xml:id='l2h-2246'>EMLINK</tt></b></dt>
+<dd> Too many links </dd></dl>
+<dl><dt><b><tt id='l2h-2247' xml:id='l2h-2247'>EPIPE</tt></b></dt>
+<dd> Broken pipe </dd></dl>
+<dl><dt><b><tt id='l2h-2248' xml:id='l2h-2248'>EDOM</tt></b></dt>
+<dd> Math argument out of domain of func </dd></dl>
+<dl><dt><b><tt id='l2h-2249' xml:id='l2h-2249'>ERANGE</tt></b></dt>
+<dd> Math result not representable </dd></dl>
+<dl><dt><b><tt id='l2h-2250' xml:id='l2h-2250'>EDEADLK</tt></b></dt>
+<dd> Resource deadlock would occur </dd></dl>
+<dl><dt><b><tt id='l2h-2251' xml:id='l2h-2251'>ENAMETOOLONG</tt></b></dt>
+<dd> File name too long </dd></dl>
+<dl><dt><b><tt id='l2h-2252' xml:id='l2h-2252'>ENOLCK</tt></b></dt>
+<dd> No record locks available </dd></dl>
+<dl><dt><b><tt id='l2h-2253' xml:id='l2h-2253'>ENOSYS</tt></b></dt>
+<dd> Function not implemented </dd></dl>
+<dl><dt><b><tt id='l2h-2254' xml:id='l2h-2254'>ENOTEMPTY</tt></b></dt>
+<dd> Directory not empty </dd></dl>
+<dl><dt><b><tt id='l2h-2255' xml:id='l2h-2255'>ELOOP</tt></b></dt>
+<dd> Too many symbolic links encountered </dd></dl>
+<dl><dt><b><tt id='l2h-2256' xml:id='l2h-2256'>EWOULDBLOCK</tt></b></dt>
+<dd> Operation would block </dd></dl>
+<dl><dt><b><tt id='l2h-2257' xml:id='l2h-2257'>ENOMSG</tt></b></dt>
+<dd> No message of desired type </dd></dl>
+<dl><dt><b><tt id='l2h-2258' xml:id='l2h-2258'>EIDRM</tt></b></dt>
+<dd> Identifier removed </dd></dl>
+<dl><dt><b><tt id='l2h-2259' xml:id='l2h-2259'>ECHRNG</tt></b></dt>
+<dd> Channel number out of range </dd></dl>
+<dl><dt><b><tt id='l2h-2260' xml:id='l2h-2260'>EL2NSYNC</tt></b></dt>
+<dd> Level 2 not synchronized </dd></dl>
+<dl><dt><b><tt id='l2h-2261' xml:id='l2h-2261'>EL3HLT</tt></b></dt>
+<dd> Level 3 halted </dd></dl>
+<dl><dt><b><tt id='l2h-2262' xml:id='l2h-2262'>EL3RST</tt></b></dt>
+<dd> Level 3 reset </dd></dl>
+<dl><dt><b><tt id='l2h-2263' xml:id='l2h-2263'>ELNRNG</tt></b></dt>
+<dd> Link number out of range </dd></dl>
+<dl><dt><b><tt id='l2h-2264' xml:id='l2h-2264'>EUNATCH</tt></b></dt>
+<dd> Protocol driver not attached </dd></dl>
+<dl><dt><b><tt id='l2h-2265' xml:id='l2h-2265'>ENOCSI</tt></b></dt>
+<dd> No CSI structure available </dd></dl>
+<dl><dt><b><tt id='l2h-2266' xml:id='l2h-2266'>EL2HLT</tt></b></dt>
+<dd> Level 2 halted </dd></dl>
+<dl><dt><b><tt id='l2h-2267' xml:id='l2h-2267'>EBADE</tt></b></dt>
+<dd> Invalid exchange </dd></dl>
+<dl><dt><b><tt id='l2h-2268' xml:id='l2h-2268'>EBADR</tt></b></dt>
+<dd> Invalid request descriptor </dd></dl>
+<dl><dt><b><tt id='l2h-2269' xml:id='l2h-2269'>EXFULL</tt></b></dt>
+<dd> Exchange full </dd></dl>
+<dl><dt><b><tt id='l2h-2270' xml:id='l2h-2270'>ENOANO</tt></b></dt>
+<dd> No anode </dd></dl>
+<dl><dt><b><tt id='l2h-2271' xml:id='l2h-2271'>EBADRQC</tt></b></dt>
+<dd> Invalid request code </dd></dl>
+<dl><dt><b><tt id='l2h-2272' xml:id='l2h-2272'>EBADSLT</tt></b></dt>
+<dd> Invalid slot </dd></dl>
+<dl><dt><b><tt id='l2h-2273' xml:id='l2h-2273'>EDEADLOCK</tt></b></dt>
+<dd> File locking deadlock error </dd></dl>
+<dl><dt><b><tt id='l2h-2274' xml:id='l2h-2274'>EBFONT</tt></b></dt>
+<dd> Bad font file format </dd></dl>
+<dl><dt><b><tt id='l2h-2275' xml:id='l2h-2275'>ENOSTR</tt></b></dt>
+<dd> Device not a stream </dd></dl>
+<dl><dt><b><tt id='l2h-2276' xml:id='l2h-2276'>ENODATA</tt></b></dt>
+<dd> No data available </dd></dl>
+<dl><dt><b><tt id='l2h-2277' xml:id='l2h-2277'>ETIME</tt></b></dt>
+<dd> Timer expired </dd></dl>
+<dl><dt><b><tt id='l2h-2278' xml:id='l2h-2278'>ENOSR</tt></b></dt>
+<dd> Out of streams resources </dd></dl>
+<dl><dt><b><tt id='l2h-2279' xml:id='l2h-2279'>ENONET</tt></b></dt>
+<dd> Machine is not on the network </dd></dl>
+<dl><dt><b><tt id='l2h-2280' xml:id='l2h-2280'>ENOPKG</tt></b></dt>
+<dd> Package not installed </dd></dl>
+<dl><dt><b><tt id='l2h-2281' xml:id='l2h-2281'>EREMOTE</tt></b></dt>
+<dd> Object is remote </dd></dl>
+<dl><dt><b><tt id='l2h-2282' xml:id='l2h-2282'>ENOLINK</tt></b></dt>
+<dd> Link has been severed </dd></dl>
+<dl><dt><b><tt id='l2h-2283' xml:id='l2h-2283'>EADV</tt></b></dt>
+<dd> Advertise error </dd></dl>
+<dl><dt><b><tt id='l2h-2284' xml:id='l2h-2284'>ESRMNT</tt></b></dt>
+<dd> Srmount error </dd></dl>
+<dl><dt><b><tt id='l2h-2285' xml:id='l2h-2285'>ECOMM</tt></b></dt>
+<dd> Communication error on send </dd></dl>
+<dl><dt><b><tt id='l2h-2286' xml:id='l2h-2286'>EPROTO</tt></b></dt>
+<dd> Protocol error </dd></dl>
+<dl><dt><b><tt id='l2h-2287' xml:id='l2h-2287'>EMULTIHOP</tt></b></dt>
+<dd> Multihop attempted </dd></dl>
+<dl><dt><b><tt id='l2h-2288' xml:id='l2h-2288'>EDOTDOT</tt></b></dt>
+<dd> RFS specific error </dd></dl>
+<dl><dt><b><tt id='l2h-2289' xml:id='l2h-2289'>EBADMSG</tt></b></dt>
+<dd> Not a data message </dd></dl>
+<dl><dt><b><tt id='l2h-2290' xml:id='l2h-2290'>EOVERFLOW</tt></b></dt>
+<dd> Value too large for defined data type </dd></dl>
+<dl><dt><b><tt id='l2h-2291' xml:id='l2h-2291'>ENOTUNIQ</tt></b></dt>
+<dd> Name not unique on network </dd></dl>
+<dl><dt><b><tt id='l2h-2292' xml:id='l2h-2292'>EBADFD</tt></b></dt>
+<dd> File descriptor in bad state </dd></dl>
+<dl><dt><b><tt id='l2h-2293' xml:id='l2h-2293'>EREMCHG</tt></b></dt>
+<dd> Remote address changed </dd></dl>
+<dl><dt><b><tt id='l2h-2294' xml:id='l2h-2294'>ELIBACC</tt></b></dt>
+<dd> Can not access a needed shared library </dd></dl>
+<dl><dt><b><tt id='l2h-2295' xml:id='l2h-2295'>ELIBBAD</tt></b></dt>
+<dd> Accessing a corrupted shared library </dd></dl>
+<dl><dt><b><tt id='l2h-2296' xml:id='l2h-2296'>ELIBSCN</tt></b></dt>
+<dd> .lib section in a.out corrupted </dd></dl>
+<dl><dt><b><tt id='l2h-2297' xml:id='l2h-2297'>ELIBMAX</tt></b></dt>
+<dd> Attempting to link in too many shared libraries </dd></dl>
+<dl><dt><b><tt id='l2h-2298' xml:id='l2h-2298'>ELIBEXEC</tt></b></dt>
+<dd> Cannot exec a shared library directly </dd></dl>
+<dl><dt><b><tt id='l2h-2299' xml:id='l2h-2299'>EILSEQ</tt></b></dt>
+<dd> Illegal byte sequence </dd></dl>
+<dl><dt><b><tt id='l2h-2300' xml:id='l2h-2300'>ERESTART</tt></b></dt>
+<dd> Interrupted system call should be restarted </dd></dl>
+<dl><dt><b><tt id='l2h-2301' xml:id='l2h-2301'>ESTRPIPE</tt></b></dt>
+<dd> Streams pipe error </dd></dl>
+<dl><dt><b><tt id='l2h-2302' xml:id='l2h-2302'>EUSERS</tt></b></dt>
+<dd> Too many users </dd></dl>
+<dl><dt><b><tt id='l2h-2303' xml:id='l2h-2303'>ENOTSOCK</tt></b></dt>
+<dd> Socket operation on non-socket </dd></dl>
+<dl><dt><b><tt id='l2h-2304' xml:id='l2h-2304'>EDESTADDRREQ</tt></b></dt>
+<dd> Destination address required </dd></dl>
+<dl><dt><b><tt id='l2h-2305' xml:id='l2h-2305'>EMSGSIZE</tt></b></dt>
+<dd> Message too long </dd></dl>
+<dl><dt><b><tt id='l2h-2306' xml:id='l2h-2306'>EPROTOTYPE</tt></b></dt>
+<dd> Protocol wrong type for socket </dd></dl>
+<dl><dt><b><tt id='l2h-2307' xml:id='l2h-2307'>ENOPROTOOPT</tt></b></dt>
+<dd> Protocol not available </dd></dl>
+<dl><dt><b><tt id='l2h-2308' xml:id='l2h-2308'>EPROTONOSUPPORT</tt></b></dt>
+<dd> Protocol not supported </dd></dl>
+<dl><dt><b><tt id='l2h-2309' xml:id='l2h-2309'>ESOCKTNOSUPPORT</tt></b></dt>
+<dd> Socket type not supported </dd></dl>
+<dl><dt><b><tt id='l2h-2310' xml:id='l2h-2310'>EOPNOTSUPP</tt></b></dt>
+<dd> Operation not supported on transport endpoint </dd></dl>
+<dl><dt><b><tt id='l2h-2311' xml:id='l2h-2311'>EPFNOSUPPORT</tt></b></dt>
+<dd> Protocol family not supported </dd></dl>
+<dl><dt><b><tt id='l2h-2312' xml:id='l2h-2312'>EAFNOSUPPORT</tt></b></dt>
+<dd> Address family not supported by protocol </dd></dl>
+<dl><dt><b><tt id='l2h-2313' xml:id='l2h-2313'>EADDRINUSE</tt></b></dt>
+<dd> Address already in use </dd></dl>
+<dl><dt><b><tt id='l2h-2314' xml:id='l2h-2314'>EADDRNOTAVAIL</tt></b></dt>
+<dd> Cannot assign requested address </dd></dl>
+<dl><dt><b><tt id='l2h-2315' xml:id='l2h-2315'>ENETDOWN</tt></b></dt>
+<dd> Network is down </dd></dl>
+<dl><dt><b><tt id='l2h-2316' xml:id='l2h-2316'>ENETUNREACH</tt></b></dt>
+<dd> Network is unreachable </dd></dl>
+<dl><dt><b><tt id='l2h-2317' xml:id='l2h-2317'>ENETRESET</tt></b></dt>
+<dd> Network dropped connection because of reset </dd></dl>
+<dl><dt><b><tt id='l2h-2318' xml:id='l2h-2318'>ECONNABORTED</tt></b></dt>
+<dd> Software caused connection abort </dd></dl>
+<dl><dt><b><tt id='l2h-2319' xml:id='l2h-2319'>ECONNRESET</tt></b></dt>
+<dd> Connection reset by peer </dd></dl>
+<dl><dt><b><tt id='l2h-2320' xml:id='l2h-2320'>ENOBUFS</tt></b></dt>
+<dd> No buffer space available </dd></dl>
+<dl><dt><b><tt id='l2h-2321' xml:id='l2h-2321'>EISCONN</tt></b></dt>
+<dd> Transport endpoint is already connected </dd></dl>
+<dl><dt><b><tt id='l2h-2322' xml:id='l2h-2322'>ENOTCONN</tt></b></dt>
+<dd> Transport endpoint is not connected </dd></dl>
+<dl><dt><b><tt id='l2h-2323' xml:id='l2h-2323'>ESHUTDOWN</tt></b></dt>
+<dd> Cannot send after transport endpoint shutdown </dd></dl>
+<dl><dt><b><tt id='l2h-2324' xml:id='l2h-2324'>ETOOMANYREFS</tt></b></dt>
+<dd> Too many references: cannot splice </dd></dl>
+<dl><dt><b><tt id='l2h-2325' xml:id='l2h-2325'>ETIMEDOUT</tt></b></dt>
+<dd> Connection timed out </dd></dl>
+<dl><dt><b><tt id='l2h-2326' xml:id='l2h-2326'>ECONNREFUSED</tt></b></dt>
+<dd> Connection refused </dd></dl>
+<dl><dt><b><tt id='l2h-2327' xml:id='l2h-2327'>EHOSTDOWN</tt></b></dt>
+<dd> Host is down </dd></dl>
+<dl><dt><b><tt id='l2h-2328' xml:id='l2h-2328'>EHOSTUNREACH</tt></b></dt>
+<dd> No route to host </dd></dl>
+<dl><dt><b><tt id='l2h-2329' xml:id='l2h-2329'>EALREADY</tt></b></dt>
+<dd> Operation already in progress </dd></dl>
+<dl><dt><b><tt id='l2h-2330' xml:id='l2h-2330'>EINPROGRESS</tt></b></dt>
+<dd> Operation now in progress </dd></dl>
+<dl><dt><b><tt id='l2h-2331' xml:id='l2h-2331'>ESTALE</tt></b></dt>
+<dd> Stale NFS file handle </dd></dl>
+<dl><dt><b><tt id='l2h-2332' xml:id='l2h-2332'>EUCLEAN</tt></b></dt>
+<dd> Structure needs cleaning </dd></dl>
+<dl><dt><b><tt id='l2h-2333' xml:id='l2h-2333'>ENOTNAM</tt></b></dt>
+<dd> Not a XENIX named type file </dd></dl>
+<dl><dt><b><tt id='l2h-2334' xml:id='l2h-2334'>ENAVAIL</tt></b></dt>
+<dd> No XENIX semaphores available </dd></dl>
+<dl><dt><b><tt id='l2h-2335' xml:id='l2h-2335'>EISNAM</tt></b></dt>
+<dd> Is a named type file </dd></dl>
+<dl><dt><b><tt id='l2h-2336' xml:id='l2h-2336'>EREMOTEIO</tt></b></dt>
+<dd> Remote I/O error </dd></dl>
+<dl><dt><b><tt id='l2h-2337' xml:id='l2h-2337'>EDQUOT</tt></b></dt>
+<dd> Quota exceeded </dd></dl>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.22 tempfile  "
+  href="module-tempfile.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.24 glob  "
+  href="module-glob.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-tempfile.html">6.22 tempfile  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-glob.html">6.24 glob  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="whatsnew24.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="whatsnew24.html" title='What's New in Python 2.4' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node13.html" />
+<link rel="prev" href="node11.html" />
+<link rel="parent" href="whatsnew24.html" />
+<link rel="next" href="node13.html" />
+<meta name='aesop' content='information' />
+<title>11 Other Language Changes</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="10 PEP 331: Locale-Independent"
+  href="node11.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12 New, Improved, and"
+  href="node13.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node11.html">10 PEP 331: Locale-Independent</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node13.html">12 New, Improved, and</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="node12.html#SECTION0001210000000000000000">11.1 Optimizations</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+<HR>
+
+<H1><A NAME="SECTION0001200000000000000000">
+11 Other Language Changes</A>
+</H1>
+
+<P>
+Here are all of the changes that Python 2.4 makes to the core Python
+language.
+
+<P>
+
+<UL>
+<LI>Decorators for functions and methods were added (<a class="rfc" id='rfcref-1456' xml:id='rfcref-1456'
+href="http://www.python.org/peps/pep-0318.html">PEP 318</a>).
+
+<P>
+</LI>
+<LI>Built-in <tt class="function">set</tt> and <tt class="function">frozenset</tt> types were 
+added (<a class="rfc" id='rfcref-1458' xml:id='rfcref-1458'
+href="http://www.python.org/peps/pep-0218.html">PEP 218</a>).  Other new built-ins include the <tt class="function">reversed(<var>seq</var>)</tt> function (<a class="rfc" id='rfcref-1460' xml:id='rfcref-1460'
+href="http://www.python.org/peps/pep-0322.html">PEP 322</a>).
+
+<P>
+</LI>
+<LI>Generator expressions were added (<a class="rfc" id='rfcref-1462' xml:id='rfcref-1462'
+href="http://www.python.org/peps/pep-0289.html">PEP 289</a>).
+
+<P>
+</LI>
+<LI>Certain numeric expressions no longer return values restricted to 32 or 64 bits (<a class="rfc" id='rfcref-1464' xml:id='rfcref-1464'
+href="http://www.python.org/peps/pep-0237.html">PEP 237</a>).
+
+<P>
+</LI>
+<LI>You can now put parentheses around the list of names in a
+<code>from <var>module</var> import <var>names</var></code> statement (<a class="rfc" id='rfcref-1466' xml:id='rfcref-1466'
+href="http://www.python.org/peps/pep-0328.html">PEP 328</a>).
+
+<P>
+</LI>
+<LI>The <tt class="method">dict.update()</tt> method now accepts the same
+argument forms as the <tt class="class">dict</tt> constructor.  This includes any
+mapping, any iterable of key/value pairs, and keyword arguments.
+(Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The string methods <tt class="method">ljust()</tt>, <tt class="method">rjust()</tt>, and
+<tt class="method">center()</tt> now take an optional argument for specifying a
+fill character other than a space.
+(Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>Strings also gained an <tt class="method">rsplit()</tt> method that
+works like the <tt class="method">split()</tt> method but splits from the end of
+the string.  
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; 'www.python.org'.split('.', 1)
+['www', 'python.org']
+'www.python.org'.rsplit('.', 1)
+['www.python', 'org']
+</pre></div>      
+
+<P>
+</LI>
+<LI>Three keyword parameters, <var>cmp</var>, <var>key</var>, and
+<var>reverse</var>, were added to the <tt class="method">sort()</tt> method of lists.
+These parameters make some common usages of <tt class="method">sort()</tt> simpler.
+All of these parameters are optional.
+
+<P>
+For the <var>cmp</var> parameter, the value should be a comparison function
+that takes two parameters and returns -1, 0, or +1 depending on how
+the parameters compare.  This function will then be used to sort the
+list.  Previously this was the only parameter that could be provided
+to <tt class="method">sort()</tt>.
+
+<P>
+<var>key</var> should be a single-parameter function that takes a list
+element and returns a comparison key for the element.  The list is
+then sorted using the comparison keys.  The following example sorts a
+list case-insensitively:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; L = ['A', 'b', 'c', 'D']
+&gt;&gt;&gt; L.sort()                 # Case-sensitive sort
+&gt;&gt;&gt; L
+['A', 'D', 'b', 'c']
+&gt;&gt;&gt; # Using 'key' parameter to sort list
+&gt;&gt;&gt; L.sort(key=lambda x: x.lower())
+&gt;&gt;&gt; L
+['A', 'b', 'c', 'D']
+&gt;&gt;&gt; # Old-fashioned way
+&gt;&gt;&gt; L.sort(cmp=lambda x,y: cmp(x.lower(), y.lower()))
+&gt;&gt;&gt; L
+['A', 'b', 'c', 'D']
+</pre></div>
+
+<P>
+The last example, which uses the <var>cmp</var> parameter, is the old way
+to perform a case-insensitive sort.  It works but is slower than using
+a <var>key</var> parameter.  Using <var>key</var> calls <tt class="method">lower()</tt> method
+once for each element in the list while using <var>cmp</var> will call it
+twice for each comparison, so using <var>key</var> saves on invocations of
+the <tt class="method">lower()</tt> method.
+
+<P>
+For simple key functions and comparison functions, it is often
+possible to avoid a <tt class="keyword">lambda</tt> expression by using an unbound
+method instead.  For example, the above case-insensitive sort is best
+written as:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; L.sort(key=str.lower)
+&gt;&gt;&gt; L
+['A', 'b', 'c', 'D']
+</pre></div>       
+
+<P>
+Finally, the <var>reverse</var> parameter takes a Boolean value.  If the
+value is true, the list will be sorted into reverse order.
+Instead of <code>L.sort() ; L.reverse()</code>, you can now write
+<code>L.sort(reverse=True)</code>.
+
+<P>
+The results of sorting are now guaranteed to be stable.  This means
+that two entries with equal keys will be returned in the same order as
+they were input.  For example, you can sort a list of people by name,
+and then sort the list by age, resulting in a list sorted by age where
+people with the same age are in name-sorted order.
+
+<P>
+(All changes to <tt class="method">sort()</tt> contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>There is a new built-in function
+<tt class="function">sorted(<var>iterable</var>)</tt> that works like the in-place
+<tt class="method">list.sort()</tt> method but can be used in
+expressions.  The differences are:
+  
+<UL>
+<LI>the input may be any iterable;
+</LI>
+<LI>a newly formed copy is sorted, leaving the original intact; and
+</LI>
+<LI>the expression returns the new sorted copy
+  
+</LI>
+</UL>
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; L = [9,7,8,3,2,4,1,6,5]
+&gt;&gt;&gt; [10+i for i in sorted(L)]       # usable in a list comprehension
+[11, 12, 13, 14, 15, 16, 17, 18, 19]
+&gt;&gt;&gt; L                               # original is left unchanged
+[9,7,8,3,2,4,1,6,5]
+&gt;&gt;&gt; sorted('Monty Python')          # any iterable may be an input
+[' ', 'M', 'P', 'h', 'n', 'n', 'o', 'o', 't', 't', 'y', 'y']
+
+&gt;&gt;&gt; # List the contents of a dict sorted by key values
+&gt;&gt;&gt; colormap = dict(red=1, blue=2, green=3, black=4, yellow=5)
+&gt;&gt;&gt; for k, v in sorted(colormap.iteritems()):
+...     print k, v
+...
+black 4
+blue 2
+green 3
+red 1
+yellow 5
+</pre></div>
+
+<P>
+(Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>Integer operations will no longer trigger an <tt class="exception">OverflowWarning</tt>.
+The <tt class="exception">OverflowWarning</tt> warning will disappear in Python 2.5.
+
+<P>
+</LI>
+<LI>The interpreter gained a new switch, <b class="programopt">-m</b>, that
+takes a name, searches for the corresponding  module on <code>sys.path</code>,
+and runs the module as a script.  For example, 
+you can now run the Python profiler with <code>python -m profile</code>.
+(Contributed by Nick Coghlan.)
+
+<P>
+</LI>
+<LI>The <tt class="function">eval(<var>expr</var>, <var>globals</var>, <var>locals</var>)</tt>
+and <tt class="function">execfile(<var>filename</var>, <var>globals</var>, <var>locals</var>)</tt>
+functions and the <tt class="keyword">exec</tt> statement now accept any mapping type
+for the <var>locals</var> parameter.  Previously this had to be a regular
+Python dictionary.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The <tt class="function">zip()</tt> built-in function and <tt class="function">itertools.izip()</tt>
+  now return an empty list if called with no arguments.
+  Previously they raised a <tt class="exception">TypeError</tt>
+  exception.  This makes them more
+  suitable for use with variable length argument lists:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; def transpose(array):
+...    return zip(*array)
+...
+&gt;&gt;&gt; transpose([(1,2,3), (4,5,6)])
+[(1, 4), (2, 5), (3, 6)]
+&gt;&gt;&gt; transpose([])
+[]
+</pre></div>
+(Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>Encountering a failure while importing a module no longer leaves
+a partially-initialized module object in <code>sys.modules</code>.  The
+incomplete module object left behind would fool further imports of the
+same module into succeeding, leading to confusing errors.  
+(Fixed by Tim Peters.)
+
+<P>
+</LI>
+<LI><tt class="constant">None</tt> is now a constant; code that binds a new value to 
+the name "<tt class="samp">None</tt>" is now a syntax error.
+(Contributed by Raymond Hettinger.)       
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION0001210000000000000000">
+11.1 Optimizations</A>
+</H2>
+
+<P>
+
+<UL>
+<LI>The inner loops for list and tuple slicing
+ were optimized and now run about one-third faster.  The inner loops
+ for dictionaries were also optimized, resulting in performance boosts for
+ <tt class="method">keys()</tt>, <tt class="method">values()</tt>, <tt class="method">items()</tt>,
+ <tt class="method">iterkeys()</tt>, <tt class="method">itervalues()</tt>, and <tt class="method">iteritems()</tt>.
+ (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The machinery for growing and shrinking lists was optimized for
+ speed and for space efficiency.  Appending and popping from lists now
+ runs faster due to more efficient code paths and less frequent use of
+ the underlying system <tt class="cfunction">realloc()</tt>.  List comprehensions
+ also benefit.   <tt class="method">list.extend()</tt> was also optimized and no
+ longer converts its argument into a temporary list before extending
+ the base list.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI><tt class="function">list()</tt>, <tt class="function">tuple()</tt>, <tt class="function">map()</tt>,
+  <tt class="function">filter()</tt>, and <tt class="function">zip()</tt> now run several times
+  faster with non-sequence arguments that supply a <tt class="method">__len__()</tt>
+  method.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The methods <tt class="method">list.__getitem__()</tt>,
+  <tt class="method">dict.__getitem__()</tt>, and <tt class="method">dict.__contains__()</tt> are
+  are now implemented as <tt class="class">method_descriptor</tt> objects rather
+  than <tt class="class">wrapper_descriptor</tt> objects.  This form of 
+  access doubles their performance and makes them more suitable for
+  use as arguments to functionals:
+  "<tt class="samp">map(mydict.__getitem__, keylist)</tt>".
+  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>Added a new opcode, <code>LIST_APPEND</code>, that simplifies
+  the generated bytecode for list comprehensions and speeds them up
+  by about a third.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The peephole bytecode optimizer has been improved to 
+produce shorter, faster bytecode; remarkably, the resulting bytecode is 
+more readable.  (Enhanced by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>String concatenations in statements of the form <code>s = s +
+"abc"</code> and <code>s += "abc"</code> are now performed more efficiently in
+certain circumstances.  This optimization won't be present in other
+Python implementations such as Jython, so you shouldn't rely on it;
+using the <tt class="method">join()</tt> method of strings is still recommended when
+you want to efficiently glue a large number of strings together.
+(Contributed by Armin Rigo.)       
+
+<P>
+</LI>
+</UL>
+
+<P>
+The net result of the 2.4 optimizations is that Python 2.4 runs the
+pystone benchmark around 5% faster than Python 2.3 and 35% faster
+than Python 2.2.  (pystone is not a particularly good benchmark, but
+it's the most commonly used measurement of Python's performance.  Your
+own applications may show greater or smaller benefits from Python&nbsp;2.4.)
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="10 PEP 331: Locale-Independent"
+  href="node11.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12 New, Improved, and"
+  href="node13.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node11.html">10 PEP 331: Locale-Independent</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node13.html">12 New, Improved, and</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 1.01.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

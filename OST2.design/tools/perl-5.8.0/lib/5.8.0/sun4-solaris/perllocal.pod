@@ -1,0 +1,22 @@
+=head2 Thu Jul 14 13:20:08 2005: C<Module> L<Midas|Midas>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 3.31>
+
+=item *
+
+C<EXE_FILES: midas midasformat>
+
+=back
+

@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-UserDict.html" />
+<link rel="prev" href="module-atexit.html" />
+<link rel="parent" href="python.html" />
+<link rel="next" href="module-UserDict.html" />
+<meta name='aesop' content='information' />
+<title>3.6 types -- Names for built-in types</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.5.1 atexit Example"
+  href="atexit-example.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3. Python Runtime Services"
+  href="python.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.7 UserDict  "
+  href="module-UserDict.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="atexit-example.html">3.5.1 atexit Example</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="python.html">3. Python Runtime Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-UserDict.html">3.7 UserDict  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION005600000000000000000">
+3.6 <tt class="module">types</tt> --
+         Names for built-in types</A>
+</H1>
+
+<P>
+<A NAME="module-types"></A>
+
+<P>
+This module defines names for some object types that are used by
+the standard Python interpreter, but not for the types defined by various
+extension modules.  Also, it does not include some of the types that
+arise during processing such the <code>listiterator</code> type.
+It is safe to use "<tt class="samp">from types import *</tt>" --
+the module does not export any names besides the ones listed here.
+New names exported by future versions of this module will all end in
+"<tt class="samp">Type</tt>".
+
+<P>
+Typical use is for functions that do different things depending on
+their argument types, like the following:
+
+<P>
+<div class="verbatim"><pre>
+from types import *
+def delete(mylist, item):
+    if type(item) is IntType:
+       del mylist[item]
+    else:
+       mylist.remove(item)
+</pre></div>
+
+<P>
+Starting in Python 2.2, built-in factory functions such as
+<tt class="function">int()</tt> and <tt class="function">str()</tt> are also names for the
+corresponding types.  This is now the preferred way to access
+the type instead of using the <tt class="module">types</tt> module.  Accordingly,
+the example above should be written as follows:
+
+<P>
+<div class="verbatim"><pre>
+def delete(mylist, item):
+    if isinstance(item, int):
+       del mylist[item]
+    else:
+       mylist.remove(item)
+</pre></div>
+
+<P>
+The module defines the following names:
+
+<P>
+<dl><dt><b><tt id='l2h-440' xml:id='l2h-440'>NoneType</tt></b></dt>
+<dd>
+The type of <code>None</code>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-441' xml:id='l2h-441'>TypeType</tt></b></dt>
+<dd>
+The type of type objects (such as returned by
+<tt class="function">type()</tt><a id='l2h-442' xml:id='l2h-442'></a>).
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-443' xml:id='l2h-443'>BooleanType</tt></b></dt>
+<dd>
+The type of the <tt class="class">bool</tt> values <code>True</code> and <code>False</code>; this
+is an alias of the built-in <tt class="function">bool()</tt> function.
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-444' xml:id='l2h-444'>IntType</tt></b></dt>
+<dd>
+The type of integers (e.g. <code>1</code>).
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-445' xml:id='l2h-445'>LongType</tt></b></dt>
+<dd>
+The type of long integers (e.g. <code>1L</code>).
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-446' xml:id='l2h-446'>FloatType</tt></b></dt>
+<dd>
+The type of floating point numbers (e.g. <code>1.0</code>).
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-447' xml:id='l2h-447'>ComplexType</tt></b></dt>
+<dd>
+The type of complex numbers (e.g. <code>1.0j</code>).  This is not defined
+if Python was built without complex number support.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-448' xml:id='l2h-448'>StringType</tt></b></dt>
+<dd>
+The type of character strings (e.g. <code>'Spam'</code>).
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-449' xml:id='l2h-449'>UnicodeType</tt></b></dt>
+<dd>
+The type of Unicode character strings (e.g. <code>u'Spam'</code>).  This is
+not defined if Python was built without Unicode support.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-450' xml:id='l2h-450'>TupleType</tt></b></dt>
+<dd>
+The type of tuples (e.g. <code>(1, 2, 3, 'Spam')</code>).
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-451' xml:id='l2h-451'>ListType</tt></b></dt>
+<dd>
+The type of lists (e.g. <code>[0, 1, 2, 3]</code>).
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-452' xml:id='l2h-452'>DictType</tt></b></dt>
+<dd>
+The type of dictionaries (e.g. <code>{'Bacon': 1, 'Ham': 0}</code>).
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-453' xml:id='l2h-453'>DictionaryType</tt></b></dt>
+<dd>
+An alternate name for <code>DictType</code>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-454' xml:id='l2h-454'>FunctionType</tt></b></dt>
+<dd>
+The type of user-defined functions and lambdas.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-455' xml:id='l2h-455'>LambdaType</tt></b></dt>
+<dd>
+An alternate name for <code>FunctionType</code>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-456' xml:id='l2h-456'>GeneratorType</tt></b></dt>
+<dd>
+The type of generator-iterator objects, produced by calling a
+generator function.
+
+<span class="versionnote">New in version 2.2.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-457' xml:id='l2h-457'>CodeType</tt></b></dt>
+<dd>
+The type for code objects such as returned by
+<tt class="function">compile()</tt><a id='l2h-458' xml:id='l2h-458'></a>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-459' xml:id='l2h-459'>ClassType</tt></b></dt>
+<dd>
+The type of user-defined classes.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-460' xml:id='l2h-460'>InstanceType</tt></b></dt>
+<dd>
+The type of instances of user-defined classes.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-461' xml:id='l2h-461'>MethodType</tt></b></dt>
+<dd>
+The type of methods of user-defined class instances.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-462' xml:id='l2h-462'>UnboundMethodType</tt></b></dt>
+<dd>
+An alternate name for <code>MethodType</code>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-463' xml:id='l2h-463'>BuiltinFunctionType</tt></b></dt>
+<dd>
+The type of built-in functions like <tt class="function">len()</tt> or
+<tt class="function">sys.exit()</tt>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-464' xml:id='l2h-464'>BuiltinMethodType</tt></b></dt>
+<dd>
+An alternate name for <code>BuiltinFunction</code>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-465' xml:id='l2h-465'>ModuleType</tt></b></dt>
+<dd>
+The type of modules.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-466' xml:id='l2h-466'>FileType</tt></b></dt>
+<dd>
+The type of open file objects such as <code>sys.stdout</code>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-467' xml:id='l2h-467'>XRangeType</tt></b></dt>
+<dd>
+The type of range objects returned by
+<tt class="function">xrange()</tt><a id='l2h-468' xml:id='l2h-468'></a>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-469' xml:id='l2h-469'>SliceType</tt></b></dt>
+<dd>
+The type of objects returned by
+<tt class="function">slice()</tt><a id='l2h-470' xml:id='l2h-470'></a>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-471' xml:id='l2h-471'>EllipsisType</tt></b></dt>
+<dd>
+The type of <code>Ellipsis</code>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-472' xml:id='l2h-472'>TracebackType</tt></b></dt>
+<dd>
+The type of traceback objects such as found in
+<code>sys.exc_traceback</code>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-473' xml:id='l2h-473'>FrameType</tt></b></dt>
+<dd>
+The type of frame objects such as found in <code>tb.tb_frame</code> if
+<code>tb</code> is a traceback object.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-474' xml:id='l2h-474'>BufferType</tt></b></dt>
+<dd>
+The type of buffer objects created by the
+<tt class="function">buffer()</tt><a id='l2h-475' xml:id='l2h-475'></a> function.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-476' xml:id='l2h-476'>StringTypes</tt></b></dt>
+<dd>
+A sequence containing <code>StringType</code> and <code>UnicodeType</code> used to
+facilitate easier checking for any string object.  Using this is more
+portable than using a sequence of the two string types constructed
+elsewhere since it only contains <code>UnicodeType</code> if it has been
+built in the running version of Python.  For example:
+<code>isinstance(s, types.StringTypes)</code>.
+
+<span class="versionnote">New in version 2.2.</span>
+
+</dd></dl>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.5.1 atexit Example"
+  href="atexit-example.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3. Python Runtime Services"
+  href="python.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.7 UserDict  "
+  href="module-UserDict.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="atexit-example.html">3.5.1 atexit Example</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="python.html">3. Python Runtime Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-UserDict.html">3.7 UserDict  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

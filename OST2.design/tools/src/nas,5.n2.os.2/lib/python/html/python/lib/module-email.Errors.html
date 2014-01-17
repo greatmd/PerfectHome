@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-email.Utils.html" />
+<link rel="prev" href="module-email.Encoders.html" />
+<link rel="parent" href="module-email.html" />
+<link rel="next" href="module-email.Utils.html" />
+<meta name='aesop' content='information' />
+<title>12.2.8 Exception and Defect classes</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.2.7 Encoders"
+  href="module-email.Encoders.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.2 email  "
+  href="module-email.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.2.9 Miscellaneous utilities"
+  href="module-email.Utils.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-email.Encoders.html">12.2.7 Encoders</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-email.html">12.2 email  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-email.Utils.html">12.2.9 Miscellaneous utilities</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0014280000000000000000">
+12.2.8 Exception and Defect classes</A>
+</H2>
+<A NAME="module-email.Errors"></A>
+
+<P>
+The following exception classes are defined in the
+<tt class="module">email.Errors</tt> module:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-3936' xml:id='l2h-3936' class="exception">MessageError</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+This is the base class for all exceptions that the <tt class="module">email</tt>
+package can raise.  It is derived from the standard
+<tt class="exception">Exception</tt> class and defines no additional methods.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-3937' xml:id='l2h-3937' class="exception">MessageParseError</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+This is the base class for exceptions thrown by the <tt class="class">Parser</tt>
+class.  It is derived from <tt class="exception">MessageError</tt>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-3938' xml:id='l2h-3938' class="exception">HeaderParseError</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Raised under some error conditions when parsing the <a class="rfc" id='rfcref-90944' xml:id='rfcref-90944'
+href="http://www.faqs.org/rfcs/rfc2822.html">RFC 2822</a> headers of
+a message, this class is derived from <tt class="exception">MessageParseError</tt>.
+It can be raised from the <tt class="method">Parser.parse()</tt> or
+<tt class="method">Parser.parsestr()</tt> methods.
+
+<P>
+Situations where it can be raised include finding an envelope
+header after the first <a class="rfc" id='rfcref-90946' xml:id='rfcref-90946'
+href="http://www.faqs.org/rfcs/rfc2822.html">RFC 2822</a> header of the message, finding a
+continuation line before the first <a class="rfc" id='rfcref-90948' xml:id='rfcref-90948'
+href="http://www.faqs.org/rfcs/rfc2822.html">RFC 2822</a> header is found, or finding
+a line in the headers which is neither a header or a continuation
+line.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-3939' xml:id='l2h-3939' class="exception">BoundaryError</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Raised under some error conditions when parsing the <a class="rfc" id='rfcref-90950' xml:id='rfcref-90950'
+href="http://www.faqs.org/rfcs/rfc2822.html">RFC 2822</a> headers of
+a message, this class is derived from <tt class="exception">MessageParseError</tt>.
+It can be raised from the <tt class="method">Parser.parse()</tt> or
+<tt class="method">Parser.parsestr()</tt> methods.
+
+<P>
+Situations where it can be raised include not being able to find the
+starting or terminating boundary in a <span class="mimetype">multipart/*</span> message
+when strict parsing is used.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-3940' xml:id='l2h-3940' class="exception">MultipartConversionError</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Raised when a payload is added to a <tt class="class">Message</tt> object using
+<tt class="method">add_payload()</tt>, but the payload is already a scalar and the
+message's <span class="mailheader">Content-Type:</span> main type is not either
+<span class="mimetype">multipart</span> or missing.  <tt class="exception">MultipartConversionError</tt>
+multiply inherits from <tt class="exception">MessageError</tt> and the built-in
+<tt class="exception">TypeError</tt>.
+
+<P>
+Since <tt class="method">Message.add_payload()</tt> is deprecated, this exception is
+rarely raised in practice.  However the exception may also be raised
+if the <tt class="method">attach()</tt> method is called on an instance of a class
+derived from <tt class="class">MIMENonMultipart</tt> (e.g. <tt class="class">MIMEImage</tt>).
+</dl>
+
+<P>
+Here's the list of the defects that the <tt class="class">FeedParser</tt> can find while
+parsing messages.  Note that the defects are added to the message where the
+problem was found, so for example, if a message nested inside a
+<span class="mimetype">multipart/alternative</span> had a malformed header, that nested message
+object would have a defect, but the containing messages would not.
+
+<P>
+All defect classes are subclassed from <tt class="class">email.Errors.MessageDefect</tt>, but
+this class is <em>not</em> an exception!
+
+<P>
+
+<span class="versionnote">New in version 2.4:
+All the defect classes were added.</span>
+
+<P>
+
+<UL>
+<LI><tt class="class">NoBoundaryInMultipartDefect</tt> - A message claimed to be a
+      multipart, but had no <span class="mimetype">boundary</span> parameter.
+
+<P>
+</LI>
+<LI><tt class="class">StartBoundaryNotFoundDefect</tt> - The start boundary claimed in the
+      <span class="mailheader">Content-Type:</span> header was never found.
+
+<P>
+</LI>
+<LI><tt class="class">FirstHeaderLineIsContinuationDefect</tt> - The message had a
+      continuation line as its first header line.
+
+<P>
+</LI>
+<LI><tt class="class">MisplacedEnvelopeHeaderDefect</tt> - A ``Unix From'' header was found
+      in the middle of a header block.
+
+<P>
+</LI>
+<LI><tt class="class">MalformedHeaderDefect</tt> - A header was found that was missing a
+      colon, or was otherwise malformed.
+
+<P>
+</LI>
+<LI><tt class="class">MultipartInvariantViolationDefect</tt> - A message claimed to be a
+      <span class="mimetype">multipart</span>, but no subparts were found.  Note that when a
+      message has this defect, its <tt class="method">is_multipart()</tt> method may return
+      false even though its content type claims to be <span class="mimetype">multipart</span>.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.2.7 Encoders"
+  href="module-email.Encoders.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.2 email  "
+  href="module-email.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.2.9 Miscellaneous utilities"
+  href="module-email.Utils.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-email.Encoders.html">12.2.7 Encoders</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-email.html">12.2 email  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-email.Utils.html">12.2.9 Miscellaneous utilities</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

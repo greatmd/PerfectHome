@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-statcache.html" />
+<link rel="prev" href="module-dircache.html" />
+<link rel="parent" href="allos.html" />
+<link rel="next" href="module-statcache.html" />
+<meta name='aesop' content='information' />
+<title>6.4 stat -- Interpreting stat() results</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.3 dircache  "
+  href="module-dircache.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.5 statcache  "
+  href="module-statcache.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-dircache.html">6.3 dircache  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-statcache.html">6.5 statcache  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008400000000000000000">
+6.4 <tt class="module">stat</tt> --
+         Interpreting <tt class="function">stat()</tt> results</A>
+</H1>
+
+<P>
+<A NAME="module-stat"></A>
+
+<P>
+The <tt class="module">stat</tt> module defines constants and functions for
+interpreting the results of <tt class="function">os.stat()</tt>,
+<tt class="function">os.fstat()</tt> and <tt class="function">os.lstat()</tt> (if they exist).  For
+complete details about the <tt class="cfunction">stat()</tt>, <tt class="cfunction">fstat()</tt> and
+<tt class="cfunction">lstat()</tt> calls, consult the documentation for your system.
+
+<P>
+The <tt class="module">stat</tt> module defines the following functions to test for
+specific file types:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1776' xml:id='l2h-1776' class="function">S_ISDIR</tt></b>(</nobr></td>
+  <td><var>mode</var>)</td></tr></table></dt>
+<dd>
+Return non-zero if the mode is from a directory.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1777' xml:id='l2h-1777' class="function">S_ISCHR</tt></b>(</nobr></td>
+  <td><var>mode</var>)</td></tr></table></dt>
+<dd>
+Return non-zero if the mode is from a character special device file.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1778' xml:id='l2h-1778' class="function">S_ISBLK</tt></b>(</nobr></td>
+  <td><var>mode</var>)</td></tr></table></dt>
+<dd>
+Return non-zero if the mode is from a block special device file.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1779' xml:id='l2h-1779' class="function">S_ISREG</tt></b>(</nobr></td>
+  <td><var>mode</var>)</td></tr></table></dt>
+<dd>
+Return non-zero if the mode is from a regular file.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1780' xml:id='l2h-1780' class="function">S_ISFIFO</tt></b>(</nobr></td>
+  <td><var>mode</var>)</td></tr></table></dt>
+<dd>
+Return non-zero if the mode is from a FIFO (named pipe).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1781' xml:id='l2h-1781' class="function">S_ISLNK</tt></b>(</nobr></td>
+  <td><var>mode</var>)</td></tr></table></dt>
+<dd>
+Return non-zero if the mode is from a symbolic link.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1782' xml:id='l2h-1782' class="function">S_ISSOCK</tt></b>(</nobr></td>
+  <td><var>mode</var>)</td></tr></table></dt>
+<dd>
+Return non-zero if the mode is from a socket.
+</dl>
+
+<P>
+Two additional functions are defined for more general manipulation of
+the file's mode:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1783' xml:id='l2h-1783' class="function">S_IMODE</tt></b>(</nobr></td>
+  <td><var>mode</var>)</td></tr></table></dt>
+<dd>
+Return the portion of the file's mode that can be set by
+<tt class="function">os.chmod()</tt>--that is, the file's permission bits, plus the
+sticky bit, set-group-id, and set-user-id bits (on systems that support
+them).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1784' xml:id='l2h-1784' class="function">S_IFMT</tt></b>(</nobr></td>
+  <td><var>mode</var>)</td></tr></table></dt>
+<dd>
+Return the portion of the file's mode that describes the file type (used
+by the <tt class="function">S_IS*()</tt> functions above).
+</dl>
+
+<P>
+Normally, you would use the <tt class="function">os.path.is*()</tt> functions for
+testing the type of a file; the functions here are useful when you are
+doing multiple tests of the same file and wish to avoid the overhead of
+the <tt class="cfunction">stat()</tt> system call for each test.  These are also
+useful when checking for information about a file that isn't handled
+by <tt class="module"><a href="module-os.path.html">os.path</a></tt>, like the tests for block and character
+devices.
+
+<P>
+All the variables below are simply symbolic indexes into the 10-tuple
+returned by <tt class="function">os.stat()</tt>, <tt class="function">os.fstat()</tt> or
+<tt class="function">os.lstat()</tt>.
+
+<P>
+<dl><dt><b><tt id='l2h-1785' xml:id='l2h-1785'>ST_MODE</tt></b></dt>
+<dd>
+Inode protection mode.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1786' xml:id='l2h-1786'>ST_INO</tt></b></dt>
+<dd>
+Inode number.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1787' xml:id='l2h-1787'>ST_DEV</tt></b></dt>
+<dd>
+Device inode resides on.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1788' xml:id='l2h-1788'>ST_NLINK</tt></b></dt>
+<dd>
+Number of links to the inode.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1789' xml:id='l2h-1789'>ST_UID</tt></b></dt>
+<dd>
+User id of the owner.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1790' xml:id='l2h-1790'>ST_GID</tt></b></dt>
+<dd>
+Group id of the owner.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1791' xml:id='l2h-1791'>ST_SIZE</tt></b></dt>
+<dd>
+Size in bytes of a plain file; amount of data waiting on some special
+files.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1792' xml:id='l2h-1792'>ST_ATIME</tt></b></dt>
+<dd>
+Time of last access.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1793' xml:id='l2h-1793'>ST_MTIME</tt></b></dt>
+<dd>
+Time of last modification.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1794' xml:id='l2h-1794'>ST_CTIME</tt></b></dt>
+<dd>
+The ``ctime'' as reported by the operating system.  On some systems
+(like <span class="Unix">Unix</span>) is the time of the last metadata change, and, on others
+(like Windows), is the creation time (see platform documentation for
+details).
+</dd></dl>
+
+<P>
+The interpretation of ``file size'' changes according to the file
+type.  For plain files this is the size of the file in bytes.  For
+FIFOs and sockets under most flavors of <span class="Unix">Unix</span> (including Linux in
+particular), the ``size'' is the number of bytes waiting to be read at
+the time of the call to <tt class="function">os.stat()</tt>, <tt class="function">os.fstat()</tt>,
+or <tt class="function">os.lstat()</tt>; this can sometimes be useful, especially for
+polling one of these special files after a non-blocking open.  The
+meaning of the size field for other character and block devices varies
+more, depending on the implementation of the underlying system call.
+
+<P>
+Example:
+
+<P>
+<div class="verbatim"><pre>
+import os, sys
+from stat import *
+
+def walktree(top, callback):
+    '''recursively descend the directory tree rooted at top,
+       calling the callback function for each regular file'''
+
+    for f in os.listdir(top):
+        pathname = os.path.join(top, f)
+        mode = os.stat(pathname)[ST_MODE]
+        if S_ISDIR(mode):
+            # It's a directory, recurse into it
+            walktree(pathname, callback)
+        elif S_ISREG(mode):
+            # It's a file, call the callback function
+            callback(pathname)
+        else:
+            # Unknown file type, print a message
+            print 'Skipping %s' % pathname
+
+def visitfile(file):
+    print 'visiting', file
+
+if __name__ == '__main__':
+    walktree(sys.argv[1], visitfile)
+</pre></div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.3 dircache  "
+  href="module-dircache.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.5 statcache  "
+  href="module-statcache.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-dircache.html">6.3 dircache  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-statcache.html">6.5 statcache  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

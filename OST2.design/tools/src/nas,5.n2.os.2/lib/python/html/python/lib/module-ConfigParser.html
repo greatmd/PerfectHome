@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-fileinput.html" />
+<link rel="prev" href="module-itertools.html" />
+<link rel="parent" href="misc.html" />
+<link rel="next" href="RawConfigParser-objects.html" />
+<meta name='aesop' content='information' />
+<title>5.17 ConfigParser -- Configuration file parser</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.16.3 Recipes"
+  href="itertools-recipes.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5. Miscellaneous Services"
+  href="misc.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.17.1 RawConfigParser Objects"
+  href="RawConfigParser-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="itertools-recipes.html">5.16.3 Recipes</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="misc.html">5. Miscellaneous Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="RawConfigParser-objects.html">5.17.1 RawConfigParser Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0071700000000000000000">
+5.17 <tt class="module">ConfigParser</tt> --
+         Configuration file parser</A>
+</H1>
+
+<P>
+<A NAME="module-ConfigParser"></A>
+
+<P>
+This module defines the class <tt class="class">ConfigParser</tt>.
+<a id='l2h-1398' xml:id='l2h-1398'></a><a id='l2h-1399' xml:id='l2h-1399'></a><a id='l2h-1413' xml:id='l2h-1413'></a>
+The <tt class="class">ConfigParser</tt> class implements a basic configuration file
+parser language which provides a structure similar to what you would
+find on Microsoft Windows INI files.  You can use this to write Python
+programs which can be customized by end users easily.
+
+<P>
+<div class="warning"><b class="label">Warning:</b>
+
+  This library does <em>not</em> interpret or write the value-type
+  prefixes used in the Windows Registry extended version of INI syntax.
+</div>
+
+<P>
+The configuration file consists of sections, led by a
+"<tt class="samp">[section]</tt>" header and followed by "<tt class="samp">name: value</tt>" entries,
+with continuations in the style of <a class="rfc" id='rfcref-87570' xml:id='rfcref-87570'
+href="http://www.faqs.org/rfcs/rfc822.html">RFC 822</a>; "<tt class="samp">name=value</tt>" is
+also accepted.  Note that leading whitespace is removed from values.
+The optional values can contain format strings which refer to other
+values in the same section, or values in a special
+<code>DEFAULT</code> section.  Additional defaults can be provided on
+initialization and retrieval.  Lines beginning with "<tt class="character">#</tt>" or
+"<tt class="character">;</tt>" are ignored and may be used to provide comments.
+
+<P>
+For example:
+
+<P>
+<div class="verbatim"><pre>
+[My Section]
+foodir: %(dir)s/whatever
+dir=frob
+</pre></div>
+
+<P>
+would resolve the "<tt class="samp">%(dir)s</tt>" to the value of
+"<tt class="samp">dir</tt>" ("<tt class="samp">frob</tt>" in this case).  All reference expansions are
+done on demand.
+
+<P>
+Default values can be specified by passing them into the
+<tt class="class">ConfigParser</tt> constructor as a dictionary.  Additional defaults 
+may be passed into the <tt class="method">get()</tt> method which will override all
+others.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-1400' xml:id='l2h-1400' class="class">RawConfigParser</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>defaults</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+The basic configuration object.  When <var>defaults</var> is given, it is
+initialized into the dictionary of intrinsic defaults.  This class
+does not support the magical interpolation behavior.
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-1401' xml:id='l2h-1401' class="class">ConfigParser</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>defaults</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Derived class of <tt class="class">RawConfigParser</tt> that implements the magical
+interpolation feature and adds optional arguments to the <tt class="method">get()</tt>
+and <tt class="method">items()</tt> methods.  The values in <var>defaults</var> must be
+appropriate for the "<tt class="samp">%()s</tt>" string interpolation.  Note that
+<var>__name__</var> is an intrinsic default; its value is the section name,
+and will override any value provided in <var>defaults</var>.
+
+<P>
+All option names used in interpolation will be passed through the
+<tt class="method">optionxform()</tt> method just like any other option name
+reference.  For example, using the default implementation of
+<tt class="method">optionxform()</tt> (which converts option names to lower case),
+the values "<tt class="samp">foo %(bar)s</tt>" and "<tt class="samp">foo %(BAR)s</tt>" are
+equivalent.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-1402' xml:id='l2h-1402' class="class">SafeConfigParser</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>defaults</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Derived class of <tt class="class">ConfigParser</tt> that implements a more-sane
+variant of the magical interpolation feature.  This implementation is
+more predictable as well.
+New applications should prefer this version if they don't need to be
+compatible with older versions of Python.
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-1403' xml:id='l2h-1403' class="exception">NoSectionError</tt></b></dt>
+<dd>
+Exception raised when a specified section is not found.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-1404' xml:id='l2h-1404' class="exception">DuplicateSectionError</tt></b></dt>
+<dd>
+Exception raised if <tt class="method">add_section()</tt> is called with the name of
+a section that is already present.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-1405' xml:id='l2h-1405' class="exception">NoOptionError</tt></b></dt>
+<dd>
+Exception raised when a specified option is not found in the specified 
+section.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-1406' xml:id='l2h-1406' class="exception">InterpolationError</tt></b></dt>
+<dd>
+Base class for exceptions raised when problems occur performing string
+interpolation.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-1407' xml:id='l2h-1407' class="exception">InterpolationDepthError</tt></b></dt>
+<dd>
+Exception raised when string interpolation cannot be completed because
+the number of iterations exceeds <tt class="constant">MAX_INTERPOLATION_DEPTH</tt>.
+Subclass of <tt class="exception">InterpolationError</tt>.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-1408' xml:id='l2h-1408' class="exception">InterpolationMissingOptionError</tt></b></dt>
+<dd>
+Exception raised when an option referenced from a value does not exist.
+Subclass of <tt class="exception">InterpolationError</tt>.
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-1409' xml:id='l2h-1409' class="exception">InterpolationSyntaxError</tt></b></dt>
+<dd>
+Exception raised when the source text into which substitutions are
+made does not conform to the required syntax.
+Subclass of <tt class="exception">InterpolationError</tt>.
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-1410' xml:id='l2h-1410' class="exception">MissingSectionHeaderError</tt></b></dt>
+<dd>
+Exception raised when attempting to parse a file which has no section
+headers.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-1411' xml:id='l2h-1411' class="exception">ParsingError</tt></b></dt>
+<dd>
+Exception raised when errors occur attempting to parse a file.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1412' xml:id='l2h-1412'>MAX_INTERPOLATION_DEPTH</tt></b></dt>
+<dd>
+The maximum depth for recursive interpolation for <tt class="method">get()</tt> when
+the <var>raw</var> parameter is false.  This is relevant only for the
+<tt class="class">ConfigParser</tt> class.
+</dd></dl>
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-shlex.html">shlex</a></tt>:</b>
+    <dd>Support for a creating <span class="Unix">Unix</span> shell-like
+                    mini-languages which can be used as an alternate
+                    format for application configuration files.
+  </dl>
+</div>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="RawConfigParser-objects.html">5.17.1 RawConfigParser Objects</a>
+<LI><A href="ConfigParser-objects.html">5.17.2 ConfigParser Objects</a>
+<LI><A href="SafeConfigParser-objects.html">5.17.3 SafeConfigParser Objects</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.16.3 Recipes"
+  href="itertools-recipes.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5. Miscellaneous Services"
+  href="misc.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.17.1 RawConfigParser Objects"
+  href="RawConfigParser-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="itertools-recipes.html">5.16.3 Recipes</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="misc.html">5. Miscellaneous Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="RawConfigParser-objects.html">5.17.1 RawConfigParser Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-mailcap.html" />
+<link rel="prev" href="module-formatter.html" />
+<link rel="parent" href="netdata.html" />
+<link rel="next" href="module-email.Message.html" />
+<meta name='aesop' content='information' />
+<title>12.2 email -- An email and MIME handling package</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.1.4 Writer Implementations"
+  href="writer-impls.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12. Internet Data Handling"
+  href="netdata.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.2.1 Representing an email"
+  href="module-email.Message.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="writer-impls.html">12.1.4 Writer Implementations</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="netdata.html">12. Internet Data Handling</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-email.Message.html">12.2.1 Representing an email</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0014200000000000000000">
+12.2 <tt class="module">email</tt> --
+	 An email and MIME handling package</A>
+</H1>
+
+<P>
+<A NAME="module-email"></A>
+
+<P>
+
+<span class="versionnote">New in version 2.2.</span>
+
+<P>
+The <tt class="module">email</tt> package is a library for managing email messages,
+including MIME and other <a class="rfc" id='rfcref-90746' xml:id='rfcref-90746'
+href="http://www.faqs.org/rfcs/rfc2822.html">RFC 2822</a>-based message documents.  It
+subsumes most of the functionality in several older standard modules
+such as <tt class="module"><a href="module-rfc822.html">rfc822</a></tt>, <tt class="module"><a href="module-mimetools.html">mimetools</a></tt>,
+<tt class="module"><a href="module-multifile.html">multifile</a></tt>, and other non-standard packages such as
+<tt class="module">mimecntl</tt>.  It is specifically <em>not</em> designed to do any
+sending of email messages to SMTP (<a class="rfc" id='rfcref-90748' xml:id='rfcref-90748'
+href="http://www.faqs.org/rfcs/rfc2821.html">RFC 2821</a>) servers; that is the
+function of the <tt class="module"><a href="module-smtplib.html">smtplib</a></tt> module.  The <tt class="module">email</tt>
+package attempts to be as RFC-compliant as possible, supporting in
+addition to <a class="rfc" id='rfcref-90750' xml:id='rfcref-90750'
+href="http://www.faqs.org/rfcs/rfc2822.html">RFC 2822</a>, such MIME-related RFCs as
+<a class="rfc" id='rfcref-90752' xml:id='rfcref-90752'
+href="http://www.faqs.org/rfcs/rfc2045.html">RFC 2045</a>, <a class="rfc" id='rfcref-90754' xml:id='rfcref-90754'
+href="http://www.faqs.org/rfcs/rfc2046.html">RFC 2046</a>, <a class="rfc" id='rfcref-90756' xml:id='rfcref-90756'
+href="http://www.faqs.org/rfcs/rfc2047.html">RFC 2047</a>, and <a class="rfc" id='rfcref-90758' xml:id='rfcref-90758'
+href="http://www.faqs.org/rfcs/rfc2231.html">RFC 2231</a>.
+
+<P>
+The primary distinguishing feature of the <tt class="module">email</tt> package is
+that it splits the parsing and generating of email messages from the
+internal <em>object model</em> representation of email.  Applications
+using the <tt class="module">email</tt> package deal primarily with objects; you can
+add sub-objects to messages, remove sub-objects from messages,
+completely re-arrange the contents, etc.  There is a separate parser
+and a separate generator which handles the transformation from flat
+text to the object model, and then back to flat text again.  There
+are also handy subclasses for some common MIME object types, and a few
+miscellaneous utilities that help with such common tasks as extracting
+and parsing message field values, creating RFC-compliant dates, etc.
+
+<P>
+The following sections describe the functionality of the
+<tt class="module">email</tt> package.  The ordering follows a progression that
+should be common in applications: an email message is read as flat
+text from a file or other source, the text is parsed to produce the
+object structure of the email message, this structure is manipulated,
+and finally rendered back into flat text.
+
+<P>
+It is perfectly feasible to create the object structure out of whole
+cloth -- i.e. completely from scratch.  From there, a similar
+progression can be taken as above.
+
+<P>
+Also included are detailed specifications of all the classes and
+modules that the <tt class="module">email</tt> package provides, the exception
+classes you might encounter while using the <tt class="module">email</tt> package,
+some auxiliary utilities, and a few examples.  For users of the older
+<tt class="module">mimelib</tt> package, or previous versions of the <tt class="module">email</tt>
+package, a section on differences and porting is provided.
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+    <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-smtplib.html">smtplib</a></tt>:</b>
+    <dd>SMTP protocol client.
+  </dl>
+</div>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="module-email.Message.html">12.2.1 Representing an email message</a>
+<UL>
+<LI><A href="node581.html">12.2.1.1 Deprecated methods</a>
+</ul>
+<LI><A href="module-email.Parser.html">12.2.2 Parsing email messages</a>
+<UL>
+<LI><A href="node583.html">12.2.2.1 FeedParser API</a>
+<LI><A href="node584.html">12.2.2.2 Parser class API</a>
+<LI><A href="node585.html">12.2.2.3 Additional notes</a>
+</ul>
+<LI><A href="module-email.Generator.html">12.2.3 Generating MIME documents</a>
+<UL>
+<LI><A href="node587.html">12.2.3.1 Deprecated methods</a>
+</ul>
+<LI><A href="node588.html">12.2.4 Creating email and MIME objects from scratch</a>
+<LI><A href="module-email.Header.html">12.2.5 Internationalized headers</a>
+<LI><A href="module-email.Charset.html">12.2.6 Representing character sets</a>
+<LI><A href="module-email.Encoders.html">12.2.7 Encoders</a>
+<LI><A href="module-email.Errors.html">12.2.8 Exception and Defect classes</a>
+<LI><A href="module-email.Utils.html">12.2.9 Miscellaneous utilities</a>
+<LI><A href="module-email.Iterators.html">12.2.10 Iterators</a>
+<LI><A href="node595.html">12.2.11 Package History</a>
+<LI><A href="node596.html">12.2.12 Differences from <tt class="module">mimelib</tt></a>
+<LI><A href="node597.html">12.2.13 Examples</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.1.4 Writer Implementations"
+  href="writer-impls.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12. Internet Data Handling"
+  href="netdata.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.2.1 Representing an email"
+  href="module-email.Message.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="writer-impls.html">12.1.4 Writer Implementations</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="netdata.html">12. Internet Data Handling</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-email.Message.html">12.2.1 Representing an email</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

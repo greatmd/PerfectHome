@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-mimetools.html" />
+<link rel="prev" href="module-mailbox.html" />
+<link rel="parent" href="netdata.html" />
+<link rel="next" href="mh-objects.html" />
+<meta name='aesop' content='information' />
+<title>12.5 mhlib -- Access to MH mailboxes</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.4.1 Mailbox Objects"
+  href="mailbox-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12. Internet Data Handling"
+  href="netdata.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.5.1 MH Objects"
+  href="mh-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="mailbox-objects.html">12.4.1 Mailbox Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="netdata.html">12. Internet Data Handling</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="mh-objects.html">12.5.1 MH Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0014500000000000000000">
+12.5 <tt class="module">mhlib</tt> --
+         Access to MH mailboxes</A>
+</H1>
+
+<P>
+<A NAME="module-mhlib"></A>
+
+<P>
+The <tt class="module">mhlib</tt> module provides a Python interface to MH folders and
+their contents.
+
+<P>
+The module contains three basic classes, <tt class="class">MH</tt>, which represents a
+particular collection of folders, <tt class="class">Folder</tt>, which represents a single
+folder, and <tt class="class">Message</tt>, which represents a single message.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-3972' xml:id='l2h-3972' class="class">MH</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>path</var><big>[</big><var>, profile</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+<tt class="class">MH</tt> represents a collection of MH folders.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-3973' xml:id='l2h-3973' class="class">Folder</tt></b>(</nobr></td>
+  <td><var>mh, name</var>)</td></tr></table></dt>
+<dd>
+The <tt class="class">Folder</tt> class represents a single folder and its messages.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-3974' xml:id='l2h-3974' class="class">Message</tt></b>(</nobr></td>
+  <td><var>folder, number</var><big>[</big><var>, name</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+<tt class="class">Message</tt> objects represent individual messages in a folder.  The
+Message class is derived from <tt class="class">mimetools.Message</tt>.
+</dl>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="mh-objects.html">12.5.1 MH Objects</a>
+<LI><A href="mh-folder-objects.html">12.5.2 Folder Objects</a>
+<LI><A href="mh-message-objects.html">12.5.3 Message Objects</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.4.1 Mailbox Objects"
+  href="mailbox-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12. Internet Data Handling"
+  href="netdata.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.5.1 MH Objects"
+  href="mh-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="mailbox-objects.html">12.4.1 Mailbox Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="netdata.html">12. Internet Data Handling</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="mh-objects.html">12.5.1 MH Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

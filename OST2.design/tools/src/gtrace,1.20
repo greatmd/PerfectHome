@@ -1,0 +1,2088 @@
+#!/usr/bin/perl
+use strict;
+use Getopt::Long;
+
+$|=1;
+
+# Script to aid tracing and debugging assembly language diags with the N2 based
+# sparc bench. The script reads in the vcs.log file and extracts executed
+# instruction and state deltas from the log file. It then allows for printing
+# the architeced state at any instruction boundary.
+#
+# Requires that the log file have the state delta information (+show_delta).
+#
+#
+# $state{$thread}{$instr}{$regname} = value;
+# $trace{$thread}{$instr} =  <string>
+# $fulltrace{$instr} =  <string>
+# $delta{$thread}{$instr}{reg} = value
+# $current{$thread} = <current instr number>
+#
+# Track CWP/GL and display for appropriate CWP/GL
+# $cwp{$thread}{win}{instr}{regname} = value
+# $gl{$thread}{level}{instr}{regname} = value
+
+# Symbols
+# $symbols{address} = label
+# $offset{tid}{address} = label+offset
+
+my $debug = 0;
+
+chomp(my $prog=`basename $0`);
+#chomp(my $progpath=`dirname $0`);
+my $progpath = $ENV{DV_ROOT}."/tools/src";
+print "$prog ";
+
+my $logfile = "vcs.log";
+my $saslog = 0;
+our $newsasformat = 0;
+my $symfile = "symbol.tbl";
+my $diagexe = "diag.exe";
+our $dis_cmd = (-x "$progpath/dis") ?  "$progpath/dis " : "g_objdump -dS ";
+my $have_symbols = 0;
+my $have_pa = 0;
+my $nosas = 0;
+my $have_disas = 0;
+my $nodisas = 0;
+my $usedis = 0;
+our %state;
+our %regmap;
+my %trace;
+my %fulltrace;
+my %expdelta;
+my %actdelta;
+my %symbols;
+my @sorted_symbols;
+my %offset;
+my %disas;
+my %cwp;
+my %gl;
+my %delta;
+my %current;
+my %current_label;
+my %last;
+my $line;
+my $numthreads = 0;
+our $num_threads_per_node = 64;
+our $num_threads_per_core = 8;
+my $i;
+my $tid = 9999;
+my $merge = 0;
+my $instr;
+my $char = 0;
+my $cores = "";
+my $only_cores = "";
+my $trace = 0;
+my $maxwin = 8;
+my $maxgl = 4;
+my @delta_index;
+my $statetype = 0;  # Expected = 0, Actual = 1
+my $prevstate = 0;
+my $temp;
+my $maxtime = 0;
+my $gates = 0;
+
+my $addr_blurb = "Consume less. Share more. Enjoy life";
+my $status_blurb = "Insanity: Doing The Same Thing Over And Over Again And Expecting Different Results.";
+
+# Reg definitions and expansions {{{
+my @globals = qw(g0 g1 g2 g3 g4 g5 g6 g7);
+my @windows = qw(o0 o1 o2 o3 o4 o5 o6 o7
+                 l0 l1 l2 l3 l4 l5 l6 l7
+                 i0 i1 i2 i3 i4 i5 i6 i7);
+
+our @allregs = qw(f0 f2 f4 f6 f8 f10 f12 f14 
+                 f16 f18 f20 f22 f24 f26 f28 f30 
+                 f32 f34 f36 f38 f40 f42 f44 f46 
+                 f48 f50 f52 f54 f56 f58 f60 f62 
+                 PC NPC CWP CCR FPRS FSR PSTATE 
+                 HPSTATE ASI TICK TL PIL 
+                 CANSAVE CANRESTORE CLEANWIN OTHERWIN
+                 VER WSTATE GL TBA HTBA
+                 TICK_CMPR STICK_CMPR HSTICK_CMPR 
+                 HINTP SOFTINT GSR INTR_RECEIVE
+                 TPC1 TNPC1 TSTATE1 TT1
+                 TPC2 TNPC2 TSTATE2 TT2
+                 TPC3 TNPC3 TSTATE3 TT3
+                 TPC4 TNPC4 TSTATE4 TT4
+                 TPC5 TNPC5 TSTATE5 TT5
+                 TPC6 TNPC6 TSTATE6 TT6
+                 HTSTATE1 HTSTATE2 HTSTATE3 HTSTATE4
+                 HTSTATE5 HTSTATE6 
+                 LSU_CONTROL WATCHPOINT_ADDR
+                 CTXT_PRIM_0 CTXT_SEC_0
+                 CTXT_PRIM_1 CTXT_SEC_1
+                 I_TAG_ACC D_TAG_ACC DSFAR
+                 CTXT_Z_TSB_CFG0 CTXT_Z_TSB_CFG1
+                 CTXT_Z_TSB_CFG2 CTXT_Z_TSB_CFG3
+                 CTXT_NZ_TSB_CFG0 CTXT_NZ_TSB_CFG1
+                 CTXT_NZ_TSB_CFG2 CTXT_NZ_TSB_CFG3  
+                 ) ;
+
+our %expandreg = (
+                  "HPSTATE" => {'0:0'=>"tlz", '2:2'=>"hpriv", '5:5'=>"red",
+                                '10:10'=>"ibe"},
+                  "PSTATE" =>  {'1:1'=>"ie", '2:2'=>"priv", '3:3'=>"am",
+                                '4:4'=>"pef", '8:8'=>"tle", '9:9'=>"cle",
+                                '12:12'=>"tct"},
+                  "CCR" => {'0:0'=>"icc.c", '1:1'=>"icc.v", '2:2'=>"icc.z",
+                            '3:3'=>"\nicc.n",
+                            '4:4'=>"xcc.c", '5:5'=>"xcc.v", '6:6'=>"xcc.z",
+                            '7:7' =>"xcc.n"},
+                  "FPRS" => {'0:0'=>"dl", '2:2'=>"du", '3:3'=>"fef"},
+                  "FSR" =>  {'10:11'=>"fcc0",'5:9'=>"aexc",'0:4'=>"cexc",
+                             '13:13'=>"qne",'14:16'=>"ftt",'17:19'=>"\nver",
+                             '22:22'=>"ns",'23:27'=>"tem",'30:31'=>"rd",
+                             '32:33'=>"fcc1",'34:35'=>"fcc2",'36:37'=>"fcc3"},
+                  "GSR" => {'0:2'=>"align", '3:7'=>"scale", '8:15'=>"gcc",
+                            '24:24'=>"gq_rdy", '25.:6'=>"irnd", '27:27'=>"\nim",
+                            '32:63'=>"mask"},
+                  "TSTATE1" => {'0:4'=>"cwp", '8:20'=>"\npstate",
+                                '24:31'=>"asi", '32:39'=>"ccr",
+                                '40:43'=>"gl"},
+                  "TSTATE2" => {'0:4'=>"cwp", '8:20'=>"\npstate",
+                                '24:31'=>"asi", '32:39'=>"ccr",
+                                '40:43'=>"gl"},
+                  "TSTATE3" => {'0:4'=>"cwp", '8:20'=>"\npstate",
+                                '24:31'=>"asi", '32:39'=>"ccr",
+                                '40:43'=>"gl"},
+                  "TSTATE4" => {'0:4'=>"cwp", '8:20'=>"\npstate",
+                                '24:31'=>"asi", '32:39'=>"ccr",
+                                '40:43'=>"gl"},
+                  "TSTATE5" => {'0:4'=>"cwp", '8:20'=>"\npstate",
+                                '24:31'=>"asi", '32:39'=>"ccr",
+                                '40:43'=>"gl"},
+                  "TSTATE6" => {'0:4'=>"cwp", '8:20'=>"\npstate",
+                                '24:31'=>"asi", '32:39'=>"ccr",
+                                '40:43'=>"gl"},
+                  "LSU_CONTROL" => { '0:0'=>"ic", '1:1'=>"dc", '2:2'=>"im", 
+                                '3:3'=>"dm", '4:4'=>"se", '23:23'=>"we", '24:24'=>"re", 
+                                '25:32'=>"bm", '33:34'=>"mode"},
+                  "CTXT_Z_TSB_CFG0" => {'0:3'=>"tsb_size", '4:6'=>"page_size", 
+                                        '8:8'=>"\nra_not_pa", '13:39'=>"\ntsb_base", 
+                                        '61:61'=>"use_context_1", '62:62'=>"use_context_0", 
+                                        '63:63'=>"enable"},
+                  "CTXT_Z_TSB_CFG1" => {'0:3'=>"tsb_size", '4:6'=>"page_size", 
+                                        '8:8'=>"\nra_not_pa", '13:39'=>"\ntsb_base", 
+                                        '61:61'=>"use_context_1", '62:62'=>"use_context_0", 
+                                        '63:63'=>"enable"},
+                  "CTXT_Z_TSB_CFG2" => {'0:3'=>"tsb_size", '4:6'=>"page_size", 
+                                        '8:8'=>"\nra_not_pa", '13:39'=>"\ntsb_base", 
+                                        '61:61'=>"use_context_1", '62:62'=>"use_context_0", 
+                                        '63:63'=>"enable"},
+                  "CTXT_Z_TSB_CFG3" => {'0:3'=>"tsb_size", '4:6'=>"page_size", 
+                                        '8:8'=>"\nra_not_pa", '13:39'=>"\ntsb_base", 
+                                        '61:61'=>"use_context_1", '62:62'=>"use_context_0", 
+                                        '63:63'=>"enable"},
+                  "CTXT_NZ_TSB_CFG0" => {'0:3'=>"tsb_size", '4:6'=>"page_size", 
+                                        '8:8'=>"\nra_not_pa", '13:39'=>"\ntsb_base", 
+                                        '61:61'=>"use_context_1", '62:62'=>"use_context_0", 
+                                        '63:63'=>"enable"},
+                  "CTXT_NZ_TSB_CFG1" => {'0:3'=>"tsb_size", '4:6'=>"page_size", 
+                                        '8:8'=>"\nra_not_pa", '13:39'=>"\ntsb_base", 
+                                        '61:61'=>"use_context_1", '62:62'=>"use_context_0", 
+                                        '63:63'=>"enable"},
+                  "CTXT_NZ_TSB_CFG2" => {'0:3'=>"tsb_size", '4:6'=>"page_size", 
+                                        '8:8'=>"\nra_not_pa", '13:39'=>"\ntsb_base", 
+                                        '61:61'=>"use_context_1", '62:62'=>"use_context_0", 
+                                        '63:63'=>"enable"},
+                  "CTXT_NZ_TSB_CFG3" => {'0:3'=>"tsb_size", '4:6'=>"page_size", 
+                                        '8:8'=>"\nra_not_pa", '13:39'=>"\ntsb_base", 
+                                        '61:61'=>"use_context_1", '62:62'=>"use_context_0", 
+                                        '63:63'=>"enable"},
+                 );
+
+# }}}
+
+# Project stuff ..
+my $project;
+$project = (defined($ENV{PROJECT})&& -r "$progpath/defaults.$ENV{PROJECTLC}") ?
+                    $ENV{PROJECTLC} : "generic";
+if (-r "$progpath/defaults.$project") {
+    require "$progpath/defaults.$project";
+}
+print " ($project)\n";
+
+# Help {{{
+my $help ="
+    Gtrace is a script to aid in tracing processor architectural state for
+    debugging diags.
+
+    Gtrace requires that the simulation log file contain delta state
+    information. This is generated by using \"-vcs_run_args=+show_delta\" as
+    a simulation argument.
+
+    If gtrace is being invoked with the \"-s\" option to load Riesling's
+    sas.log, then Riesling must have been run with
+    \"-sas_run_args=-DPLI_DEBUG=2\" to provide the delta state information in
+    sas.log.
+
+    Gtrace provides the following controls and aids :
+
+    Reload :
+        Reload the simulation logs without needing to quit and re-invoke
+        gtrace.
+
+    Reload Log Only :
+        Reload the simulation log ONLY without needing to quit and re-invoke
+        gtrace.
+
+    Thread Selector :
+        These checkbuttons will allow you to select which thread to trace and
+        display in the Trace and State panels. Thread 0 (T0) is the default
+        selected thread. This is a tear-away menu.
+
+        Merge All: This selection allows you to merge all thread traces
+                   together. Clicking on a trace line will display the state
+                   for the particular thread selected.
+
+    Single Stepper :
+        Single steps the trace. Incremental changes are highlighted.
+
+    Goto :
+        Quick means of going to first, last instrucion in trace window.
+
+    Show :
+        Choice of displaying the 'EXPECTED' Vs 'ACTUAL/DUT' values for logs
+        that have cosimulation enabled.
+
+    View :
+        Chose to increase or decrease font sizes in the various panes.
+
+    Tools:
+        Invoke additional debug tools
+
+    Help Button :
+        This blurb ;-)
+
+    Trace Panel :
+        This panel displays the trace of the simulation for the selected
+        thread. Clicking on a trace line will cause the State panel to
+        display the architectural state after the execution of the seleceted
+        instruction for the selected thread.
+        
+        If a symbol file is found (symbol.tbl), labels are inserted at the
+        correct positions in the trace.
+
+        Right-clicking on the panel will bring up search functions.
+
+    Label/Offset Panel :
+        Shows the current instruction's offset from nearest (previous) label.
+
+    Status Panel :
+        Shows the current instruction for which the state is being displayed.
+
+    State Panel :
+        This panel shows the architected register values at the completion of
+        the selected instruction. 
+
+        Incremental changes for the instruction selected are highlighted.
+
+        Right-clicking on the panel will bring up search functions.
+
+        Hovering the cursor over some of the registers will show exploded
+        register field settings.
+    
+    Xdefaults Support :
+        Gtrace will honor X resource attributes (typically specified in 
+        ~/.Xdefaults). Fonts, back/foreground colors etc may be secified
+        in the form :
+            gtrace*font: -adobe-courier-medium-r-normal--14-120-75-75-m-70-iso8859-1
+        or
+            gtrace*font: courier 14
+        etc, and loaded immediately using xrdb -merge ...
+        
+    Bug Reporting :
+        Please report bugs/enhancement requests in Metrax.
+
+    Pending TODOs :
+        - Save trace and state to file
+        - Show memory contents (when/where written..)
+
+";
+sub usage {
+    die "@_\n",
+        "\nINFO > Script to aid in tracing Arch state via VCS logfile.",
+        "\nINFO > The simulation must have delta state dumped at run time",
+        "\nINFO > A log file (and optionally the symbol table) must exist in ",
+        "\nINFO > the current directory or be specified as an argument\n\n",
+        "\nINFO > Usage $prog [options] " ,
+        "\nINFO > Options are :" ,
+        "\nINFO >       -log <file>  : use <file> as input instead of vcs.log",
+        "\nINFO >       -s           : expect to read sas.log instead of vcs",
+        "\nINFO >       -t           : non-gui trace to stdout",
+        "\nINFO >       -m           : Startup with all traces merged",
+        "\nINFO >       -g           : GATESIM: don't look for state-delta in vcs log file",
+        "\nINFO >       -nodis       : Skip disassembly if needing to disassemble",
+        "\nINFO >       -usedis=file : Use the specifed existing file for disassembly",
+        "\nINFO >       -x <value>   : Limit reading upto time \@<value> (vcs.log only)",
+        "\nINFO >       -c <n[,n]*>  : Scan for specified virtual cores only",
+        "\n\n";
+
+} #}}}
+&GetOptions("log=s" => \$logfile,
+            "d", => \$debug,
+            "t", => \$trace,
+            "m", => \$merge,
+            "x=i", => \$maxtime,
+            "s", => \$saslog,
+            "g", => \$gates,
+            "nodis", => \$nodisas,
+            "usedis=s", => \$usedis,
+            "c=s" => \$cores) 
+            || &usage;
+if ($saslog && $logfile eq "vcs.log") {$logfile = "sas.log"}
+if ($trace) {$char = 1}
+
+if (!$char && $ENV{DISPLAY}) {
+    use Tk;
+    use Tk::Text;
+    use Tk::Adjuster;
+    use Tk::Balloon;
+    $Tk::encodeFallback=1;
+} else {
+    $char = 1; # Non Gui mode
+}
+
+# Figure out which files are around
+if (!$gates && ! have_deltas()) {
+    usage( "\nERROR > Could not find a logfile with show_delta information.",
+        "\n         Please run simulation with \"-vcs_run_args=+show_delta\"",
+        "\n         OR \"-sas_run_args=-DPLI_DEBUG=2\" for sas deltas\"",
+        "\n\n         Exiting.\n\n");
+}
+
+# Get list of restricted cores ..
+if ($cores ne "") {
+    foreach (split(/,/, $cores)) {
+        $only_cores .= "|T$_";
+    }
+    $only_cores =~ s/^\|//;
+}
+
+bootup();
+
+###############################################################################
+# Boot Up .. Read all files .. {{{
+sub bootup {
+
+    if (-r $symfile || -r "$symfile.gz") {
+        $have_symbols = 1;
+    }
+
+    # Do the basics ..
+    %state=();
+    %trace=();
+    %fulltrace=();
+    %expdelta=();
+    %actdelta=();
+    %symbols=();
+    %disas=();
+    %cwp=();
+    %gl=();
+    %delta=();
+    if ($have_symbols) {
+        slurp_symbols();
+    }
+
+    # Do we need disassembly ?
+    if (no_sascheck()) {
+        $nosas = 1;
+        slurp_disas() if (! $nodisas);
+    }
+    if ($gates) {slurp_barelog()} 
+    elsif ($saslog) {slurp_saslog()} 
+    else {slurp_logfile()}
+} # }}}
+
+# Non GUI
+if ($trace) {
+   log_trace(); 
+} 
+
+###############################################################################
+if (!$char) {  ## {{{ GUI Stuff
+# Set up the main windows
+my $trace_t;
+my $state_t;
+my $status_t;
+my $search_m;
+my $state_m;
+my $addr_t;
+my $balloon;
+my $last_hover;
+my $main_w = new MainWindow;
+
+$main_w -> title ("gtrace :($ENV{PWD}) $logfile");
+$main_w -> iconname ("gtrace: ($ENV{PWD} $logfile");
+$main_w -> appname ('gtrace');
+$main_w -> optionClear;
+
+#### Menubar ####
+
+my $main_m = $main_w -> Menu (-type => 'menubar', -bd => 1);
+$main_w -> configure(-menu => $main_m);
+
+## File cascade 
+my $file_m = $main_m -> cascade (-label => '~File', -tearoff => 0);
+$file_m ->command(-label => 'Reload', 
+                  -command => sub {bootup();
+                                $status_t->configure(-state =>'normal');
+                                $status_t ->delete("0.0", 'end');
+                                $status_t -> insert ("0.0", "Reloading.. ");
+                                $trace_t->configure(-state=>'normal');
+                                $trace_t->delete("0.0", 'end');
+                                show_trace($trace_t, $status_t, $addr_t, $tid);
+                                $trace_t->configure(-state=>'disabled');
+                                $state_t -> configure (-state => 'normal');
+                                $state_t->delete("0.0", 'end');
+                                $state_t -> insert("0.0", show_state($tid,-1));
+                                tagstate($state_t, $balloon);
+                                tagdelta($state_t);
+                                $state_t -> configure (-state => 'disabled');
+                                $status_t ->delete("0.0", 'end');
+                                $status_t -> insert ("0.0", "Reloaded");
+                                $status_t->configure(-state =>'disabled');
+
+                  });
+$file_m ->command(-label => 'Reload Log Only', 
+                  -command => sub {
+                                if ($gates) {slurp_barelog()} 
+                                elsif ($saslog) {slurp_saslog()} 
+                                else {slurp_logfile()}
+                                $status_t->configure(-state =>'normal');
+                                $status_t ->delete("0.0", 'end');
+                                $status_t -> insert ("0.0", "Reloading.. ");
+                                $trace_t->configure(-state=>'normal');
+                                $trace_t->delete("0.0", 'end');
+                                show_trace($trace_t, $status_t, $addr_t, $tid);
+                                $trace_t->configure(-state=>'disabled');
+                                $state_t -> configure (-state => 'normal');
+                                $state_t->delete("0.0", 'end');
+                                $state_t -> insert("0.0", show_state($tid,-1));
+                                tagstate($state_t, $balloon);
+                                tagdelta($state_t);
+                                $state_t -> configure (-state => 'disabled');
+                                $status_t ->delete("0.0", 'end');
+                                $status_t -> insert ("0.0", "Reloaded");
+                                $status_t->configure(-state =>'disabled');
+                  });
+$file_m ->separator;
+$file_m ->command(-label => 'Save Current [Viewed] Trace ', 
+                  -command => sub {
+                                use Tk::FileSelect;
+                                my $tracefile
+                                    = $main_w->FileSelect(-directory=>"./")->Show;
+                                    if (defined $tracefile) {
+                                        open (TF, ">$tracefile") || 
+                                            warn "Could not open \"$tracefile\" for writing!, $!\n";
+                                        print TF $trace_t->get("0.0",'end'), "\n";
+                                        close TF;
+                                    }
+
+                  });
+$file_m ->separator;
+$file_m ->command(-label => 'Quit', -command => sub {exit});
+
+## Thread cascade
+my $tid_m = $main_m -> cascade (-label => '~Thread', -tearoff => 1);
+
+my $cid;
+$tid_m -> radiobutton (-label => 'Merge All', -variable => \$merge,
+                       -value => '1',
+                       -command => sub {
+                            $main_w->Busy; 
+                            $trace_t->configure(-state =>'normal');
+                            $trace_t ->delete ("0.0",'end');
+                            show_trace($trace_t, $status_t, $addr_t, $tid);
+                            $trace_t->configure(-state=>'disabled');
+                            $state_t->configure(-state =>'normal');
+                            $state_t ->tagRemove('delta', "1.0", 'end');
+                            $state_t ->delete("0.0", 'end');
+                            $state_t -> insert("0.0",
+                            show_state($tid,-1));
+                            tagstate($state_t,$balloon);
+                            $state_t->configure(-state=>'disabled');
+                            $main_w->Unbusy; 
+                            });
+foreach $cid (0 .. int(($numthreads-1)/$num_threads_per_core)) {
+    my $anythd = 0;
+    map {$anythd++ if ($state{$cid*$num_threads_per_core+$_})} 
+            0..$num_threads_per_core-1;
+    next if (!$anythd);
+    my $cid_m = $tid_m -> cascade (-label => 'C'.$cid, -tearoff => 1);
+    foreach (0 .. 7) {
+        $temp = $cid*$num_threads_per_core+$_;
+        my $state = 'disabled';
+        if (defined $trace{$temp}) {
+            $state = 'normal' ;
+        }
+        $cid_m -> radiobutton (-label => 'T'.$temp, -variable => \$tid,
+                -state => $state,
+                -value => $temp,
+                -command => sub {
+                                $main_w->Busy; 
+                                $merge = 0;
+                                $trace_t->configure(-state =>'normal');
+                                $trace_t ->delete ("0.0",'end');
+                                show_trace($trace_t, $status_t, $addr_t, $tid);
+                                $trace_t->configure(-state=>'disabled');
+                                $state_t->configure(-state =>'normal');
+                                $state_t ->tagRemove('delta', "1.0", 'end');
+                                $state_t ->delete("0.0", 'end');
+                                $state_t -> insert("0.0",
+                                show_state($tid,-1));
+                                tagstate($state_t, $balloon);
+                                $state_t->configure(-state=>'disabled');
+                                $main_w->Unbusy;
+                                });
+}
+}
+
+## Step cascade
+my $step_m = $main_m -> command (-label => '~Step' ,
+      -command => sub {my ($mtid, $instr) = 
+            which_instr($status_t->get ("0.0", "end"));
+            $instr = get_next_instr ($mtid, $instr);
+            $state_t->configure(-state =>'normal');
+            $state_t ->tagRemove('delta', "1.0", 'end');
+            $state_t ->delete("0.0", 'end');
+            $state_t -> insert("0.0", 
+                show_state ($mtid, $instr));
+            tagstate($state_t, $balloon);
+            tagdelta($state_t);
+            $state_t->configure(-state=>'disabled');
+            $status_t->configure(-state =>'normal');
+            $status_t ->delete("0.0", 'end');
+            $status_t
+                ->insert("0.0",$trace{$mtid}{$instr});
+            $status_t->configure(-state =>'disabled');
+            $addr_t->configure(-state =>'normal');
+            $addr_t ->delete("0.0", 'end');
+            $addr_t
+                ->insert("0.0",$offset{$mtid}{$instr});
+            $addr_t->configure(-state =>'disabled');
+            $trace_t->tagRemove('curr', '0.0', 'end');
+            my $index = $trace_t->search($trace{$mtid}{$instr}, '0.0', 'end');
+            $trace_t->tagAdd('curr',
+                $trace_t->index("$index linestart"),
+                $trace_t->index("$index lineend"));
+            $trace_t->see($trace_t->index("$index linestart"));
+              }) ;
+
+## Go To cascade
+my $goto_m = $main_m -> cascade (-label => '~Goto', -tearoff => 1) ;
+$goto_m -> command (-label => 'First', -command => sub {
+        $trace_t->see($trace_t->index("0.0 linestart"));
+            });
+$goto_m -> command (-label => 'Last',  -command => sub {
+        my $index = $trace_t->search($trace{$tid}{$last{$tid}}, '0.0','end');
+        $trace_t->see($trace_t->index("$index linestart"));
+        });
+
+## ShowType option menu
+my $showtype_m = $main_m -> cascade (-label => 'Show', -tearoff => 1) ;
+ $showtype_m -> radiobutton (-label => 'Show Expected', -value => '0', 
+                -variable => \$statetype, 
+                -command => sub { $main_w->Busy;
+                                $state_t->configure(-state =>'normal');
+                                $state_t ->tagRemove('delta', "1.0", 'end');
+                                $state_t ->delete("0.0", 'end');
+                                $state_t -> insert("0.0",
+                                show_state($tid,$current{$tid}));
+                                tagstate($state_t, $balloon);
+                                tagdelta($state_t);
+                                $state_t->configure(-state=>'disabled');
+                                $main_w->Unbusy;
+                                });
+ $showtype_m -> radiobutton (-label => 'Show Actual/DUT',  -value => '1', 
+                -variable => \$statetype, 
+                -command => sub { $main_w->Busy;
+                                $state_t->configure(-state =>'normal');
+                                $state_t ->tagRemove('delta', "1.0", 'end');
+                                $state_t ->delete("0.0", 'end');
+                                $state_t -> insert("0.0",
+                                show_state($tid,$current{$tid}));
+                                tagstate($state_t, $balloon);
+                                tagdelta($state_t);
+                                $state_t->configure(-state=>'disabled');
+                                $main_w->Unbusy;
+                                });
+
+## View Options (font etc)
+
+my $viewtype_m = $main_m -> cascade (-label => 'View', -tearoff => 0) ;
+$viewtype_m -> command (-label => 'Increase Font' ,
+                    -command => sub {
+                      my %font = $trace_t -> fontActual($state_t->cget(-font));
+                      $font{-size} += 2;
+                      $state_t ->configure(-font => [%font]);
+                      $trace_t ->configure(-font => [%font]);
+                      $addr_t ->configure(-font => [%font]);
+                      $status_t ->configure(-font => [%font]);
+                      });
+$viewtype_m -> command (-label => 'Decrease Font', 
+                    -command => sub {
+                      my %font = $trace_t -> fontActual($state_t->cget(-font));
+                      $font{-size} -= 2;
+                      $state_t ->configure(-font => [%font]);
+                      $trace_t ->configure(-font => [%font]);
+                      $addr_t ->configure(-font => [%font]);
+                      $status_t ->configure(-font => [%font]);
+                      });
+
+## Tool Options
+
+my $tooltype_m = $main_m -> cascade (-label => 'Tool', -tearoff => 0) ;
+$tooltype_m -> command (-label => 'Launch Regtool' ,
+                    -command => sub {system("regtool &")}
+                    );
+$tooltype_m -> command (-label => 'Launch Tlbtrace' ,
+                    -command => sub {system("tlbtrace &")}
+                    );
+
+## Help Cascade
+my $help_m = $main_m -> cascade (-label => '~Help', -tearoff => 0) ;
+$help_m -> command (-label => 'Blurb',  -command => sub {helptext ($main_w);});
+
+my $trace_f = $main_w -> Frame
+        -> pack (-padx => '3m', -pady => '1m', -fill => 'both', 
+                 -expand=> '1');
+$trace_f ->packAdjust();
+
+my $addr_f = $main_w ->Frame
+        -> pack (-padx => '3m', -pady => '1m', -fill => 'both', 
+                 -expand=> '0');
+
+my $status_f = $main_w ->Frame
+        -> pack (-padx => '3m', -pady => '1m', -fill => 'both', 
+                 -expand=> '0');
+
+my $state_f = $main_w ->Frame
+        -> pack (-padx => '3m', -pady => '1m', -fill => 'both', 
+                 -expand=> '1');
+$balloon = $main_w->Balloon(-balloonposition=>'mouse');
+
+#### Trace Panel ####
+$trace_t = $trace_f -> Text (-height => '20', -width => '80',
+                             -background => 'white');
+
+if($gates) {
+    $trace_t -> configure (-height => '50');
+}
+$trace_t -> tagConfigure('instr', -foreground => 'darkblue');
+$trace_t -> tagConfigure('curr', -foreground => 'darkgreen');
+$trace_t -> tagConfigure('hot', -foreground => 'red', -relief => "raised",
+                                -borderwidth => '2');
+$trace_t -> tagBind('instr', '<Button-1>',
+                            sub {$main_w->Busy; my ($text) = @_;
+                            $main_w->grabRelease;
+                            $state_t->configure(-state =>'normal');
+                            $state_t ->delete("0.0", 'end');
+                            $state_t ->tagRemove('delta', "1.0", 'end');
+                            $state_t -> insert("0.0", show_state(
+                                which_instr($text->get (
+                                $text->index("current linestart"),
+                                $text->index("current lineend")))));
+                            tagstate($state_t, $balloon);
+                            tagdelta($state_t);
+                            $state_t->configure(-state=>'disabled');
+                            $status_t->configure(-state =>'normal');
+                            $status_t->delete("0.0", 'end');
+                            $status_t->insert("0.0", $text->get (
+                                $text->index("current linestart"),
+                                $text->index("current lineend")));
+                            $status_t->configure(-state =>'disabled');
+                            $addr_t->configure(-state =>'normal');
+                            $addr_t ->delete("0.0", 'end');
+                            $addr_t
+                                ->insert("0.0",$offset{$tid}{$instr});
+                            $addr_t->configure(-state =>'disabled');
+                            $text->tagRemove('curr', '0.0', 'end');
+                            $text->tagAdd('curr',
+                                $text->index("current linestart"),
+                                $text->index("current lineend"));
+                            $text->see($text->index("current linestart"));
+                            $main_w->Unbusy;
+                            }); 
+
+$trace_t -> tagBind('instr', "<Enter>",
+                            sub { my ($text) = @_;
+                            $last_hover = $text->index("current linestart");
+                            $text->tagAdd('hot',
+                                $text->index("current linestart"),
+                                $text->index("current lineend"));
+                                $text->configure(-cursor => "hand2");
+                            });
+$trace_t -> tagBind('instr', "<Leave>",
+                            sub { my ($text) = @_;
+                            $text->tagRemove('hot',
+                                $text->index("current linestart"),
+                                $text->index("current lineend"));
+                                $text->configure(-cursor => "xterm");
+                            });
+
+$trace_t -> tagBind('instr', "<Motion>", 
+                            sub { my ($text) = @_;
+                            my $newline = $text->index("current linestart");
+                            if ($newline ne  $last_hover) {
+                                $text->tagRemove('hot', '1.0', 'end');
+                                $last_hover = $newline;
+                                $text->tagAdd('hot',  
+                                    $text->index("current linestart"),  
+                                    $text->index("current lineend"));
+                            }
+                            });
+my $trace_sv = $trace_f -> Scrollbar(-command => ['yview', $trace_t] );
+$trace_t -> configure(-yscrollcommand => ['set', $trace_sv]);
+
+$trace_sv -> pack(-side => 'right', -fill => 'y', -expand => 0,
+               -padx => '0m', -pady => '0m');
+
+$trace_t -> pack (-side => 'top', -padx => '1m', -pady => '0m',
+                 -fill => "both", -expand => 1);
+
+#### Address Panel ####
+$addr_f -> Label (-text => 'Current Label/Offset') -> pack (-side => 'left');
+$addr_t = $addr_f -> Text (-background => 'white', -height => '1', -width => '60');
+$addr_t -> pack (-side => 'top', -padx => '1m', -pady => '0m', -fill =>'y',
+                    -expand => 0);
+$addr_t -> insert ("0.0", $addr_blurb);
+$addr_t->configure(-state=>'disabled');
+
+#### Status Panel ####
+$status_t = $status_f -> Text (-background => 'white', -height => '1', -width => '85');
+$status_t -> pack (-side => 'top', -padx => '1m', -pady => '0m', -fill =>'y',
+                    -expand => 0);
+$status_t -> insert ("0.0", $status_blurb);
+$status_t->configure(-state=>'disabled');
+
+$trace_t->configure(-state=>'normal');
+show_trace($trace_t, $status_t, $addr_t, $tid);
+$trace_t->configure(-state=>'disabled');
+
+#### State Panel ####
+$state_t = $state_f -> Text (-background => 'white', -height => '34', -width => '80');
+
+$state_t -> tagConfigure('regname', -foreground => 'darkblue', 
+                                    -underline => 1);
+$state_t -> tagConfigure('delta', -foreground => 'red');
+
+if($gates) {
+    $state_t -> configure (-height => '1', background => 'gray', -foreground => 'gray');
+    $state_t -> tagConfigure('regname', -foreground => 'gray', 
+                                    -underline => 0);
+    $balloon->attach($state_t, -msg=>"No State Information Available!" );
+}
+
+my $state_sv = $state_f -> Scrollbar(-command => ['yview', $state_t] );
+$state_t -> configure(-yscrollcommand => ['set', $state_sv]);
+
+$state_sv -> pack(-side => 'right', -fill => 'y', -expand => 0,
+               -padx => '0m', -pady => '0m');
+
+$state_t -> pack (-side => 'top', -padx => '1m', -pady => '0m', -fill =>"both",
+                    -expand => 1);
+
+$state_t -> insert("0.0", show_state($tid,-1));
+tagstate($state_t, $balloon);
+
+$state_t -> configure (-state => 'disabled');
+
+$trace_t -> bind('<4>' => sub {$_[0]->yview('scroll', -3, 'units')});
+$trace_t -> bind('<5>' => sub {$_[0]->yview('scroll', +3, 'units')});
+$state_t -> bind('<4>' => sub {$_[0]->yview('scroll', -3, 'units')});
+$state_t -> bind('<5>' => sub {$_[0]->yview('scroll', +3, 'units')});
+
+
+
+$state_m = $state_t -> menu;
+$search_m = $state_m->cascade(-label=>'Find Delta', -state=>'disabled'); 
+$search_m ->command(-label =>'Previous',  -command => 
+                            sub{$instr = previous_delta ($state_t);
+                                if ($instr !~ /^[0-9]+$/o) {
+                                    $status_t->configure(-state =>'normal');
+                                    $status_t ->delete("0.0", 'end');
+                                    $status_t
+                                        ->insert("0.0","\tNo Prev Delta Found for $instr");
+                                    $status_t->configure(-state =>'disabled');
+                                    return;
+                                }
+                                $state_t->configure(-state =>'normal');
+                                $state_t ->tagRemove('delta', "1.0", 'end');
+                                $state_t ->delete("0.0", 'end');
+                                $state_t -> insert("0.0", 
+                                    show_state ($tid, $instr));
+                                tagstate($state_t, $balloon);
+                                tagdelta($state_t);
+                                $state_t->configure(-state=>'disabled');
+                                $status_t->configure(-state =>'normal');
+                                $status_t ->delete("0.0", 'end');
+                                $status_t
+                                    ->insert("0.0",$trace{$tid}{$instr});
+                                $status_t->configure(-state =>'disabled');
+                                $addr_t->configure(-state =>'normal');
+                                $addr_t ->delete("0.0", 'end');
+                                $addr_t
+                                    ->insert("0.0",$offset{$tid}{$instr});
+                                $addr_t->configure(-state =>'disabled');
+                                $trace_t->configure(-state =>'normal');
+                                my $index = $trace_t->search($trace{$tid}{$instr}, '0.0', 'end');
+                                $trace_t->tagRemove('curr', '0.0', 'end');
+                                $trace_t->tagAdd('curr',
+                                    $trace_t->index("$index linestart"),
+                                    $trace_t->index("$index lineend"));
+                                $trace_t->see($trace_t->index("$index linestart"));});
+$search_m ->command(-label =>'Next',  -command => 
+                            sub{$instr = next_delta ($state_t);
+                                if ($instr !~ /^[0-9]+$/o) {
+                                    $status_t->configure(-state =>'normal');
+                                    $status_t ->delete("0.0", 'end');
+                                    $status_t
+                                        ->insert("0.0","\tNo Next Delta Found for $instr");
+                                    $status_t->configure(-state =>'disabled');
+                                    return;
+                                }
+                                $state_t->configure(-state =>'normal');
+                                $state_t ->tagRemove('delta', "1.0", 'end');
+                                $state_t ->delete("0.0", 'end');
+                                $state_t -> insert("0.0", 
+                                    show_state ($tid, $instr));
+                                tagstate($state_t, $balloon);
+                                tagdelta($state_t);
+                                $state_t->configure(-state=>'disabled');
+                                $status_t->configure(-state =>'normal');
+                                $status_t ->delete("0.0", 'end');
+                                $status_t
+                                    ->insert("0.0",$trace{$tid}{$instr});
+                                $status_t->configure(-state =>'disabled');
+                                $addr_t->configure(-state =>'normal');
+                                $addr_t ->delete("0.0", 'end');
+                                $addr_t
+                                    ->insert("0.0",$offset{$tid}{$instr});
+                                $addr_t->configure(-state =>'disabled');
+                                $trace_t->configure(-state =>'normal');
+                                my $index = $trace_t->search($trace{$tid}{$instr}, '0.0', 'end');
+                                $trace_t->tagRemove('curr', '0.0', 'end');
+                                $trace_t->tagAdd('curr',
+                                    $trace_t->index("$index linestart"),
+                                    $trace_t->index("$index lineend"));
+                                $trace_t->see($trace_t->index("$index linestart"));});
+
+$main_w -> Label (-text => "($ENV{PWD}) $logfile") -> pack();
+MainLoop;
+
+}  # }}}
+
+###############################################################################
+#  Initialize Non-Zero State for requested threads {{{
+#
+sub init_state {
+    my $tid = shift;
+    $state{$tid}{0}{"PC"} = "0000fffff0000020";
+    $state{$tid}{0}{"NPC"} = "0000fffff0000024";
+    $state{$tid}{0}{"CCR"} = "0000000000000000";
+    $state{$tid}{0}{"FPRS"} = "0000000000000004";
+    $state{$tid}{0}{"VER"} = "003e002410030607";
+    $state{$tid}{0}{"PSTATE"} = "0000000000000014";
+    $state{$tid}{0}{"HPSTATE"} = "0000000000000024";
+    $state{$tid}{0}{"TL"} = "0000000000000006";
+    $state{$tid}{0}{"TT6"} = "0000000000000001";
+    $state{$tid}{0}{"GL"} = "0000000000000003";
+    $state{$tid}{0}{"TICK"} = "8000000000000000";
+} # }}}
+
+###############################################################################
+# Initialize trace structure for requested threads {{{
+#
+sub init_trace {
+    my $tid = shift;
+    $current{$tid} = 0;
+    foreach (@allregs) {
+        $state{$tid}{0}{$_} = "0000000000000000";
+    }
+    foreach my $win (0 .. $maxwin-1) {
+        foreach (@windows) {
+            $cwp{$tid}{$win}{0}{$_} = "0000000000000000";
+        }
+    }
+    foreach my $g (0 .. $maxgl-1) {
+        foreach (@globals) {
+            $gl{$tid}{$g}{0}{$_} = "0000000000000000";
+        }
+    }
+} #}}}
+###############################################################################
+# Read in log file and update database .. {{{
+# 
+sub slurp_logfile {
+    my $instr = 1;
+    my $expect = 0;
+    my $actual = 0;
+    my ($ttid, $mtid, $reg, $value);
+   
+    if (&have_pas) {
+        $have_pa = 1;
+    }
+    my $fn = (-r $logfile)? $logfile :"gunzip -c $logfile |";
+    open (LOG, "$fn") 
+                || usage( "ERROR > Cannot open Log file $logfile, $!\n");
+    print "INFO > Loading logfile \"$logfile\"..\n";
+    if ($only_cores ne "") {
+        print "INFO >     Restricted to reading log for core(s) $only_cores\n";
+    }
+    my %temp;
+    while ($line = <LOG>) {
+        next unless ($line =~ /^\<T\d+\>/ || $line =~ /^Dumping\s+remaining/o 
+            || $line =~ /Reg did not change/o 
+            || $line =~ /^\s*\d+:\s+\w+\[\w+_top.*?\]:\s+@\d+\s+.*?\s+T\d+/o 
+            || $line =~ /^\s*\d+:\s+\S+:\s+@\d+\s+\T\d+\s+\w*[Pp]arked/o);
+        # If DUT did not change then last read item is in expect only ..
+        if ($line =~ /DUT Reg did not change/o) {
+            $expdelta{$ttid}{$instr}{$reg} = $temp{$ttid}{$reg};
+            delete $temp{$ttid}{$reg};
+            next;
+        }
+
+        if ($line =~ /^Dumping remaining EXPECTED/o) {
+            $expect = 1; $actual = 0; next;
+        } 
+        if ($line =~ /^Dumping remaining ACTUAL/o) {
+            $actual = 1; $expect = 0; next;
+        } 
+        if ($line =~ /tb_top(\d+).*\s+T(\d+)/) {
+            my $act_tid = $2 + $1*$num_threads_per_node;
+            $line =~ s/ T\d+/ T$act_tid/; 
+        }
+        next if ($line !~ /$only_cores/o);
+        chomp($line);
+        if ($line =~ /^\<T(\d+)\>/o) {
+            $ttid = $1;
+            foreach ($line =~ m/(\w+\s*=\s*\w+)/go) {
+                ($reg,$value) = m/(\w+)\s*=\s*(\w+)/o;
+                if ($expect) {
+                    $expdelta{$ttid}{$instr}{$reg} = $value;
+                } elsif ($actual) {
+                    $actdelta{$ttid}{$instr}{$reg} = $value;
+                } else {
+                    $temp{$ttid}{$reg} = $value;
+                }
+            }
+            next;
+        }
+        if (($mtid) 
+                = $line =~ /^\s*\d+:\s+\w+\[\w+_top.*?\]:\s+.*?\s+T(\d+)/o) {
+            $line =~ s/.*\[\w+_top.*?\]:\s+@(\d+)/$1:/;
+            last if ($maxtime && $1 > $maxtime);
+            $instr = int($instr);
+            $line =~ s/(#\d+)*\s+T/ #$instr T/; # Add instr# if not present.
+
+            if (!exists ($state{$mtid}{0})) {
+                init_trace($mtid);
+                init_state($mtid);
+                $numthreads = $mtid+1 if ($numthreads<=$mtid) ;
+                $tid = $mtid if ($mtid < $tid);
+            }
+
+            if ($nosas) {
+                my ($va) = $line =~ m/T\d+\s+(\w+)/o;
+                my $sva = substr($va, -12); # Use 48 bits only
+                $line =~ s/$va/$sva/;
+                if($have_disas) {
+                    $line =~ s/\(unchecked.*?\)/$disas{$sva}/i;
+                }
+            }
+            $current{$mtid} = $instr;
+            $trace{$mtid}{$instr} = $line;
+            $fulltrace{$instr} = $line;
+            foreach (keys %{$temp{$ttid}}) {
+                $delta{$mtid}{$instr}{$_} = $temp{$ttid}{$_};
+            }
+            %temp=();
+            if ($ttid!=$mtid) {
+                $expdelta{$mtid}{$instr}{$reg} =$expdelta{$ttid}{$instr}{$reg} ;
+                $actdelta{$mtid}{$instr}{$reg} =$actdelta{$ttid}{$instr}{$reg} ;
+                delete($expdelta{$ttid}{$instr}{$reg});
+                delete($actdelta{$ttid}{$instr}{$reg});
+            }
+            $expect=0;$actual=0;
+            $instr++;
+        } elsif (($mtid) 
+                = $line =~ /^\s*\d+:\s+\S+:\s+@\d+\s+\T(\d+)\s+\w*[Pp]arked/o) {
+            $line =~ s/.*\[.*?\]:\s+@(\d+)/$1:/;
+            $instr = $instr -1 + 0.1 ;
+            $line =~ s/(#\d+)*\s+T/ #$instr T/; # Add instr# if not present.
+
+            $current{$mtid} = $instr;
+            $trace{$mtid}{$instr} = $line;
+            $fulltrace{$instr} = $line;
+            foreach (keys %{$temp{$ttid}}) {
+                $delta{$mtid}{$instr}{$_} = $temp{$ttid}{$_};
+            }
+            %temp=();
+            $expect=0;$actual=0;
+            $instr++;
+        }
+    }
+    close LOG;
+    foreach (0.. $numthreads-1) {
+        $last{$_} = $current{$_};
+        $current{$_} = 0;
+    }
+} #}}}
+###############################################################################
+# Read in SAS log file and update database .. {{{
+# 
+sub slurp_saslog {
+    my $instr = 0;
+    my $expect = 0;
+    my $actual = 0;
+    my %currwin = ();
+    my ($prevtid, $mtid, $reg, $win, $value, $pc);
+    my $fn = (-r $logfile)? $logfile :"gunzip -c $logfile |";
+    open (LOG, "$fn") 
+                || usage( "ERROR > Cannot open Log file $logfile, $!\n");
+    print "INFO > Loading logfile \"$logfile\"..\n";
+    if ($cores ne "") {
+        foreach (split(/,/, $cores)) {
+            if ($newsasformat) {
+                $only_cores .= "|^#\d+\s+T$_|STEP:\s+$_\s+";
+            } else {
+                $only_cores .= "|^T$_|STEP:\s+$_\s+";
+            }
+        }
+        $only_cores =~ s/^\|//;
+        print "INFO >     Restricted to reading log for core(s) $cores\n";
+    }
+    foreach (0..63) {
+        $currwin{$_} = 0;
+    }
+    my %temp; my $first = 1; my $sasline; my $saspcline;
+
+    if ($newsasformat) {
+        $sasline = "^#\\d+\\s+T(\\d+)\\s+|STEP:\\s+(\\d+)";
+        $saspcline = "T(\\d+).*?\\s+<v:(\\w+)>";
+    } else {
+        $sasline = "^T(\\d+)\\s+|STEP:\\s+(\\d+)";
+        $saspcline = "^T(\\d+).*?PC=0x(\\w+)";
+    }
+    while ($line = <LOG>) {
+        next unless ($line =~ /$sasline/);
+        next if ($line !~ /$only_cores/);
+        chomp($line);
+        if ($line =~ /$saspcline/o) {
+            if (!$first) {
+                foreach (keys %{$temp{$mtid}}) {
+                    $delta{$mtid}{$instr}{$_} = $temp{$mtid}{$_};
+                }
+                %temp=();
+            }
+            $instr++;
+            ($mtid, $pc) = $line =~ m/$saspcline/o ;
+            if (!exists ($state{$mtid}{0})) {
+                init_trace($mtid);
+                init_state($mtid);
+                $numthreads = $mtid+1 if ($numthreads<=$mtid) ;
+                $tid = $mtid if ($mtid < $tid);
+            }
+            $pc = substr ($pc, -12);
+            $pc = sprintf "%012llx", hex($pc);
+            if ($newsasformat) {
+                $line =~ s/^#(\d+)\s+(T\d+)\s+<(v:\w+>\s+<p:\w+>)\s+\[(.*?)\]\s+(.*)$/$1: #$1 $2 $pc [ 0x$4 ] $5/;
+            } else {
+                $line =~ s/^(T\d+)\s+ic=(\d+)\s+\((#\d+)\)\s+PC=0x(\w+)\s+(\[.*?\])\s+(.*)$/$2: $3 $1 $pc $5 $6/;
+            }
+
+            $current{$mtid} = $instr;
+            $trace{$mtid}{$instr} = $line;
+            $fulltrace{$instr} = $line;
+            $first = 0;
+            next;
+        }
+        if (($mtid) = $line =~ /STEP:\s+(\d+)\s+/) {
+            if (($reg,$value) = $line =~ /C\s+(\w+).*?\s+(\w+)/) {
+                if ($reg =~ /^[0-9]+$/) {
+                    $reg = cregname($reg);
+                }
+                $temp{$mtid}{$reg} = $value;
+                if ($reg eq "CWP") {
+                    $currwin{$mtid} = $value;
+                }
+            }elsif (($reg,$value) = $line =~ /F\s+(\d+)\s+(\w+)/) {
+                $temp{$mtid}{"f".$reg} = $value;
+            }elsif (($reg,$value) = $line =~ /G\s+\d\s+(\d+)\s+(\w+)/) {
+                $temp{$mtid}{"g".$reg} = $value;
+            }elsif (($win, $reg, $value) = $line=~ /W\s+(\d)\s+(\d+)\s+(\w+)/) {
+                $reg = getwinreg($currwin{$mtid}, $win, $reg);
+                $temp{$mtid}{$reg} = $value;
+            }
+            next;
+        }
+    }
+    close LOG;
+    foreach (0.. $numthreads-1) {
+        $last{$_} = $current{$_};
+        $current{$_} = 0;
+    }
+} #}}}
+###############################################################################
+# Get Regname for window registers {{{
+#
+sub getwinreg {
+    my ($currwin, $win, $reg) = @_ ;
+    if ($reg >= 8 && $reg <= 15) {
+        if ($win == $currwin) {
+            $reg = "o" . ($reg - 8);
+        } else {
+            $reg = "i" . ($reg - 8);
+        }
+    } else {
+        $reg = "l" . ($reg - 16) ;
+    }
+    return $reg;
+
+} #}}}
+
+###############################################################################
+# Find nearest symbol offset {{{
+# Input va, Output symbol+offset
+#
+sub get_symbol_offset {
+    my $va = shift(@_);
+    my $nearest_va = 0;
+    foreach (@sorted_symbols) {
+    last if (hex($va) < hex($_));
+    $nearest_va = $_;
+    }
+    return (sprintf ("%s+0x%lx", 
+                      $symbols{$nearest_va}, hex($va)- hex($nearest_va)));
+}#}}}
+###############################################################################
+# Show trace for specific thread {{{
+# Inputs Text Widget, TID
+# Outputs - trace formatted string
+sub show_trace {
+    my ($trace_t, $status_t, $addr_t, $tid) = @_;
+    my %mytrace ; 
+    if (!$merge && !defined $trace{$tid}) {
+        $trace_t -> insert ('0.0', "\nNo Trace available for thread $tid");
+        return ;
+    }
+    if ($merge) {
+        %mytrace = %fulltrace;
+    } else {
+        %mytrace = %{$trace{$tid}};
+    }
+    my $last_va = 0;
+    my $last_label = '';
+    foreach (sort {$a <=> $b}  keys %mytrace) {
+        my $line = $mytrace{$_} . "\n";
+        my ($mtid, $inst, $va);
+        if ($have_symbols) {
+            if ($have_pa) {
+                ($inst,$mtid, $va) = $line =~ /\d+:\s+#(\d+)\s+T(\d+)\s+v:(\w+)/o;
+            } else {
+                ($inst,$mtid, $va) = $line =~ /\d+:\s+#(\d+)\s+T(\d+)\s+(\w+)/o;
+            }
+            if (defined ($symbols{$va})) {
+                $trace_t -> insert ('end', "\n$symbols{$va}: \n");
+                $last_label = $symbols{$va};
+                $last_va = $va;
+            }
+        }
+        $trace_t -> insert ('end', $line, 'instr');
+    }
+    if ($current{$tid}) {
+        my $index = $trace_t->search($mytrace{$current{$tid}}, '0.0','end');
+        $trace_t->tagAdd('curr',
+            $trace_t->index("$index linestart"),
+            $trace_t->index("$index lineend"));
+        $trace_t->see($trace_t->index("$index linestart"));
+        $status_t->configure(-state =>'normal');
+        $status_t->delete("0.0", 'end');
+        $status_t->insert("0.0", $mytrace{$current{$tid}});
+        $status_t->configure(-state =>'disabled');
+        $addr_t->configure(-state =>'normal');
+        $addr_t ->delete("0.0", 'end');
+        $addr_t ->insert("0.0",$offset{$tid}{$current{$tid}});
+        $addr_t->configure(-state =>'disabled');
+    } else {
+        $trace_t->tagRemove('curr', '0.0', 'end');
+        $trace_t->see($trace_t->index("0.0 linestart"));
+        $status_t->configure(-state =>'normal');
+        $status_t->delete("0.0", 'end');
+        $status_t->insert("0.0", $status_blurb);
+        $status_t->configure(-state =>'disabled');
+        $addr_t->configure(-state =>'normal');
+        $addr_t ->delete("0.0", 'end');
+        $addr_t ->insert("0.0",$addr_blurb);
+        $addr_t->configure(-state =>'disabled');
+    }
+} # }}}
+
+###############################################################################
+# Show full state for specific instruction {{{
+# 
+# Inputs - TID, Instr #
+# Outputs - State display listing - 
+#
+sub show_state {
+    ($tid, $instr) = @_;
+
+    my $statelist = "";
+
+
+    print "\nINFO > Tracing State for T$tid to Instruction #$instr..\n"
+        if ($debug);
+
+    my $currinstr;
+    my ($reg, $value);
+    my ($vtime, $disas);
+
+    my ($currwin, $currgl) = current_state($tid, $instr);
+
+    # Print State - 4/row
+    $i = 0;
+    @delta_index = ();
+    print "INFO > State for Thread $tid ($vtime : $disas):\n" if ($debug);
+        $statelist .= "          g[".hex($currgl)."]       " .
+                      "       o[". hex($currwin). "]      " .
+                      "       l[". hex($currwin). "]      " .
+                      "       i[". hex($currwin). "]     \n";
+                
+    foreach (0..7) {
+        $statelist .= "$_  ";
+        if (defined ($delta{$tid}{$instr}{"g".$_})) {
+            push (@delta_index, length($statelist),
+                length($gl{$tid}{hex($currgl)}{$instr}{"g".$_}));
+        }
+        $statelist .= sprintf "%16s  ",
+            $gl{$tid}{hex($currgl)}{$instr}{"g".$_};
+
+        if (defined ($delta{$tid}{$instr}{"o".$_})) {
+            push (@delta_index, length($statelist),
+                length($cwp{$tid}{hex($currwin)}{$instr}{"o".$_}));
+        }
+        $statelist .= sprintf "%16s  ",
+            $cwp{$tid}{hex($currwin)}{$instr}{"o".$_};
+
+        if (defined ($delta{$tid}{$instr}{"l".$_})) {
+            push (@delta_index, length($statelist),
+                length($cwp{$tid}{hex($currwin)}{$instr}{"l".$_}));
+        }
+        $statelist .= sprintf "%16s  ",
+            $cwp{$tid}{hex($currwin)}{$instr}{"l".$_};
+
+        if (defined ($delta{$tid}{$instr}{"i".$_})) {
+            push (@delta_index, length($statelist),
+                length($cwp{$tid}{hex($currwin)}{$instr}{"i".$_}));
+        }
+        $statelist .= sprintf "%16s  ",
+            $cwp{$tid}{hex($currwin)}{$instr}{"i".$_} ;
+        $statelist .= "\n";
+    }
+    while ($i < scalar(@allregs)) {
+        $statelist .= sprintf "   %16s  %16s  %16s  %16s\n", 
+            $allregs[$i], $allregs[$i+1], $allregs[$i+2], $allregs[$i+3] ; 
+
+
+        if (defined ($delta{$tid}{$instr}{$allregs[$i]})) {
+            push (@delta_index, length($statelist)+3,
+                length($state{$tid}{$instr}{$allregs[$i]}));
+        } elsif ($allregs[$i] =~ /^f(\d+)/) {
+            if (defined($delta{$tid}{$instr}{"f".($1+1)})) {
+            push (@delta_index, length($statelist)+3,
+                length($state{$tid}{$instr}{$allregs[$i]}));
+            }
+        }
+        $statelist .= sprintf "   %16s  ",
+            $state{$tid}{$instr}{$allregs[$i]};
+
+
+        if (defined ($delta{$tid}{$instr}{$allregs[$i+1]})) {
+            push (@delta_index, length($statelist),
+                length($state{$tid}{$instr}{$allregs[$i+1]}));
+        } elsif ($allregs[$i+1] =~ /^f(\d+)/) {
+            if (defined($delta{$tid}{$instr}{"f".($1+1)})) {
+            push (@delta_index, length($statelist),
+                length($state{$tid}{$instr}{$allregs[$i+1]}));
+            }
+        }
+        $statelist .= sprintf "%16s  ",
+            $state{$tid}{$instr}{$allregs[$i+1]}; 
+
+
+        if (defined ($delta{$tid}{$instr}{$allregs[$i+2]})) {
+            push (@delta_index, length($statelist),
+                length($state{$tid}{$instr}{$allregs[$i+2]}));
+        } elsif ($allregs[$i+2] =~ /^f(\d+)/) {
+            if (defined($delta{$tid}{$instr}{"f".($1+1)})) {
+            push (@delta_index, length($statelist),
+                length($state{$tid}{$instr}{$allregs[$i+2]}));
+            }
+        }
+        $statelist .= sprintf "%16s  ",
+            $state{$tid}{$instr}{$allregs[$i+2]}; 
+
+
+        if (defined ($delta{$tid}{$instr}{$allregs[$i+3]})) {
+            push (@delta_index, length($statelist),
+                length($state{$tid}{$instr}{$allregs[$i+3]}));
+        } elsif ($allregs[$i+3] =~ /^f(\d+)/) {
+            if (defined($delta{$tid}{$instr}{"f".($1+1)})) {
+            push (@delta_index, length($statelist),
+                length($state{$tid}{$instr}{$allregs[$i+3]}));
+            }
+        }
+        $statelist .= sprintf "%16s  ",
+            $state{$tid}{$instr}{$allregs[$i+3]};
+        $statelist .= "\n";
+
+        $i=$i+4; 
+    }
+   return ($statelist); 
+} # }}}
+
+###############################################################################
+# Parse trace line and return instr, tid {{{
+#
+sub which_instr {
+    my ($line) = @_;
+    if ($line !~ m/^\s*\d+:\s*#(\d+)\s+T(\d+)/) {
+        return ($tid, -1);    
+    } else {
+        my ($instr, $tid) = $line =~  /^\s*\d+:\s*#(\d+)\s+T(\d+)/;
+        return ($tid, $instr);
+    }
+} # }}}
+
+###############################################################################
+# Figure out if valid show_deltas file is present {{{
+sub have_deltas {
+    if (!-r $logfile && !-r "$logfile.gz") {
+        usage( "\nERROR > Could not find file $logfile or $logfile.gz, $!");
+    }
+    my $line;
+    my $cat = (-r $logfile)? "/bin/cat -s " : "/bin/gzcat";
+    if (!$saslog) {
+        chomp($line = `$cat $logfile* | head -6000 | /bin/grep 'Show Delta Enabled'`);
+    } else {
+        chomp($line = `$cat $logfile* | head -100 | /bin/grep 'STEP:'`);
+    }
+    return (length($line));
+} # }}}
+
+###############################################################################
+# Figure out if PA is displayed in file {{{
+sub have_pas {
+    if (!-r $logfile && !-r "$logfile.gz") {
+        usage( "\nERROR > Could not find file $logfile or $logfile.gz, $!");
+    }
+    my $line;
+    my $cat = (-r $logfile)? "/bin/cat -s " : "/bin/gzcat";
+    chomp($line = `$cat $logfile* | head -6000 | /bin/grep ': Enabled PA display'`);
+    return (length($line));
+} # }}}
+###############################################################################
+# Figure out if sas checking is enabled {{{
+sub no_sascheck {
+    if (!-r $logfile && !-r "$logfile.gz") {
+        usage( "\nERROR > Could not find file $logfile or $logfile.gz, $!");
+    }
+    my $cat = (-r $logfile)? "/bin/cat -s " : "/bin/gzcat";
+    chomp(my $line = `$cat $logfile* | head -6000 | /bin/grep 'Nas Checking Disabled'`);
+    return (length($line));
+} # }}}
+
+###############################################################################
+# Load symbol table {{{
+sub slurp_symbols {
+    
+    my $fn = (-r $symfile)? $symfile :"gunzip -c $symfile |";
+    open (SYM, "$fn") 
+                || die "ERROR > Cannot open Symbols file $symfile, $!\n";
+    print "INFO > Loading Symbols \"$symfile\"..\n";
+    my $count = 0;
+    while ($line = <SYM>) {
+        my ($label, $va) = $line =~ m/^(.*?)\s+(\w+)\s+/o;
+        $va = substr ($va, -12); # use 48 bits only
+        $symbols{$va} = $label;
+        $count++;
+    }
+    close SYM;
+    @sorted_symbols = sort {hex($a) <=> hex($b)} keys %symbols ;
+    print "INFO > Loaded  & sorted $count symbols from $symfile..\n";
+} # }}}
+
+###############################################################################
+# Load disassembly {{{
+sub slurp_disas {
+    
+    my $iscomp = 0;
+    if (! $usedis && ! -r $diagexe && ! -r "$diagexe.gz") {
+        print "INFO > No Disassembly, (\"$diagexe\" or \"$diagexe.gz\" not found) ..\n";
+        return;
+    }
+    if (!-r $diagexe && -r "$diagexe.gz") {
+        `cp $diagexe.gz /tmp/$diagexe.$$.gz; gunzip /tmp/$diagexe.$$.gz`;
+        $diagexe = "/tmp/$diagexe.$$";
+        $iscomp=1;
+    }
+    if (!$usedis) {
+        open (DIS, "$dis_cmd $diagexe |") 
+            || die "ERROR > Cannot open \"$dis_cmd $diagexe\"for disassembly, $!\n";
+        print "INFO > Disassembling \"$diagexe\"..($dis_cmd)\n";
+    } else {
+        print "INFO > Using existing disassembly \"$usedis\"..\n";
+        open (DIS, "$usedis") || die "ERROR> Cannot read sepcified disassembly file \"$usedis\" !\n";
+    }
+    while ($line = <DIS>) {
+        next if ( $line !~ /^\s*(\w+):\s+(\w\w\s){4}\s+(.*?)$/);
+        my ($va,$temp,$dis) = $line =~ m/^\s*(\w+):\s+(\w\w\s){4}\s+(.*)$/o;
+        $va = substr ($va, -12); # use 48 bits only
+        $va = "0" x (12-length($va)) . $va;
+        $dis =~ s/\s+/ /g;
+        $disas{$va} = "\t".$dis;
+    }
+    close DIS;
+    $have_disas = 1 if (scalar keys %disas);
+    unlink "$diagexe" if ($iscomp && -r $diagexe);
+} # }}}
+
+###############################################################################
+# Remove leading 0x0 .. {{{
+
+sub rlz  {
+    my $string = @_[0];
+
+    $string =~ s/^0+/0/o;
+    return $string;
+} # }}}
+
+###############################################################################
+# Find Regnames and create tags {{{
+# Scan text string for regnames
+#
+sub tagstate {
+    
+    my ($state_t,$balloon) = @_;
+
+    my $statestring = $state_t->get('0.0', 'end');
+
+    my $regstat = "";
+
+        
+    foreach (@allregs) {
+        my $len = 0; my $regex = '\b'.$_.'\b';
+        my $index = $state_t->search(-count=>\$len, -regex, $regex, '0.0', 'end');
+        my ($line, $char) = $index =~ m/(\d+).(\d+)/o; $char += $len;
+        $state_t->tagAdd('regname', $index, $line.".".$char);
+    }
+
+    foreach (qw(g o l i)) {
+        my $len = 0; 
+        my $index = $state_t->search(-count=>\$len, -exact, $_, '0.0', '2.0');
+        my ($line, $char) = $index =~ m/(\d+).(\d+)/o; $char += $len;
+        $state_t->tagAdd('regname', $index, $line.".".$char);
+    }
+    $state_t->tagBind('regname', "<Enter>",
+               sub { my ($text)=@_; 
+                     $regstat=$text->get($text->index("current wordstart"),
+                                            $text->index("current wordend"));
+                     if (defined($expandreg{$regstat})) {
+                        $regstat = showbits($regstat);
+                        $balloon->attach($state_t, -msg=>$regstat  );
+                     }
+                    $text->menu()->entryconfigure('last', -state => 'disabled');
+                    });
+    $state_t->tagBind('regname', "<Leave>",
+               sub { my ($text)=@_;$regstat="";
+                     $balloon->detach($state_t);
+                   });
+    $state_t->tagBind('regname', "<Button-3>",
+               sub { my ($text)=@_;
+                    $text->menu()->entryconfigure('last', -state => 'normal');
+                   });
+               
+
+} # }}}
+
+###############################################################################
+# Expand state bits for registers {{{
+#
+sub showbits {
+    my $regname = @_[0];
+    my $regtext = "";
+    my @regbits
+    = reverse(split(//, unpack("B*", pack("H16",$state{$tid}{$instr}{$regname}))));
+    foreach (reverse sort {$a<=>$b} keys %{$expandreg{$regname}}) {
+        my ($l, $h) = split(/:/,$_);
+        $regtext .= " ".$expandreg{$regname}{$_}." = ".join('',reverse(@regbits[$l..$h])). " |" ;
+    }
+    chop($regtext);
+    return $regtext;
+} # }}}
+###############################################################################
+# Tag Deltas in state window {{{
+#
+sub tagdelta {
+    my $state_t = @_[0];
+
+    $state_t ->tagRemove('delta', "1.0", 'end');
+    return if (! scalar(@delta_index));
+
+    while (scalar(@delta_index)) {
+        my $st_d = shift (@delta_index);
+        my $en_d = $st_d + (shift (@delta_index));
+        $state_t->tagAdd('delta', "1.0 + $st_d chars", "1.0 + $en_d chars");
+    }
+} # }}}
+
+###############################################################################
+# Get Next instruction {{{
+#
+sub get_next_instr {
+
+    my ($tid, $instr) = @_;
+    foreach (sort {$a <=> $b} keys %{$trace{$tid}}) {
+        return ($_) if ($_ > $instr);
+    }
+}# }}}
+
+###############################################################################
+# Get Prev instruction state {{{
+#
+sub get_prev_state {
+
+    my ($tid, $instr) = @_;
+    foreach (reverse sort {$a <=> $b}  keys %{$state{$tid}}) {
+        return ($_) if ($_ < $instr);
+    }
+}# }}}
+
+###############################################################################
+# Compress state/win/gl hashes {{{
+# to keep mem util low when in incr mode
+#
+sub compress_to_last_state {
+
+    my ($tid) = @_;
+    my @statelist = reverse sort {$a <=> $b}  keys %{$state{$tid}};
+    foreach (@statelist[1..(scalar(@statelist)-1)]) {
+        delete ($state{$tid}{$_});
+    }
+    foreach my $win (0..$maxwin) {
+        my @winlist = reverse sort {$a <=> $b}  keys %{$cwp{$tid}{$win}};
+        foreach (@winlist[1..(scalar(@winlist)-1)]) {
+            delete ($cwp{$tid}{$win}{$_});
+        }
+    }
+    foreach my $g (0..$maxgl) {
+        my @glist = reverse sort {$a <=> $b}  keys %{$gl{$tid}{$g}};
+        foreach (@glist[1..(scalar(@glist)-1)]) {
+            delete ($gl{$tid}{$g}{$_});
+        }
+    }
+}# }}}
+
+###############################################################################
+# Help Text {{{
+#
+sub helptext {
+
+# Subroutine to show help text
+
+# Input :
+#   parent window handle,
+# Output:
+#   window with global help displayed..
+
+    my ($main) = @_;
+
+    my $help_w = $main -> Toplevel;
+    $help_w -> title ('A Helping Hand');
+
+    my $help_t = $help_w -> Text (-width => '80', -height => '20', 
+                                  -wrap => 'word')
+                -> pack (-padx => '0m', -pady => '1m', -side => 'left',
+                   -fill=> 'y');
+
+    my $help_s = $help_w -> Scrollbar (-command => ['yview', $help_t] );
+
+    $help_t -> configure (-yscrollcommand => ['set', $help_s]);
+    $help_s -> pack(-side => 'right', -fill => 'y');
+    $help_t -> insert("0.0", $help);
+    $help_t -> configure(-state => 'disabled');
+
+    $help_w -> Button (-text => 'OK', -command => [$help_w, 'destroy'])
+            -> pack(-padx => '3m', -pady => '1m', -side => 'bottom');
+} # }}}
+
+###############################################################################
+# Non GUI trace logging {{{
+#
+# Display sorted (instr#) to stdout.
+# Keep current state for each thread - incrementally update
+# Add deltas for instruction
+# Determine %rd, and show %rd value if not in delta.
+#
+sub log_trace {
+    
+
+
+    foreach my $currinstr (sort {$a <=> $b}  keys %fulltrace) {
+        my ($currtid, $curraddr, $disas, $junk) ;
+        if (!$have_pa) {
+            ($currtid, $curraddr, $disas, $junk) = $fulltrace{$currinstr} =~
+                 m/^\d+:.*#\d+\s+T(\d+)\s+(\w+)\s+(.*?)\s*(OK|FAIL)*$/;
+        } else {
+            ($currtid, $curraddr, $disas, $junk) = $fulltrace{$currinstr} =~
+                 m/^\d+:.*#\d+\s+T(\d+)\s+v:(\w+)\s+p:\w+\s+(.*?)\s*(OK|FAIL)*$/;
+        }
+        if ($have_symbols && defined ($symbols{$curraddr})) {
+            print "\n$symbols{$curraddr}:\n";    
+        }
+        print "    $fulltrace{$currinstr}\n";
+        my $maxcol = 2;
+        my $col = 0;
+        my $rd;
+        my $opcode;
+        my $fdbl = 0;
+        my ($freg,$frnum);
+        if ($disas =~ /(\w+)\s+.*%(\w+)$/) {
+            $opcode= $1; $rd = $2;
+            if ($rd eq "fp") {
+                $rd = "i6";
+            } elsif ($rd eq "sp") {
+                $rd = "o6";
+            }
+            if ($rd =~ /^[fd](\d+)$/) {
+                $frnum=$1; $rd =~ s/^d/f/;
+                if ($opcode =~ /^[f].*d$|^ldd$/) {
+                    $fdbl = 1;
+                }
+            }
+            if (!(defined($delta{$currtid}{$currinstr}{$rd}) ||
+                  defined($delta{$currtid}{$currinstr}{"\U$rd\E"}))) {
+                my ($win, $gl) = current_state($currtid,$currinstr);
+                compress_to_last_state($currtid);
+                if ($rd !~ /^[ilogf]\d+$/o) {
+                    print "\t$rd = ", $state{$currtid}{$currinstr}{"\U$rd\E"};
+                } elsif ($rd =~ /^f(\d+)$/o) {
+                    # Float state is stored in even reg as 64 bit (Even,Odd)..
+                    if (($frnum%2)) {  ## Odd reg
+                        $frnum = $frnum - 1;
+                        $freg = "f".$frnum;
+                        print "\t$rd = 00000000", 
+                     join('',(split(//,$state{$currtid}{$currinstr}{$freg}))[8..15]);
+                    } else { # Even
+                        $freg = "f".$frnum;
+                        print "\t$rd = 00000000",  
+                     join('',(split(//,$state{$currtid}{$currinstr}{$freg}))[0..7]);
+                    }
+                } elsif ($rd =~ /^g\d+$/o) {
+                    print "\t$rd = ", $gl{$currtid}{$gl}{$currinstr}{$rd};
+                } else {
+                    print "\t$rd = ", $cwp{$currtid}{$win}{$currinstr}{$rd};
+                }
+            } elsif (defined($delta{$currtid}{$currinstr}{$rd})) {
+                print "\t$rd = $delta{$currtid}{$currinstr}{$rd}";
+            } elsif (defined($delta{$currtid}{$currinstr}{"\U$rd\E"})) {
+                print "\t$rd = ",$delta{$currtid}{$currinstr}{"\U$rd\E"};
+            }
+            # For float doubles, print odd reg now (even is printed as rd)
+            if ($fdbl) {
+                $freg = "f".($frnum+1);
+                if (!defined($delta{$currtid}{$currinstr}{$freg})) {
+                    if (!defined($state{$currtid}{$currinstr}{$rd})) {
+                        my ($win, $gl) = current_state($currtid,$currinstr);
+                        compress_to_last_state($currtid);
+                    }
+                    print "\t$freg = 00000000", 
+                 join('',(split(//,$state{$currtid}{$currinstr}{$rd}))[8..15]);
+                } else {
+                    print "\t$freg = ", $delta{$currtid}{$currinstr}{$freg};
+                }
+                $col++;
+            }
+            $col++;
+        }
+        foreach my $reg (reverse sort keys %{$delta{$currtid}{$currinstr}}) {
+            next if($reg =~ /$rd/i);
+            next if ($reg =~ /$freg/i);
+            if ($col == $maxcol) {
+                print "\n"; $col = 0
+            }
+            print "\t$reg = $delta{$currtid}{$currinstr}{$reg}";
+            $col++;
+        }
+        print "\n";
+    }
+        
+    
+} # }}}
+
+###############################################################################
+# Incremental state update {{{
+# 
+# Inputs : TID, current Instr#
+# Ouputs : Returns Win, GL;  Updates %state, %win, %cwp ..
+# Assumes that state{thread}{instr} is valid for last state updated (or reset)
+# Routine will scan all instructions between nearest previous instr and
+# specified instruction and return state hash that can be inserted into state
+# hash by caller ..
+
+sub current_state { 
+    my ($tid, $instr) = @_;
+    
+    # Update symbol offsets
+    if ($have_symbols && !defined $offset{$tid}{$instr}) {
+        $line = $trace{$tid}{$instr};
+        my $va;
+        if ($have_pa) {
+            ($va) = $line =~ /\d+:\s+#\d+\s+T\d+\s+v:(\w+)/o;
+        } else {
+            ($va) = $line =~ /\d+:\s+#\d+\s+T\d+\s+(\w+)/o;
+        }
+        print "current_state: $tid $instr $va ($line)\n" if ($debug);
+
+        if (defined ($symbols{$va})) {
+            $offset{$tid}{$instr} = $symbols{$va};
+        } else {
+            $offset{$tid}{$instr} = get_symbol_offset($va);
+        }
+    }
+
+    # If Statetype=actual, remove any expected from %delta and insert 
+    # from actual if statetype has changed ..
+    if ($statetype && (defined ($actdelta{$tid}{$instr}) ||
+                       defined ($expdelta{$tid}{$instr}))) {
+        if (!$prevstate) {
+            foreach (keys %{$expdelta{$tid}{$instr}}) {
+                 #print "Deleting $_ $delta{$tid}{$instr}{$_}\n";
+                 delete($delta{$tid}{$instr}{$_});
+            }
+            foreach (keys %{$delta{$tid}{$instr}}) {
+                $expdelta{$tid}{$instr}{$_} = $delta{$tid}{$instr}{$_};
+            }
+        }
+        foreach (keys %{$actdelta{$tid}{$instr}}) {
+            $delta{$tid}{$instr}{$_} = $actdelta{$tid}{$instr}{$_};
+            #print "Restoring $_ $delta{$tid}{$instr}{$_}\n";
+        }
+    # If Statetype=expected, remove any actual from %delta and insert 
+    # from expected if statetype has changed ..
+    } elsif (!$statetype && defined ($expdelta{$tid}{$instr})) {
+        if ($prevstate) {
+            foreach (keys %{$actdelta{$tid}{$instr}}) {
+                 #print "Deleting $_ $delta{$tid}{$instr}{$_}\n";
+                 delete($delta{$tid}{$instr}{$_});
+            }
+        }
+        foreach (keys %{$expdelta{$tid}{$instr}}) {
+            $delta{$tid}{$instr}{$_} = $expdelta{$tid}{$instr}{$_};
+            #print "Restoring $_ $delta{$tid}{$instr}{$_}\n";
+        }
+    }
+    $prevstate = $statetype;
+
+    # Find the nearest previous instr # for this thread
+    my $prev = get_prev_state($tid, $instr);
+    if ($prev == "" || $prev < 0) {
+        $prev = 0;
+        # Get Starting Values
+        foreach (@allregs) {
+            $state{$tid}{$instr}{$_} = $state{$tid}{0}{$_};
+        }
+        foreach my $win (@windows) {
+            foreach (0 .. $maxwin-1) {
+                $cwp{$tid}{$_}{$instr}{$win} = $cwp{$tid}{$_}{0}{$win};
+            }
+        }
+        foreach my $g (@globals) {
+            foreach (0 .. $maxgl-1) {
+                $gl{$tid}{$_}{$instr}{$g} = $gl{$tid}{$_}{0}{$g};
+            }
+        }
+    }
+
+    # Starting from $prev state, update deltas until $instr
+
+    foreach (@allregs) {
+        $state{$tid}{$instr}{$_} = $state{$tid}{$prev}{$_};
+    }
+    foreach my $win (@windows) {
+        foreach (0 .. $maxwin-1) {
+            $cwp{$tid}{$_}{$instr}{$win} = $cwp{$tid}{$_}{$prev}{$win};
+        }
+    }
+    foreach my $g (@globals) {
+        foreach (0 .. $maxgl-1) {
+            $gl{$tid}{$_}{$instr}{$g} = $gl{$tid}{$_}{$prev}{$g};
+        }
+    }
+
+    my $currwin = hex($state{$tid}{$prev}{"CWP"});
+    my $currgl =  hex($state{$tid}{$prev}{"GL"});
+
+    my ($currinstr,$reg);
+
+    # Scan deltas from $prev and update until $instr is reached ..
+    foreach $currinstr (sort {$a <=> $b}  keys %{$trace{$tid}}) {
+        next if ($currinstr <= $prev);
+        last if ( $currinstr > $instr);
+        foreach $reg (sort keys %{$delta{$tid}{$currinstr}}) {
+            if ($reg =~ /^gl$/i) { # Change currgl
+                $state{$tid}{$instr}{$reg} = $delta{$tid}{$currinstr}{$reg};
+                $currgl = $delta{$tid}{$currinstr}{$reg};
+            } elsif ($reg =~ /^cwp$/i) { # Change currwin
+                $state{$tid}{$instr}{$reg} = $delta{$tid}{$currinstr}{$reg};
+                $currwin = $delta{$tid}{$currinstr}{$reg};
+            } elsif ($reg =~ /^([ilo])(\d+)/) {  # Window regs
+                my ($wreg, $regnum) = ($1, $2);
+                $cwp{$tid}{hex($currwin)}{$instr}{$reg} = 
+                            $delta{$tid}{$currinstr}{$reg};
+                if ($wreg eq "i") {
+                    $cwp{$tid}{(hex($currwin)-1)%8}{$instr}{"o".$regnum} =
+                            $delta{$tid}{$currinstr}{$reg};
+                } elsif ($wreg eq "o") {
+                    $cwp{$tid}{(hex($currwin)+1)%8}{$instr}{"i".$regnum} =
+                            $delta{$tid}{$currinstr}{$reg};
+                }
+            } elsif ($reg =~ /^g\d+/) {  # Globals
+                $gl{$tid}{hex($currgl)}{$instr}{$reg} = 
+                            $delta{$tid}{$currinstr}{$reg};
+            } elsif ($reg =~ /^f(\d+)/) { # Floats are 32 bit [Even,Odd]
+                    my $freg = $1;
+                    my $fereg = "f".($freg & 0xfe); #regnum
+                if ($saslog) { # sas stores 32 bits only ..
+                    if (! ($freg%2)) {  ## Even reg
+                        $state{$tid}{$instr}{$fereg} =
+                            $delta{$tid}{$currinstr}{$reg} .
+                                substr($state{$tid}{$instr}{$fereg},8,8);
+                    } else {           ## Odd reg
+                        $state{$tid}{$instr}{$fereg} = 
+                            substr($state{$tid}{$instr}{$fereg},0,8) . 
+                                $delta{$tid}{$currinstr}{$reg};
+                    }
+                } else {
+                    if (! ($freg%2)) {  ## Even reg
+                        my $value = join('',
+                            (split(//,$delta{$tid}{$currinstr}{$reg}))[8..15]);
+                        $state{$tid}{$instr}{$fereg} = $value . 
+                            substr($state{$tid}{$instr}{$fereg},8,8);
+                    } else {           ## Odd reg
+                        my $value = join('',
+                            (split(//,$delta{$tid}{$currinstr}{$reg}))[8..15]);
+                        $state{$tid}{$instr}{$fereg} = 
+                            substr($state{$tid}{$instr}{$fereg},0,8) . $value;
+                    }
+                }
+            } else {
+                $state{$tid}{$instr}{$reg} = $delta{$tid}{$currinstr}{$reg};
+            }
+        }
+    }
+
+    $current{$tid} = $instr;
+    return (hex($currwin), hex($currgl));
+    
+} # }}}
+
+###############################################################################
+# search for previous delta for register under cursor {{{
+#
+sub previous_delta {
+    my ($state_t) = @_;
+    my $regname = $state_t->get($state_t->index("current wordstart"),
+                                $state_t->index("current wordend"));
+    
+    foreach my $previnstr (reverse sort {$a<=>$b} keys %{$delta{$tid}}) {
+        if ($previnstr < $instr && defined ($delta{$tid}{$previnstr}{$regname})) {
+            return($previnstr);
+        }
+    }
+    return ($regname);
+}# }}}
+
+###############################################################################
+# search for next delta for register under cursor {{{
+#
+sub next_delta {
+    my ($state_t) = @_;
+    my $regname = $state_t->get($state_t->index("current wordstart"),
+                                $state_t->index("current wordend"));
+    
+    foreach my $nextinstr (sort {$a<=>$b} keys %{$delta{$tid}}) {
+        if ($nextinstr > $instr && defined ($delta{$tid}{$nextinstr}{$regname})) {
+            return($nextinstr);
+        }
+    }
+    return ($regname);
+}# }}}
+
+###############################################################################
+
+###############################################################################
+# Translate control register number to name {{{
+#
+sub cregname {
+    my $regnum = shift;
+    if (!defined $regmap{32}) {
+        %regmap = (  32 => "PC",
+                    33 => "NPC",
+                    34 => "Y",
+                    35 => "CCR",
+                    36 => "FPRS",
+                    37 => "FSR",
+                    38 => "ASI",
+                    39 => "TICK",
+                    40 => "GSR",
+                    41 => "TICK_CMPR",
+                    42 => "STICK",
+                    43 => "STICK_CMPR",
+                    44 => "PSTATE",
+                    45 => "TL",
+                    46 => "PIL",
+                    47 => "TPC1",
+                    48 => "TPC2",
+                    49 => "TPC3",
+                    50 => "TPC4",
+                    51 => "TPC5",
+                    52 => "TPC6",
+                    57 => "TNPC1",
+                    58 => "TNPC2",
+                    59 => "TNPC3",
+                    60 => "TNPC4",
+                    61 => "TNPC5",
+                    62 => "TNPC6",
+                    67 => "TSTATE1",
+                    68 => "TSTATE2",
+                    69 => "TSTATE3",
+                    70 => "TSTATE4",
+                    71 => "TSTATE5",
+                    72 => "TSTATE6",
+                    77 => "TT1",
+                    78 => "TT2",
+                    79 => "TT3",
+                    80 => "TT4",
+                    81 => "TT5",
+                    82 => "TT6",
+                    87 => "TBA",
+                    88 => "VER",
+                    89 => "CWP",
+                    90 => "CANSAVE",
+                    91 => "CANRESTORE",
+                    92 => "OTHERWIN",
+                    93 => "WSTATE",
+                    94 => "CLEANWIN",
+                    95 => "SOFTINT",
+                    96 => "ECACHE_ERROR_ENABLE",
+                    97 => "ASYNCHRONOUS_FAULT_STATUS",
+                    98 => "ASYNCHRONOUS_FAULT_ADDRESS",
+                    99 => "OUT_INTR_DATA0",
+                    100=> "OUT_INTR_DATA1",
+                    101=> "OUT_INTR_DATA2",
+                    102=> "INTR_DISPATCH_STATUS",
+                    103=> "IN_INTR_DATA0",
+                    104=> "IN_INTR_DATA1",
+                    105=> "IN_INTR_DATA2",
+                    106=> "INTR_RECEIVE",
+                    107=> "GL",
+                    108=> "HPSTATE",
+                    109=> "HTSTATE1",
+                    110=> "HTSTATE2",
+                    111=> "HTSTATE3",
+                    112=> "HTSTATE4",
+                    113=> "HTSTATE5",
+                    114=> "HTSTATE6",
+                    115=> "HTSTATE7",
+                    116=> "HTSTATE8",
+                    117=> "HTSTATE9",
+                    118=> "HTSTATE10",
+                    119=> "HTBA",
+                    120=> "HINTP",
+                    121=> "HSTICK_CMPR",
+                    122=> "MID",
+                    123=> "ISFSR",
+                    124=> "DSFSR",
+                    125=> "DSFAR",
+                    126=> "CTXT_PRIM_0",
+                    127=> "CTXT_SEC_0",
+                    128=> "CTXT_PRIM_1",
+                    129=> "CTXT_SEC_1",
+                    130=> "LSU_CONTROL",
+                    131=> "I_TAG_ACC",
+                    132=> "CTXT_Z_TSB_CFG0",
+                    133=> "CTXT_Z_TSB_CFG1",
+                    134=> "CTXT_Z_TSB_CFG2",
+                    135=> "CTXT_Z_TSB_CFG3",
+                    136=> "CTXT_NZ_TSB_CFG0",
+                    137=> "CTXT_NZ_TSB_CFG1",
+                    138=> "CTXT_NZ_TSB_CFG2",
+                    139=> "CTXT_NZ_TSB_CFG3",
+                    140=> "I_DATA_IN",
+                    141=> "D_TAG_ACC",
+                    142=> "WATCHPOINT_ADDR",
+                    143=> "D_DATA_IN"
+                    );
+            }
+            return ($regmap{$regnum});
+}#}}}
+
+# Read in gates log file and update database .. {{{
+# 
+sub slurp_barelog {
+    my $instr = 1;
+    my $expect = 0;
+    my $actual = 0;
+    my ($mtid, $reg, $value);
+   
+    if (&have_pas) {
+        $have_pa = 1;
+    }
+    my $fn = (-r $logfile)? $logfile :"gunzip -c $logfile |";
+    open (LOG, "$fn") 
+                || usage( "ERROR > Cannot open Log file $logfile, $!\n");
+    print "INFO > Loading logfile \"$logfile\"..\n";
+    if ($only_cores ne "") {
+        print "INFO >     Restricted to reading log for core(s) $only_cores\n";
+    }
+    while ($line = <LOG>) {
+        next unless ($line =~ /^\s*\d+:\s+\w+\[\w+_top.*?\]:\s+.*?\s+T\d+/o);
+
+        next if ($line !~ /$only_cores/o);
+        chomp($line);
+        if (($mtid) 
+                = $line =~ /^\s*\d+:\s+\w+\[\w+_top.*?\]:\s+.*?\s+T(\d+)/o) {
+            $line =~ /^\s*(\d+):/o;
+            $line =~ s/.*\[\w+_top.*?\]:\s+@(\d+)/$1:/o;
+            last if ($maxtime && $1 > $maxtime);
+            $instr = int($instr);
+            $line =~ s/(#\d+)*\s+T/ #$instr T/; # Add instr# if not present.
+
+            if (!exists ($state{$mtid}{0})) {
+                init_trace($mtid);
+                init_state($mtid);
+                $numthreads = $mtid+1 if ($numthreads<=$mtid) ;
+                $tid = $mtid if ($mtid < $tid);
+            }
+
+            my ($va) = $line =~ m/T\d+\s+(\w+)/o;
+            my $sva = substr($va, -12); # Use 48 bits only
+            $line =~ s/$va/$sva/;
+            if($have_disas) {
+                $line .= "    " . $disas{$sva};
+            }
+            $current{$mtid} = $instr;
+            $trace{$mtid}{$instr} = $line;
+            $fulltrace{$instr} = $line;
+            $instr++;
+        } 
+    }
+    close LOG;
+    foreach (0.. $numthreads-1) {
+        $last{$_} = $current{$_};
+        $current{$_} = 0;
+    }
+} #}}}

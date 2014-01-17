@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-md5.html" />
+<link rel="prev" href="crypto.html" />
+<link rel="parent" href="crypto.html" />
+<link rel="next" href="module-md5.html" />
+<meta name='aesop' content='information' />
+<title>15.1 hmac -- Keyed-Hashing for Message Authentication</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="15. Cryptographic Services"
+  href="crypto.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="15. Cryptographic Services"
+  href="crypto.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="15.2 md5  "
+  href="module-md5.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="crypto.html">15. Cryptographic Services</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="crypto.html">15. Cryptographic Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-md5.html">15.2 md5  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0017100000000000000000">
+15.1 <tt class="module">hmac</tt> --
+         Keyed-Hashing for Message Authentication</A>
+</H1>
+
+<P>
+<A NAME="module-hmac"></A>
+
+<P>
+
+<span class="versionnote">New in version 2.2.</span>
+
+<P>
+This module implements the HMAC algorithm as described by <a class="rfc" id='rfcref-92061' xml:id='rfcref-92061'
+href="http://www.faqs.org/rfcs/rfc2104.html">RFC 2104</a>.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4807' xml:id='l2h-4807' class="function">new</tt></b>(</nobr></td>
+  <td><var>key</var><big>[</big><var>, msg</var><big>[</big><var>, digestmod</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  Return a new hmac object.  If <var>msg</var> is present, the method call
+  <code>update(<var>msg</var>)</code> is made. <var>digestmod</var> is the digest
+  module for the HMAC object to use. It defaults to the
+  <tt class="module"><a href="module-md5.html">md5</a></tt> module.
+</dl>
+
+<P>
+An HMAC object has the following methods:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4808' xml:id='l2h-4808' class="method">update</tt></b>(</nobr></td>
+  <td><var>msg</var>)</td></tr></table></dt>
+<dd>
+  Update the hmac object with the string <var>msg</var>.  Repeated calls
+  are equivalent to a single call with the concatenation of all the
+  arguments: <code>m.update(a); m.update(b)</code> is equivalent to
+  <code>m.update(a + b)</code>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4809' xml:id='l2h-4809' class="method">digest</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Return the digest of the strings passed to the <tt class="method">update()</tt>
+  method so far.  This is a 16-byte string (for <tt class="module"><a href="module-md5.html">md5</a></tt>) or a
+  20-byte string (for <tt class="module"><a href="module-sha.html">sha</a></tt>) which may contain non-ASCII
+  characters, including NUL bytes.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4810' xml:id='l2h-4810' class="method">hexdigest</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Like <tt class="method">digest()</tt> except the digest is returned as a string of
+  length 32 for <tt class="module"><a href="module-md5.html">md5</a></tt> (40 for <tt class="module"><a href="module-sha.html">sha</a></tt>), containing
+  only hexadecimal digits.  This may be used to exchange the value
+  safely in email or other non-binary environments.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4811' xml:id='l2h-4811' class="method">copy</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Return a copy (``clone'') of the hmac object.  This can be used to
+  efficiently compute the digests of strings that share a common
+  initial substring.
+</dl>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="15. Cryptographic Services"
+  href="crypto.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="15. Cryptographic Services"
+  href="crypto.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="15.2 md5  "
+  href="module-md5.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="crypto.html">15. Cryptographic Services</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="crypto.html">15. Cryptographic Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-md5.html">15.2 md5  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

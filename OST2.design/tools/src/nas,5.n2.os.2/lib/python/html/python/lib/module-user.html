@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-builtin.html" />
+<link rel="prev" href="module-site.html" />
+<link rel="parent" href="python.html" />
+<link rel="next" href="module-builtin.html" />
+<meta name='aesop' content='information' />
+<title>3.31 user -- User-specific configuration hook</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.30 site  "
+  href="module-site.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3. Python Runtime Services"
+  href="python.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.32 __builtin__  "
+  href="module-builtin.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-site.html">3.30 site  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="python.html">3. Python Runtime Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-builtin.html">3.32 __builtin__  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0053100000000000000000">
+3.31 <tt class="module">user</tt> --
+         User-specific configuration hook</A>
+</H1>
+
+<P>
+<A NAME="module-user"></A>
+
+<P>
+<a id='l2h-808' xml:id='l2h-808'></a><a id='l2h-809' xml:id='l2h-809'></a>
+<P>
+As a policy, Python doesn't run user-specified code on startup of
+Python programs.  (Only interactive sessions execute the script
+specified in the <a class="envvar" id='l2h-811' xml:id='l2h-811'>PYTHONSTARTUP</a> environment variable if it
+exists).
+
+<P>
+However, some programs or sites may find it convenient to allow users
+to have a standard customization file, which gets run when a program
+requests it.  This module implements such a mechanism.  A program
+that wishes to use the mechanism must execute the statement
+
+<P>
+<div class="verbatim"><pre>
+import user
+</pre></div>
+
+<P>
+The <tt class="module">user</tt> module looks for a file <span class="file">.pythonrc.py</span> in the user's
+home directory and if it can be opened, executes it (using
+<tt class="function">execfile()</tt><a id='l2h-810' xml:id='l2h-810'></a>) in its own (the
+module <tt class="module">user</tt>'s) global namespace.  Errors during this phase
+are not caught; that's up to the program that imports the
+<tt class="module">user</tt> module, if it wishes.  The home directory is assumed to
+be named by the <a class="envvar" id='l2h-812' xml:id='l2h-812'>HOME</a> environment variable; if this is not set,
+the current directory is used.
+
+<P>
+The user's <span class="file">.pythonrc.py</span> could conceivably test for
+<code>sys.version</code> if it wishes to do different things depending on
+the Python version.
+
+<P>
+A warning to users: be very conservative in what you place in your
+<span class="file">.pythonrc.py</span> file.  Since you don't know which programs will
+use it, changing the behavior of standard modules or functions is
+generally not a good idea.
+
+<P>
+A suggestion for programmers who wish to use this mechanism: a simple
+way to let users specify options for your package is to have them
+define variables in their <span class="file">.pythonrc.py</span> file that you test in
+your module.  For example, a module <tt class="module">spam</tt> that has a verbosity
+level can look for a variable <code>user.spam_verbose</code>, as follows:
+
+<P>
+<div class="verbatim"><pre>
+import user
+
+verbose = bool(getattr(user, "spam_verbose", 0))
+</pre></div>
+
+<P>
+(The three-argument form of <tt class="function">getattr()</tt> is used in case
+the user has not defined <code>spam_verbose</code> in their
+<span class="file">.pythonrc.py</span> file.)
+
+<P>
+Programs with extensive customization needs are better off reading a
+program-specific customization file.
+
+<P>
+Programs with security or privacy concerns should <em>not</em> import
+this module; a user can easily break into a program by placing
+arbitrary code in the <span class="file">.pythonrc.py</span> file.
+
+<P>
+Modules for general use should <em>not</em> import this module; it may
+interfere with the operation of the importing program.
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-site.html">site</a></tt>:</b>
+    <dd>Site-wide customization mechanism.
+  </dl>
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="3.30 site  "
+  href="module-site.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="3. Python Runtime Services"
+  href="python.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="3.32 __builtin__  "
+  href="module-builtin.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-site.html">3.30 site  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="python.html">3. Python Runtime Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-builtin.html">3.32 __builtin__  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

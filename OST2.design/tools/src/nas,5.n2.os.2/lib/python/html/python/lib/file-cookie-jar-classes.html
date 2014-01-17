@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="cookie-policy-objects.html" />
+<link rel="prev" href="node542.html" />
+<link rel="parent" href="module-cookielib.html" />
+<link rel="next" href="cookie-policy-objects.html" />
+<meta name='aesop' content='information' />
+<title>11.20.2 FileCookieJar subclasses and co-operation with web browsers </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.20.1 CookieJar and FileCookieJar"
+  href="node542.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11.20 cookielib  "
+  href="module-cookielib.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.20.3 CookiePolicy Objects"
+  href="cookie-policy-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node542.html">11.20.1 CookieJar and FileCookieJar</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-cookielib.html">11.20 cookielib  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="cookie-policy-objects.html">11.20.3 CookiePolicy Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00132020000000000000000"></A><A NAME="file-cookie-jar-classes"></A>
+<BR>
+11.20.2 FileCookieJar subclasses and co-operation with web browsers
+  
+</H2>
+
+<P>
+The following <tt class="class">CookieJar</tt> subclasses are provided for reading
+and writing .  Further <tt class="class">CookieJar</tt> subclasses, including one
+that reads Microsoft Internet Explorer cookies, are available at
+<a class="url" href="http://wwwsearch.sf.net/ClientCookie/">http://wwwsearch.sf.net/ClientCookie/</a>.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-3634' xml:id='l2h-3634' class="class">MozillaCookieJar</tt></b>(</nobr></td>
+  <td><var>filename, delayload=<tt class="constant">None</tt>,
+ policy=<tt class="constant">None</tt></var>)</td></tr></table></dt>
+<dd>
+A <tt class="class">FileCookieJar</tt> that can load from and save cookies to disk in
+the Mozilla <code>cookies.txt</code> file format (which is also used by the
+Lynx and Netscape browsers).  <span class="note"><b class="label">Note:</b>
+This loses information about RFC
+2965 cookies, and also about newer or non-standard cookie-attributes
+such as <code>port</code>.</span>
+
+<P>
+<span class="warning"><b class="label">Warning:</b>
+Back up your cookies before saving if you have cookies whose
+loss / corruption would be inconvenient (there are some subtleties
+which may lead to slight changes in the file over a load / save
+round-trip).</span>
+
+<P>
+Also note that cookies saved while Mozilla is running will get
+clobbered by Mozilla.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-3635' xml:id='l2h-3635' class="class">LWPCookieJar</tt></b>(</nobr></td>
+  <td><var>filename, delayload=<tt class="constant">None</tt>,
+ policy=<tt class="constant">None</tt></var>)</td></tr></table></dt>
+<dd>
+A <tt class="class">FileCookieJar</tt> that can load from and save cookies to disk in
+format compatible with the libwww-perl library's <code>Set-Cookie3</code>
+file format.  This is convenient if you want to store cookies in a
+human-readable file.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.20.1 CookieJar and FileCookieJar"
+  href="node542.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11.20 cookielib  "
+  href="module-cookielib.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.20.3 CookiePolicy Objects"
+  href="cookie-policy-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node542.html">11.20.1 CookieJar and FileCookieJar</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-cookielib.html">11.20 cookielib  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="cookie-policy-objects.html">11.20.3 CookiePolicy Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

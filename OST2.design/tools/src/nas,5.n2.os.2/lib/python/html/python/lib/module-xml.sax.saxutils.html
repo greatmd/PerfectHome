@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-xml.sax.xmlreader.html" />
+<link rel="prev" href="module-xml.sax.handler.html" />
+<link rel="parent" href="markup.html" />
+<link rel="next" href="module-xml.sax.xmlreader.html" />
+<meta name='aesop' content='information' />
+<title>13.11 xml.sax.saxutils -- SAX Utilities</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="13.10.4 ErrorHandler Objects"
+  href="sax-error-handler.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="13. Structured Markup Processing"
+  href="markup.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="13.12 xml.sax.xmlreader  "
+  href="module-xml.sax.xmlreader.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="sax-error-handler.html">13.10.4 ErrorHandler Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="markup.html">13. Structured Markup Processing</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-xml.sax.xmlreader.html">13.12 xml.sax.xmlreader  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00151100000000000000000">
+13.11 <tt class="module">xml.sax.saxutils</tt> --
+         SAX Utilities</A>
+</H1>
+
+<P>
+<A NAME="module-xml.sax.saxutils"></A>
+
+<P>
+
+<span class="versionnote">New in version 2.0.</span>
+
+<P>
+The module <tt class="module">xml.sax.saxutils</tt> contains a number of classes and
+functions that are commonly useful when creating SAX applications,
+either in direct use, or as base classes.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4509' xml:id='l2h-4509' class="function">escape</tt></b>(</nobr></td>
+  <td><var>data</var><big>[</big><var>, entities</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  Escape "<tt class="character">&amp;</tt>", "<tt class="character">&lt;</tt>", and "<tt class="character">&gt;</tt>" in a string
+  of data.
+
+<P>
+You can escape other strings of data by passing a dictionary as the
+  optional <var>entities</var> parameter.  The keys and values must all be
+  strings; each key will be replaced with its corresponding value.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4510' xml:id='l2h-4510' class="function">unescape</tt></b>(</nobr></td>
+  <td><var>data</var><big>[</big><var>, entities</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  Unescape "<tt class="character">&amp;amp;</tt>", "<tt class="character">&amp;lt;</tt>", and "<tt class="character">&amp;gt;</tt>"
+  in a string of data.
+
+<P>
+You can unescape other strings of data by passing a dictionary as the
+  optional <var>entities</var> parameter.  The keys and values must all be
+  strings; each key will be replaced with its corresponding value.
+
+<P>
+
+<span class="versionnote">New in version 2.3.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4511' xml:id='l2h-4511' class="function">quoteattr</tt></b>(</nobr></td>
+  <td><var>data</var><big>[</big><var>, entities</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  Similar to <tt class="function">escape()</tt>, but also prepares <var>data</var> to be
+  used as an attribute value.  The return value is a quoted version of
+  <var>data</var> with any additional required replacements.
+  <tt class="function">quoteattr()</tt> will select a quote character based on the
+  content of <var>data</var>, attempting to avoid encoding any quote
+  characters in the string.  If both single- and double-quote
+  characters are already in <var>data</var>, the double-quote characters
+  will be encoded and <var>data</var> will be wrapped in double-quotes.  The
+  resulting string can be used directly as an attribute value:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; print "&lt;element attr=%s&gt;" % quoteattr("ab ' cd \" ef")
+&lt;element attr="ab ' cd &amp;quot; ef"&gt;
+</pre></div>
+
+<P>
+This function is useful when generating attribute values for HTML or
+  any SGML using the reference concrete syntax.
+  
+<span class="versionnote">New in version 2.2.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-4512' xml:id='l2h-4512' class="class">XMLGenerator</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>out</var><big>[</big><var>, encoding</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  This class implements the <tt class="class">ContentHandler</tt> interface by
+  writing SAX events back into an XML document. In other words, using
+  an <tt class="class">XMLGenerator</tt> as the content handler will reproduce the
+  original document being parsed. <var>out</var> should be a file-like
+  object which will default to <var>sys.stdout</var>. <var>encoding</var> is the
+  encoding of the output stream which defaults to <code>'iso-8859-1'</code>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-4513' xml:id='l2h-4513' class="class">XMLFilterBase</tt></b>(</nobr></td>
+  <td><var>base</var>)</td></tr></table></dt>
+<dd>
+  This class is designed to sit between an <tt class="class">XMLReader</tt> and the
+  client application's event handlers.  By default, it does nothing
+  but pass requests up to the reader and events on to the handlers
+  unmodified, but subclasses can override specific methods to modify
+  the event stream or the configuration requests as they pass through.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4514' xml:id='l2h-4514' class="function">prepare_input_source</tt></b>(</nobr></td>
+  <td><var>source</var><big>[</big><var>, base</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+  This function takes an input source and an optional base URL and
+  returns a fully resolved <tt class="class">InputSource</tt> object ready for
+  reading.  The input source can be given as a string, a file-like
+  object, or an <tt class="class">InputSource</tt> object; parsers will use this
+  function to implement the polymorphic <var>source</var> argument to their
+  <tt class="method">parse()</tt> method.
+</dl>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="13.10.4 ErrorHandler Objects"
+  href="sax-error-handler.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="13. Structured Markup Processing"
+  href="markup.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="13.12 xml.sax.xmlreader  "
+  href="module-xml.sax.xmlreader.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="sax-error-handler.html">13.10.4 ErrorHandler Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="markup.html">13. Structured Markup Processing</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-xml.sax.xmlreader.html">13.12 xml.sax.xmlreader  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

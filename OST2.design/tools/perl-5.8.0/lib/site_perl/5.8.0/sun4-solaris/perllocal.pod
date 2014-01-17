@@ -1,0 +1,1496 @@
+=head2 Wed Aug 28 19:20:52 2002: C<Module> L<IO::Tty|IO::Tty>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.02>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Aug 28 19:25:16 2002: C<Module> L<Expect|Expect>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.15>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Aug 28 19:29:00 2002: C<Module> L<TimeDate|TimeDate>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.1301>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Aug 28 19:38:30 2002: C<Module> L<Term::ReadLine::Gnu|Term::ReadLine::Gnu>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.12>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Aug 28 19:40:52 2002: C<Module> L<CommandTerm|CommandTerm>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.05>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Aug 28 19:42:21 2002: C<Module> L<Tie::IxHash|Tie::IxHash>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.21>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Aug 28 20:00:48 2002: C<Module> L<Tk|Tk>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 800.023>
+
+=item *
+
+C<EXE_FILES: ptksh ptked>
+
+=back
+
+=head2 Tue Sep  3 14:32:55 2002: C<Module> L<TRELoad|TRELoad>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.00>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Sep  5 10:47:33 2002: C<Module> L<Bit::Vector|Bit::Vector>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 6.1>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Sep 25 18:34:11 2002: C<Module> L<TRELoad|TRELoad>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.00>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Oct  1 16:38:54 2002: C<Module> L<DBI|DBI>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.18>
+
+=item *
+
+C<EXE_FILES: dbish dbiproxy>
+
+=back
+
+=head2 Tue Oct  1 16:49:33 2002: C<Module> L<Msql-Mysql-modules|Msql-Mysql-modules>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.2219>
+
+=item *
+
+C<EXE_FILES: dbimon>
+
+=back
+
+=head2 Fri Oct 25 15:11:56 2002: C<Module> L<Term::ReadKey|Term::ReadKey>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.21>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Oct 28 16:24:28 2002: C<Module> L<TRELoad|TRELoad>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.01>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Oct 30 19:16:50 2002: C<Module> L<Tie::DxHash|Tie::DxHash>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.93>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Nov 21 14:08:25 2002: C<Module> L<Crypt::Tea|Crypt::Tea>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.43>
+
+=item *
+
+C<EXE_FILES: bin/tea>
+
+=back
+
+=head2 Thu Nov 21 14:48:34 2002: C<Module> L<Crypt::Rijndael|Crypt::Rijndael>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.04>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Nov 21 14:54:55 2002: C<Module> L<Crypt::CBC|Crypt::CBC>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.08>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Nov 21 14:55:45 2002: C<Module> L<Crypt::Blowfish|Crypt::Blowfish>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.09>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Nov 21 15:46:36 2002: C<Module> L<Crypt::DES|Crypt::DES>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.03>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Nov 21 19:11:20 2002: C<Module> L<Crypt::Tea|Crypt::Tea>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.43>
+
+=item *
+
+C<EXE_FILES: bin/tea>
+
+=back
+
+=head2 Fri Nov 22 17:23:02 2002: C<Module> L<Expect|Expect>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.15>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Dec  2 18:21:32 2002: C<Module> L<Algorithm::Diff|Algorithm::Diff>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.15>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Feb 21 14:31:51 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Feb 21 14:35:41 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Feb 21 16:08:15 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Feb 21 16:11:23 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Feb 21 16:24:47 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Feb 21 16:26:40 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Feb 21 16:30:42 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Feb 21 16:33:21 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Feb 21 16:36:07 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Feb 21 16:36:58 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Mon Feb 24 12:41:00 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Wed Mar 12 11:53:23 2003: C<Module> L<IO::Stty|IO::Stty>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: .02>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Mar 18 08:45:55 2003: C<Module> L<BigIntSupport|BigIntSupport>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Apr 14 18:23:19 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.02>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Wed Apr 16 13:42:22 2003: C<Module> L<TRELoad|TRELoad>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.01>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Jun 20 13:13:11 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.03>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Fri Jun 20 17:09:58 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.03>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Tue Jun 24 14:57:10 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.03>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Thu Jul 24 16:29:00 2003: C<Module> L<HTML::Tagset|HTML::Tagset>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 3.03>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Jul 24 16:30:10 2003: C<Module> L<HTML::Parser|HTML::Parser>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 3.28>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Jul 24 16:30:39 2003: C<Module> L<HTML-TableExtract|HTML-TableExtract>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.08>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Jul 24 16:44:30 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.04>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Mon Jul 28 22:47:54 2003: C<Module> L<ScanTest|ScanTest>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.05>
+
+=item *
+
+C<EXE_FILES: scantest venial>
+
+=back
+
+=head2 Tue Aug 12 14:12:24 2003: C<Module> L<Pastel|Pastel>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.04>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Aug 12 14:13:33 2003: C<Module> L<GDS2|GDS2>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.3.1>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Aug 18 14:25:07 2003: C<Module> L<Bundle::Expect|Bundle::Expect>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.09>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Aug 19 10:56:24 2003: C<Module> L<Date::Simple|Date::Simple>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.04>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Aug 19 11:04:40 2003: C<Module> L<Bundle::Expect|Bundle::Expect>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.09>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Aug 19 14:30:22 2003: C<Module> L<Expect|Expect>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.15>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Aug 21 10:26:53 2003: C<Module> L<IO::Tty|IO::Tty>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.02>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Aug 21 10:45:10 2003: C<Module> L<IO::Tty|IO::Tty>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.02>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Sep 11 13:43:07 2003: C<Module> L<Number::Format|Number::Format>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.45>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Sep 12 12:02:57 2003: C<Module> L<Net::Telnet|Net::Telnet>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 3.03>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Sep 23 12:11:23 2003: C<Module> L<Math::Matrix|Math::Matrix>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: >
+
+=item *
+
+C<VERSION: 0.4>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Sep 23 12:23:30 2003: C<Module> L<Math::MatrixReal|Math::MatrixReal>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.9>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Oct 27 13:12:36 2003: C<Module> L<Date::Manip|Date::Manip>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 5.42>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Thu Feb 19 18:19:01 2004: C<Module> L<psh|psh>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.8>
+
+=item *
+
+C<EXE_FILES: psh>
+
+=back
+
+=head2 Fri Mar 19 16:50:48 2004: C<Module> L<Data::Dump|Data::Dump>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.02>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Mar 19 17:29:01 2004: C<Module> L<Perl::Tidy|Perl::Tidy>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 20031021>
+
+=item *
+
+C<EXE_FILES: bin/perltidy>
+
+=back
+
+=head2 Tue Mar 23 11:39:00 2004: C<Module> L<Date::Calc|Date::Calc>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 5.3>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Mar 29 14:34:46 2004: C<Module> L<Planets|Planets>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.00>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Mar 31 10:22:20 2004: C<Module> L<Parse::RecDescent|Parse::RecDescent>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.79>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Wed Mar 31 10:23:44 2004: C<Module> L<Lingua::EN::Numbers::Ordinate|Lingua::EN::Numbers::Ordinate>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Apr 20 16:10:13 2004: C<Module> L<Cudd|Cudd>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.06>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Apr 23 11:07:24 2004: C<Module> L<Math::Geometry|Math::Geometry>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.03>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+

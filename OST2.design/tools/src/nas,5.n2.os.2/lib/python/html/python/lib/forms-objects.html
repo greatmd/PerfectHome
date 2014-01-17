@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="form-objects.html" />
+<link rel="parent" href="module-fl.html" />
+<link rel="next" href="module-fl-constants.html" />
+<meta name='aesop' content='information' />
+<title>20.4.3 FORMS Objects</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="20.4.2 Form Objects"
+  href="form-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="20.4 fl  "
+  href="module-fl.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="20.5 FL  "
+  href="module-fl-constants.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="form-objects.html">20.4.2 Form Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-fl.html">20.4 fl  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-fl-constants.html">20.5 FL  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0022430000000000000000"></A>
+<A NAME="forms-objects"></A>
+<BR>
+20.4.3 FORMS Objects
+</H2>
+
+<P>
+Besides methods specific to particular kinds of FORMS objects, all
+FORMS objects also have the following methods:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5168' xml:id='l2h-5168' class="method">set_call_back</tt></b>(</nobr></td>
+  <td><var>function, argument</var>)</td></tr></table></dt>
+<dd>
+Set the object's callback function and argument.  When the object
+needs interaction, the callback function will be called with two
+arguments: the object, and the callback argument.  (FORMS objects
+without a callback function are returned by <tt class="function">fl.do_forms()</tt>
+or <tt class="function">fl.check_forms()</tt> when they need interaction.)  Call this
+method without arguments to remove the callback function.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5169' xml:id='l2h-5169' class="method">delete_object</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Delete the object.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5170' xml:id='l2h-5170' class="method">show_object</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Show the object.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5171' xml:id='l2h-5171' class="method">hide_object</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Hide the object.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5172' xml:id='l2h-5172' class="method">redraw_object</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Redraw the object.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5173' xml:id='l2h-5173' class="method">freeze_object</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Freeze the object.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5174' xml:id='l2h-5174' class="method">unfreeze_object</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+  Unfreeze the object.
+</dl>
+
+<P>
+FORMS objects have these data attributes; see the FORMS documentation:
+
+<P>
+<div class="center"><table class="realtable">
+  <thead>
+    <tr>
+      <th class="left"  >Name</th>
+      <th class="left"  >C Type</th>
+      <th class="left"  >Meaning</th>
+      </tr>
+    </thead>
+  <tbody>
+    <tr><td class="left"   valign="baseline"><tt class="member">objclass</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >object class</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">type</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >object type</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">boxtype</tt></td>
+        <td class="left"  >int</td>
+        <td class="left"  >box type</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">x</tt></td>
+        <td class="left"  >float</td>
+        <td class="left"  >x origin</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">y</tt></td>
+        <td class="left"  >float</td>
+        <td class="left"  >y origin</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">w</tt></td>
+        <td class="left"  >float</td>
+        <td class="left"  >width</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">h</tt></td>
+        <td class="left"  >float</td>
+        <td class="left"  >height</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">col1</tt></td>
+        <td class="left"  >int</td>
+        <td class="left"  >primary color</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">col2</tt></td>
+        <td class="left"  >int</td>
+        <td class="left"  >secondary color</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">align</tt></td>
+        <td class="left"  >int</td>
+        <td class="left"  >alignment</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">lcol</tt></td>
+        <td class="left"  >int</td>
+        <td class="left"  >label color</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">lsize</tt></td>
+        <td class="left"  >float</td>
+        <td class="left"  >label font size</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">label</tt></td>
+        <td class="left"  >string</td>
+        <td class="left"  >label string</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">lstyle</tt></td>
+        <td class="left"  >int</td>
+        <td class="left"  >label style</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">pushed</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >(see FORMS docs)</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">focus</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >(see FORMS docs)</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">belowmouse</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >(see FORMS docs)</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">frozen</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >(see FORMS docs)</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">active</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >(see FORMS docs)</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">input</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >(see FORMS docs)</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">visible</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >(see FORMS docs)</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">radio</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >(see FORMS docs)</td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="member">automatic</tt></td>
+        <td class="left"  >int (read-only)</td>
+        <td class="left"  >(see FORMS docs)</td></tr></tbody>
+</table></div>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="20.4.2 Form Objects"
+  href="form-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="20.4 fl  "
+  href="module-fl.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="20.5 FL  "
+  href="module-fl-constants.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="form-objects.html">20.4.2 Form Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-fl.html">20.4 fl  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-fl-constants.html">20.5 FL  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

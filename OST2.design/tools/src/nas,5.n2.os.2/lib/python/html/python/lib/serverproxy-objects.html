@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="boolean-objects.html" />
+<link rel="prev" href="module-xmlrpclib.html" />
+<link rel="parent" href="module-xmlrpclib.html" />
+<link rel="next" href="boolean-objects.html" />
+<meta name='aesop' content='information' />
+<title>11.22.1 ServerProxy Objects </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.22 xmlrpclib  "
+  href="module-xmlrpclib.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11.22 xmlrpclib  "
+  href="module-xmlrpclib.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.22.2 Boolean Objects"
+  href="boolean-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-xmlrpclib.html">11.22 xmlrpclib  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-xmlrpclib.html">11.22 xmlrpclib  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="boolean-objects.html">11.22.2 Boolean Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00132210000000000000000"></A><A NAME="serverproxy-objects"></A>
+<BR>
+11.22.1 ServerProxy Objects 
+</H2>
+
+<P>
+A <tt class="class">ServerProxy</tt> instance has a method corresponding to
+each remote procedure call accepted by the XML-RPC server.  Calling
+the method performs an RPC, dispatched by both name and argument
+signature (e.g. the same method name can be overloaded with multiple
+argument signatures).  The RPC finishes by returning a value, which
+may be either returned data in a conformant type or a <tt class="class">Fault</tt> or
+<tt class="class">ProtocolError</tt> object indicating an error.
+
+<P>
+Servers that support the XML introspection API support some common
+methods grouped under the reserved <tt class="member">system</tt> member:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3699' xml:id='l2h-3699' class="method">system.listMethods</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+This method returns a list of strings, one for each (non-system)
+method supported by the XML-RPC server.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3700' xml:id='l2h-3700' class="method">system.methodSignature</tt></b>(</nobr></td>
+  <td><var>name</var>)</td></tr></table></dt>
+<dd>
+This method takes one parameter, the name of a method implemented by
+the XML-RPC server.It returns an array of possible signatures for this
+method. A signature is an array of types. The first of these types is
+the return type of the method, the rest are parameters.
+
+<P>
+Because multiple signatures (ie. overloading) is permitted, this method
+returns a list of signatures rather than a singleton.
+
+<P>
+Signatures themselves are restricted to the top level parameters
+expected by a method. For instance if a method expects one array of
+structs as a parameter, and it returns a string, its signature is
+simply "string, array". If it expects three integers and returns a
+string, its signature is "string, int, int, int".
+
+<P>
+If no signature is defined for the method, a non-array value is
+returned. In Python this means that the type of the returned 
+value will be something other that list.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3701' xml:id='l2h-3701' class="method">system.methodHelp</tt></b>(</nobr></td>
+  <td><var>name</var>)</td></tr></table></dt>
+<dd>
+This method takes one parameter, the name of a method implemented by
+the XML-RPC server.  It returns a documentation string describing the
+use of that method. If no such string is available, an empty string is
+returned. The documentation string may contain HTML markup.  
+</dl>
+
+<P>
+Introspection methods are currently supported by servers written in
+PHP, C and Microsoft .NET. Partial introspection support is included
+in recent updates to UserLand Frontier. Introspection support for
+Perl, Python and Java is available at the XML-RPC Hacks page.
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.22 xmlrpclib  "
+  href="module-xmlrpclib.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11.22 xmlrpclib  "
+  href="module-xmlrpclib.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.22.2 Boolean Objects"
+  href="boolean-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-xmlrpclib.html">11.22 xmlrpclib  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-xmlrpclib.html">11.22 xmlrpclib  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="boolean-objects.html">11.22.2 Boolean Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

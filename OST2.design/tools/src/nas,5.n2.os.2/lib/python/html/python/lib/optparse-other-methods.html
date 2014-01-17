@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="optparse-conflicts-between-options.html" />
+<link rel="parent" href="optparse-reference-guide.html" />
+<link rel="next" href="optparse-option-callbacks.html" />
+<meta name='aesop' content='information' />
+<title>6.21.3.10 Other methods</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.9 Conflicts between options"
+  href="optparse-conflicts-between-options.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.4 Option Callbacks"
+  href="optparse-option-callbacks.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-conflicts-between-options.html">6.21.3.9 Conflicts between options</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-option-callbacks.html">6.21.4 Option Callbacks</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00821310000000000000000"></A><A NAME="optparse-other-methods"></A>
+<BR>
+6.21.3.10 Other methods
+</H3>
+
+<P>
+OptionParser supports several other public methods:
+
+<UL>
+<LI> 
+<code>set_usage(usage)</code>
+
+<P>
+Set the usage string according to the rules described above for the
+<code>usage</code> constructor keyword argument.  Passing <code>None</code> sets the
+default usage string; use <code>SUPPRESS_USAGE</code> to suppress a usage
+message.
+
+<P>
+</LI>
+<LI> 
+<code>enable_interspersed_args()</code>, <code>disable_interspersed_args()</code>
+
+<P>
+Enable/disable positional arguments interspersed with options, similar
+to GNU getopt (enabled by default).  For example, if <code>"-a"</code> and
+<code>"-b"</code> are both simple options that take no arguments, <tt class="module">optparse</tt>
+normally accepts this syntax:
+<div class="verbatim"><pre>
+prog -a arg1 -b arg2
+</pre></div>
+
+<P>
+and treats it as equivalent to
+<div class="verbatim"><pre>
+prog -a -b arg1 arg2
+</pre></div>
+
+<P>
+To disable this feature, call <code>disable_interspersed_args()</code>.  This
+restores traditional <span class="Unix">Unix</span> syntax, where option parsing stops with the
+first non-option argument.
+
+<P>
+</LI>
+<LI> 
+<code>set_defaults(dest=value, ...)</code>
+
+<P>
+Set default values for several option destinations at once.  Using
+<tt class="method">set_defaults()</tt> is the preferred way to set default values for
+options, since multiple options can share the same destination.  For
+example, if several ``mode'' options all set the same destination, any
+one of them can set the default, and the last one wins:
+<div class="verbatim"><pre>
+parser.add_option("--advanced", action="store_const",
+                  dest="mode", const="advanced",
+                  default="novice")    # overridden below
+parser.add_option("--novice", action="store_const",
+                  dest="mode", const="novice",
+                  default="advanced")  # overrides above setting
+</pre></div>
+
+<P>
+To avoid this confusion, use <tt class="method">set_defaults()</tt>:
+<div class="verbatim"><pre>
+parser.set_defaults(mode="advanced")
+parser.add_option("--advanced", action="store_const",
+                  dest="mode", const="advanced")
+parser.add_option("--novice", action="store_const",
+                  dest="mode", const="novice")
+</pre></div>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.9 Conflicts between options"
+  href="optparse-conflicts-between-options.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.4 Option Callbacks"
+  href="optparse-option-callbacks.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-conflicts-between-options.html">6.21.3.9 Conflicts between options</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-option-callbacks.html">6.21.4 Option Callbacks</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

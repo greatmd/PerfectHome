@@ -1,0 +1,154 @@
+=head2 Fri Apr 23 11:14:41 2004: C<Module> L<ExtUtils::MakeMaker|ExtUtils::MakeMaker>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 6.21_03>
+
+=item *
+
+C<EXE_FILES: bin/instmodsh>
+
+=back
+
+=head2 Fri Apr 23 11:39:00 2004: C<Module> L<Inline|Inline>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.44>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Apr 26 17:08:41 2004: C<Module> L<Heap|Heap>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.70>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Mon Apr 26 17:09:17 2004: C<Module> L<Graph|Graph>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.20102>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue Apr 27 09:42:06 2004: C<Module> L<Set::Object|Set::Object>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.05>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Sat May  1 15:04:05 2004: C<Module> L<Tk::WorldCanvas|Tk::WorldCanvas>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.2.7>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Tue May  4 13:42:34 2004: C<Module> L<SVG|SVG>
+
+=over 4
+
+=item *
+
+C<installed into: /import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.28>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+

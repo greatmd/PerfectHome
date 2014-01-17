@@ -1,0 +1,31 @@
+set dofile abort exit
+ADD_BLACK_BOX
+set abort limit ABORT_LIMIT
+set decision order DECISION_ORDER
+set contention check CONTENTION_CHECK
+set simulation mode SIMULATION_MODE
+set fault type FAULT_TYPE
+HOLD_PI_ON
+set gate report trace                        
+set gate level primitive
+add scan group SCAN_GROUP TEST_PROCEDURE_FILE
+ADD_SCAN_CHAINS
+ADD_CLOCK_PH1
+ADD_CLOCK_PH2
+ADD_LOW_PINS
+ADD_HIGH_PINS
+flatten model
+set system mode atpg
+rep scan chain
+rep scan cells
+LOAD_PATH_FILE
+add faults -all
+run
+report statistics
+REPORT_INSTANCES
+REPORT_DRC_RULES
+report drc rule d5
+REPORT_FAULTS
+SAVE_SERIAL_PATTERNS
+SAVE_PARALLEL_PATTERNS
+exit

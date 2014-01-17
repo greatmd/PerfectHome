@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="api.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="api.html" title='Python/C API Reference Manual' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="slice-objects.html" />
+<link rel="prev" href="iterator-objects.html" />
+<link rel="parent" href="otherObjects.html" />
+<link rel="next" href="slice-objects.html" />
+<meta name='aesop' content='information' />
+<title>7.5.6 Descriptor Objects </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.5.5 Iterator Objects"
+  href="iterator-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.5 Other Objects"
+  href="otherObjects.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.5.7 Slice Objects"
+  href="slice-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="iterator-objects.html">7.5.5 Iterator Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="otherObjects.html">7.5 Other Objects</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="slice-objects.html">7.5.7 Slice Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009560000000000000000"></A><A NAME="descriptor-objects"></A>
+<BR>
+7.5.6 Descriptor Objects 
+</H2>
+
+<P>
+``Descriptors'' are objects that describe some attribute of an object.
+They are found in the dictionary of type objects.
+
+<P>
+<dl><dt>PyTypeObject <b><tt id='l2h-703' xml:id='l2h-703' class="cdata">PyProperty_Type</tt></b></dt>
+<dd>
+  The type object for the built-in descriptor types.
+  
+<span class="versionnote">New in version 2.2.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-704' xml:id='l2h-704' class="cfunction">PyDescr_NewGetSet</tt></b>(</nobr></td><td>PyTypeObject *<var>type</var>,
+					        PyGetSetDef *<var>getset</var>)</td></tr></table></dt>
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+  
+<span class="versionnote">New in version 2.2.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-705' xml:id='l2h-705' class="cfunction">PyDescr_NewMember</tt></b>(</nobr></td><td>PyTypeObject *<var>type</var>,
+					        PyMemberDef *<var>meth</var>)</td></tr></table></dt>
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+  
+<span class="versionnote">New in version 2.2.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-706' xml:id='l2h-706' class="cfunction">PyDescr_NewMethod</tt></b>(</nobr></td><td>PyTypeObject *<var>type</var>,
+                                                PyMethodDef *<var>meth</var>)</td></tr></table></dt>
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+  
+<span class="versionnote">New in version 2.2.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-707' xml:id='l2h-707' class="cfunction">PyDescr_NewWrapper</tt></b>(</nobr></td><td>PyTypeObject *<var>type</var>,
+						 struct wrapperbase *<var>wrapper</var>,
+                                                 void *<var>wrapped</var>)</td></tr></table></dt>
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+  
+<span class="versionnote">New in version 2.2.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-708' xml:id='l2h-708' class="cfunction">PyDescr_NewClassMethod</tt></b>(</nobr></td><td>PyTypeObject *<var>type</var>,
+						     PyMethodDef *<var>method</var>)</td></tr></table></dt>
+<dd>
+  
+<span class="versionnote">New in version 2.3.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>int&nbsp;<b><tt id='l2h-709' xml:id='l2h-709' class="cfunction">PyDescr_IsData</tt></b>(</nobr></td><td>PyObject *<var>descr</var>)</td></tr></table></dt>
+<dd>
+  Return true if the descriptor objects <var>descr</var> describes a data
+  attribute, or false if it describes a method.  <var>descr</var> must be a
+  descriptor object; there is no error checking.
+  
+<span class="versionnote">New in version 2.2.</span>
+
+</dd></dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline"><td><nobr>PyObject*&nbsp;<b><tt id='l2h-710' xml:id='l2h-710' class="cfunction">PyWrapper_New</tt></b>(</nobr></td><td>PyObject *, PyObject *)</td></tr></table></dt>
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+  
+<span class="versionnote">New in version 2.2.</span>
+
+</dd></dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.5.5 Iterator Objects"
+  href="iterator-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.5 Other Objects"
+  href="otherObjects.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.5.7 Slice Objects"
+  href="slice-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="iterator-objects.html">7.5.5 Iterator Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="otherObjects.html">7.5 Other Objects</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="slice-objects.html">7.5.7 Slice Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

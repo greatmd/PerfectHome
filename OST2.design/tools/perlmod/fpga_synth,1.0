@@ -1,0 +1,297 @@
+# ========== Copyright Header Begin ==========================================
+# 
+# OpenSPARC T2 Processor File: fpga_synth,1.0
+# Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+# 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#
+# * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For the avoidance of doubt, and except that if any non-GPL license 
+# choice is available it will apply instead, Sun elects to use only 
+# the General Public License version 2 (GPLv2) at this time for any 
+# software where a choice of GPL license versions is made 
+# available with the language indicating that GPLv2 or any later version 
+# may be used, or where a choice of which version of the GPL is applied is 
+# otherwise unspecified. 
+#
+# Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+# CA 95054 USA or visit www.sun.com if you need additional information or 
+# have any questions. 
+# 
+# ========== Copyright Header End ============================================
+#!/usr/bin/perl
+
+use Cwd;
+
+sub Help;
+sub tee_stdout;
+
+  $version="1.4";
+MAIN:
+  {
+  #// Help
+  if($#ARGV==-1){Help;exit(-1);}
+
+  #// Parsing arguments
+  my $filelist;
+  my $user_compile_dir;
+  my $synthesis_tool;
+  my $top="t2";
+  my $device="XC5VLX330";
+  my $project_file;
+  my $no_run=0;
+  my $clean=0;
+  my $help=0;
+  my $result_output_dir = "t2_synth" ;
+
+  open(LOG,">fpga_synth.log") ;
+  
+  printf LOG ("Running fpga_synth version $version .... \n");
+  printf LOG ("\n");
+  printf LOG ("fpga_synth @ARGV \n");
+  printf LOG ("\t.....\n");
+
+  for(my $i=0;$i<$#ARGV+1;$i++)
+    {
+    if($ARGV[$i] eq "-f")
+      {
+      if($i==$#ARGV){printf ("  Missing value for: %s\n",$ARGV[$i]);exit(-1);}
+      $filelist=$ARGV[$i+1];
+      $i++;
+      }
+
+    elsif($ARGV[$i] eq "-user_compile_dir")
+      {
+      if($i==$#ARGV){printf("  Missing value for: %s\n",$ARGV[$i]);exit(-1);}
+      $user_compile_dir=$ARGV[$i+1];
+      $i++;
+      }
+
+    elsif($ARGV[$i] eq "-synplicity")
+      {
+      $synthesis_tool="synplicity";
+      }
+
+    elsif($ARGV[$i] eq "-top")
+      {
+      if($i==$#ARGV){printf("  Missing value for: %s\n",$ARGV[$i]);exit(-1);}
+      $top=$ARGV[$i+1];
+      $i++;
+      }
+
+    elsif($ARGV[$i] eq "-device")
+      {
+      if($i==$#ARGV){printf("  Missing value for: %s\n",$ARGV[$i]);exit(-1);}
+      $device=$ARGV[$i+1];
+      $i++;
+      }
+
+    elsif($ARGV[$i] eq "-project_file")
+      {
+      if($i==$#ARGV){printf("  Missing value for: %s\n",$ARGV[$i]);exit(-1);}
+      $project_file = $ARGV[$i+1];
+      $i++;
+      }
+
+    elsif($ARGV[$i] eq "-no_run")
+      {
+      $no_run=1;
+      }
+
+    elsif($ARGV[$i] eq "-clean")
+      {
+      $clean=1;
+      }
+
+    elsif($ARGV[$i] eq "-h")
+      {
+      Help;
+      exit(-1);
+      }
+
+    else
+      {
+      printf("  Invalid argument: %s\n",$ARGV[$i]);
+      exit(-1);
+      }
+    }
+
+
+  if(length($filelist)==0)
+    {
+    if($clean == 0) {
+    printf("Using the default flist , $ENV{DV_ROOT}/design/fpga/rtl/fpga_rtl_synth.flist .\n\n"); 
+    printf LOG ("Using the default flist , $ENV{DV_ROOT}/design/fpga/rtl/fpga_rtl_synth.flist .\n\n"); }
+    printf LOG ("\t.....\n");
+    $filelist="$ENV{DV_ROOT}/design/fpga/rtl/fpga_rtl_synth.flist";
+    }
+
+  if(length($user_compile_dir)==0)
+    {
+     if($clean == 0) {
+    printf("Using the default compile dir, $ENV{MODEL_DIR}/fpga_synth .\n\n"); 
+    printf LOG ("Using the default compile dir, $ENV{MODEL_DIR}/fpga_synth .\n\n"); }
+    printf LOG ("\t.....\n");
+    $user_compile_dir="$ENV{MODEL_DIR}/fpga_synth";
+    }
+
+  if($clean==1)
+    {
+      system("rm -Rf $user_compile_dir");
+      exit(0);
+    }
+
+  if(length($synthesis_tool)==0)
+    {
+    printf("  ERROR: Please specify a synthesis tool.\n\n");
+    exit(-1);
+    }
+
+  if(length($ENV{DV_ROOT})==0)
+    {
+    printf("  ERROR: Please set env variable DV_ROOT.\n");
+    exit(-1);
+    }
+
+  if(length($ENV{SYNP_HOME})==0 && no_run==0)
+    {
+    printf("  ERROR: Please set env variable SYNP_HOME.\n");
+    exit(-1);
+    }
+
+
+  system("mkdir -p $user_compile_dir");
+  
+  chdir "$user_compile_dir" or die "Can't access $user_compile_dir";
+
+   $result_dir = cwd() ;
+
+  if(length($project_file)==0)
+    {
+      $project_file="fpga_synth_${synthesis_tool}.prj";
+      $import_verilog = "import_verilog_${synthesis_tool}.prj";
+
+      open g2, ">${import_verilog}" or die "File creation error: ${import_verilog}";
+     
+      open f1 ,"<${filelist}";
+      @list = <f1> ;
+       foreach $elem (@list) {
+       $_ = $elem ;
+       chomp ;
+       s/\s*-v\s+// ;
+       s/\s+//;
+       next if (/^\/\//);
+       $elem = $_ ;
+
+       if($elem =~m/\+incdir\+/) {
+       $_ = $elem ;
+       s/\+incdir\+// ;
+       $elem = $_ ;
+       print g2 "set_option -library_path \"$elem\" \n" ;
+      }
+      elsif ($elem =~m/\+define\+/){
+      $_ = $elem ;
+      s/\+define\+//g;
+      $elem = $_ ;
+       push(@defines,$elem) ;
+      }
+      else {
+       push(@vfiles,$elem) ;
+      }
+      }
+      
+       print g2 "hdl_define -set \"@defines\" \n";
+       foreach $elem2 (@vfiles) {
+         print g2 "add_file -verilog \"$elem2\" \n" ;
+        }
+      close g2 ; 
+ 
+      open g, ">${project_file}" or die "File creation error: ${project_file}";
+      print g "set DV_ROOT [get_env DV_ROOT]\n";
+      print g "set_option -top_module \"${top}\"\n";
+      print g "project -result_file \"t2_synth\/${top}.edf\"\n";
+      print g "project -log_file \"${top}.srr\"\n";
+      print g "\n";
+      print g "source import_verilog_${synthesis_tool}.prj\n" ;
+      print g "source \$DV_ROOT/tools/fpga/fpga_synth_synplicity_default.prj\n" ;
+      if (-e "$ENV{DV_ROOT}/tools/fpga/${device}.prj")
+	{
+      print g "source  \$DV_ROOT/tools/fpga/${device}.prj\n";
+	}
+      close g;
+
+    }
+
+  printf LOG ("Created ${project_file} in  $result_dir \n");  
+  printf LOG ("\t.....\n");
+  
+  open g, ">run.script" or die "File creation error: run.script";
+  print g "\$SYNP_HOME/bin/synplify_pro -batch ${project_file}\n";
+  close g;
+  system("chmod 0755 run.script");
+
+  open g3, ">fpga_gate.flist" or die "File creation error: fpga_gate.flist";
+
+  print g3 "\$DV_ROOT/design/fpga/opencores/timescale.v\n" ;
+  print g3 "$result_dir/t2_synth/${top}.vm\n" ;
+  close g3 ;
+
+  system ("cat $ENV{DV_ROOT}/design/fpga/gate/fpga_gate_tb.flist >> fpga_gate.flist") ;
+  system ("cat $ENV{DV_ROOT}/design/fpga/gate/xilinx_lib.flist >> fpga_gate.flist") ;
+
+  printf LOG ("Created fpga_gate.flist in  $result_dir \n");  
+  printf LOG ("\t.....\n");
+  printf LOG ("Linking the fpga gate flist to $DV_ROOT/design/fpga/gate/fpga_gate_master.flist \n");
+
+  if(-e "$ENV{DV_ROOT}/design/fpga/gate/fpga_gate_master.flist") { 
+	system ("rm -Rf $ENV{DV_ROOT}/design/fpga/gate/fpga_gate_master.flist") 
+  } ;
+    
+  system ("ln -fs $result_dir/fpga_gate.flist $ENV{DV_ROOT}/design/fpga/gate/fpga_gate_master.flist") ; 
+
+  if($no_run==0)
+    {
+    printf LOG ("\n");
+    printf LOG ("Running the synthesis script ...\n");
+    printf LOG ("\t.....\n");
+    system("./run.script");
+    }
+
+  
+  exit(0);
+  }
+
+
+#+-------------+
+#|  Help menu  |
+#+-------------+
+sub Help
+{
+    printf("fpga_synth -version $version\n");
+    printf("----------\n");
+    printf("Utility  to synthesize T2 system level environment for FPGA  \n");
+    printf("   -f  <flist>              : optional, file list , default $DV_ROOT/design/fpga/rtl/fpga_rtl_synth.flist \n");
+    printf("   -user_compile_dir  <dir> : optional, user specified dir , default \$MODEL_DIR/fpga_synth \n");
+    printf("   -synplicity              : required, synthesis tool to use, uses synplify pro\n");
+    printf("   -top <module>            : optional, top module, default t2 \n");
+    printf("   -device  <keyword>       : optional, FPGA device, default LX330\n");
+    printf("   -project_file <file>     : optional, user specified project file\n");
+    printf("   -no_run                  : optional, does not run synthesis, generates run.script only\n");
+    printf("   -clean                   : optional, removes temp directories/files\n");
+    printf("   -h                       : optional, help\n");
+}
+
+

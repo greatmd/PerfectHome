@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="dist.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="dist.html" title='Distributing Python Modules' />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="intro.html" />
+<meta name='aesop' content='information' />
+<title>Distributing Python Modules</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></td>
+<td class='online-navigation'><a rel="parent" title="Python Documentation Index"
+  href="../index.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="1. An Introduction to"
+  href="intro.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="../index.html">Python Documentation Index</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="intro.html">1. An Introduction to</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<P>
+
+<link rel='up' href='../index.html' title='Python Documentation Index' />
+<div class="titlepage">
+<div class='center'>
+<h1>Distributing Python Modules</h1>
+<p><b><font size="+2">Greg Ward</font></b></p>
+<p>
+	<strong>Python Software Foundation</strong>
+<BR>
+Email: <span class="email">distutils-sig@python.org</span>
+</p>
+<p><i>        Anthony Baxter</i></p>
+<p><strong>Release 2.4.2</strong><br />
+<strong>28 September 2005</strong></p>
+<p></p>
+</div>
+</div>
+
+<P>
+Copyright &#169; 2001-2004 Python Software Foundation.
+All rights reserved.
+
+<P>
+Copyright &#169; 2000 BeOpen.com.
+All rights reserved.
+
+<P>
+Copyright &#169; 1995-2000 Corporation for National Research Initiatives.
+All rights reserved.
+
+<P>
+Copyright &#169; 1991-1995 Stichting Mathematisch Centrum.
+All rights reserved.
+
+<P>
+See the end of this document for complete license and permissions
+information.
+
+<P>
+
+<H3>Abstract:</H3>
+<DIV CLASS="ABSTRACT">
+  
+  This document describes the Python Distribution Utilities
+  (``Distutils'') from the module developer's point of view, describing
+  how to use the Distutils to make Python modules and extensions easily
+  available to a wider audience with very little overhead for
+  build/release/install mechanics.
+</DIV>
+<P>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="intro.html">1. An Introduction to Distutils</a>
+<UL>
+<LI><A href="concepts.html">1.1 Concepts &amp; Terminology</a>
+<LI><A href="simple-example.html">1.2 A Simple Example</a>
+<LI><A href="python-terms.html">1.3 General Python terminology</a>
+<LI><A href="distutils-term.html">1.4 Distutils-specific terminology</a>
+</ul>
+<LI><A href="setup-script.html">2. Writing the Setup Script</a>
+<UL>
+<LI><A href="listing-packages.html">2.1 Listing whole packages</a>
+<LI><A href="listing-modules.html">2.2 Listing individual modules</a>
+<LI><A href="describing-extensions.html">2.3 Describing extension modules</a>
+<UL>
+<LI><A href="describing-extensions.html#SECTION002310000000000000000">2.3.1 Extension names and packages</a>
+<LI><A href="describing-extensions.html#SECTION002320000000000000000">2.3.2 Extension source files</a>
+<LI><A href="describing-extensions.html#SECTION002330000000000000000">2.3.3 Preprocessor options</a>
+<LI><A href="describing-extensions.html#SECTION002340000000000000000">2.3.4 Library options</a>
+<LI><A href="describing-extensions.html#SECTION002350000000000000000">2.3.5 Other options</a>
+</ul>
+<LI><A href="node10.html">2.4 Installing Scripts</a>
+<LI><A href="node11.html">2.5 Installing Package Data</a>
+<LI><A href="node12.html">2.6 Installing Additional Files</a>
+<LI><A href="meta-data.html">2.7 Additional meta-data</a>
+<LI><A href="node14.html">2.8 Debugging the setup script</a>
+</ul>
+<LI><A href="setup-config.html">3. Writing the Setup Configuration File</a>
+<LI><A href="source-dist.html">4. Creating a Source Distribution</a>
+<UL>
+<LI><A href="manifest.html">4.1 Specifying the files to distribute</a>
+<LI><A href="manifest-options.html">4.2 Manifest-related options</a>
+</ul>
+<LI><A href="built-dist.html">5. Creating Built Distributions</a>
+<UL>
+<LI><A href="creating-dumb.html">5.1 Creating dumb built distributions</a>
+<LI><A href="creating-rpms.html">5.2 Creating RPM packages</a>
+<LI><A href="postinstallation-script.html">5.3 Creating Windows Installers</a>
+<UL>
+<LI><A href="postinstallation-script.html#SECTION005310000000000000000">5.3.1 The Postinstallation script</a>
+</ul>
+</ul>
+<LI><A href="package-index.html">6. Registering with the Package Index</a>
+<LI><A href="examples.html">7. Examples</a>
+<UL>
+<LI><A href="pure-mod.html">7.1 Pure Python distribution (by module)</a>
+<LI><A href="pure-pkg.html">7.2 Pure Python distribution (by package)</a>
+<LI><A href="single-ext.html">7.3 Single extension module</a>
+</ul>
+<LI><A href="extending.html">8. Extending Distutils</a>
+<UL>
+<LI><A href="node29.html">8.1 Integrating new commands</a>
+</ul>
+<LI><A href="reference.html">9. Command Reference</a>
+<UL>
+<LI><A href="install-scripts-cmd.html">9.1 Installing modules: the <code class="du-command">install</code> command family</a>
+<UL>
+<LI><A href="install-scripts-cmd.html#SECTION009110000000000000000">9.1.1 <code class="du-command">install_data</code></a>
+<LI><A href="install-scripts-cmd.html#SECTION009120000000000000000">9.1.2 <code class="du-command">install_scripts</code></a>
+</ul>
+<LI><A href="sdist-cmd.html">9.2 Creating a source distribution: the
+            <code class="du-command">sdist</code> command</a>
+</ul>
+<LI><A href="api-reference.html">10. API Reference</a>
+<UL>
+<LI><A href="module-distutils.core.html">10.1 <tt class="module">distutils.core</tt> -- Core Distutils functionality</a>
+<LI><A href="module-distutils.ccompiler.html">10.2 <tt class="module">distutils.ccompiler</tt> -- CCompiler base class</a>
+<LI><A href="module-distutils.unixccompiler.html">10.3 <tt class="module">distutils.unixccompiler</tt> -- Unix C Compiler</a>
+<LI><A href="module-distutils.msvccompiler.html">10.4 <tt class="module">distutils.msvccompiler</tt> -- Microsoft Compiler</a>
+<LI><A href="module-distutils.bcppcompiler.html">10.5 <tt class="module">distutils.bcppcompiler</tt> -- Borland Compiler</a>
+<LI><A href="module-distutils.cygwinccompiler.html">10.6 <tt class="module">distutils.cygwincompiler</tt> -- Cygwin Compiler</a>
+<LI><A href="module-distutils.emxccompiler.html">10.7 <tt class="module">distutils.emxccompiler</tt> -- OS/2 EMX Compiler</a>
+<LI><A href="module-distutils.mwerkscompiler.html">10.8 <tt class="module">distutils.mwerkscompiler</tt> -- Metrowerks CodeWarrior support</a>
+<LI><A href="module-distutils.archiveutil.html">10.9 <tt class="module">distutils.archive_util</tt> -- 
+			Archiving utilities</a>
+<LI><A href="module-distutils.deputil.html">10.10 <tt class="module">distutils.dep_util</tt> -- Dependency checking</a>
+<LI><A href="module-distutils.dirutil.html">10.11 <tt class="module">distutils.dir_util</tt> -- Directory tree operations</a>
+<LI><A href="module-distutils.fileutil.html">10.12 <tt class="module">distutils.file_util</tt> -- Single file operations</a>
+<LI><A href="module-distutils.util.html">10.13 <tt class="module">distutils.util</tt> -- Miscellaneous other utility functions</a>
+<LI><A href="module-distutils.dist.html">10.14 <tt class="module">distutils.dist</tt> -- The Distribution class</a>
+<LI><A href="module-distutils.extension.html">10.15 <tt class="module">distutils.extension</tt> -- The Extension class</a>
+<LI><A href="module-distutils.debug.html">10.16 <tt class="module">distutils.debug</tt> -- Distutils debug mode</a>
+<LI><A href="module-distutils.errors.html">10.17 <tt class="module">distutils.errors</tt> -- Distutils exceptions</a>
+<LI><A href="module-distutils.fancygetopt.html">10.18 <tt class="module">distutils.fancy_getopt</tt>
+         -- Wrapper around the standard getopt module</a>
+<LI><A href="module-distutils.filelist.html">10.19 <tt class="module">distutils.filelist</tt> -- The FileList class</a>
+<LI><A href="module-distutils.log.html">10.20 <tt class="module">distutils.log</tt> -- Simple PEP 282-style logging</a>
+<LI><A href="module-distutils.spawn.html">10.21 <tt class="module">distutils.spawn</tt> -- Spawn a sub-process</a>
+<LI><A href="module-distutils.sysconfig.html">10.22 <tt class="module">distutils.sysconfig</tt> --
+         System configuration information</a>
+<LI><A href="module-distutils.textfile.html">10.23 <tt class="module">distutils.text_file</tt> -- The TextFile class</a>
+<LI><A href="module-distutils.version.html">10.24 <tt class="module">distutils.version</tt> -- Version number classes</a>
+<LI><A href="module-distutils.cmd.html">10.25 <tt class="module">distutils.cmd</tt> -- Abstract base class for Distutils commands</a>
+<LI><A href="module-distutils.command.html">10.26 <tt class="module">distutils.command</tt> -- Individual Distutils commands</a>
+<LI><A href="module-distutils.command.bdist.html">10.27 <tt class="module">distutils.command.bdist</tt> -- Build a binary installer</a>
+<LI><A href="module-distutils.command.bdistpackager.html">10.28 <tt class="module">distutils.command.bdist_packager</tt> -- Abstract base class for packagers</a>
+<LI><A href="module-distutils.command.bdistdumb.html">10.29 <tt class="module">distutils.command.bdist_dumb</tt> -- Build a ``dumb'' installer</a>
+<LI><A href="module-distutils.command.bdistrpm.html">10.30 <tt class="module">distutils.command.bdist_rpm</tt> -- Build a binary distribution as a Redhat RPM and SRPM</a>
+<LI><A href="module-distutils.command.bdistwininst.html">10.31 <tt class="module">distutils.command.bdist_wininst</tt> -- Build a Windows installer</a>
+<LI><A href="module-distutils.command.sdist.html">10.32 <tt class="module">distutils.command.sdist</tt> -- Build a source distribution</a>
+<LI><A href="module-distutils.command.build.html">10.33 <tt class="module">distutils.command.build</tt> -- Build all files of a package</a>
+<LI><A href="module-distutils.command.buildclib.html">10.34 <tt class="module">distutils.command.build_clib</tt> -- Build any C libraries in a package</a>
+<LI><A href="module-distutils.command.buildext.html">10.35 <tt class="module">distutils.command.build_ext</tt> -- Build any extensions in a package</a>
+<LI><A href="module-distutils.command.buildpy.html">10.36 <tt class="module">distutils.command.build_py</tt> -- Build the .py/.pyc files of a package</a>
+<LI><A href="module-distutils.command.buildscripts.html">10.37 <tt class="module">distutils.command.build_scripts</tt> -- Build the scripts of a package</a>
+<LI><A href="module-distutils.command.clean.html">10.38 <tt class="module">distutils.command.clean</tt> -- Clean a package build area</a>
+<LI><A href="module-distutils.command.config.html">10.39 <tt class="module">distutils.command.config</tt> -- Perform package configuration</a>
+<LI><A href="module-distutils.command.install.html">10.40 <tt class="module">distutils.command.install</tt> -- Install a package</a>
+<LI><A href="module-distutils.command.installdata.html">10.41 <tt class="module">distutils.command.install_data</tt>
+               -- Install data files from a package</a>
+<LI><A href="module-distutils.command.installheaders.html">10.42 <tt class="module">distutils.command.install_headers</tt>
+               -- Install C/C++ header files from a package</a>
+<LI><A href="module-distutils.command.installlib.html">10.43 <tt class="module">distutils.command.install_lib</tt>
+               -- Install library files from a package</a>
+<LI><A href="module-distutils.command.installscripts.html">10.44 <tt class="module">distutils.command.install_scripts</tt>
+               -- Install script files from a package</a>
+<LI><A href="module-distutils.command.register.html">10.45 <tt class="module">distutils.command.register</tt>
+               -- Register a module with the Python Package Index</a>
+<LI><A href="node79.html">10.46 Creating a new Distutils command</a>
+</ul>
+<LI><A href="modindex.html">Module Index</a>
+<LI><A href="genindex.html">Index</a>
+<LI><A href="about.html">About this document ...</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></td>
+<td class='online-navigation'><a rel="parent" title="Python Documentation Index"
+  href="../index.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="1. An Introduction to"
+  href="intro.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="../index.html">Python Documentation Index</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="intro.html">1. An Introduction to</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

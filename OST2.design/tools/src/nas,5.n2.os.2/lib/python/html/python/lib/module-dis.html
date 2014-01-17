@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-pickletools.html" />
+<link rel="prev" href="module-compileall.html" />
+<link rel="parent" href="language.html" />
+<link rel="next" href="bytecodes.html" />
+<meta name='aesop' content='information' />
+<title>18.10 dis -- Disassembler for Python byte code</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="18.9 compileall  "
+  href="module-compileall.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="18. Python Language Services"
+  href="language.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="18.10.1 Python Byte Code"
+  href="bytecodes.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-compileall.html">18.9 compileall  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="language.html">18. Python Language Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="bytecodes.html">18.10.1 Python Byte Code</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00201000000000000000000">
+18.10 <tt class="module">dis</tt> --
+         Disassembler for Python byte code</A>
+</H1>
+
+<P>
+<A NAME="module-dis"></A>
+
+<P>
+The <tt class="module">dis</tt> module supports the analysis of Python byte code by
+disassembling it.  Since there is no Python assembler, this module
+defines the Python assembly language.  The Python byte code which
+this module takes as an input is defined in the file 
+<span class="file">Include/opcode.h</span> and used by the compiler and the interpreter.
+
+<P>
+Example: Given the function <tt class="function">myfunc</tt>:
+
+<P>
+<div class="verbatim"><pre>
+def myfunc(alist):
+    return len(alist)
+</pre></div>
+
+<P>
+the following command can be used to get the disassembly of
+<tt class="function">myfunc()</tt>:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; dis.dis(myfunc)
+  2           0 LOAD_GLOBAL              0 (len)
+              3 LOAD_FAST                0 (alist)
+              6 CALL_FUNCTION            1
+              9 RETURN_VALUE        
+             10 LOAD_CONST               0 (None)
+             13 RETURN_VALUE
+</pre></div>
+
+<P>
+(The ``2'' is a line number).
+
+<P>
+The <tt class="module">dis</tt> module defines the following functions and constants:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5001' xml:id='l2h-5001' class="function">dis</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>bytesource</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Disassemble the <var>bytesource</var> object. <var>bytesource</var> can denote
+either a module, a class, a method, a function, or a code object.  
+For a module, it disassembles all functions.  For a class,
+it disassembles all methods.  For a single code sequence, it prints
+one line per byte code instruction.  If no object is provided, it
+disassembles the last traceback.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5002' xml:id='l2h-5002' class="function">distb</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>tb</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Disassembles the top-of-stack function of a traceback, using the last
+traceback if none was passed.  The instruction causing the exception
+is indicated.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5003' xml:id='l2h-5003' class="function">disassemble</tt></b>(</nobr></td>
+  <td><var>code</var><big>[</big><var>, lasti</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Disassembles a code object, indicating the last instruction if <var>lasti</var>
+was provided.  The output is divided in the following columns:
+
+<P>
+
+<OL>
+<LI>the line number, for the first instruction of each line
+</LI>
+<LI>the current instruction, indicated as "<tt class="samp">-&#45;&gt;</tt>",
+</LI>
+<LI>a labelled instruction, indicated with "<tt class="samp">&gt;<code>&gt;</code></tt>",
+</LI>
+<LI>the address of the instruction,
+</LI>
+<LI>the operation code name,
+</LI>
+<LI>operation parameters, and
+</LI>
+<LI>interpretation of the parameters in parentheses.
+</LI>
+</OL>
+
+<P>
+The parameter interpretation recognizes local and global
+variable names, constant values, branch targets, and compare
+operators.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-5004' xml:id='l2h-5004' class="function">disco</tt></b>(</nobr></td>
+  <td><var>code</var><big>[</big><var>, lasti</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+A synonym for disassemble.  It is more convenient to type, and kept
+for compatibility with earlier Python releases.
+</dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5005' xml:id='l2h-5005'>opname</tt></b></dt>
+<dd>
+Sequence of operation names, indexable using the byte code.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5006' xml:id='l2h-5006'>cmp_op</tt></b></dt>
+<dd>
+Sequence of all compare operation names.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5007' xml:id='l2h-5007'>hasconst</tt></b></dt>
+<dd>
+Sequence of byte codes that have a constant parameter.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5008' xml:id='l2h-5008'>hasfree</tt></b></dt>
+<dd>
+Sequence of byte codes that access a free variable.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5009' xml:id='l2h-5009'>hasname</tt></b></dt>
+<dd>
+Sequence of byte codes that access an attribute by name.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5010' xml:id='l2h-5010'>hasjrel</tt></b></dt>
+<dd>
+Sequence of byte codes that have a relative jump target.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5011' xml:id='l2h-5011'>hasjabs</tt></b></dt>
+<dd>
+Sequence of byte codes that have an absolute jump target.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5012' xml:id='l2h-5012'>haslocal</tt></b></dt>
+<dd>
+Sequence of byte codes that access a local variable.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-5013' xml:id='l2h-5013'>hascompare</tt></b></dt>
+<dd>
+Sequence of byte codes of Boolean operations.
+</dd></dl>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="bytecodes.html">18.10.1 Python Byte Code Instructions</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="18.9 compileall  "
+  href="module-compileall.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="18. Python Language Services"
+  href="language.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="18.10.1 Python Byte Code"
+  href="bytecodes.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-compileall.html">18.9 compileall  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="language.html">18. Python Language Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="bytecodes.html">18.10.1 Python Byte Code</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

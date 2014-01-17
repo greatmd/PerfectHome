@@ -1,0 +1,5 @@
+#!/import/archperf/ws/devtools/2/64/bin/python
+
+from idlelib.PyShell import main
+if __name__ == '__main__':
+    main()

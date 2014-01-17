@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-time.html" />
+<link rel="prev" href="module-popen2.html" />
+<link rel="parent" href="allos.html" />
+<link rel="next" href="node251.html" />
+<meta name='aesop' content='information' />
+<title>6.10 datetime -- Basic date and time types</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.9.2 Flow Control Issues"
+  href="popen2-flow-control.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.10.1 Available Types"
+  href="node251.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="popen2-flow-control.html">6.9.2 Flow Control Issues</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node251.html">6.10.1 Available Types</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0081000000000000000000">
+6.10 <tt class="module">datetime</tt> --
+         Basic date and time types</A>
+</H1>
+
+<P>
+<A NAME="module-datetime"></A>
+
+<P>
+
+<span class="versionnote">New in version 2.3.</span>
+
+<P>
+The <tt class="module">datetime</tt> module supplies classes for manipulating dates
+and times in both simple and complex ways.  While date and time
+arithmetic is supported, the focus of the implementation is on
+efficient member extraction for output formatting and manipulation.
+
+<P>
+There are two kinds of date and time objects: ``naive'' and ``aware''.
+This distinction refers to whether the object has any notion of time
+zone, daylight saving time, or other kind of algorithmic or political
+time adjustment.  Whether a naive <tt class="class">datetime</tt> object represents
+Coordinated Universal Time (UTC), local time, or time in some other
+timezone is purely up to the program, just like it's up to the program
+whether a particular number represents metres, miles, or mass.  Naive
+<tt class="class">datetime</tt> objects are easy to understand and to work with, at
+the cost of ignoring some aspects of reality.
+
+<P>
+For applications requiring more, <tt class="class">datetime</tt> and <tt class="class">time</tt>
+objects have an optional time zone information member,
+<tt class="member">tzinfo</tt>, that can contain an instance of a subclass of
+the abstract <tt class="class">tzinfo</tt> class.  These <tt class="class">tzinfo</tt> objects
+capture information about the offset from UTC time, the time zone
+name, and whether Daylight Saving Time is in effect.  Note that no
+concrete <tt class="class">tzinfo</tt> classes are supplied by the <tt class="module">datetime</tt>
+module.  Supporting timezones at whatever level of detail is required
+is up to the application.  The rules for time adjustment across the
+world are more political than rational, and there is no standard
+suitable for every application.
+
+<P>
+The <tt class="module">datetime</tt> module exports the following constants:
+
+<P>
+<dl><dt><b><tt id='l2h-1856' xml:id='l2h-1856'>MINYEAR</tt></b></dt>
+<dd>
+  The smallest year number allowed in a <tt class="class">date</tt> or
+  <tt class="class">datetime</tt> object.  <tt class="constant">MINYEAR</tt>
+  is <code>1</code>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-1857' xml:id='l2h-1857'>MAXYEAR</tt></b></dt>
+<dd>
+  The largest year number allowed in a <tt class="class">date</tt> or <tt class="class">datetime</tt>
+  object.  <tt class="constant">MAXYEAR</tt> is <code>9999</code>.
+</dd></dl>
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-calendar.html">calendar</a></tt>:</b>
+    <dd>General calendar related functions.
+  </dl>
+  <dl compact="compact" class="seemodule">
+    <dt>Module <b><tt class="module"><a href="module-time.html">time</a></tt>:</b>
+    <dd>Time access and conversions.
+  </dl>
+</div>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="node251.html">6.10.1 Available Types</a>
+<LI><A href="datetime-timedelta.html">6.10.2 <tt class="class">timedelta</tt> Objects</a>
+<LI><A href="datetime-date.html">6.10.3 <tt class="class">date</tt> Objects</a>
+<LI><A href="datetime-datetime.html">6.10.4 <tt class="class">datetime</tt> Objects</a>
+<LI><A href="datetime-time.html">6.10.5 <tt class="class">time</tt> Objects</a>
+<LI><A href="datetime-tzinfo.html">6.10.6 <tt class="class">tzinfo</tt> Objects</a>
+<LI><A href="node257.html">6.10.7 <tt class="method">strftime()</tt> Behavior</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.9.2 Flow Control Issues"
+  href="popen2-flow-control.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6. Generic Operating System"
+  href="allos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.10.1 Available Types"
+  href="node251.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="popen2-flow-control.html">6.9.2 Flow Control Issues</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node251.html">6.10.1 Available Types</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

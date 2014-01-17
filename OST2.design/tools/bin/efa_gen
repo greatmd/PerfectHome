@@ -1,0 +1,316 @@
+#!/usr/bin/perl
+
+$sims_launch_dir = $ARGV[0];
+$dv_root = $ARGV[1];
+$sys_config = $ARGV[2];
+
+$efa = "$dv_root/verif/diag/assembly/include/efa.dat";
+$efa_new = "$sims_launch_dir/efa.dat";
+$sims_log = "$sims_launch_dir/sims.log";
+
+open (EFA, $efa) || die("Could not open $efa!");;
+@efa_data = <EFA>;
+close(EFA);
+
+open (SIMSLOG, $sims_log);
+@sims_log = <SIMSLOG>;
+close(SIMSLOG);
+
+if($#sims_log > 0){
+@sims_lines = grep { /^sims / } @sims_log;
+@sims_cmd = split /\s+/, shift @sims_lines;
+
+$i = $#sims_cmd;
+while($i > 0){
+	if($sims_cmd[$i] =~ /bank_set_mask=(\w+)/){
+		$bank_set_mask = $1;
+		$i = -1;
+	}
+	$i--;
+}
+
+$i = $#sims_cmd;
+while($i > 0){
+	if($sims_cmd[$i] =~ /core_set_mask=(\w+)/){
+		$core_set_mask = $1;
+		$i = -1;
+	}
+	$i--;
+}
+
+$i = $#sims_cmd;
+while($i > 0){
+	if($sims_cmd[$i] =~ /-midas_args=-DCORE_AVAIL=0x(\w+)/){
+		$dcore_avail = $1;
+		$dcore_avail_write = 1;
+		$i = -1;
+	}
+	$i--;
+}
+
+$i = $#sims_cmd;
+while($i > 0){
+	if($sims_cmd[$i] =~ /-midas_args=-DBANK_AVAIL=0x(\w+)/){
+		$dbank_avail = $1;
+		$dbank_avail_write = 1;
+		$i = -1;
+	}
+	$i--;
+}
+
+$i = $#sims_cmd;
+while($i > 0){
+	if($sims_cmd[$i] =~ /-midas_args=-DSERIAL_NUM=0x(\w+)/){
+		$dserial_num = $1;
+		$i = -1;
+	}
+	$i--;
+}
+
+$i = $#sims_cmd;
+while($i > 0){
+	if($sims_cmd[$i] =~ /-sys=(\w+)/){
+		$sys = $1;
+		$i = -1;
+	}
+	$i--;
+}
+$sys =~ /-sys=fc(\d+)/;
+$cores = $1;
+
+open EFANEW, ">$efa_new";
+
+$dcore_avail = "00".$dcore_avail;
+$dbank_avail = "00".$dbank_avail;
+$dserial_num = "0000000000000000".$dserial_num;
+
+$dbank_avail =~ /(\w\w)$/;
+$dbank_avail_val = $1;
+$dbank_avail_val_int = hex($dbank_avail_val);
+$dbank_avail_val_int = $dbank_avail_val_int & 0xff;
+$dbank_avail_val_int = $dbank_avail_val_int | 0x8400000;
+if(get_parity($dbank_avail_val_int) == 1){
+	$dbank_avail_val_int = $dbank_avail_val_int | 0xf0000000;
+}
+else{
+        $dbank_avail_val_int = $dbank_avail_val_int | 0xe0000000;
+}
+
+$dcore_avail =~ /(\w\w)$/;
+$dcore_avail_val = $1;
+$dcore_avail_val_int = hex($dcore_avail_val);
+$dcore_avail_val_int = $dcore_avail_val_int & 0xff;
+$dcore_avail_val_int = $dcore_avail_val_int | 0x8000000;
+$temp = get_parity($dcore_avail_val_int);
+if(get_parity($dcore_avail_val_int) == 1){
+	$dcore_avail_val_int = $dcore_avail_val_int | 0xf0000000;
+}
+else{
+        $dcore_avail_val_int = $dcore_avail_val_int | 0xe0000000;
+}
+
+$dserial_num =~ /(\w\w\w\w\w\w)$/;
+$dserial_num_lower22 = $1;
+$dserial_num_lower22_int = hex($dserial_num_lower22);
+$dserial_num_lower22_int = $dserial_num_lower22_int & 0x3fffff;
+$dserial_num_lower22_int = $dserial_num_lower22_int | 0x8800000;
+if(get_parity($dserial_num_lower22_int) == 1){
+	$dserial_num_lower22_int = $dserial_num_lower22_int | 0xf0000000;
+}
+else{
+        $dserial_num_lower22_int = $dserial_num_lower22_int | 0xe0000000;
+}
+
+$dserial_num =~ /(\w\w\w\w\w\w)\w\w\w\w\w$/;
+$dserial_num_middle22 = $1;
+$dserial_num_middle22_int = hex($dserial_num_middle22);
+$dserial_num_middle22_int = $dserial_num_middle22_int >> 2;
+$dserial_num_middle22_int = $dserial_num_middle22_int & 0x3fffff;
+$dserial_num_middle22_int = $dserial_num_middle22_int | 0x8c00000;
+if(get_parity($dserial_num_middle22_int) == 1){
+	$dserial_num_middle22_int = $dserial_num_middle22_int | 0xf0000000;
+}
+else{
+        $dserial_num_middle22_int = $dserial_num_middle22_int | 0xe0000000;
+}
+
+$dserial_num =~ /(\w\w\w\w\w\w)\w\w\w\w\w\w\w\w\w\w\w$/;
+$dserial_num_upper20 = $1;
+$dserial_num_upper20_int = hex($dserial_num_upper20);
+$dserial_num_upper20_int = $dserial_num_upper20_int & 0xfffff;
+$dserial_num_upper20_int = $dserial_num_upper20_int | 0x9000000;
+if(get_parity($dserial_num_upper20_int) == 1){
+	$dserial_num_upper20_int = $dserial_num_upper20_int | 0xf0000000;
+}
+else{
+        $dserial_num_upper20_int = $dserial_num_upper20_int | 0xe0000000;
+}
+
+for($i=0; $i<=$#efa_data; $i++){
+	if($i == 0){
+		if($dcore_avail_write == 1){
+			printf EFANEW ("%x\n", $dcore_avail_val_int);
+		}
+		else{
+		$efa_data[$i] =~ /^(\w)(\w+)\w\w/;
+		$parity = $1;
+		$cores = $2;
+		if($core_set_mask ne ""){
+                        $core_set_mask_int = hex($core_set_mask);
+                        $parity = "f";
+                        $bit_count = 0;
+                        for($j=0; $j<=7; $j++){
+                                if($core_set_mask_int & 1 == 1){
+                                        $bit_count++;
+                                }
+                                $core_set_mask_int = $core_set_mask_int >> 1;
+                        }
+                        if($bit_count %2 == 1){
+                                $parity = "e";
+                        } 
+			$cores = $parity.$cores.$core_set_mask;
+		}
+		else{
+			if($sys eq "fc1"){
+				$cores = "e".$cores."01";
+			}
+			elsif($sys eq "fc2"){
+				$cores = $parity.$cores."03";
+			}
+			elsif($sys eq "fc4"){
+				$cores = $parity.$cores."0f";
+			}
+			elsif($sys eq "fc8"){
+				$cores = $parity.$cores."ff";
+			}
+		}
+		print EFANEW $cores."\n";
+		}
+	}
+	elsif($i == 2){
+		if($dbank_avail_write == 1){
+			printf EFANEW ("%x\n", $dbank_avail_val_int);
+		}
+		else{
+		$efa_data[$i] =~ /^(\w+)\w\w/;
+		$banks = $1;
+		if($bank_set_mask ne ""){
+			$pm_hex = &pm_bank_mask_conversion();
+			$banks = $banks.$pm_hex;
+		}
+		else{
+			$banks = $banks."ff";
+		}
+		print EFANEW $banks."\n";
+		}
+	}
+	elsif($i == 7){
+		printf EFANEW ("%x\n", $dserial_num_lower22_int);
+	}
+	elsif($i == 8){
+		printf EFANEW ("%x\n", $dserial_num_middle22_int);
+	}
+	elsif($i == 9){
+		printf EFANEW ("%x\n", $dserial_num_upper20_int);
+	}	
+	else{
+		print EFANEW $efa_data[$i];
+	}
+}
+
+close(EFANEW);
+
+}
+else{
+        open EFANEW, ">$efa_new";
+        for($i=0; $i<=$#efa_data; $i++){
+                if($i == 0){
+                        $efa_data[$i] =~ /^(\w)(\w+)\w\w/;
+                        $parity = $1;
+                        $cores = $2;
+                        if($sys_config eq "-fc1"){
+                                $cores = "e".$cores."01";
+                        }
+                        elsif($sys_config eq "-fc2"){
+                                $cores = $parity.$cores."03";
+                        }
+                        elsif($sys_config eq "-fc4"){
+                                $cores = $parity.$cores."0f";
+                        }
+                        elsif($sys_config eq "-fc8"){
+                                $cores = $parity.$cores."ff";
+                        }
+                        print EFANEW $cores."\n";
+                }
+                else{
+                        print EFANEW $efa_data[$i];
+                }
+        }
+        close(EFANEW);
+
+}
+
+sub get_parity{
+	my $i, $temp_input_val, $ones;
+
+	$input_val = @_[0];
+	$ones = 0;
+	for($i=0; $i<=27; $i++){
+		$temp_input_val = $input_val & 0x1;
+		if($temp_input_val == 1){
+			$ones++;
+		}
+		$input_val = $input_val >> 1;
+	}
+	if($ones % 2 == 1){
+		return(1);
+	}
+	else{
+		return(0);
+	}
+}
+
+sub bin2dec{
+	return unpack("N", pack("B32", substr("0" x 32 . shift, -32)));
+}
+
+sub pm_core_mask_conversion{
+	$cores_hex = "ff";
+			
+	return ($cores_hex);	
+}
+
+sub pm_bank_mask_conversion{
+	$pm_hex = "ff";
+	if($bank_set_mask eq "1"){
+		$pm_hex = "03";
+	}
+	elsif($bank_set_mask eq "2"){
+		$pm_hex = "0c";
+	}
+	elsif($bank_set_mask eq "3"){
+		$pm_hex = "0f";
+	}
+	elsif($bank_set_mask eq "4"){
+		$pm_hex = "30";
+	}
+	elsif($bank_set_mask eq "5"){
+		$pm_hex = "33";
+	}
+	elsif($bank_set_mask eq "6"){
+		$pm_hex = "3c";
+	}
+	elsif($bank_set_mask eq "8"){
+		$pm_hex = "c0";
+	}
+	elsif($bank_set_mask eq "9"){
+		$pm_hex = "c3";
+	}
+	elsif($bank_set_mask eq "a"){
+		$pm_hex = "cc";
+	}
+	elsif($bank_set_mask eq "c"){
+		$pm_hex = "f0";
+	}
+	return ($pm_hex);
+}

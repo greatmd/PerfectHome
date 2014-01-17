@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-timeit.html" />
+<link rel="prev" href="node458.html" />
+<link rel="parent" href="profile.html" />
+<link rel="next" href="hotshot-objects.html" />
+<meta name='aesop' content='information' />
+<title>10.9 hotshot -- High performance logging profiler</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="10.8 Extensions  "
+  href="node458.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="10. The Python Profiler"
+  href="profile.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="10.9.1 Profile Objects"
+  href="hotshot-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node458.html">10.8 Extensions  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="profile.html">10. The Python Profiler</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="hotshot-objects.html">10.9.1 Profile Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0012900000000000000000">
+10.9 <tt class="module">hotshot</tt> --
+         High performance logging profiler</A>
+</H1>
+
+<P>
+<A NAME="module-hotshot"></A>
+
+<P>
+
+<span class="versionnote">New in version 2.2.</span>
+
+<P>
+This module provides a nicer interface to the <tt class="module">_hotshot</tt> C module.
+Hotshot is a replacement for the existing <tt class="module"><a href="module-profile.html">profile</a></tt> module. As it's
+written mostly in C, it should result in a much smaller performance impact
+than the existing <tt class="module"><a href="module-profile.html">profile</a></tt> module.
+
+<P>
+<div class="warning"><b class="label">Warning:</b>
+
+  The <tt class="module">hotshot</tt> profiler does not yet work well with threads.
+  It is useful to use an unthreaded script to run the profiler over
+  the code you're interested in measuring if at all possible.
+</div>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-3122' xml:id='l2h-3122' class="class">Profile</tt></b>(</nobr></td>
+  <td><var>logfile</var><big>[</big><var>, lineevents</var><big>[</big><var>,
+                           linetimings</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+The profiler object. The argument <var>logfile</var> is the name of a log
+file to use for logged profile data. The argument <var>lineevents</var>
+specifies whether to generate events for every source line, or just on
+function call/return. It defaults to <code>0</code> (only log function
+call/return). The argument <var>linetimings</var> specifies whether to
+record timing information. It defaults to <code>1</code> (store timing
+information).
+</dl>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="hotshot-objects.html">10.9.1 Profile Objects</a>
+<LI><A href="module-hotshot.stats.html">10.9.2 Using hotshot data</a>
+<LI><A href="hotshot-example.html">10.9.3 Example Usage</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="10.8 Extensions  "
+  href="node458.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="10. The Python Profiler"
+  href="profile.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="10.9.1 Profile Objects"
+  href="hotshot-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node458.html">10.8 Extensions  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="profile.html">10. The Python Profiler</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="hotshot-objects.html">10.9.1 Profile Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

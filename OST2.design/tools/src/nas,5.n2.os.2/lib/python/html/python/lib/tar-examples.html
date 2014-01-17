@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="tarinfo-objects.html" />
+<link rel="parent" href="module-tarfile.html" />
+<link rel="next" href="module-readline.html" />
+<meta name='aesop' content='information' />
+<title>7.19.3 Examples </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.19.2 TarInfo Objects"
+  href="tarinfo-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.19 tarfile  "
+  href="module-tarfile.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.20 readline  "
+  href="module-readline.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="tarinfo-objects.html">7.19.2 TarInfo Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-tarfile.html">7.19 tarfile  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-readline.html">7.20 readline  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0091930000000000000000"></A><A NAME="tar-examples"></A>
+<BR>
+7.19.3 Examples 
+</H2>
+
+<P>
+How to create an uncompressed tar archive from a list of filenames:
+<div class="verbatim"><pre>
+import tarfile
+tar = tarfile.open("sample.tar", "w")
+for name in ["foo", "bar", "quux"]:
+    tar.add(name)
+tar.close()
+</pre></div>
+
+<P>
+How to read a gzip compressed tar archive and display some member information:
+<div class="verbatim"><pre>
+import tarfile
+tar = tarfile.open("sample.tar.gz", "r:gz")
+for tarinfo in tar:
+    print tarinfo.name, "is", tarinfo.size, "bytes in size and is",
+    if tarinfo.isreg():
+        print "a regular file."
+    elif tarinfo.isdir():
+        print "a directory."
+    else:
+        print "something else."
+tar.close()
+</pre></div>
+
+<P>
+How to create a tar archive with faked information:
+<div class="verbatim"><pre>
+import tarfile
+tar = tarfile.open("sample.tar.gz", "w:gz")
+for name in namelist:
+    tarinfo = tar.gettarinfo(name, "fakeproj-1.0/" + name)
+    tarinfo.uid = 123
+    tarinfo.gid = 456
+    tarinfo.uname = "johndoe"
+    tarinfo.gname = "fake"
+    tar.addfile(tarinfo, file(name))
+tar.close()
+</pre></div>
+
+<P>
+The <em>only</em> way to extract an uncompressed tar stream from
+<code>sys.stdin</code>:
+<div class="verbatim"><pre>
+import sys
+import tarfile
+tar = tarfile.open(mode="r|", fileobj=sys.stdin)
+for tarinfo in tar:
+    tar.extract(tarinfo)
+tar.close()
+</pre></div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.19.2 TarInfo Objects"
+  href="tarinfo-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.19 tarfile  "
+  href="module-tarfile.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.20 readline  "
+  href="module-readline.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="tarinfo-objects.html">7.19.2 TarInfo Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-tarfile.html">7.19 tarfile  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-readline.html">7.20 readline  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

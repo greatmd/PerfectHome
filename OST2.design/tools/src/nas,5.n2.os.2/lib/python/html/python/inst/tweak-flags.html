@@ -1,0 +1,428 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="inst.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="inst.html" title='Installing Python Modules' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="about.html" />
+<link rel="prev" href="config-syntax.html" />
+<link rel="parent" href="inst.html" />
+<link rel="next" href="about.html" />
+<meta name='aesop' content='information' />
+<title>6 Building Extensions: Tips and Tricks</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5 Distutils Configuration Files"
+  href="config-syntax.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="Installing Python Modules"
+  href="inst.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="About this document ..."
+  href="about.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="config-syntax.html">5 Distutils Configuration Files</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="inst.html">Installing Python Modules</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="about.html">About this document ...</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="tweak-flags.html#SECTION000610000000000000000">6.1 Tweaking compiler/linker flags</a>
+<LI><A href="tweak-flags.html#SECTION000620000000000000000">6.2 Using non-Microsoft compilers on Windows</a>
+<UL>
+<LI><A href="tweak-flags.html#SECTION000621000000000000000">6.2.1 Borland C++</a>
+<LI><A href="tweak-flags.html#SECTION000622000000000000000">6.2.2 GNU C / Cygwin / MinGW</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+</div>
+<HR>
+
+<H1><A NAME="SECTION000600000000000000000"></A>
+<A NAME="building-ext"></A>
+<BR>
+6 Building Extensions: Tips and Tricks
+</H1>
+
+<P>
+Whenever possible, the Distutils try to use the configuration
+information made available by the Python interpreter used to run the
+<span class="file">setup.py</span> script.  For example, the same compiler and linker
+flags used to compile Python will also be used for compiling
+extensions.  Usually this will work well, but in complicated
+situations this might be inappropriate.  This section discusses how to
+override the usual Distutils behaviour.
+
+<P>
+
+<H2><A NAME="SECTION000610000000000000000"></A>
+<A NAME="tweak-flags"></A>
+<BR>
+6.1 Tweaking compiler/linker flags
+</H2>
+
+<P>
+Compiling a Python extension written in C or C++ will sometimes
+require specifying custom flags for the compiler and linker in order
+to use a particular library or produce a special kind of object code.
+This is especially true if the extension hasn't been tested on your 
+platform, or if you're trying to cross-compile Python.
+
+<P>
+In the most general case, the extension author might have foreseen
+that compiling the extensions would be complicated, and provided a
+<span class="file">Setup</span> file for you to edit.  This will likely only be done if
+the module distribution contains many separate extension modules, or
+if they often require elaborate sets of compiler flags in order to work.
+
+<P>
+A <span class="file">Setup</span> file, if present, is parsed in order to get a list of
+extensions to build.  Each line in a <span class="file">Setup</span> describes a single
+module.  Lines have the following structure:
+
+<P>
+<div class="verbatim"><pre><TT>
+ <var>module</var> ... [<var>sourcefile</var> ...] [<var>cpparg</var> ...] [<var>library</var> ...]
+ </TT></pre></div>
+
+<P>
+Let's examine each of the fields in turn.
+
+<P>
+
+<UL>
+<LI><var>module</var> is the name of the extension module to be built,
+      and should be a valid Python identifier.  You can't just change
+      this in order to rename a module (edits to the source code would
+      also be needed), so this should be left alone.
+
+<P>
+</LI>
+<LI><var>sourcefile</var> is anything that's likely to be a source code
+      file, at least judging by the filename.  Filenames ending in
+      <span class="file">.c</span> are assumed to be written in C, filenames ending in
+      <span class="file">.C</span>, <span class="file">.cc</span>, and <span class="file">.c++</span> are assumed to be
+      C++, and filenames ending in <span class="file">.m</span> or <span class="file">.mm</span> are
+      assumed to be in Objective C.
+
+<P>
+</LI>
+<LI><var>cpparg</var> is an argument for the C preprocessor, 
+      and is anything starting with <b class="programopt">-I</b>, <b class="programopt">-D</b>,
+      <b class="programopt">-U</b> or <b class="programopt">-C</b>.
+
+<P>
+</LI>
+<LI><var>library</var> is anything ending in <span class="file">.a</span> or beginning with
+      <b class="programopt">-l</b> or <b class="programopt">-L</b>.
+</LI>
+</UL>
+
+<P>
+If a particular platform requires a special library on your platform,
+you can add it by editing the <span class="file">Setup</span> file and running
+<code>python setup.py build</code>.  For example, if the module defined by the line
+
+<P>
+<div class="verbatim"><pre>
+foo foomodule.c
+</pre></div>
+
+<P>
+must be linked with the math library <span class="file">libm.a</span> on your platform,
+simply add <b class="programopt">-lm</b> to the line:
+
+<P>
+<div class="verbatim"><pre>
+foo foomodule.c -lm
+</pre></div>
+
+<P>
+Arbitrary switches intended for the compiler or the linker can be
+supplied with the <b class="programopt">-Xcompiler</b> <var>arg</var> and
+<b class="programopt">-Xlinker</b> <var>arg</var> options:
+
+<P>
+<div class="verbatim"><pre>
+foo foomodule.c -Xcompiler -o32 -Xlinker -shared -lm
+</pre></div>
+
+<P>
+The next option after <b class="programopt">-Xcompiler</b> and
+<b class="programopt">-Xlinker</b> will be appended to the proper command line, so
+in the above example the compiler will be passed the <b class="programopt">-o32</b>
+option, and the linker will be passed <b class="programopt">-shared</b>.  If a
+compiler option requires an argument, you'll have to supply multiple
+<b class="programopt">-Xcompiler</b> options; for example, to pass <code>-x c++</code> the
+<span class="file">Setup</span> file would have to contain
+<code>-Xcompiler -x -Xcompiler c++</code>.
+
+<P>
+Compiler flags can also be supplied through setting the
+<a class="envvar" id='l2h-7' xml:id='l2h-7'>CFLAGS</a> environment variable.  If set, the contents of
+<a class="envvar" id='l2h-8' xml:id='l2h-8'>CFLAGS</a> will be added to the compiler flags specified in the 
+<span class="file">Setup</span> file.
+
+<P>
+
+<H2><A NAME="SECTION000620000000000000000"></A><A NAME="non-ms-compilers"></A>
+<BR>
+6.2 Using non-Microsoft compilers on Windows 
+</H2>
+
+<P>
+
+<H3><A NAME="SECTION000621000000000000000">
+6.2.1 Borland C++</A>
+</H3>
+
+<P>
+This subsection describes the necessary steps to use Distutils with the 
+Borland C++ compiler version 5.5.
+
+<P>
+First you have to know that Borland's object file format (OMF) is
+different from the format used by the Python version you can download
+from the Python or ActiveState Web site.  (Python is built with
+Microsoft Visual C++, which uses COFF as the object file format.)
+For this reason you have to convert Python's library
+<span class="file">python24.lib</span> into the Borland format.  You can do this as
+follows:
+
+<P>
+<div class="verbatim"><pre>
+coff2omf python24.lib python24_bcpp.lib
+</pre></div>
+
+<P>
+The <span class="file">coff2omf</span> program comes with the Borland compiler.  The file
+<span class="file">python24.lib</span> is in the <span class="file">Libs</span> directory of your Python
+installation.  If your extension uses other libraries (zlib,...) you
+have to convert them too.
+
+<P>
+The converted files have to reside in the same directories as the
+normal libraries.
+
+<P>
+How does Distutils manage to use these libraries with their changed
+names?  If the extension needs a library (eg. <span class="file">foo</span>) Distutils
+checks first if it finds a library with suffix <span class="file">_bcpp</span>
+(eg. <span class="file">foo_bcpp.lib</span>) and then uses this library.  In the case it
+doesn't find such a special library it uses the default name
+(<span class="file">foo.lib</span>.)<A NAME="tex2html1"
+  HREF="#foot489"><SUP>1</SUP></A>
+<P>
+To let Distutils compile your extension with Borland C++ you now have
+to type:
+
+<P>
+<div class="verbatim"><pre>
+python setup.py build --compiler=bcpp
+</pre></div>
+
+<P>
+If you want to use the Borland C++ compiler as the default, you
+could specify this in your personal or system-wide configuration file
+for Distutils (see section&nbsp;<A href="config-syntax.html#config-files">5</A>.)
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seetitle">
+    <dt><em class="citetitle"><a href="http://www.borland.com/bcppbuilder/freecompiler/"
+        >C++Builder Compiler</a></em></dt>
+    <dd>Information about the free C++ compiler from Borland,
+     including links to the download pages.</dd>
+  </dl>
+
+<P>
+<dl compact="compact" class="seetitle">
+    <dt><em class="citetitle"><a href="http://www.cyberus.ca/~g_will/pyExtenDL.shtml"
+        >Creating Python Extensions Using Borland's Free Compiler</a></em></dt>
+    <dd>Document describing how to use Borland's free command-line C++
+     compiler to build Python.</dd>
+  </dl>
+</div>
+
+<P>
+
+<H3><A NAME="SECTION000622000000000000000">
+6.2.2 GNU C / Cygwin / MinGW</A>
+</H3>
+
+<P>
+This section describes the necessary steps to use Distutils with the
+GNU C/C++ compilers in their Cygwin and MinGW
+distributions.<A NAME="tex2html2"
+  HREF="#foot575"><SUP>2</SUP></A>For a Python interpreter that was built with Cygwin, everything should
+work without any of these following steps.
+
+<P>
+These compilers require some special libraries.
+This task is more complex than for Borland's C++, because there is no
+program to convert the library.
+
+<P>
+First you have to create a list of symbols which the Python DLL exports.
+(You can find a good program for this task at 
+<a class="url" href="http://starship.python.net/crew/kernr/mingw32/Notes.html">http://starship.python.net/crew/kernr/mingw32/Notes.html</a>, see at 
+PExports 0.42h there.)
+
+<P>
+<div class="verbatim"><pre>
+pexports python24.dll &gt;python24.def
+</pre></div>
+
+<P>
+Then you can create from these information an import library for gcc.
+
+<P>
+<div class="verbatim"><pre>
+dlltool --dllname python24.dll --def python24.def --output-lib libpython24.a
+</pre></div>
+
+<P>
+The resulting library has to be placed in the same directory as 
+<span class="file">python24.lib</span>. (Should be the <span class="file">libs</span> directory under your
+Python installation directory.)
+
+<P>
+If your extension uses other libraries (zlib,...) you might 
+have to convert them too.
+The converted files have to reside in the same directories as the normal
+libraries do.
+
+<P>
+To let Distutils compile your extension with Cygwin you now have to type
+
+<P>
+<div class="verbatim"><pre>
+python setup.py build --compiler=cygwin
+</pre></div>
+
+<P>
+and for Cygwin in no-cygwin mode<A NAME="tex2html3"
+  HREF="#foot576"><SUP>3</SUP></A> or for MinGW type:
+
+<P>
+<div class="verbatim"><pre>
+python setup.py build --compiler=mingw32
+</pre></div>
+
+<P>
+If you want to use any of these options/compilers as default, you should
+consider to write it in your personal or system-wide configuration file
+for Distutils (see section&nbsp;<A href="config-syntax.html#config-files">5</A>.)
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+  <dl compact="compact" class="seetitle">
+    <dt><em class="citetitle"><a href="http://www.zope.org/Members/als/tips/win32_mingw_modules"
+        >Building Python modules on MS Windows platform with MinGW</a></em></dt>
+    <dd>Information about building the required libraries for the MinGW
+     environment.</dd>
+  </dl>
+
+<P>
+<dl compact="compact" class="seeurl">
+    <dt><a href="http://pyopengl.sourceforge.net/ftp/win32-stuff/"
+        class="url">http://pyopengl.sourceforge.net/ftp/win32-stuff/</a></dt>
+    <dd>Converted import libraries in Cygwin/MinGW and Borland format,
+     and a script to create the registry entries needed for Distutils
+     to locate the built Python.</dd>
+  </dl>
+</div>
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot489">...foo.lib.)</A><A
+ href="tweak-flags.html#tex2html1"><SUP>1</SUP></A></DT>
+<DD>This also means you could replace all
+existing COFF-libraries with OMF-libraries of the same name.
+
+</DD>
+<DT><A NAME="foot575">...
+distributions.</A><A
+ href="tweak-flags.html#tex2html2"><SUP>2</SUP></A></DT>
+<DD>Check
+<a class="url" href="http://sources.redhat.com/cygwin/">http://sources.redhat.com/cygwin/</a> and
+<a class="url" href="http://www.mingw.org/">http://www.mingw.org/</a> for more information
+
+</DD>
+<DT><A NAME="foot576">... mode</A><A
+ href="tweak-flags.html#tex2html3"><SUP>3</SUP></A></DT>
+<DD>Then you have no
+POSIX emulation available, but you also don't need
+<span class="file">cygwin1.dll</span>.
+
+</DD>
+</DL>
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5 Distutils Configuration Files"
+  href="config-syntax.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="Installing Python Modules"
+  href="inst.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="About this document ..."
+  href="about.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="config-syntax.html">5 Distutils Configuration Files</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="inst.html">Installing Python Modules</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="about.html">About this document ...</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

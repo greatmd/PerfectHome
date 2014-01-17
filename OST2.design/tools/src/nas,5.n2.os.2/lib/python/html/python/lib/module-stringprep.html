@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="module-unicodedata.html" />
+<link rel="parent" href="strings.html" />
+<link rel="next" href="misc.html" />
+<meta name='aesop' content='information' />
+<title>4.11 stringprep -- Internet String Preparation</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="4.10 unicodedata  "
+  href="module-unicodedata.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="4. String Services"
+  href="strings.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5. Miscellaneous Services"
+  href="misc.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-unicodedata.html">4.10 unicodedata  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="strings.html">4. String Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="misc.html">5. Miscellaneous Services</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0061100000000000000000">
+4.11 <tt class="module">stringprep</tt> --
+         Internet String Preparation</A>
+</H1>
+
+<P>
+<A NAME="module-stringprep"></A>
+
+<P>
+When identifying things (such as host names) in the internet, it is
+often necessary to compare such identifications for
+``equality''. Exactly how this comparison is executed may depend on
+the application domain, e.g. whether it should be case-insensitive or
+not. It may be also necessary to restrict the possible
+identifications, to allow only identifications consisting of
+``printable'' characters.
+
+<P>
+<a class="rfc" id='rfcref-87139' xml:id='rfcref-87139'
+href="http://www.faqs.org/rfcs/rfc3454.html">RFC 3454</a> defines a procedure for ``preparing'' Unicode strings in
+internet protocols. Before passing strings onto the wire, they are
+processed with the preparation procedure, after which they have a
+certain normalized form. The RFC defines a set of tables, which can be
+combined into profiles. Each profile must define which tables it uses,
+and what other optional parts of the <code>stringprep</code> procedure are
+part of the profile. One example of a <code>stringprep</code> profile is
+<code>nameprep</code>, which is used for internationalized domain names.
+
+<P>
+The module <tt class="module">stringprep</tt> only exposes the tables from RFC
+3454. As these tables would be very large to represent them as
+dictionaries or lists, the module uses the Unicode character database
+internally. The module source code itself was generated using the
+<code>mkstringprep.py</code> utility.
+
+<P>
+As a result, these tables are exposed as functions, not as data
+structures. There are two kinds of tables in the RFC: sets and
+mappings. For a set, <tt class="module">stringprep</tt> provides the ``characteristic
+function'', i.e. a function that returns true if the parameter is part
+of the set. For mappings, it provides the mapping function: given the
+key, it returns the associated value. Below is a list of all functions
+available in the module.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1039' xml:id='l2h-1039' class="function">in_table_a1</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableA.1 (Unassigned code points
+in Unicode 3.2).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1040' xml:id='l2h-1040' class="function">in_table_b1</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableB.1 (Commonly mapped to
+nothing).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1041' xml:id='l2h-1041' class="function">map_table_b2</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Return the mapped value for <var>code</var> according to tableB.2 
+(Mapping for case-folding used with NFKC).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1042' xml:id='l2h-1042' class="function">map_table_b3</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Return the mapped value for <var>code</var> according to tableB.3 
+(Mapping for case-folding used with no normalization).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1043' xml:id='l2h-1043' class="function">in_table_c11</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.1.1 
+(ASCII space characters).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1044' xml:id='l2h-1044' class="function">in_table_c12</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.1.2 
+(Non-ASCII space characters).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1045' xml:id='l2h-1045' class="function">in_table_c11_c12</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.1 
+(Space characters, union of C.1.1 and C.1.2).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1046' xml:id='l2h-1046' class="function">in_table_c21</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.2.1 
+(ASCII control characters).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1047' xml:id='l2h-1047' class="function">in_table_c22</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.2.2 
+(Non-ASCII control characters).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1048' xml:id='l2h-1048' class="function">in_table_c21_c22</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.2 
+(Control characters, union of C.2.1 and C.2.2).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1049' xml:id='l2h-1049' class="function">in_table_c3</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.3 
+(Private use).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1050' xml:id='l2h-1050' class="function">in_table_c4</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.4 
+(Non-character code points).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1051' xml:id='l2h-1051' class="function">in_table_c5</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.5 
+(Surrogate codes).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1052' xml:id='l2h-1052' class="function">in_table_c6</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.6 
+(Inappropriate for plain text).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1053' xml:id='l2h-1053' class="function">in_table_c7</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.7 
+(Inappropriate for canonical representation).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1054' xml:id='l2h-1054' class="function">in_table_c8</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.8 
+(Change display properties or are deprecated).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1055' xml:id='l2h-1055' class="function">in_table_c9</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableC.9 
+(Tagging characters).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1056' xml:id='l2h-1056' class="function">in_table_d1</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableD.1 
+(Characters with bidirectional property ``R'' or ``AL'').
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1057' xml:id='l2h-1057' class="function">in_table_d2</tt></b>(</nobr></td>
+  <td><var>code</var>)</td></tr></table></dt>
+<dd>
+Determine whether <var>code</var> is in tableD.2 
+(Characters with bidirectional property ``L'').
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="4.10 unicodedata  "
+  href="module-unicodedata.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="4. String Services"
+  href="strings.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5. Miscellaneous Services"
+  href="misc.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-unicodedata.html">4.10 unicodedata  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="strings.html">4. String Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="misc.html">5. Miscellaneous Services</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

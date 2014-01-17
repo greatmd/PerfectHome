@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="idle.html" />
+<link rel="prev" href="module-ScrolledText.html" />
+<link rel="parent" href="tkinter.html" />
+<link rel="next" href="pen-rawpen-objects.html" />
+<meta name='aesop' content='information' />
+<title>16.4 turtle -- Turtle graphics for Tk</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="16.3 ScrolledText  "
+  href="module-ScrolledText.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="16. Graphical User Interfaces"
+  href="tkinter.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="16.4.1 Pen and RawPen"
+  href="pen-rawpen-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-ScrolledText.html">16.3 ScrolledText  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="tkinter.html">16. Graphical User Interfaces</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="pen-rawpen-objects.html">16.4.1 Pen and RawPen</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0018400000000000000000">
+16.4 <tt class="module">turtle</tt> --
+         Turtle graphics for Tk</A>
+</H1>
+
+<P>
+<A NAME="module-turtle"></A>   
+<p class="availability">Availability: <span
+ class="platform">Tk</span>.</p>
+
+<P>
+
+<P>
+The <tt class="module">turtle</tt> module provides turtle graphics primitives, in both an
+object-oriented and procedure-oriented ways. Because it uses <tt class="module">Tkinter</tt>
+for the underlying graphics, it needs a version of python installed with
+Tk support.
+
+<P>
+The procedural interface uses a pen and a canvas which are automagically
+created when any of the functions are called.
+
+<P>
+The <tt class="module">turtle</tt> module defines the following functions:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4885' xml:id='l2h-4885' class="function">degrees</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Set angle measurement units to degrees.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4886' xml:id='l2h-4886' class="function">radians</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Set angle measurement units to radians.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4887' xml:id='l2h-4887' class="function">reset</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Clear the screen, re-center the pen, and set variables to the default
+values.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4888' xml:id='l2h-4888' class="function">clear</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Clear the screen.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4889' xml:id='l2h-4889' class="function">tracer</tt></b>(</nobr></td>
+  <td><var>flag</var>)</td></tr></table></dt>
+<dd>
+Set tracing on/off (according to whether flag is true or not). Tracing
+means line are drawn more slowly, with an animation of an arrow along the 
+line.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4890' xml:id='l2h-4890' class="function">forward</tt></b>(</nobr></td>
+  <td><var>distance</var>)</td></tr></table></dt>
+<dd>
+Go forward <var>distance</var> steps.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4891' xml:id='l2h-4891' class="function">backward</tt></b>(</nobr></td>
+  <td><var>distance</var>)</td></tr></table></dt>
+<dd>
+Go backward <var>distance</var> steps.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4892' xml:id='l2h-4892' class="function">left</tt></b>(</nobr></td>
+  <td><var>angle</var>)</td></tr></table></dt>
+<dd>
+Turn left <var>angle</var> units. Units are by default degrees, but can be
+set via the <tt class="function">degrees()</tt> and <tt class="function">radians()</tt> functions.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4893' xml:id='l2h-4893' class="function">right</tt></b>(</nobr></td>
+  <td><var>angle</var>)</td></tr></table></dt>
+<dd>
+Turn right <var>angle</var> units. Units are by default degrees, but can be
+set via the <tt class="function">degrees()</tt> and <tt class="function">radians()</tt> functions.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4894' xml:id='l2h-4894' class="function">up</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Move the pen up -- stop drawing.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4895' xml:id='l2h-4895' class="function">down</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Move the pen down -- draw when moving.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4896' xml:id='l2h-4896' class="function">width</tt></b>(</nobr></td>
+  <td><var>width</var>)</td></tr></table></dt>
+<dd>
+Set the line width to <var>width</var>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4897' xml:id='l2h-4897' class="function">color</tt></b>(</nobr></td>
+  <td><var>s</var>)</td></tr></table></dt>
+<dd>
+<dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt class="function">color</tt></b>(</nobr></td>
+  <td><var>(r, g, b)</var>)</td></tr></table></dt>
+<dd><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt class="function">color</tt></b>(</nobr></td>
+  <td><var>r, g, b</var>)</td></tr></table></dt>
+<dd>Set the pen color.  In the first form, the color is specified as a
+Tk color specification as a string.  The second form specifies the
+color as a tuple of the RGB values, each in the range [0..1].  For the
+third form, the color is specified giving the RGB values as three
+separate parameters (each in the range [0..1]).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4898' xml:id='l2h-4898' class="function">write</tt></b>(</nobr></td>
+  <td><var>text</var><big>[</big><var>, move</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Write <var>text</var> at the current pen position. If <var>move</var> is true,
+the pen is moved to the bottom-right corner of the text. By default,
+<var>move</var> is false.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4899' xml:id='l2h-4899' class="function">fill</tt></b>(</nobr></td>
+  <td><var>flag</var>)</td></tr></table></dt>
+<dd>
+The complete specifications are rather complex, but the recommended 
+usage is: call <code>fill(1)</code> before drawing a path you want to fill,
+and call <code>fill(0)</code> when you finish to draw the path.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4900' xml:id='l2h-4900' class="function">circle</tt></b>(</nobr></td>
+  <td><var>radius</var><big>[</big><var>, extent</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Draw a circle with radius <var>radius</var> whose center-point is
+<var>radius</var> units left of the turtle.
+<var>extent</var> determines which part of a circle is drawn: if
+not given it defaults to a full circle.
+
+<P>
+If <var>extent</var> is not a full circle, one endpoint of the arc is the
+current pen position. The arc is drawn in a counter clockwise
+direction if <var>radius</var> is positive, otherwise in a clockwise
+direction.  In the process, the direction of the turtle is changed
+by the amount of the <var>extent</var>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4901' xml:id='l2h-4901' class="function">goto</tt></b>(</nobr></td>
+  <td><var>x, y</var>)</td></tr></table></dt>
+<dd>
+<dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt class="function">goto</tt></b>(</nobr></td>
+  <td><var>(x, y)</var>)</td></tr></table></dt>
+<dd>Go to co-ordinates <var>x</var>, <var>y</var>.  The co-ordinates may be
+specified either as two separate arguments or as a 2-tuple.
+</dl>
+
+<P>
+This module also does <code>from math import *</code>, so see the
+documentation for the <tt class="module"><a href="module-math.html">math</a></tt> module for additional constants
+and functions useful for turtle graphics.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4902' xml:id='l2h-4902' class="function">demo</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Exercise the module a bit.
+</dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4903' xml:id='l2h-4903' class="exception">Error</tt></b></dt>
+<dd>
+Exception raised on any error caught by this module.
+</dd></dl>
+
+<P>
+For examples, see the code of the <tt class="function">demo()</tt> function.
+
+<P>
+This module defines the following classes:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-4904' xml:id='l2h-4904' class="class">Pen</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Define a pen. All above functions can be called as a methods on the given
+pen. The constructor automatically creates a canvas do be drawn on.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-4905' xml:id='l2h-4905' class="class">RawPen</tt></b>(</nobr></td>
+  <td><var>canvas</var>)</td></tr></table></dt>
+<dd>
+Define a pen which draws on a canvas <var>canvas</var>. This is useful if 
+you want to use the module to create graphics in a ``real'' program.
+</dl>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="pen-rawpen-objects.html">16.4.1 Pen and RawPen Objects</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="16.3 ScrolledText  "
+  href="module-ScrolledText.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="16. Graphical User Interfaces"
+  href="tkinter.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="16.4.1 Pen and RawPen"
+  href="pen-rawpen-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-ScrolledText.html">16.3 ScrolledText  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="tkinter.html">16. Graphical User Interfaces</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="pen-rawpen-objects.html">16.4.1 Pen and RawPen</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

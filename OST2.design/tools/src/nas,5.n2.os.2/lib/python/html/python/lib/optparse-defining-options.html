@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="optparse-standard-option-actions.html" />
+<link rel="prev" href="optparse-populating-parser.html" />
+<link rel="parent" href="optparse-reference-guide.html" />
+<link rel="next" href="optparse-standard-option-actions.html" />
+<meta name='aesop' content='information' />
+<title>6.21.3.3 Defining options</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.2 Populating the parser"
+  href="optparse-populating-parser.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.3.4 Standard option actions"
+  href="optparse-standard-option-actions.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-populating-parser.html">6.21.3.2 Populating the parser</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-standard-option-actions.html">6.21.3.4 Standard option actions</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION0082133000000000000000"></A><A NAME="optparse-defining-options"></A>
+<BR>
+6.21.3.3 Defining options
+</H3>
+
+<P>
+Each Option instance represents a set of synonymous command-line option
+strings, e.g. <b class="programopt">-f</b> and <b class="programopt">--file</b>.  You can
+specify any number of short or long option strings, but you must specify
+at least one overall option string.
+
+<P>
+The canonical way to create an Option instance is with the
+<tt class="method">add_option()</tt> method of <tt class="class">OptionParser</tt>:
+<div class="verbatim"><pre>
+parser.add_option(opt_str[, ...], attr=value, ...)
+</pre></div>
+
+<P>
+To define an option with only a short option string:
+<div class="verbatim"><pre>
+parser.add_option("-f", attr=value, ...)
+</pre></div>
+
+<P>
+And to define an option with only a long option string:
+<div class="verbatim"><pre>
+parser.add_option("--foo", attr=value, ...)
+</pre></div>
+
+<P>
+The keyword arguments define attributes of the new Option object.  The
+most important option attribute is <tt class="member">action</tt>, and it largely determines
+which other attributes are relevant or required.  If you pass irrelevant
+option attributes, or fail to pass required ones, <tt class="module">optparse</tt> raises an
+OptionError exception explaining your mistake.
+
+<P>
+An options's <em>action</em> determines what <tt class="module">optparse</tt> does when it encounters this
+option on the command-line.  The standard option actions hard-coded into
+<tt class="module">optparse</tt> are:
+<DL>
+<DT><STRONG><code>store</code></STRONG></DT>
+<DD>store this option's argument (default)
+</DD>
+<DT><STRONG><code>store_const</code></STRONG></DT>
+<DD>store a constant value
+</DD>
+<DT><STRONG><code>store_true</code></STRONG></DT>
+<DD>store a true value
+</DD>
+<DT><STRONG><code>store_false</code></STRONG></DT>
+<DD>store a false value
+</DD>
+<DT><STRONG><code>append</code></STRONG></DT>
+<DD>append this option's argument to a list
+</DD>
+<DT><STRONG><code>count</code></STRONG></DT>
+<DD>increment a counter by one
+</DD>
+<DT><STRONG><code>callback</code></STRONG></DT>
+<DD>call a specified function
+</DD>
+<DT><STRONG><tt class="member">help</tt></STRONG></DT>
+<DD>print a usage message including all options and the
+documentation for them
+</DD>
+</DL>
+
+<P>
+(If you don't supply an action, the default is <code>store</code>.  For this
+action, you may also supply <tt class="member">type</tt> and <tt class="member">dest</tt> option attributes; see
+below.)
+
+<P>
+As you can see, most actions involve storing or updating a value
+somewhere.  <tt class="module">optparse</tt> always creates a special object for this,
+conventionally called <code>options</code> (it happens to be an instance of
+<code>optparse.Values</code>).  Option arguments (and various other values) are
+stored as attributes of this object, according to the <tt class="member">dest</tt>
+(destination) option attribute.
+
+<P>
+For example, when you call
+<div class="verbatim"><pre>
+parser.parse_args()
+</pre></div>
+
+<P>
+one of the first things <tt class="module">optparse</tt> does is create the <code>options</code> object:
+<div class="verbatim"><pre>
+options = Values()
+</pre></div>
+
+<P>
+If one of the options in this parser is defined with
+<div class="verbatim"><pre>
+parser.add_option("-f", "--file", action="store", type="string", dest="filename")
+</pre></div>
+
+<P>
+and the command-line being parsed includes any of the following:
+<div class="verbatim"><pre>
+-ffoo
+-f foo
+--file=foo
+--file foo
+</pre></div>
+
+<P>
+then <tt class="module">optparse</tt>, on seeing this option, will do the equivalent of
+<div class="verbatim"><pre>
+options.filename = "foo"
+</pre></div>
+
+<P>
+The <tt class="member">type</tt> and <tt class="member">dest</tt> option attributes are almost as important as
+<tt class="member">action</tt>, but <tt class="member">action</tt> is the only one that makes sense for <em>all</em>
+options.
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.2 Populating the parser"
+  href="optparse-populating-parser.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.3.4 Standard option actions"
+  href="optparse-standard-option-actions.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-populating-parser.html">6.21.3.2 Populating the parser</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-standard-option-actions.html">6.21.3.4 Standard option actions</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

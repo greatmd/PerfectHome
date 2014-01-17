@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="xdr-unpacker-objects.html" />
+<link rel="prev" href="module-xdrlib.html" />
+<link rel="parent" href="module-xdrlib.html" />
+<link rel="next" href="xdr-unpacker-objects.html" />
+<meta name='aesop' content='information' />
+<title>12.17.1 Packer Objects </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.17 xdrlib  "
+  href="module-xdrlib.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.17 xdrlib  "
+  href="module-xdrlib.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.17.2 Unpacker Objects"
+  href="xdr-unpacker-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-xdrlib.html">12.17 xdrlib  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-xdrlib.html">12.17 xdrlib  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="xdr-unpacker-objects.html">12.17.2 Unpacker Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00141710000000000000000"></A><A NAME="xdr-packer-objects"></A>
+<BR>
+12.17.1 Packer Objects 
+</H2>
+
+<P>
+<tt class="class">Packer</tt> instances have the following methods:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4165' xml:id='l2h-4165' class="method">get_buffer</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Returns the current pack buffer as a string.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4166' xml:id='l2h-4166' class="method">reset</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Resets the pack buffer to the empty string.
+</dl>
+
+<P>
+In general, you can pack any of the most common XDR data types by
+calling the appropriate <code>pack_<var>type</var>()</code> method.  Each method
+takes a single argument, the value to pack.  The following simple data
+type packing methods are supported: <tt class="method">pack_uint()</tt>,
+<tt class="method">pack_int()</tt>, <tt class="method">pack_enum()</tt>, <tt class="method">pack_bool()</tt>,
+<tt class="method">pack_uhyper()</tt>, and <tt class="method">pack_hyper()</tt>.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4167' xml:id='l2h-4167' class="method">pack_float</tt></b>(</nobr></td>
+  <td><var>value</var>)</td></tr></table></dt>
+<dd>
+Packs the single-precision floating point number <var>value</var>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4168' xml:id='l2h-4168' class="method">pack_double</tt></b>(</nobr></td>
+  <td><var>value</var>)</td></tr></table></dt>
+<dd>
+Packs the double-precision floating point number <var>value</var>.
+</dl>
+
+<P>
+The following methods support packing strings, bytes, and opaque data:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4169' xml:id='l2h-4169' class="method">pack_fstring</tt></b>(</nobr></td>
+  <td><var>n, s</var>)</td></tr></table></dt>
+<dd>
+Packs a fixed length string, <var>s</var>.  <var>n</var> is the length of the
+string but it is <em>not</em> packed into the data buffer.  The string
+is padded with null bytes if necessary to guaranteed 4 byte alignment.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4170' xml:id='l2h-4170' class="method">pack_fopaque</tt></b>(</nobr></td>
+  <td><var>n, data</var>)</td></tr></table></dt>
+<dd>
+Packs a fixed length opaque data stream, similarly to
+<tt class="method">pack_fstring()</tt>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4171' xml:id='l2h-4171' class="method">pack_string</tt></b>(</nobr></td>
+  <td><var>s</var>)</td></tr></table></dt>
+<dd>
+Packs a variable length string, <var>s</var>.  The length of the string is
+first packed as an unsigned integer, then the string data is packed
+with <tt class="method">pack_fstring()</tt>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4172' xml:id='l2h-4172' class="method">pack_opaque</tt></b>(</nobr></td>
+  <td><var>data</var>)</td></tr></table></dt>
+<dd>
+Packs a variable length opaque data string, similarly to
+<tt class="method">pack_string()</tt>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4173' xml:id='l2h-4173' class="method">pack_bytes</tt></b>(</nobr></td>
+  <td><var>bytes</var>)</td></tr></table></dt>
+<dd>
+Packs a variable length byte stream, similarly to <tt class="method">pack_string()</tt>.
+</dl>
+
+<P>
+The following methods support packing arrays and lists:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4174' xml:id='l2h-4174' class="method">pack_list</tt></b>(</nobr></td>
+  <td><var>list, pack_item</var>)</td></tr></table></dt>
+<dd>
+Packs a <var>list</var> of homogeneous items.  This method is useful for
+lists with an indeterminate size; i.e. the size is not available until
+the entire list has been walked.  For each item in the list, an
+unsigned integer <code>1</code> is packed first, followed by the data value
+from the list.  <var>pack_item</var> is the function that is called to pack
+the individual item.  At the end of the list, an unsigned integer
+<code>0</code> is packed.
+
+<P>
+For example, to pack a list of integers, the code might appear like
+this:
+
+<P>
+<div class="verbatim"><pre>
+import xdrlib
+p = xdrlib.Packer()
+p.pack_list([1, 2, 3], p.pack_int)
+</pre></div>
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4175' xml:id='l2h-4175' class="method">pack_farray</tt></b>(</nobr></td>
+  <td><var>n, array, pack_item</var>)</td></tr></table></dt>
+<dd>
+Packs a fixed length list (<var>array</var>) of homogeneous items.  <var>n</var>
+is the length of the list; it is <em>not</em> packed into the buffer,
+but a <tt class="exception">ValueError</tt> exception is raised if
+<code>len(<var>array</var>)</code> is not equal to <var>n</var>.  As above,
+<var>pack_item</var> is the function used to pack each element.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4176' xml:id='l2h-4176' class="method">pack_array</tt></b>(</nobr></td>
+  <td><var>list, pack_item</var>)</td></tr></table></dt>
+<dd>
+Packs a variable length <var>list</var> of homogeneous items.  First, the
+length of the list is packed as an unsigned integer, then each element
+is packed as in <tt class="method">pack_farray()</tt> above.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.17 xdrlib  "
+  href="module-xdrlib.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.17 xdrlib  "
+  href="module-xdrlib.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.17.2 Unpacker Objects"
+  href="xdr-unpacker-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-xdrlib.html">12.17 xdrlib  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-xdrlib.html">12.17 xdrlib  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="xdr-unpacker-objects.html">12.17.2 Unpacker Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

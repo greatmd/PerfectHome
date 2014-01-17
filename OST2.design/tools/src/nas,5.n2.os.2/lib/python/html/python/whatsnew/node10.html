@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="whatsnew24.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="whatsnew24.html" title='What's New in Python 2.4' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node11.html" />
+<link rel="prev" href="node9.html" />
+<link rel="parent" href="whatsnew24.html" />
+<link rel="next" href="node11.html" />
+<meta name='aesop' content='information' />
+<title>9 PEP 328: Multi-line Imports</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="8 PEP 327: Decimal"
+  href="node9.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="10 PEP 331: Locale-Independent"
+  href="node11.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node9.html">8 PEP 327: Decimal</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node11.html">10 PEP 331: Locale-Independent</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0001000000000000000000">
+9 PEP 328: Multi-line Imports</A>
+</H1>
+
+<P>
+One language change is a small syntactic tweak aimed at making it
+easier to import many names from a module.  In a
+<code>from <var>module</var> import <var>names</var></code> statement, 
+<var>names</var> is a sequence of names separated by commas.  If the sequence is 
+very long, you can either write multiple imports from the same module,
+or you can use backslashes to escape the line endings like this:
+
+<P>
+<div class="verbatim"><pre>
+from SimpleXMLRPCServer import SimpleXMLRPCServer,\
+            SimpleXMLRPCRequestHandler,\
+            CGIXMLRPCRequestHandler,\
+            resolve_dotted_attribute
+</pre></div>
+
+<P>
+The syntactic change in Python 2.4 simply allows putting the names
+within parentheses.  Python ignores newlines within a parenthesized
+expression, so the backslashes are no longer needed:
+
+<P>
+<div class="verbatim"><pre>
+from SimpleXMLRPCServer import (SimpleXMLRPCServer,
+                                SimpleXMLRPCRequestHandler,
+                                CGIXMLRPCRequestHandler,
+                                resolve_dotted_attribute)
+</pre></div>
+
+<P>
+The PEP also proposes that all <tt class="keyword">import</tt> statements be absolute
+imports, with a leading "<tt class="samp">.</tt>" character to indicate a relative
+import.  This part of the PEP is not yet implemented, and will have to
+wait for Python 2.5 or some other future version.
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+<dl compact="compact" class="seerfc">
+    <dt><a href="http://www.python.org/peps/pep-0328.html"
+        title="Imports: Multi-Line and Absolute/Relative"
+        >PEP 328, <em>Imports: Multi-Line and Absolute/Relative</em></a>
+    <dd>Written by Aahz.  Multi-line imports were implemented by
+             Dima Dorfman.
+  </dl>
+</div>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="8 PEP 327: Decimal"
+  href="node9.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="10 PEP 331: Locale-Independent"
+  href="node11.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node9.html">8 PEP 327: Decimal</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node11.html">10 PEP 331: Locale-Independent</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 1.01.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

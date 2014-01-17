@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="ref.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="ref.html" title='Python Reference Manual' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="function.html" />
+<link rel="prev" href="for.html" />
+<link rel="parent" href="compound.html" />
+<link rel="next" href="function.html" />
+<meta name='aesop' content='information' />
+<title>7.4 The try statement</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.3 The for statement"
+  href="for.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Compound statements"
+  href="compound.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.5 Function definitions"
+  href="function.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="for.html">7.3 The for statement</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="compound.html">7. Compound statements</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="function.html">7.5 Function definitions</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009400000000000000000"></A><A NAME="try"></A>
+<BR>
+7.4 The <tt class="keyword">try</tt> statement
+</H1>
+<a id='l2h-592' xml:id='l2h-592'></a>
+<P>
+The <tt class="keyword">try</tt> statement specifies exception handlers and/or cleanup
+code for a group of statements:
+
+<P>
+<dl><dd class="grammar">
+<div class="productions">
+<table>
+<tr>
+    <td><a id='tok-try_stmt' xml:id='tok-try_stmt'>try_stmt</a></td>
+    <td>::=</td>
+    <td><a class='grammartoken' href="try.html#tok-try_exc_stmt">try_exc_stmt</a> | <a class='grammartoken' href="try.html#tok-try_fin_stmt">try_fin_stmt</a></td></tr>
+  <tr>
+    <td><a id='tok-try_exc_stmt' xml:id='tok-try_exc_stmt'>try_exc_stmt</a></td>
+    <td>::=</td>
+    <td>"try" ":" <a class='grammartoken' href="compound.html#tok-suite">suite</a></td></tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><code>("except" [<a class='grammartoken' href="Booleans.html#tok-expression">expression</a>
+                             ["," <a class='grammartoken' href="assignment.html#tok-target">target</a>]] ":" <a class='grammartoken' href="compound.html#tok-suite">suite</a>)+</code></td></tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><code>["else" ":" <a class='grammartoken' href="compound.html#tok-suite">suite</a>]</code></td></tr>
+  <tr>
+    <td><a id='tok-try_fin_stmt' xml:id='tok-try_fin_stmt'>try_fin_stmt</a></td>
+    <td>::=</td>
+    <td>"try" ":" <a class='grammartoken' href="compound.html#tok-suite">suite</a>
+              "finally" ":" <a class='grammartoken' href="compound.html#tok-suite">suite</a></td></tr>
+</table>
+</div>
+<a class="grammar-footer"
+  href="grammar.txt" type="text/plain"
+  >Download entire grammar as text.</a>
+</dd></dl>
+
+<P>
+There are two forms of <tt class="keyword">try</tt> statement:
+<tt class="keyword">try</tt>...<tt class="keyword">except</tt> and
+<tt class="keyword">try</tt>...<tt class="keyword">finally</tt>.  These forms cannot be mixed (but
+they can be nested in each other).
+
+<P>
+The <tt class="keyword">try</tt>...<tt class="keyword">except</tt> form specifies one or more
+exception handlers
+(the <tt class="keyword">except</tt> clauses).  When no exception occurs in the
+<tt class="keyword">try</tt> clause, no exception handler is executed.  When an
+exception occurs in the <tt class="keyword">try</tt> suite, a search for an exception
+handler is started.  This search inspects the except clauses in turn until
+one is found that matches the exception.  An expression-less except
+clause, if present, must be last; it matches any exception.  For an
+except clause with an expression, that expression is evaluated, and the
+clause matches the exception if the resulting object is ``compatible''
+with the exception.  An object is compatible with an exception if it
+is either the object that identifies the exception, or (for exceptions
+that are classes) it is a base class of the exception, or it is a
+tuple containing an item that is compatible with the exception.  Note
+that the object identities must match, i.e. it must be the same
+object, not just an object with the same value.
+<a id='l2h-593' xml:id='l2h-593'></a>
+<P>
+If no except clause matches the exception, the search for an exception
+handler continues in the surrounding code and on the invocation stack.
+
+<P>
+If the evaluation of an expression in the header of an except clause
+raises an exception, the original search for a handler is canceled
+and a search starts for the new exception in the surrounding code and
+on the call stack (it is treated as if the entire <tt class="keyword">try</tt> statement
+raised the exception).
+
+<P>
+When a matching except clause is found, the exception's parameter is
+assigned to the target specified in that except clause, if present,
+and the except clause's suite is executed.  All except clauses must
+have an executable block.  When the end of this block
+is reached, execution continues normally after the entire try
+statement.  (This means that if two nested handlers exist for the same
+exception, and the exception occurs in the try clause of the inner
+handler, the outer handler will not handle the exception.)
+
+<P>
+Before an except clause's suite is executed, details about the
+exception are assigned to three variables in the
+<tt class="module">sys</tt><a id='l2h-605' xml:id='l2h-605'></a> module: <code>sys.exc_type</code> receives
+the object identifying the exception; <code>sys.exc_value</code> receives
+the exception's parameter; <code>sys.exc_traceback</code> receives a
+traceback object<a id='l2h-594' xml:id='l2h-594'></a> (see section&nbsp;<A href="types.html#traceback">3.2</A>)
+identifying the point in the program where the exception occurred.
+These details are also available through the <tt class="function">sys.exc_info()</tt>
+function, which returns a tuple <code>(<var>exc_type</var>, <var>exc_value</var>,
+<var>exc_traceback</var>)</code>.  Use of the corresponding variables is
+deprecated in favor of this function, since their use is unsafe in a
+threaded program.  As of Python 1.5, the variables are restored to
+their previous values (before the call) when returning from a function
+that handled an exception.
+<a id='l2h-596' xml:id='l2h-596'></a>
+<P>
+The optional <tt class="keyword">else</tt> clause is executed if and when control
+flows off the end of the <tt class="keyword">try</tt> clause.<A NAME="tex2html10"
+  HREF="#foot6708"><SUP>7.1</SUP></A> Exceptions in the <tt class="keyword">else</tt> clause are not handled by the
+preceding <tt class="keyword">except</tt> clauses.
+<a id='l2h-597' xml:id='l2h-597'></a><a id='l2h-598' xml:id='l2h-598'></a><a id='l2h-599' xml:id='l2h-599'></a><a id='l2h-600' xml:id='l2h-600'></a>
+<P>
+The <tt class="keyword">try</tt>...<tt class="keyword">finally</tt> form specifies a `cleanup' handler.  The
+<tt class="keyword">try</tt> clause is executed.  When no exception occurs, the
+<tt class="keyword">finally</tt> clause is executed.  When an exception occurs in the
+<tt class="keyword">try</tt> clause, the exception is temporarily saved, the
+<tt class="keyword">finally</tt> clause is executed, and then the saved exception is
+re-raised.  If the <tt class="keyword">finally</tt> clause raises another exception or
+executes a <tt class="keyword">return</tt> or <tt class="keyword">break</tt> statement, the saved
+exception is lost.  A <tt class="keyword">continue</tt> statement is illegal in the
+<tt class="keyword">finally</tt> clause.  (The reason is a problem with the current
+implementation - this restriction may be lifted in the future).  The
+exception information is not available to the program during execution of
+the <tt class="keyword">finally</tt> clause.
+<a id='l2h-601' xml:id='l2h-601'></a>
+<P>
+When a <tt class="keyword">return</tt>, <tt class="keyword">break</tt> or <tt class="keyword">continue</tt> statement is
+executed in the <tt class="keyword">try</tt> suite of a <tt class="keyword">try</tt>...<tt class="keyword">finally</tt>
+statement, the <tt class="keyword">finally</tt> clause is also executed `on the way out.' A
+<tt class="keyword">continue</tt> statement is illegal in the <tt class="keyword">finally</tt> clause.
+(The reason is a problem with the current implementation -- this
+restriction may be lifted in the future).
+<a id='l2h-602' xml:id='l2h-602'></a><a id='l2h-603' xml:id='l2h-603'></a><a id='l2h-604' xml:id='l2h-604'></a>
+<P>
+Additional information on exceptions can be found in
+section&nbsp;<A href="exceptions.html#exceptions">4.2</A>, and information on using the <tt class="keyword">raise</tt>
+statement to generate exceptions may be found in section&nbsp;<A href="raise.html#raise">6.9</A>.
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot6708">... clause.</A><A
+ href="try.html#tex2html10"><SUP>7.1</SUP></A></DT>
+<DD>
+  Currently, control ``flows off the end'' except in the case of an
+  exception or the execution of a <tt class="keyword">return</tt>,
+  <tt class="keyword">continue</tt>, or <tt class="keyword">break</tt> statement.
+
+
+</DD>
+</DL>
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.3 The for statement"
+  href="for.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Compound statements"
+  href="compound.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.5 Function definitions"
+  href="function.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="for.html">7.3 The for statement</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="compound.html">7. Compound statements</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="function.html">7.5 Function definitions</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

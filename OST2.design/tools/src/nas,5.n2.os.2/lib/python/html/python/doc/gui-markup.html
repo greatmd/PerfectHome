@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="doc.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="doc.html" title='Documenting Python' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="grammar-displays.html" />
+<link rel="parent" href="special-constructs.html" />
+<link rel="next" href="tools.html" />
+<meta name='aesop' content='information' />
+<title>6.13 Graphical Interface Components </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.12 Grammar Production Displays"
+  href="grammar-displays.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6 Special Markup Constructs"
+  href="special-constructs.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7 Processing Tools"
+  href="tools.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Documenting Python</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="grammar-displays.html">6.12 Grammar Production Displays</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="special-constructs.html">6 Special Markup Constructs</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="tools.html">7 Processing Tools</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0007130000000000000000"></A><A NAME="gui-markup"></A>
+<BR>
+6.13 Graphical Interface Components 
+</H2>
+
+<P>
+The components of graphical interfaces will be assigned markup, but
+  most of the specifics have not been determined.
+
+<P>
+
+<dl class='macrodesc'>
+<dt><b><tt class='macro'>&#92;guilabel</tt></b>
+    <tt>{</tt><var>label</var><tt>}</tt></dt>
+<dd>
+    Labels presented as part of an interactive user interface should
+    be marked using <tt class='macro'>&#92;guilabel</tt>.  This includes labels from
+    text-based interfaces such as those created using <code>curses</code> or
+    other text-based libraries.  Any label used in the interface
+    should be marked with this macro, including button labels, window
+    titles, field names, menu and menu selection names, and even
+    values in selection lists.
+  </dd></dl>
+
+<P>
+
+<dl class='macrodesc'>
+<dt><b><tt class='macro'>&#92;menuselection</tt></b>
+    <tt>{</tt><var>menupath</var><tt>}</tt></dt>
+<dd>
+    Menu selections should be marked using a combination of
+    <tt class='macro'>&#92;menuselection</tt> and <tt class='macro'>&#92;sub</tt>.  This macro is used to mark
+    a complete sequence of menu selections, including selecting
+    submenus and choosing a specific operation, or any subsequence of
+    such a sequence.  The names of individual selections should be
+    separated by occurrences of <tt class='macro'>&#92;sub</tt>.
+
+<P>
+For example, to mark the selection ``<span class="guilabel">Start </span> &gt; <span class="guilabel">
+    Programs</span>'', use this markup:
+
+<P>
+<div class="verbatim"><pre>
+\menuselection{Start \sub Programs}
+</pre></div>
+
+<P>
+When including a selection that includes some trailing indicator,
+    such as the ellipsis some operating systems use to indicate that
+    the command opens a dialog, the indicator should be omitted from
+    the selection name.
+
+<P>
+Individual selection names within the <tt class='macro'>&#92;menuselection</tt> should
+    not be marked using <tt class='macro'>&#92;guilabel</tt> since that's implied by using
+    <tt class='macro'>&#92;menuselection</tt>.
+  </dd></dl>
+
+<P>
+
+<dl class='macrodesc'>
+<dt><b><tt class='macro'>&#92;sub</tt></b>
+    </dt>
+<dd>
+    Separator for menu selections that include multiple levels.  This
+    macro is only defined within the context of the
+    <tt class='macro'>&#92;menuselection</tt> macro.
+  </dd></dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.12 Grammar Production Displays"
+  href="grammar-displays.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6 Special Markup Constructs"
+  href="special-constructs.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7 Processing Tools"
+  href="tools.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Documenting Python</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="grammar-displays.html">6.12 Grammar Production Displays</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="special-constructs.html">6 Special Markup Constructs</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="tools.html">7 Processing Tools</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

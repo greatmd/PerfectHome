@@ -1,0 +1,41 @@
+#!/bin/csh -f
+sleep 10 ;
+set DIR=$0
+set DIR=$DIR:h
+unlimit stacksize
+#limit core 0
+#This bit of code tries to autodetect the dram size build option. Its because big_mem needs to
+#match the set size at run time to what was used at build time. Both the verilog a big_mem default
+#to 1G if no option given
+set init_format
+#If this file already exists, assume that user is merging a memory image with a sims diag.
+#For example the checkpoint flow. So don't overwrite it with the code shown below
+test -f  mem.image.add_axis
+#This code allows sims diags to define empty blocks of memory that the dram model can allocate.
+#Useful for DMA diags which just need big buffers to write to.
+if ($status != 0) then
+  test -f symbol.tbl
+  if ($status == 0) then
+    #input:
+    #1empty_blk_start 0000000880040140 0880000140 0880000000
+    #1empty_blk_end   0000000880040140 0880000140 0890000000
+    #2empty_blk_start 0000000880040140 0880000140 08a0000000
+    #2empty_blk_end   0000000880040140 0880000140 08b0000000
+    #output
+    #@880000000//10000000
+    #@8A0000000//10000000
+    grep empty_blk symbol.tbl | \
+     tr "[:lower:]" "[:upper:]" | \
+    nawk 'BEGIN{print "obase=16";print "ibase=16"} /_START/{st_pa=$NF} /_END/{ print st_pa ; print $NF " -" st_pa}' |\
+    bc -l | \
+    nawk ' BEGIN {loop=0} {if (! loop) { printf "@%s//+",$1;loop=1} else {printf "%s\n",$1;loop=0}}' >! mem.image.add_axis
+  endif
+endif
+touch mem.image.add_axis
+#This is the crucial step. small_mem does some simple formatting on the mem image
+#big_mem does the manipulation to allocate entries in a 64 way cache
+cat mem.image mem.image.add_axis | $DIR/small_mem - - | \
+$DIR/big_mem -f - -d . -m 0x40000000 $init_format $*
+set st=$status
+rm -f mem.image.add_axis
+exit $st

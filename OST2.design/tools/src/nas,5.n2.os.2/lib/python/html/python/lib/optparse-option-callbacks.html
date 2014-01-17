@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="optparse-extending-optparse.html" />
+<link rel="prev" href="optparse-reference-guide.html" />
+<link rel="parent" href="module-optparse.html" />
+<link rel="next" href="optparse-defining-callback-option.html" />
+<meta name='aesop' content='information' />
+<title>6.21.4 Option Callbacks</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.10 Other methods"
+  href="optparse-other-methods.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21 optparse  "
+  href="module-optparse.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.4.1 Defining a callback"
+  href="optparse-defining-callback-option.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-other-methods.html">6.21.3.10 Other methods</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-optparse.html">6.21 optparse  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-defining-callback-option.html">6.21.4.1 Defining a callback</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0082140000000000000000"></A><A NAME="optparse-option-callbacks"></A>
+<BR>
+6.21.4 Option Callbacks
+</H2>
+
+<P>
+When <tt class="module">optparse</tt>'s built-in actions and types aren't quite enough for your
+needs, you have two choices: extend <tt class="module">optparse</tt> or define a callback option.
+Extending <tt class="module">optparse</tt> is more general, but overkill for a lot of simple
+cases.  Quite often a simple callback is all you need.
+
+<P>
+There are two steps to defining a callback option:
+
+<UL>
+<LI> 
+define the option itself using the <code>callback</code> action
+
+<P>
+</LI>
+<LI> 
+write the callback; this is a function (or method) that
+takes at least four arguments, as described below
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="optparse-defining-callback-option.html">6.21.4.1 Defining a callback option</a>
+<LI><A href="optparse-how-callbacks-called.html">6.21.4.2 How callbacks are called</a>
+<LI><A href="optparse-raising-errors-in-callback.html">6.21.4.3 Raising errors in a callback</a>
+<LI><A href="optparse-callback-example-1.html">6.21.4.4 Callback example 1: trivial callback</a>
+<LI><A href="optparse-callback-example-2.html">6.21.4.5 Callback example 2: check option order</a>
+<LI><A href="optparse-callback-example-3.html">6.21.4.6 Callback example 3: check option order (generalized)</a>
+<LI><A href="optparse-callback-example-4.html">6.21.4.7 Callback example 4: check arbitrary condition</a>
+<LI><A href="optparse-callback-example-5.html">6.21.4.8 Callback example 5: fixed arguments</a>
+<LI><A href="optparse-callback-example-6.html">6.21.4.9 Callback example 6: variable arguments</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.10 Other methods"
+  href="optparse-other-methods.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21 optparse  "
+  href="module-optparse.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.4.1 Defining a callback"
+  href="optparse-defining-callback-option.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-other-methods.html">6.21.3.10 Other methods</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-optparse.html">6.21 optparse  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-defining-callback-option.html">6.21.4.1 Defining a callback</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

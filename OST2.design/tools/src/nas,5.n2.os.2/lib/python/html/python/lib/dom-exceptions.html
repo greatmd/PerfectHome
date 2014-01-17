@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="dom-pi-objects.html" />
+<link rel="parent" href="node652.html" />
+<link rel="next" href="dom-conformance.html" />
+<meta name='aesop' content='information' />
+<title>13.6.2.12 Exceptions </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="13.6.2.11 ProcessingInstruction Objects"
+  href="dom-pi-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="13.6.2 Objects in the"
+  href="node652.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="13.6.3 Conformance"
+  href="dom-conformance.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="dom-pi-objects.html">13.6.2.11 ProcessingInstruction Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="node652.html">13.6.2 Objects in the</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="dom-conformance.html">13.6.3 Conformance</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00156212000000000000000"></A><A NAME="dom-exceptions"></A>
+<BR>
+13.6.2.12 Exceptions 
+</H3>
+
+<P>
+
+<span class="versionnote">New in version 2.1.</span>
+
+<P>
+The DOM Level&nbsp;2 recommendation defines a single exception,
+<tt class="exception">DOMException</tt>, and a number of constants that allow
+applications to determine what sort of error occurred.
+<tt class="exception">DOMException</tt> instances carry a <tt class="member">code</tt> attribute
+that provides the appropriate value for the specific exception.
+
+<P>
+The Python DOM interface provides the constants, but also expands the
+set of exceptions so that a specific exception exists for each of the
+exception codes defined by the DOM.  The implementations must raise
+the appropriate specific exception, each of which carries the
+appropriate value for the <tt class="member">code</tt> attribute.
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4428' xml:id='l2h-4428' class="exception">DOMException</tt></b></dt>
+<dd>
+  Base exception class used for all specific DOM exceptions.  This
+  exception class cannot be directly instantiated.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4429' xml:id='l2h-4429' class="exception">DomstringSizeErr</tt></b></dt>
+<dd>
+  Raised when a specified range of text does not fit into a string.
+  This is not known to be used in the Python DOM implementations, but
+  may be received from DOM implementations not written in Python.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4430' xml:id='l2h-4430' class="exception">HierarchyRequestErr</tt></b></dt>
+<dd>
+  Raised when an attempt is made to insert a node where the node type
+  is not allowed.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4431' xml:id='l2h-4431' class="exception">IndexSizeErr</tt></b></dt>
+<dd>
+  Raised when an index or size parameter to a method is negative or
+  exceeds the allowed values.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4432' xml:id='l2h-4432' class="exception">InuseAttributeErr</tt></b></dt>
+<dd>
+  Raised when an attempt is made to insert an <tt class="class">Attr</tt> node that
+  is already present elsewhere in the document.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4433' xml:id='l2h-4433' class="exception">InvalidAccessErr</tt></b></dt>
+<dd>
+  Raised if a parameter or an operation is not supported on the
+  underlying object.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4434' xml:id='l2h-4434' class="exception">InvalidCharacterErr</tt></b></dt>
+<dd>
+  This exception is raised when a string parameter contains a
+  character that is not permitted in the context it's being used in by
+  the XML 1.0 recommendation.  For example, attempting to create an
+  <tt class="class">Element</tt> node with a space in the element type name will
+  cause this error to be raised.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4435' xml:id='l2h-4435' class="exception">InvalidModificationErr</tt></b></dt>
+<dd>
+  Raised when an attempt is made to modify the type of a node.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4436' xml:id='l2h-4436' class="exception">InvalidStateErr</tt></b></dt>
+<dd>
+  Raised when an attempt is made to use an object that is not defined or is no
+  longer usable.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4437' xml:id='l2h-4437' class="exception">NamespaceErr</tt></b></dt>
+<dd>
+  If an attempt is made to change any object in a way that is not
+  permitted with regard to the
+  <em class="citetitle"><a
+ href="http://www.w3.org/TR/REC-xml-names/"
+ title="Namespaces in XML"
+ >Namespaces in XML</a></em>
+  recommendation, this exception is raised.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4438' xml:id='l2h-4438' class="exception">NotFoundErr</tt></b></dt>
+<dd>
+  Exception when a node does not exist in the referenced context.  For
+  example, <tt class="method">NamedNodeMap.removeNamedItem()</tt> will raise this if
+  the node passed in does not exist in the map.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4439' xml:id='l2h-4439' class="exception">NotSupportedErr</tt></b></dt>
+<dd>
+  Raised when the implementation does not support the requested type
+  of object or operation.
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4440' xml:id='l2h-4440' class="exception">NoDataAllowedErr</tt></b></dt>
+<dd>
+  This is raised if data is specified for a node which does not
+  support data.
+  </dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4441' xml:id='l2h-4441' class="exception">NoModificationAllowedErr</tt></b></dt>
+<dd>
+  Raised on attempts to modify an object where modifications are not
+  allowed (such as for read-only nodes).
+</dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4442' xml:id='l2h-4442' class="exception">SyntaxErr</tt></b></dt>
+<dd>
+  Raised when an invalid or illegal string is specified.
+  </dd></dl>
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4443' xml:id='l2h-4443' class="exception">WrongDocumentErr</tt></b></dt>
+<dd>
+  Raised when a node is inserted in a different document than it
+  currently belongs to, and the implementation does not support
+  migrating the node from one document to the other.
+</dd></dl>
+
+<P>
+The exception codes defined in the DOM recommendation map to the
+exceptions described above according to this table:
+
+<P>
+<div class="center"><table class="realtable">
+  <thead>
+    <tr>
+      <th class="left"  >Constant</th>
+      <th class="left"  >Exception</th>
+      </tr>
+    </thead>
+  <tbody>
+    <tr><td class="left"   valign="baseline"><tt class="constant">DOMSTRING_SIZE_ERR</tt></td>
+        <td class="left"  ><tt class="exception">DomstringSizeErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">HIERARCHY_REQUEST_ERR</tt></td>
+        <td class="left"  ><tt class="exception">HierarchyRequestErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">INDEX_SIZE_ERR</tt></td>
+        <td class="left"  ><tt class="exception">IndexSizeErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">INUSE_ATTRIBUTE_ERR</tt></td>
+        <td class="left"  ><tt class="exception">InuseAttributeErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">INVALID_ACCESS_ERR</tt></td>
+        <td class="left"  ><tt class="exception">InvalidAccessErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">INVALID_CHARACTER_ERR</tt></td>
+        <td class="left"  ><tt class="exception">InvalidCharacterErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">INVALID_MODIFICATION_ERR</tt></td>
+        <td class="left"  ><tt class="exception">InvalidModificationErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">INVALID_STATE_ERR</tt></td>
+        <td class="left"  ><tt class="exception">InvalidStateErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">NAMESPACE_ERR</tt></td>
+        <td class="left"  ><tt class="exception">NamespaceErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">NOT_FOUND_ERR</tt></td>
+        <td class="left"  ><tt class="exception">NotFoundErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">NOT_SUPPORTED_ERR</tt></td>
+        <td class="left"  ><tt class="exception">NotSupportedErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">NO_DATA_ALLOWED_ERR</tt></td>
+        <td class="left"  ><tt class="exception">NoDataAllowedErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">NO_MODIFICATION_ALLOWED_ERR</tt></td>
+        <td class="left"  ><tt class="exception">NoModificationAllowedErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">SYNTAX_ERR</tt></td>
+        <td class="left"  ><tt class="exception">SyntaxErr</tt></td></tr>
+    <tr><td class="left"   valign="baseline"><tt class="constant">WRONG_DOCUMENT_ERR</tt></td>
+        <td class="left"  ><tt class="exception">WrongDocumentErr</tt></td></tr></tbody>
+</table></div>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="13.6.2.11 ProcessingInstruction Objects"
+  href="dom-pi-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="13.6.2 Objects in the"
+  href="node652.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="13.6.3 Conformance"
+  href="dom-conformance.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="dom-pi-objects.html">13.6.2.11 ProcessingInstruction Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="node652.html">13.6.2 Objects in the</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="dom-conformance.html">13.6.3 Conformance</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

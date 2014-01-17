@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="regrtest.html" />
+<link rel="prev" href="module-test.html" />
+<link rel="parent" href="module-test.html" />
+<link rel="next" href="regrtest.html" />
+<meta name='aesop' content='information' />
+<title>5.4.1 Writing Unit Tests for the test package</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.4 test  "
+  href="module-test.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.4 test  "
+  href="module-test.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.4.2 Running tests using"
+  href="regrtest.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-test.html">5.4 test  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-test.html">5.4 test  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="regrtest.html">5.4.2 Running tests using</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION007410000000000000000"></A><A NAME="writing-tests"></A>
+<BR>
+5.4.1 Writing Unit Tests for the <tt class="module">test</tt> package
+</H2>
+
+<P>
+It is preferred that tests for the <tt class="module">test</tt> package use the
+<tt class="module"><a href="module-unittest.html">unittest</a></tt> module and follow a few guidelines.
+One is to have the name of all the test methods start with "<tt class="samp">test_</tt>" as
+well as the module's name.
+This is needed so that the methods are recognized by the test driver as
+test methods.
+Also, no documentation string for the method should be included.
+A comment (such as
+"<tt class="samp"># Tests function returns only True or False</tt>") should be used to provide
+documentation for test methods.
+This is done because documentation strings get printed out if they exist and
+thus what test is being run is not stated.
+
+<P>
+A basic boilerplate is often used:
+
+<P>
+<div class="verbatim"><pre>
+import unittest
+from test import test_support
+
+class MyTestCase1(unittest.TestCase):
+
+    # Only use setUp() and tearDown() if necessary
+
+    def setUp(self):
+        ... code to execute in preparation for tests ...
+
+    def tearDown(self):
+        ... code to execute to clean up after tests ...
+
+    def test_feature_one(self):
+        # Test feature one.
+        ... testing code ...
+
+    def test_feature_two(self):
+        # Test feature two.
+        ... testing code ...
+
+    ... more test methods ...
+
+class MyTestCase2(unittest.TestCase):
+    ... same structure as MyTestCase1 ...
+
+... more test classes ...
+
+def test_main():
+    test_support.run_unittest(MyTestCase1,
+                              MyTestCase2,
+                              ... list other tests ...
+                             )
+
+if __name__ == '__main__':
+    test_main()
+</pre></div>
+
+<P>
+This boilerplate code allows the testing suite to be run by
+<tt class="module">test.regrtest</tt> as well as on its own as a script.
+
+<P>
+The goal for regression testing is to try to break code.
+This leads to a few guidelines to be followed:
+
+<P>
+
+<UL>
+<LI>The testing suite should exercise all classes, functions, and
+      constants.
+      This includes not just the external API that is to be presented to the
+      outside world but also "private" code.
+</LI>
+<LI>Whitebox testing (examining the code being tested when the tests are
+      being written) is preferred.
+      Blackbox testing (testing only the published user interface) is not
+      complete enough to make sure all boundary and edge cases are tested.
+</LI>
+<LI>Make sure all possible values are tested including invalid ones.
+      This makes sure that not only all valid values are acceptable but also
+      that improper values are handled correctly.
+</LI>
+<LI>Exhaust as many code paths as possible.
+      Test where branching occurs and thus tailor input to make sure as many
+      different paths through the code are taken.
+</LI>
+<LI>Add an explicit test for any bugs discovered for the tested code.
+      This will make sure that the error does not crop up again if the code is
+      changed in the future.
+</LI>
+<LI>Make sure to clean up after your tests (such as close and remove all
+      temporary files).
+</LI>
+<LI>Import as few modules as possible and do it as soon as possible.
+      This minimizes external dependencies of tests and also minimizes possible
+      anomalous behavior from side-effects of importing a module.
+</LI>
+<LI>Try to maximize code reuse.
+      On occasion, tests will vary by something as small as what type
+      of input is used.
+      Minimize code duplication by subclassing a basic test class with a class
+      that specifies the input:
+<div class="verbatim"><pre>
+class TestFuncAcceptsSequences(unittest.TestCase):
+
+    func = mySuperWhammyFunction
+
+    def test_func(self):
+        self.func(self.arg)
+
+class AcceptLists(TestFuncAcceptsSequences):
+    arg = [1,2,3]
+
+class AcceptStrings(TestFuncAcceptsSequences):
+    arg = 'abc'
+
+class AcceptTuples(TestFuncAcceptsSequences):
+    arg = (1,2,3)
+</pre></div>
+</LI>
+</UL>
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+<dl compact="compact" class="seetitle">
+    <dt><em class="citetitle"
+        >Test Driven Development</em></dt>
+    <dd>A book by Kent Beck on writing tests before code.</dd>
+  </dl>
+</div>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.4 test  "
+  href="module-test.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.4 test  "
+  href="module-test.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.4.2 Running tests using"
+  href="regrtest.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-test.html">5.4 test  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-test.html">5.4 test  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="regrtest.html">5.4.2 Running tests using</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

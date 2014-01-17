@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="node584.html" />
+<link rel="parent" href="module-email.Parser.html" />
+<link rel="next" href="module-email.Generator.html" />
+<meta name='aesop' content='information' />
+<title>12.2.2.3 Additional notes</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.2.2.2 Parser class API"
+  href="node584.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.2.2 Parsing email messages"
+  href="module-email.Parser.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.2.3 Generating MIME documents"
+  href="module-email.Generator.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node584.html">12.2.2.2 Parser class API</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-email.Parser.html">12.2.2 Parsing email messages</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-email.Generator.html">12.2.3 Generating MIME documents</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION0014223000000000000000">
+12.2.2.3 Additional notes</A>
+</H3>
+
+<P>
+Here are some notes on the parsing semantics:
+
+<P>
+
+<UL>
+<LI>Most non-<span class="mimetype">multipart</span> type messages are parsed as a single
+      message object with a string payload.  These objects will return
+      <code>False</code> for <tt class="method">is_multipart()</tt>.  Their
+      <tt class="method">get_payload()</tt> method will return a string object.
+
+<P>
+</LI>
+<LI>All <span class="mimetype">multipart</span> type messages will be parsed as a
+      container message object with a list of sub-message objects for
+      their payload.  The outer container message will return
+      <code>True</code> for <tt class="method">is_multipart()</tt> and their
+      <tt class="method">get_payload()</tt> method will return the list of
+      <tt class="class">Message</tt> subparts.
+
+<P>
+</LI>
+<LI>Most messages with a content type of <span class="mimetype">message/*</span>
+      (e.g. <span class="mimetype">message/delivery-status</span> and
+      <span class="mimetype">message/rfc822</span>) will also be parsed as container
+      object containing a list payload of length 1.  Their
+      <tt class="method">is_multipart()</tt> method will return <code>True</code>.  The
+      single element in the list payload will be a sub-message object.
+
+<P>
+</LI>
+<LI>Some non-standards compliant messages may not be internally consistent
+      about their <span class="mimetype">multipart</span>-edness.  Such messages may have a
+      <span class="mailheader">Content-Type:</span> header of type <span class="mimetype">multipart</span>, but their
+      <tt class="method">is_multipart()</tt> method may return <code>False</code>.  If such
+      messages were parsed with the <tt class="class">FeedParser</tt>, they will have an
+      instance of the <tt class="class">MultipartInvariantViolationDefect</tt> class in their
+      <var>defects</var> attribute list.  See <tt class="module"><a href="module-email.Errors.html">email.Errors</a></tt> for
+      details.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.2.2.2 Parser class API"
+  href="node584.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.2.2 Parsing email messages"
+  href="module-email.Parser.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.2.3 Generating MIME documents"
+  href="module-email.Generator.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node584.html">12.2.2.2 Parser class API</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-email.Parser.html">12.2.2 Parsing email messages</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-email.Generator.html">12.2.3 Generating MIME documents</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

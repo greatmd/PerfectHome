@@ -1,0 +1,428 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="whatsnew24.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="whatsnew24.html" title='What's New in Python 2.4' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node10.html" />
+<link rel="prev" href="node8.html" />
+<link rel="parent" href="whatsnew24.html" />
+<link rel="next" href="node10.html" />
+<meta name='aesop' content='information' />
+<title>8 PEP 327: Decimal Data Type</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7 PEP 324: New"
+  href="node8.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="9 PEP 328: Multi-line"
+  href="node10.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node8.html">7 PEP 324: New</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node10.html">9 PEP 328: Multi-line</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="node9.html#SECTION000910000000000000000">8.1 Why is Decimal needed?</a>
+<LI><A href="node9.html#SECTION000920000000000000000">8.2 The <tt class="class">Decimal</tt> type</a>
+<LI><A href="node9.html#SECTION000930000000000000000">8.3 The <tt class="class">Context</tt> type</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+<HR>
+
+<H1><A NAME="SECTION000900000000000000000">
+8 PEP 327: Decimal Data Type</A>
+</H1>
+
+<P>
+Python has always supported floating-point (FP) numbers, based on the
+underlying C <tt class="ctype">double</tt> type, as a data type.  However, while most
+programming languages provide a floating-point type, many people (even
+programmers) are unaware that floating-point numbers don't represent
+certain decimal fractions accurately.  The new <tt class="class">Decimal</tt> type
+can represent these fractions accurately, up to a user-specified
+precision limit.
+
+<P>
+
+<H2><A NAME="SECTION000910000000000000000">
+8.1 Why is Decimal needed?</A>
+</H2>
+
+<P>
+The limitations arise from the representation used for floating-point numbers.
+FP numbers are made up of three components:
+
+<P>
+
+<UL>
+<LI>The sign, which is positive or negative.
+</LI>
+<LI>The mantissa, which is a single-digit binary number  
+followed by a fractional part.  For example, <code>1.01</code> in base-2 notation
+is <code>1 + 0/2 + 1/4</code>, or 1.25 in decimal notation.
+</LI>
+<LI>The exponent, which tells where the decimal point is located in the number represented.  
+</LI>
+</UL>
+
+<P>
+For example, the number 1.25 has positive sign, a mantissa value of
+1.01 (in binary), and an exponent of 0 (the decimal point doesn't need
+to be shifted).  The number 5 has the same sign and mantissa, but the
+exponent is 2 because the mantissa is multiplied by 4 (2 to the power
+of the exponent 2); 1.25 * 4 equals 5.
+
+<P>
+Modern systems usually provide floating-point support that conforms to
+a standard called IEEE 754.  C's <tt class="ctype">double</tt> type is usually
+implemented as a 64-bit IEEE 754 number, which uses 52 bits of space
+for the mantissa.  This means that numbers can only be specified to 52
+bits of precision.  If you're trying to represent numbers whose
+expansion repeats endlessly, the expansion is cut off after 52 bits.
+Unfortunately, most software needs to produce output in base 10, and
+common fractions in base 10 are often repeating decimals in binary.
+For example, 1.1 decimal is binary <code>1.0001100110011 ...</code>; .1 =
+1/16 + 1/32 + 1/256 plus an infinite number of additional terms.  IEEE
+754 has to chop off that infinitely repeated decimal after 52 digits,
+so the representation is slightly inaccurate.
+
+<P>
+Sometimes you can see this inaccuracy when the number is printed:
+<div class="verbatim"><pre>
+&gt;&gt;&gt; 1.1
+1.1000000000000001
+</pre></div>
+
+<P>
+The inaccuracy isn't always visible when you print the number because
+the FP-to-decimal-string conversion is provided by the C library, and
+most C libraries try to produce sensible output.  Even if it's not
+displayed, however, the inaccuracy is still there and subsequent
+operations can magnify the error.
+
+<P>
+For many applications this doesn't matter.  If I'm plotting points and
+displaying them on my monitor, the difference between 1.1 and
+1.1000000000000001 is too small to be visible.  Reports often limit
+output to a certain number of decimal places, and if you round the
+number to two or three or even eight decimal places, the error is
+never apparent.  However, for applications where it does matter, 
+it's a lot of work to implement your own custom arithmetic routines.
+
+<P>
+Hence, the <tt class="class">Decimal</tt> type was created.
+
+<P>
+
+<H2><A NAME="SECTION000920000000000000000">
+8.2 The <tt class="class">Decimal</tt> type</A>
+</H2>
+
+<P>
+A new module, <tt class="module">decimal</tt>, was added to Python's standard
+library.  It contains two classes, <tt class="class">Decimal</tt> and
+<tt class="class">Context</tt>.  <tt class="class">Decimal</tt> instances represent numbers, and
+<tt class="class">Context</tt> instances are used to wrap up various settings such as
+the precision and default rounding mode.
+
+<P>
+<tt class="class">Decimal</tt> instances are immutable, like regular Python integers
+and FP numbers; once it's been created, you can't change the value an
+instance represents.  <tt class="class">Decimal</tt> instances can be created from
+integers or strings:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; import decimal
+&gt;&gt;&gt; decimal.Decimal(1972)
+Decimal("1972")
+&gt;&gt;&gt; decimal.Decimal("1.1")
+Decimal("1.1")
+</pre></div>
+
+<P>
+You can also provide tuples containing the sign, the mantissa represented 
+as a tuple of decimal digits, and the exponent:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; decimal.Decimal((1, (1, 4, 7, 5), -2))
+Decimal("-14.75")
+</pre></div>
+
+<P>
+Cautionary note: the sign bit is a Boolean value, so 0 is positive and
+1 is negative. 
+
+<P>
+Converting from floating-point numbers poses a bit of a problem:
+should the FP number representing 1.1 turn into the decimal number for
+exactly 1.1, or for 1.1 plus whatever inaccuracies are introduced?
+The decision was to dodge the issue and leave such a conversion out of
+the API.  Instead, you should convert the floating-point number into a
+string using the desired precision and pass the string to the
+<tt class="class">Decimal</tt> constructor:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; f = 1.1
+&gt;&gt;&gt; decimal.Decimal(str(f))
+Decimal("1.1")
+&gt;&gt;&gt; decimal.Decimal('%.12f' % f)
+Decimal("1.100000000000")
+</pre></div>
+
+<P>
+Once you have <tt class="class">Decimal</tt> instances, you can perform the usual
+mathematical operations on them.  One limitation: exponentiation
+requires an integer exponent:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; a = decimal.Decimal('35.72')
+&gt;&gt;&gt; b = decimal.Decimal('1.73')
+&gt;&gt;&gt; a+b
+Decimal("37.45")
+&gt;&gt;&gt; a-b
+Decimal("33.99")
+&gt;&gt;&gt; a*b
+Decimal("61.7956")
+&gt;&gt;&gt; a/b
+Decimal("20.64739884393063583815028902")
+&gt;&gt;&gt; a ** 2
+Decimal("1275.9184")
+&gt;&gt;&gt; a**b
+Traceback (most recent call last):
+  ...
+decimal.InvalidOperation: x ** (non-integer)
+</pre></div>
+
+<P>
+You can combine <tt class="class">Decimal</tt> instances with integers, but not with
+floating-point numbers:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; a + 4
+Decimal("39.72")
+&gt;&gt;&gt; a + 4.5
+Traceback (most recent call last):
+  ...
+TypeError: You can interact Decimal only with int, long or Decimal data types.
+&gt;&gt;&gt;
+</pre></div>
+
+<P>
+<tt class="class">Decimal</tt> numbers can be used with the <tt class="module">math</tt> and
+<tt class="module">cmath</tt> modules, but note that they'll be immediately converted to 
+floating-point numbers before the operation is performed, resulting in
+a possible loss of precision and accuracy.  You'll also get back a
+regular floating-point number and not a <tt class="class">Decimal</tt>.  
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; import math, cmath
+&gt;&gt;&gt; d = decimal.Decimal('123456789012.345')
+&gt;&gt;&gt; math.sqrt(d)
+351364.18288201344
+&gt;&gt;&gt; cmath.sqrt(-d)
+351364.18288201344j
+</pre></div>
+
+<P>
+<tt class="class">Decimal</tt> instances have a <tt class="method">sqrt()</tt> method that
+returns a <tt class="class">Decimal</tt>, but if you need other things such as
+trigonometric functions you'll have to implement them.
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; d.sqrt()
+Decimal("351364.1828820134592177245001")
+</pre></div>
+
+<P>
+
+<H2><A NAME="SECTION000930000000000000000">
+8.3 The <tt class="class">Context</tt> type</A>
+</H2>
+
+<P>
+Instances of the <tt class="class">Context</tt> class encapsulate several settings for 
+decimal operations:
+
+<P>
+
+<UL>
+<LI><tt class="member">prec</tt> is the precision, the number of decimal places.
+</LI>
+<LI><tt class="member">rounding</tt> specifies the rounding mode.  The <tt class="module">decimal</tt>
+       module has constants for the various possibilities:
+       <tt class="constant">ROUND_DOWN</tt>, <tt class="constant">ROUND_CEILING</tt>, 
+       <tt class="constant">ROUND_HALF_EVEN</tt>, and various others.
+</LI>
+<LI><tt class="member">traps</tt> is a dictionary specifying what happens on
+encountering certain error conditions: either  an exception is raised or 
+a value is returned.  Some examples of error conditions are
+division by zero, loss of precision, and overflow.
+</LI>
+</UL>
+
+<P>
+There's a thread-local default context available by calling
+<tt class="function">getcontext()</tt>; you can change the properties of this context
+to alter the default precision, rounding, or trap handling.  The
+following example shows the effect of changing the precision of the default
+context:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; decimal.getcontext().prec
+28
+&gt;&gt;&gt; decimal.Decimal(1) / decimal.Decimal(7)
+Decimal("0.1428571428571428571428571429")
+&gt;&gt;&gt; decimal.getcontext().prec = 9 
+&gt;&gt;&gt; decimal.Decimal(1) / decimal.Decimal(7)
+Decimal("0.142857143")
+</pre></div>
+
+<P>
+The default action for error conditions is selectable; the module can
+either return a special value such as infinity or not-a-number, or
+exceptions can be raised:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; decimal.Decimal(1) / decimal.Decimal(0)
+Traceback (most recent call last):
+  ...
+decimal.DivisionByZero: x / 0
+&gt;&gt;&gt; decimal.getcontext().traps[decimal.DivisionByZero] = False
+&gt;&gt;&gt; decimal.Decimal(1) / decimal.Decimal(0)
+Decimal("Infinity")
+&gt;&gt;&gt;
+</pre></div>
+
+<P>
+The <tt class="class">Context</tt> instance also has various methods for formatting 
+numbers such as <tt class="method">to_eng_string()</tt> and <tt class="method">to_sci_string()</tt>.
+
+<P>
+For more information, see the documentation for the <tt class="module">decimal</tt>
+module, which includes a quick-start tutorial and a reference.
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+<dl compact="compact" class="seerfc">
+    <dt><a href="http://www.python.org/peps/pep-0327.html"
+        title="Decimal Data Type"
+        >PEP 327, <em>Decimal Data Type</em></a>
+    <dd>Written by Facundo Batista and implemented
+  by Facundo Batista, Eric Price, Raymond Hettinger, Aahz, and Tim Peters.
+  </dl>
+
+<P>
+<dl compact="compact" class="seeurl">
+    <dt><a href="http://research.microsoft.com/~hollasch/cgindex/coding/ieeefloat.html"
+        class="url">http://research.microsoft.com/~hollasch/cgindex/coding/ieeefloat.html</a></dt>
+    <dd>A more detailed overview of the IEEE-754 representation.</dd>
+  </dl>
+
+<P>
+<dl compact="compact" class="seeurl">
+    <dt><a href="http://www.lahey.com/float.htm"
+        class="url">http://www.lahey.com/float.htm</a></dt>
+    <dd>The article uses Fortran code to illustrate many of the problems
+that floating-point inaccuracy can cause.</dd>
+  </dl>
+
+<P>
+<dl compact="compact" class="seeurl">
+    <dt><a href="http://www2.hursley.ibm.com/decimal/"
+        class="url">http://www2.hursley.ibm.com/decimal/</a></dt>
+    <dd>A description of a decimal-based representation.  This representation
+is being proposed as a standard, and underlies the new Python decimal
+type.  Much of this material was written by Mike Cowlishaw, designer of the
+Rexx language.</dd>
+  </dl>
+
+<P>
+</div>      
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7 PEP 324: New"
+  href="node8.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="9 PEP 328: Multi-line"
+  href="node10.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node8.html">7 PEP 324: New</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node10.html">9 PEP 328: Multi-line</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 1.01.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

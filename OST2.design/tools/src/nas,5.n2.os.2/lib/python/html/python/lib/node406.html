@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node407.html" />
+<link rel="prev" href="module-bz2.html" />
+<link rel="parent" href="module-bz2.html" />
+<link rel="next" href="node407.html" />
+<meta name='aesop' content='information' />
+<title>7.17.1 (De)compression of files</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.17 bz2  "
+  href="module-bz2.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.17 bz2  "
+  href="module-bz2.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.17.2 Sequential (de)compression"
+  href="node407.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-bz2.html">7.17 bz2  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-bz2.html">7.17 bz2  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node407.html">7.17.2 Sequential (de)compression</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0091710000000000000000">
+7.17.1 (De)compression of files</A>
+</H2>
+
+<P>
+Handling of compressed files is offered by the <tt class="class">BZ2File</tt> class.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-2833' xml:id='l2h-2833' class="class">BZ2File</tt></b>(</nobr></td>
+  <td><var>filename</var><big>[</big><var>, mode</var><big>[</big><var>,
+                           buffering</var><big>[</big><var>, compresslevel</var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Open a bz2 file. Mode can be either <code>'r'</code> or <code>'w'</code>, for reading 
+(default) or writing. When opened for writing, the file will be created if
+it doesn't exist, and truncated otherwise. If <var>buffering</var> is given,
+<code>0</code> means unbuffered, and larger numbers specify the buffer size;
+the default is <code>0</code>. If
+<var>compresslevel</var> is given, it must be a number between <code>1</code> and
+<code>9</code>; the default is <code>9</code>.
+Add a "<tt class="character">U</tt>" to mode to open the file for input with universal newline
+support. Any line ending in the input file will be seen as a
+"<tt class="character">&#92;n</tt>" in Python.  Also, a file so opened gains the
+attribute <tt class="member">newlines</tt>; the value for this attribute is one of
+<code>None</code> (no newline read yet), <code>'&#92;r'</code>, <code>'&#92;n'</code>,
+<code>'&#92;r&#92;n'</code> or a tuple containing all the newline types
+seen. Universal newlines are available only when reading.
+Instances support iteration in the same way as normal <tt class="class">file</tt>
+instances.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2834' xml:id='l2h-2834' class="method">close</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Close the file. Sets data attribute <tt class="member">closed</tt> to true. A closed file
+cannot be used for further I/O operations. <tt class="method">close()</tt> may be called
+more than once without error.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2835' xml:id='l2h-2835' class="method">read</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>size</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Read at most <var>size</var> uncompressed bytes, returned as a string. If the
+<var>size</var> argument is negative or omitted, read until EOF is reached.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2836' xml:id='l2h-2836' class="method">readline</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>size</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Return the next line from the file, as a string, retaining newline.
+A non-negative <var>size</var> argument limits the maximum number of bytes to
+return (an incomplete line may be returned then). Return an empty
+string at EOF.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2837' xml:id='l2h-2837' class="method">readlines</tt></b>(</nobr></td>
+  <td><var></var><big>[</big><var>size</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Return a list of lines read. The optional <var>size</var> argument, if given,
+is an approximate bound on the total number of bytes in the lines returned.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2838' xml:id='l2h-2838' class="method">xreadlines</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+For backward compatibility. <tt class="class">BZ2File</tt> objects now include the
+performance optimizations previously implemented in the
+<tt class="module">xreadlines</tt> module.
+<div class="versionnote"><b>Deprecated since release 2.3.</b>
+This exists only for compatibility with the method by
+                 this name on <tt class="class">file</tt> objects, which is
+                 deprecated.  Use <code>for line in file</code> instead.</div><p></p>
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2839' xml:id='l2h-2839' class="method">seek</tt></b>(</nobr></td>
+  <td><var>offset</var><big>[</big><var>, whence</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Move to new file position. Argument <var>offset</var> is a byte count. Optional
+argument <var>whence</var> defaults to <code>0</code> (offset from start of file,
+offset should be <code>&gt;= 0</code>); other values are <code>1</code> (move relative to
+current position, positive or negative), and <code>2</code> (move relative to end
+of file, usually negative, although many platforms allow seeking beyond
+the end of a file).
+
+<P>
+Note that seeking of bz2 files is emulated, and depending on the parameters
+the operation may be extremely slow.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2840' xml:id='l2h-2840' class="method">tell</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the current file position, an integer (may be a long integer).
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2841' xml:id='l2h-2841' class="method">write</tt></b>(</nobr></td>
+  <td><var>data</var>)</td></tr></table></dt>
+<dd>
+Write string <var>data</var> to file. Note that due to buffering, <tt class="method">close()</tt>
+may be needed before the file on disk reflects the data written.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2842' xml:id='l2h-2842' class="method">writelines</tt></b>(</nobr></td>
+  <td><var>sequence_of_strings</var>)</td></tr></table></dt>
+<dd>
+Write the sequence of strings to the file. Note that newlines are not added.
+The sequence can be any iterable object producing strings. This is equivalent
+to calling write() for each string.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.17 bz2  "
+  href="module-bz2.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7.17 bz2  "
+  href="module-bz2.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.17.2 Sequential (de)compression"
+  href="node407.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-bz2.html">7.17 bz2  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-bz2.html">7.17 bz2  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node407.html">7.17.2 Sequential (de)compression</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

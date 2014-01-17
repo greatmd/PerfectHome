@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-zipfile.html" />
+<link rel="prev" href="module-gzip.html" />
+<link rel="parent" href="someos.html" />
+<link rel="next" href="node406.html" />
+<meta name='aesop' content='information' />
+<title>7.17 bz2 -- Compression compatible with bzip2</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.16 gzip  "
+  href="module-gzip.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Optional Operating System"
+  href="someos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.17.1 (De)compression of files"
+  href="node406.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-gzip.html">7.16 gzip  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="someos.html">7. Optional Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node406.html">7.17.1 (De)compression of files</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0091700000000000000000">
+7.17 <tt class="module">bz2</tt> --
+         Compression compatible with <b class="program">bzip2</b></A>
+</H1>
+
+<P>
+<A NAME="module-bz2"></A>
+
+<P>
+
+<span class="versionnote">New in version 2.3.</span>
+
+<P>
+This module provides a comprehensive interface for the bz2 compression library.
+It implements a complete file interface, one-shot (de)compression functions,
+and types for sequential (de)compression.
+
+<P>
+Here is a resume of the features offered by the bz2 module:
+
+<P>
+
+<UL>
+<LI><tt class="class">BZ2File</tt> class implements a complete file interface, including
+      <tt class="method">readline()</tt>, <tt class="method">readlines()</tt>,
+      <tt class="method">writelines()</tt>, <tt class="method">seek()</tt>, etc;
+</LI>
+<LI><tt class="class">BZ2File</tt> class implements emulated <tt class="method">seek()</tt> support;
+</LI>
+<LI><tt class="class">BZ2File</tt> class implements universal newline support;
+</LI>
+<LI><tt class="class">BZ2File</tt> class offers an optimized line iteration using
+      the readahead algorithm borrowed from file objects;
+</LI>
+<LI>Sequential (de)compression supported by <tt class="class">BZ2Compressor</tt> and
+      <tt class="class">BZ2Decompressor</tt> classes;
+</LI>
+<LI>One-shot (de)compression supported by <tt class="function">compress()</tt> and
+      <tt class="function">decompress()</tt> functions;
+</LI>
+<LI>Thread safety uses individual locking mechanism;
+</LI>
+<LI>Complete inline documentation;
+</LI>
+</UL>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="node406.html">7.17.1 (De)compression of files</a>
+<LI><A href="node407.html">7.17.2 Sequential (de)compression</a>
+<LI><A href="node408.html">7.17.3 One-shot (de)compression</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="7.16 gzip  "
+  href="module-gzip.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="7. Optional Operating System"
+  href="someos.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.17.1 (De)compression of files"
+  href="node406.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-gzip.html">7.16 gzip  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="someos.html">7. Optional Operating System</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node406.html">7.17.1 (De)compression of files</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

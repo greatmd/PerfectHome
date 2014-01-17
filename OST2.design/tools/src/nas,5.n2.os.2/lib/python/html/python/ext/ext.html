@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="ext.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="ext.html" title='Extending and Embedding the Python Interpreter' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="front.html" />
+<meta name='aesop' content='information' />
+<title>Extending and Embedding the Python Interpreter</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></td>
+<td class='online-navigation'><a rel="parent" title="Python Documentation Index"
+  href="../index.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="Front Matter"
+  href="front.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Extending and Embedding the Python Interpreter</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="../index.html">Python Documentation Index</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="front.html">Front Matter</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<P>
+
+<link rel='up' href='../index.html' title='Python Documentation Index' />
+<div class="titlepage">
+<div class='center'>
+<h1>Extending and Embedding the Python Interpreter</h1>
+<p><b><font size="+2">Guido van Rossum</font></b></p>
+<p>
+	<strong>Python Software Foundation</strong>
+<BR>
+Email: <span class="email">docs@python.org</span>
+</p>
+<p><i>	Fred L. Drake, Jr., editor</i></p>
+<p><strong>Release 2.4.2</strong><br />
+<strong>28 September 2005</strong></p>
+<p></p>
+</div>
+</div>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="front.html">Front Matter</a>
+<LI><A href="contents.html">Contents</a>
+<LI><A href="intro.html">1. Extending Python with C or C++</a>
+<UL>
+<LI><A href="simpleExample.html">1.1 A Simple Example</a>
+<LI><A href="errors.html">1.2 Intermezzo: Errors and Exceptions</a>
+<LI><A href="backToExample.html">1.3 Back to the Example</a>
+<LI><A href="methodTable.html">1.4 The Module's Method Table and Initialization Function</a>
+<LI><A href="compilation.html">1.5 Compilation and Linkage</a>
+<LI><A href="callingPython.html">1.6 Calling Python Functions from C</a>
+<LI><A href="parseTuple.html">1.7 Extracting Parameters in Extension Functions</a>
+<LI><A href="parseTupleAndKeywords.html">1.8 Keyword Parameters for Extension Functions</a>
+<LI><A href="buildValue.html">1.9 Building Arbitrary Values</a>
+<LI><A href="refcounts.html">1.10 Reference Counts</a>
+<UL>
+<LI><A href="refcountsInPython.html">1.10.1 Reference Counting in Python</a>
+<LI><A href="ownershipRules.html">1.10.2 Ownership Rules</a>
+<LI><A href="thinIce.html">1.10.3 Thin Ice</a>
+<LI><A href="nullPointers.html">1.10.4 NULL Pointers</a>
+</ul>
+<LI><A href="cplusplus.html">1.11 Writing Extensions in C++</a>
+<LI><A href="using-cobjects.html">1.12 Providing a C API for an Extension Module</a>
+</ul>
+<LI><A href="defining-new-types.html">2. Defining New Types</a>
+<UL>
+<LI><A href="dnt-basics.html">2.1 The Basics</a>
+<UL>
+<LI><A href="node22.html">2.1.1 Adding data and methods to the Basic example</a>
+<LI><A href="node23.html">2.1.2 Providing finer control over data attributes</a>
+<LI><A href="node24.html">2.1.3 Supporting cyclic garbage collection</a>
+</ul>
+<LI><A href="dnt-type-methods.html">2.2 Type Methods</a>
+<UL>
+<LI><A href="node26.html">2.2.1 Finalization and De-allocation</a>
+<LI><A href="node27.html">2.2.2 Object Presentation</a>
+<LI><A href="node28.html">2.2.3 Attribute Management</a>
+<LI><A href="node31.html">2.2.4 Object Comparison</a>
+<LI><A href="node32.html">2.2.5 Abstract Protocol Support</a>
+<LI><A href="node33.html">2.2.6 More Suggestions</a>
+</ul>
+</ul>
+<LI><A href="building.html">3. Building C and C++ Extensions with distutils</a>
+<UL>
+<LI><A href="distributing.html">3.1 Distributing your extension modules</a>
+</ul>
+<LI><A href="building-on-windows.html">4. Building C and C++ Extensions on Windows</a>
+<UL>
+<LI><A href="win-cookbook.html">4.1 A Cookbook Approach</a>
+<LI><A href="dynamic-linking.html">4.2 Differences Between <span class="Unix">Unix</span> and Windows</a>
+<LI><A href="win-dlls.html">4.3 Using DLLs in Practice</a>
+</ul>
+<LI><A href="embedding.html">5. Embedding Python in Another Application</a>
+<UL>
+<LI><A href="high-level-embedding.html">5.1 Very High Level Embedding</a>
+<LI><A href="lower-level-embedding.html">5.2 Beyond Very High Level Embedding: An overview</a>
+<LI><A href="pure-embedding.html">5.3 Pure Embedding</a>
+<LI><A href="extending-with-embedding.html">5.4 Extending Embedded Python</a>
+<LI><A href="embeddingInCplusplus.html">5.5 Embedding Python in C++</a>
+<LI><A href="link-reqs.html">5.6 Linking Requirements</a>
+</ul>
+<LI><A href="reporting-bugs.html">A. Reporting Bugs</a>
+<LI><A href="node48.html">B. History and License</a>
+<UL>
+<LI><A href="node49.html">B.1 History of the software</a>
+<LI><A href="node50.html">B.2 Terms and conditions for accessing or otherwise using Python</a>
+<LI><A href="node51.html">B.3 Licenses and Acknowledgements for Incorporated Software</a>
+<UL>
+<LI><A href="node52.html">B.3.1 Mersenne Twister</a>
+<LI><A href="node53.html">B.3.2 Sockets</a>
+<LI><A href="node54.html">B.3.3 Floating point exception control</a>
+<LI><A href="node55.html">B.3.4 MD5 message digest algorithm</a>
+<LI><A href="node56.html">B.3.5 Asynchronous socket services</a>
+<LI><A href="node57.html">B.3.6 Cookie management</a>
+<LI><A href="node58.html">B.3.7 Profiling</a>
+<LI><A href="node59.html">B.3.8 Execution tracing</a>
+<LI><A href="node60.html">B.3.9 UUencode and UUdecode functions</a>
+<LI><A href="node61.html">B.3.10 XML Remote Procedure Calls</a>
+</ul>
+</ul>
+<LI><A href="about.html">About this document ...</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></td>
+<td class='online-navigation'><a rel="parent" title="Python Documentation Index"
+  href="../index.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="Front Matter"
+  href="front.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Extending and Embedding the Python Interpreter</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="../index.html">Python Documentation Index</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="front.html">Front Matter</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

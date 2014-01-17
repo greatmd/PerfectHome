@@ -1,0 +1,16 @@
+#! /bin/sh
+
+OS=`uname -s`
+if [ $OS = "SunOS" ] ; then
+exe=$DV_ROOT/tools/SunOS/sparc/gmake
+fi
+if [ $OS = "Linux" ]; then
+exe=$DV_ROOT/tools/Linux/x86_64/gmake
+fi
+    if [ -x $exe ]; then
+        exec $exe "$@"
+    else
+        die "executable $exe not found!"
+    fi
+
+

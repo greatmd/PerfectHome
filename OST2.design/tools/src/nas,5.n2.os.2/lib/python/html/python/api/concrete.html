@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="api.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="api.html" title='Python/C API Reference Manual' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="initialization.html" />
+<link rel="prev" href="abstract.html" />
+<link rel="parent" href="api.html" />
+<link rel="next" href="fundamental.html" />
+<meta name='aesop' content='information' />
+<title>7. Concrete Objects Layer </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.6 Buffer Protocol"
+  href="abstract-buffer.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="Python/C API Reference Manual"
+  href="api.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.1 Fundamental Objects"
+  href="fundamental.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="abstract-buffer.html">6.6 Buffer Protocol</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="api.html">Python/C API Reference Manual</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="fundamental.html">7.1 Fundamental Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009000000000000000000"></A><A NAME="concrete"></A>
+<BR>
+7. Concrete Objects Layer 
+</H1>
+
+<P>
+The functions in this chapter are specific to certain Python object
+types.  Passing them an object of the wrong type is not a good idea;
+if you receive an object from a Python program and you are not sure
+that it has the right type, you must perform a type check first;
+for example, to check that an object is a dictionary, use
+<tt class="cfunction">PyDict_Check()</tt>.  The chapter is structured like the
+``family tree'' of Python object types.
+
+<P>
+<span class="warning"><b class="label">Warning:</b>
+While the functions described in this chapter carefully check
+the type of the objects which are passed in, many of them do not check
+for <tt class="constant">NULL</tt> being passed instead of a valid object.  Allowing <tt class="constant">NULL</tt>
+to be passed in can cause memory access violations and immediate
+termination of the interpreter.</span>
+
+<P>
+
+<p><br /></p><hr class='online-navigation' />
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="fundamental.html">7.1 Fundamental Objects</a>
+<UL>
+<LI><A href="typeObjects.html">7.1.1 Type Objects</a>
+<LI><A href="noneObject.html">7.1.2 The None Object</a>
+</ul>
+<LI><A href="numericObjects.html">7.2 Numeric Objects</a>
+<UL>
+<LI><A href="intObjects.html">7.2.1 Plain Integer Objects</a>
+<LI><A href="boolObjects.html">7.2.2 Boolean Objects</a>
+<LI><A href="longObjects.html">7.2.3 Long Integer Objects</a>
+<LI><A href="floatObjects.html">7.2.4 Floating Point Objects</a>
+<LI><A href="complexObjects.html">7.2.5 Complex Number Objects</a>
+<UL>
+<LI><A href="node39.html">7.2.5.1 Complex Numbers as C Structures</a>
+<LI><A href="node40.html">7.2.5.2 Complex Numbers as Python Objects</a>
+</ul>
+</ul>
+<LI><A href="sequenceObjects.html">7.3 Sequence Objects</a>
+<UL>
+<LI><A href="stringObjects.html">7.3.1 String Objects</a>
+<LI><A href="unicodeObjects.html">7.3.2 Unicode Objects</a>
+<UL>
+<LI><A href="builtinCodecs.html">7.3.2.1 Built-in Codecs</a>
+<LI><A href="unicodeMethodsAndSlots.html">7.3.2.2 Methods and Slot Functions</a>
+</ul>
+<LI><A href="bufferObjects.html">7.3.3 Buffer Objects</a>
+<LI><A href="tupleObjects.html">7.3.4 Tuple Objects</a>
+<LI><A href="listObjects.html">7.3.5 List Objects</a>
+</ul>
+<LI><A href="mapObjects.html">7.4 Mapping Objects</a>
+<UL>
+<LI><A href="dictObjects.html">7.4.1 Dictionary Objects</a>
+</ul>
+<LI><A href="otherObjects.html">7.5 Other Objects</a>
+<UL>
+<LI><A href="fileObjects.html">7.5.1 File Objects</a>
+<LI><A href="instanceObjects.html">7.5.2 Instance Objects</a>
+<LI><A href="method-objects.html">7.5.3 Method Objects</a>
+<LI><A href="moduleObjects.html">7.5.4 Module Objects</a>
+<LI><A href="iterator-objects.html">7.5.5 Iterator Objects</a>
+<LI><A href="descriptor-objects.html">7.5.6 Descriptor Objects</a>
+<LI><A href="slice-objects.html">7.5.7 Slice Objects</a>
+<LI><A href="weakref-objects.html">7.5.8 Weak Reference Objects</a>
+<LI><A href="cObjects.html">7.5.9 CObjects</a>
+<LI><A href="cell-objects.html">7.5.10 Cell Objects</a>
+<LI><A href="gen-objects.html">7.5.11 Generator Objects</a>
+<LI><A href="datetime-objects.html">7.5.12 DateTime Objects</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.6 Buffer Protocol"
+  href="abstract-buffer.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="Python/C API Reference Manual"
+  href="api.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="7.1 Fundamental Objects"
+  href="fundamental.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="abstract-buffer.html">6.6 Buffer Protocol</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="api.html">Python/C API Reference Manual</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="fundamental.html">7.1 Fundamental Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

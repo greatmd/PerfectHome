@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="optparse-querying-manipulating-option-parser.html" />
+<link rel="prev" href="optparse-standard-option-types.html" />
+<link rel="parent" href="optparse-reference-guide.html" />
+<link rel="next" href="optparse-querying-manipulating-option-parser.html" />
+<meta name='aesop' content='information' />
+<title>6.21.3.7 Parsing arguments</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.6 Standard option types"
+  href="optparse-standard-option-types.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.3.8 Querying and manipulating"
+  href="optparse-querying-manipulating-option-parser.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-standard-option-types.html">6.21.3.6 Standard option types</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-querying-manipulating-option-parser.html">6.21.3.8 Querying and manipulating</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION0082137000000000000000"></A><A NAME="optparse-parsing-arguments"></A>
+<BR>
+6.21.3.7 Parsing arguments
+</H3>
+
+<P>
+The whole point of creating and populating an OptionParser is to call
+its <tt class="method">parse_args()</tt> method:
+<div class="verbatim"><pre>
+(options, args) = parser.parse_args(args=None, options=None)
+</pre></div>
+
+<P>
+where the input parameters are
+<DL>
+<DT><STRONG><code>args</code></STRONG></DT>
+<DD>the list of arguments to process (<code>sys.argv[1:]</code> by default)
+</DD>
+<DT><STRONG><code>options</code></STRONG></DT>
+<DD>object to store option arguments in (a new instance of
+optparse.Values by default)
+</DD>
+</DL>
+
+<P>
+and the return values are
+<DL>
+<DT><STRONG><code>options</code></STRONG></DT>
+<DD>the same object as was passed in as <code>options</code>, or the new
+optparse.Values instance created by <tt class="module">optparse</tt>
+</DD>
+<DT><STRONG><code>args</code></STRONG></DT>
+<DD>the leftover positional arguments after all options have been
+processed
+</DD>
+</DL>
+
+<P>
+The most common usage is to supply neither keyword argument.  If you
+supply a <code>values</code> object, it will be repeatedly modified with a
+<code>setattr()</code> call for every option argument written to an option
+destination, and finally returned by <tt class="method">parse_args()</tt>.
+
+<P>
+If <tt class="method">parse_args()</tt> encounters any errors in the argument list, it calls
+the OptionParser's <tt class="method">error()</tt> method with an appropriate end-user error
+message.  This ultimately terminates your process with an exit status of
+2 (the traditional <span class="Unix">Unix</span> exit status for command-line errors).
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6.21.3.6 Standard option types"
+  href="optparse-standard-option-types.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="6.21.3 Reference Guide"
+  href="optparse-reference-guide.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6.21.3.8 Querying and manipulating"
+  href="optparse-querying-manipulating-option-parser.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="optparse-standard-option-types.html">6.21.3.6 Standard option types</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="optparse-reference-guide.html">6.21.3 Reference Guide</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="optparse-querying-manipulating-option-parser.html">6.21.3.8 Querying and manipulating</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

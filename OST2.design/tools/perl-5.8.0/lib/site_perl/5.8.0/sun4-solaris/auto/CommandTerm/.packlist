@@ -1,0 +1,5 @@
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/CommandTerm.pm
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/CommandTerm/Curses.pm
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/CommandTerm/ProgPty.pm
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/CommandTerm/Rl.pm
+/import/bw/tools/local/perl-5.8.0/lib/site_perl/5.8.0/CommandTerm/Tk.pm

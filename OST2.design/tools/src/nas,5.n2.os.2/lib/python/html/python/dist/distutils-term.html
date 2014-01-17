@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="dist.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="dist.html" title='Distributing Python Modules' />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="prev" href="python-terms.html" />
+<link rel="parent" href="intro.html" />
+<link rel="next" href="setup-script.html" />
+<meta name='aesop' content='information' />
+<title>1.4 Distutils-specific terminology</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="1.3 General Python terminology"
+  href="python-terms.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="1. An Introduction to"
+  href="intro.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="2. Writing the Setup"
+  href="setup-script.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="python-terms.html">1.3 General Python terminology</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="intro.html">1. An Introduction to</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="setup-script.html">2. Writing the Setup</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001400000000000000000"></A>
+<A NAME="distutils-term"></A>
+<BR>
+1.4 Distutils-specific terminology
+</H1>
+
+<P>
+The following terms apply more specifically to the domain of
+distributing Python modules using the Distutils:
+<DL>
+<DT><STRONG>module distribution</STRONG></DT>
+<DD>a collection of Python modules distributed
+  together as a single downloadable resource and meant to be installed
+  <em>en masse</em>.  Examples of some well-known module distributions are
+  Numeric Python, PyXML, PIL (the Python Imaging Library), or
+  mxBase.  (This would be called a <em>package</em>, except that term
+  is already taken in the Python context: a single module distribution
+  may contain zero, one, or many Python packages.)
+
+<P>
+</DD>
+<DT><STRONG>pure module distribution</STRONG></DT>
+<DD>a module distribution that contains only
+  pure Python modules and packages.  Sometimes referred to as a ``pure
+  distribution.''
+
+<P>
+</DD>
+<DT><STRONG>non-pure module distribution</STRONG></DT>
+<DD>a module distribution that contains
+  at least one extension module.  Sometimes referred to as a ``non-pure
+  distribution.''
+
+<P>
+</DD>
+<DT><STRONG>distribution root</STRONG></DT>
+<DD>the top-level directory of your source tree (or 
+  source distribution); the directory where <span class="file">setup.py</span> exists.  Generally 
+  <span class="file">setup.py</span> will be run from this directory.
+</DD>
+</DL>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="1.3 General Python terminology"
+  href="python-terms.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="1. An Introduction to"
+  href="intro.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="2. Writing the Setup"
+  href="setup-script.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="python-terms.html">1.3 General Python terminology</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="intro.html">1. An Introduction to</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="setup-script.html">2. Writing the Setup</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

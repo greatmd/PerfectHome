@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-dl.html" />
+<link rel="prev" href="module-grp.html" />
+<link rel="parent" href="unix.html" />
+<link rel="next" href="module-dl.html" />
+<meta name='aesop' content='information' />
+<title>8.4 crypt -- Function to check Unix passwords</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="8.3 grp  "
+  href="module-grp.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="8. Unix Specific Services"
+  href="unix.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="8.5 dl  "
+  href="module-dl.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-grp.html">8.3 grp  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="unix.html">8. Unix Specific Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-dl.html">8.5 dl  </A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0010400000000000000000">
+8.4 <tt class="module">crypt</tt> --
+         Function to check <span class="Unix">Unix</span> passwords</A>
+</H1>
+
+<P>
+<A NAME="module-crypt"></A>  
+<p class="availability">Availability: <span
+ class="platform">Unix</span>.</p>
+
+<P>
+This module implements an interface to the
+<span class="manpage"><i>crypt</i>(3)</span><a id='l2h-2984' xml:id='l2h-2984'></a> routine, which is a one-way hash
+function based upon a modified DES<a id='l2h-2982' xml:id='l2h-2982'></a> algorithm; see
+the <span class="Unix">Unix</span> man page for further details.  Possible uses include
+allowing Python scripts to accept typed passwords from the user, or
+attempting to crack <span class="Unix">Unix</span> passwords with a dictionary.
+
+<P>
+Notice that the behavior of this module depends on the actual implementation 
+of the <span class="manpage"><i>crypt</i>(3)</span><a id='l2h-2985' xml:id='l2h-2985'></a> routine in the running system. 
+Therefore, any extensions available on the current implementation will also 
+be available on this module.
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-2983' xml:id='l2h-2983' class="function">crypt</tt></b>(</nobr></td>
+  <td><var>word, salt</var>)</td></tr></table></dt>
+<dd> 
+  <var>word</var> will usually be a user's password as typed at a prompt or 
+  in a graphical interface.  <var>salt</var> is usually a random
+  two-character string which will be used to perturb the DES algorithm
+  in one of 4096 ways.  The characters in <var>salt</var> must be in the
+  set <tt class="regexp">[./a-zA-Z0-9]</tt>.  Returns the hashed password as a
+  string, which will be composed of characters from the same alphabet
+   as the salt (the first two characters represent the salt itself).
+
+<P>
+Since a few <span class="manpage"><i>crypt</i>(3)</span><a id='l2h-2986' xml:id='l2h-2986'></a> extensions allow different
+  values, with different sizes in the <var>salt</var>, it is recommended to use 
+  the full crypted password as salt when checking for a password.
+</dl>
+
+<P>
+A simple example illustrating typical use:
+
+<P>
+<div class="verbatim"><pre>
+import crypt, getpass, pwd
+
+def login():
+    username = raw_input('Python login:')
+    cryptedpasswd = pwd.getpwnam(username)[1]
+    if cryptedpasswd:
+        if cryptedpasswd == 'x' or cryptedpasswd == '*': 
+            raise "Sorry, currently no support for shadow passwords"
+        cleartext = getpass.getpass()
+        return crypt.crypt(cleartext, cryptedpasswd) == cryptedpasswd
+    else:
+        return 1
+</pre></div>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="8.3 grp  "
+  href="module-grp.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="8. Unix Specific Services"
+  href="unix.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="8.5 dl  "
+  href="module-dl.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-grp.html">8.3 grp  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="unix.html">8. Unix Specific Services</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-dl.html">8.5 dl  </A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

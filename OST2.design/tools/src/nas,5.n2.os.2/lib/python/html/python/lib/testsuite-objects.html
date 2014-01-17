@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="testresult-objects.html" />
+<link rel="prev" href="testcase-objects.html" />
+<link rel="parent" href="module-unittest.html" />
+<link rel="next" href="testresult-objects.html" />
+<meta name='aesop' content='information' />
+<title>5.3.6 TestSuite Objects </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.3.5 TestCase Objects"
+  href="testcase-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.3 unittest  "
+  href="module-unittest.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.3.7 TestResult Objects"
+  href="testresult-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="testcase-objects.html">5.3.5 TestCase Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-unittest.html">5.3 unittest  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="testresult-objects.html">5.3.7 TestResult Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION007360000000000000000"></A><A NAME="testsuite-objects"></A>
+<BR>
+5.3.6 TestSuite Objects
+            
+</H2>
+
+<P>
+<tt class="class">TestSuite</tt> objects behave much like <tt class="class">TestCase</tt> objects,
+except they do not actually implement a test.  Instead, they are used
+to aggregate tests into groups that should be run together.  Some
+additional methods are available to add tests to <tt class="class">TestSuite</tt>
+instances:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1158' xml:id='l2h-1158' class="method">addTest</tt></b>(</nobr></td>
+  <td><var>test</var>)</td></tr></table></dt>
+<dd>
+  Add a <tt class="class">TestCase</tt> or <tt class="class">TestSuite</tt> to the set of tests that
+  make up the suite.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1159' xml:id='l2h-1159' class="method">addTests</tt></b>(</nobr></td>
+  <td><var>tests</var>)</td></tr></table></dt>
+<dd>
+  Add all the tests from a sequence of <tt class="class">TestCase</tt> and
+  <tt class="class">TestSuite</tt> instances to this test suite.
+</dl>
+
+<P>
+The <tt class="method">run()</tt> method is also slightly different:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-1160' xml:id='l2h-1160' class="method">run</tt></b>(</nobr></td>
+  <td><var>result</var>)</td></tr></table></dt>
+<dd>
+  Run the tests associated with this suite, collecting the result into
+  the test result object passed as <var>result</var>.  Note that unlike
+  <tt class="method">TestCase.run()</tt>, <tt class="method">TestSuite.run()</tt> requires the
+  result object to be passed in.
+</dl>
+
+<P>
+In the typical usage of a <tt class="class">TestSuite</tt> object, the <tt class="method">run()</tt>
+method is invoked by a <tt class="class">TestRunner</tt> rather than by the end-user
+test harness.
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="5.3.5 TestCase Objects"
+  href="testcase-objects.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="5.3 unittest  "
+  href="module-unittest.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="5.3.7 TestResult Objects"
+  href="testresult-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="testcase-objects.html">5.3.5 TestCase Objects</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-unittest.html">5.3 unittest  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="testresult-objects.html">5.3.7 TestResult Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

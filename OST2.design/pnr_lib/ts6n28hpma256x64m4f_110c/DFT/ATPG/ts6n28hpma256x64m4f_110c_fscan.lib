@@ -1,0 +1,1107 @@
+//****************************************************************************** */
+//*                                                                              */
+//*STATEMENT OF USE                                                              */
+//*                                                                              */
+//*This information contains confidential and proprietary information of TSMC.   */
+//*No part of this information may be reproduced, transmitted, transcribed,      */
+//*stored in a retrieval system, or translated into any human or computer        */
+//*language, in any form or by any means, electronic, mechanical, magnetic,      */
+//*optical, chemical, manual, or otherwise, without the prior written permission */
+//*of TSMC. This information was prepared for informational purpose and is for   */
+//*use by TSMC's customers only. TSMC reserves the right to make changes in the  */
+//*information at any time and without notice.                                   */
+//*                                                                              */
+//****************************************************************************** */
+//*        Software         : TSMC MEMORY COMPILER tsn28hpmf2prf_2011.06.06.110c */
+//*        Technology       : TSMC 28nm CMOS LOGIC High Performance Mobile 1P10M HKMG CU_ELK 0.9V */
+//*        Memory Type      : TSMC 28nm High Performance Mobile Two Port Register File */
+//*                         : with d240 bit cell SVT periphery */
+//*        Library Name     : ts6n28hpma256x64m4f (user specify : TS6N28HPMA256X64M4F) */
+//*        Library Version  : 110c */
+//*        Generated Time   : 2013/09/17, 17:42:29 */
+//*************************************************************************** ** */
+array_delimiter = "[]";
+
+model TS6N28HPMA256X64M4F (
+			AA, D, WEB, CLKW, AB, REB, CLKR, 
+                        RCT,
+                        WCT,
+                        KP,
+			Q
+			)
+
+(
+        model_source = verilog_module;
+	input (AA) (array = 7 : 0;)
+	input (AB) (array = 7 : 0;)
+        input (D)  (array = 63 : 0;)
+        input (RCT) (array = 1 : 0;)
+        input (WCT) (array = 1 : 0;)
+        input (KP) (array = 2 : 0;)
+        input (WEB) ()
+        input (REB) ()      
+        input (CLKW) (clock=rise_edge;)
+        input (CLKR) (clock=rise_edge;)
+
+        //intern (RE_i)   (primitive=_inv(REB,RE_i);)
+        //intern (RE) (primitive=_and(RE_i,WEB,RE);)
+        intern (RE)   (primitive=_inv(REB,RE);)
+
+        //intern (WE_0) (primitive=_nor(RE_i,WEB,WE_0);)
+        intern (WE_0) (primitive=_nor(WEB,WE_0);)
+        //intern (WE_1) (primitive=_nor(RE_i,WEB,WE_1);)
+        intern (WE_1) (primitive=_nor(WEB,WE_1);)
+        //intern (WE_2) (primitive=_nor(RE_i,WEB,WE_2);)
+        intern (WE_2) (primitive=_nor(WEB,WE_2);)
+        //intern (WE_3) (primitive=_nor(RE_i,WEB,WE_3);)
+        intern (WE_3) (primitive=_nor(WEB,WE_3);)
+        //intern (WE_4) (primitive=_nor(RE_i,WEB,WE_4);)
+        intern (WE_4) (primitive=_nor(WEB,WE_4);)
+        //intern (WE_5) (primitive=_nor(RE_i,WEB,WE_5);)
+        intern (WE_5) (primitive=_nor(WEB,WE_5);)
+        //intern (WE_6) (primitive=_nor(RE_i,WEB,WE_6);)
+        intern (WE_6) (primitive=_nor(WEB,WE_6);)
+        //intern (WE_7) (primitive=_nor(RE_i,WEB,WE_7);)
+        intern (WE_7) (primitive=_nor(WEB,WE_7);)
+        //intern (WE_8) (primitive=_nor(RE_i,WEB,WE_8);)
+        intern (WE_8) (primitive=_nor(WEB,WE_8);)
+        //intern (WE_9) (primitive=_nor(RE_i,WEB,WE_9);)
+        intern (WE_9) (primitive=_nor(WEB,WE_9);)
+        //intern (WE_10) (primitive=_nor(RE_i,WEB,WE_10);)
+        intern (WE_10) (primitive=_nor(WEB,WE_10);)
+        //intern (WE_11) (primitive=_nor(RE_i,WEB,WE_11);)
+        intern (WE_11) (primitive=_nor(WEB,WE_11);)
+        //intern (WE_12) (primitive=_nor(RE_i,WEB,WE_12);)
+        intern (WE_12) (primitive=_nor(WEB,WE_12);)
+        //intern (WE_13) (primitive=_nor(RE_i,WEB,WE_13);)
+        intern (WE_13) (primitive=_nor(WEB,WE_13);)
+        //intern (WE_14) (primitive=_nor(RE_i,WEB,WE_14);)
+        intern (WE_14) (primitive=_nor(WEB,WE_14);)
+        //intern (WE_15) (primitive=_nor(RE_i,WEB,WE_15);)
+        intern (WE_15) (primitive=_nor(WEB,WE_15);)
+        //intern (WE_16) (primitive=_nor(RE_i,WEB,WE_16);)
+        intern (WE_16) (primitive=_nor(WEB,WE_16);)
+        //intern (WE_17) (primitive=_nor(RE_i,WEB,WE_17);)
+        intern (WE_17) (primitive=_nor(WEB,WE_17);)
+        //intern (WE_18) (primitive=_nor(RE_i,WEB,WE_18);)
+        intern (WE_18) (primitive=_nor(WEB,WE_18);)
+        //intern (WE_19) (primitive=_nor(RE_i,WEB,WE_19);)
+        intern (WE_19) (primitive=_nor(WEB,WE_19);)
+        //intern (WE_20) (primitive=_nor(RE_i,WEB,WE_20);)
+        intern (WE_20) (primitive=_nor(WEB,WE_20);)
+        //intern (WE_21) (primitive=_nor(RE_i,WEB,WE_21);)
+        intern (WE_21) (primitive=_nor(WEB,WE_21);)
+        //intern (WE_22) (primitive=_nor(RE_i,WEB,WE_22);)
+        intern (WE_22) (primitive=_nor(WEB,WE_22);)
+        //intern (WE_23) (primitive=_nor(RE_i,WEB,WE_23);)
+        intern (WE_23) (primitive=_nor(WEB,WE_23);)
+        //intern (WE_24) (primitive=_nor(RE_i,WEB,WE_24);)
+        intern (WE_24) (primitive=_nor(WEB,WE_24);)
+        //intern (WE_25) (primitive=_nor(RE_i,WEB,WE_25);)
+        intern (WE_25) (primitive=_nor(WEB,WE_25);)
+        //intern (WE_26) (primitive=_nor(RE_i,WEB,WE_26);)
+        intern (WE_26) (primitive=_nor(WEB,WE_26);)
+        //intern (WE_27) (primitive=_nor(RE_i,WEB,WE_27);)
+        intern (WE_27) (primitive=_nor(WEB,WE_27);)
+        //intern (WE_28) (primitive=_nor(RE_i,WEB,WE_28);)
+        intern (WE_28) (primitive=_nor(WEB,WE_28);)
+        //intern (WE_29) (primitive=_nor(RE_i,WEB,WE_29);)
+        intern (WE_29) (primitive=_nor(WEB,WE_29);)
+        //intern (WE_30) (primitive=_nor(RE_i,WEB,WE_30);)
+        intern (WE_30) (primitive=_nor(WEB,WE_30);)
+        //intern (WE_31) (primitive=_nor(RE_i,WEB,WE_31);)
+        intern (WE_31) (primitive=_nor(WEB,WE_31);)
+        //intern (WE_32) (primitive=_nor(RE_i,WEB,WE_32);)
+        intern (WE_32) (primitive=_nor(WEB,WE_32);)
+        //intern (WE_33) (primitive=_nor(RE_i,WEB,WE_33);)
+        intern (WE_33) (primitive=_nor(WEB,WE_33);)
+        //intern (WE_34) (primitive=_nor(RE_i,WEB,WE_34);)
+        intern (WE_34) (primitive=_nor(WEB,WE_34);)
+        //intern (WE_35) (primitive=_nor(RE_i,WEB,WE_35);)
+        intern (WE_35) (primitive=_nor(WEB,WE_35);)
+        //intern (WE_36) (primitive=_nor(RE_i,WEB,WE_36);)
+        intern (WE_36) (primitive=_nor(WEB,WE_36);)
+        //intern (WE_37) (primitive=_nor(RE_i,WEB,WE_37);)
+        intern (WE_37) (primitive=_nor(WEB,WE_37);)
+        //intern (WE_38) (primitive=_nor(RE_i,WEB,WE_38);)
+        intern (WE_38) (primitive=_nor(WEB,WE_38);)
+        //intern (WE_39) (primitive=_nor(RE_i,WEB,WE_39);)
+        intern (WE_39) (primitive=_nor(WEB,WE_39);)
+        //intern (WE_40) (primitive=_nor(RE_i,WEB,WE_40);)
+        intern (WE_40) (primitive=_nor(WEB,WE_40);)
+        //intern (WE_41) (primitive=_nor(RE_i,WEB,WE_41);)
+        intern (WE_41) (primitive=_nor(WEB,WE_41);)
+        //intern (WE_42) (primitive=_nor(RE_i,WEB,WE_42);)
+        intern (WE_42) (primitive=_nor(WEB,WE_42);)
+        //intern (WE_43) (primitive=_nor(RE_i,WEB,WE_43);)
+        intern (WE_43) (primitive=_nor(WEB,WE_43);)
+        //intern (WE_44) (primitive=_nor(RE_i,WEB,WE_44);)
+        intern (WE_44) (primitive=_nor(WEB,WE_44);)
+        //intern (WE_45) (primitive=_nor(RE_i,WEB,WE_45);)
+        intern (WE_45) (primitive=_nor(WEB,WE_45);)
+        //intern (WE_46) (primitive=_nor(RE_i,WEB,WE_46);)
+        intern (WE_46) (primitive=_nor(WEB,WE_46);)
+        //intern (WE_47) (primitive=_nor(RE_i,WEB,WE_47);)
+        intern (WE_47) (primitive=_nor(WEB,WE_47);)
+        //intern (WE_48) (primitive=_nor(RE_i,WEB,WE_48);)
+        intern (WE_48) (primitive=_nor(WEB,WE_48);)
+        //intern (WE_49) (primitive=_nor(RE_i,WEB,WE_49);)
+        intern (WE_49) (primitive=_nor(WEB,WE_49);)
+        //intern (WE_50) (primitive=_nor(RE_i,WEB,WE_50);)
+        intern (WE_50) (primitive=_nor(WEB,WE_50);)
+        //intern (WE_51) (primitive=_nor(RE_i,WEB,WE_51);)
+        intern (WE_51) (primitive=_nor(WEB,WE_51);)
+        //intern (WE_52) (primitive=_nor(RE_i,WEB,WE_52);)
+        intern (WE_52) (primitive=_nor(WEB,WE_52);)
+        //intern (WE_53) (primitive=_nor(RE_i,WEB,WE_53);)
+        intern (WE_53) (primitive=_nor(WEB,WE_53);)
+        //intern (WE_54) (primitive=_nor(RE_i,WEB,WE_54);)
+        intern (WE_54) (primitive=_nor(WEB,WE_54);)
+        //intern (WE_55) (primitive=_nor(RE_i,WEB,WE_55);)
+        intern (WE_55) (primitive=_nor(WEB,WE_55);)
+        //intern (WE_56) (primitive=_nor(RE_i,WEB,WE_56);)
+        intern (WE_56) (primitive=_nor(WEB,WE_56);)
+        //intern (WE_57) (primitive=_nor(RE_i,WEB,WE_57);)
+        intern (WE_57) (primitive=_nor(WEB,WE_57);)
+        //intern (WE_58) (primitive=_nor(RE_i,WEB,WE_58);)
+        intern (WE_58) (primitive=_nor(WEB,WE_58);)
+        //intern (WE_59) (primitive=_nor(RE_i,WEB,WE_59);)
+        intern (WE_59) (primitive=_nor(WEB,WE_59);)
+        //intern (WE_60) (primitive=_nor(RE_i,WEB,WE_60);)
+        intern (WE_60) (primitive=_nor(WEB,WE_60);)
+        //intern (WE_61) (primitive=_nor(RE_i,WEB,WE_61);)
+        intern (WE_61) (primitive=_nor(WEB,WE_61);)
+        //intern (WE_62) (primitive=_nor(RE_i,WEB,WE_62);)
+        intern (WE_62) (primitive=_nor(WEB,WE_62);)
+        //intern (WE_63) (primitive=_nor(RE_i,WEB,WE_63);)
+        intern (WE_63) (primitive=_nor(WEB,WE_63);)
+
+      intern (D_0)  (primitive = _buf(D[0],D_0);)
+      intern (D_1)  (primitive = _buf(D[1],D_1);)
+      intern (D_2)  (primitive = _buf(D[2],D_2);)
+      intern (D_3)  (primitive = _buf(D[3],D_3);)
+      intern (D_4)  (primitive = _buf(D[4],D_4);)
+      intern (D_5)  (primitive = _buf(D[5],D_5);)
+      intern (D_6)  (primitive = _buf(D[6],D_6);)
+      intern (D_7)  (primitive = _buf(D[7],D_7);)
+      intern (D_8)  (primitive = _buf(D[8],D_8);)
+      intern (D_9)  (primitive = _buf(D[9],D_9);)
+      intern (D_10)  (primitive = _buf(D[10],D_10);)
+      intern (D_11)  (primitive = _buf(D[11],D_11);)
+      intern (D_12)  (primitive = _buf(D[12],D_12);)
+      intern (D_13)  (primitive = _buf(D[13],D_13);)
+      intern (D_14)  (primitive = _buf(D[14],D_14);)
+      intern (D_15)  (primitive = _buf(D[15],D_15);)
+      intern (D_16)  (primitive = _buf(D[16],D_16);)
+      intern (D_17)  (primitive = _buf(D[17],D_17);)
+      intern (D_18)  (primitive = _buf(D[18],D_18);)
+      intern (D_19)  (primitive = _buf(D[19],D_19);)
+      intern (D_20)  (primitive = _buf(D[20],D_20);)
+      intern (D_21)  (primitive = _buf(D[21],D_21);)
+      intern (D_22)  (primitive = _buf(D[22],D_22);)
+      intern (D_23)  (primitive = _buf(D[23],D_23);)
+      intern (D_24)  (primitive = _buf(D[24],D_24);)
+      intern (D_25)  (primitive = _buf(D[25],D_25);)
+      intern (D_26)  (primitive = _buf(D[26],D_26);)
+      intern (D_27)  (primitive = _buf(D[27],D_27);)
+      intern (D_28)  (primitive = _buf(D[28],D_28);)
+      intern (D_29)  (primitive = _buf(D[29],D_29);)
+      intern (D_30)  (primitive = _buf(D[30],D_30);)
+      intern (D_31)  (primitive = _buf(D[31],D_31);)
+      intern (D_32)  (primitive = _buf(D[32],D_32);)
+      intern (D_33)  (primitive = _buf(D[33],D_33);)
+      intern (D_34)  (primitive = _buf(D[34],D_34);)
+      intern (D_35)  (primitive = _buf(D[35],D_35);)
+      intern (D_36)  (primitive = _buf(D[36],D_36);)
+      intern (D_37)  (primitive = _buf(D[37],D_37);)
+      intern (D_38)  (primitive = _buf(D[38],D_38);)
+      intern (D_39)  (primitive = _buf(D[39],D_39);)
+      intern (D_40)  (primitive = _buf(D[40],D_40);)
+      intern (D_41)  (primitive = _buf(D[41],D_41);)
+      intern (D_42)  (primitive = _buf(D[42],D_42);)
+      intern (D_43)  (primitive = _buf(D[43],D_43);)
+      intern (D_44)  (primitive = _buf(D[44],D_44);)
+      intern (D_45)  (primitive = _buf(D[45],D_45);)
+      intern (D_46)  (primitive = _buf(D[46],D_46);)
+      intern (D_47)  (primitive = _buf(D[47],D_47);)
+      intern (D_48)  (primitive = _buf(D[48],D_48);)
+      intern (D_49)  (primitive = _buf(D[49],D_49);)
+      intern (D_50)  (primitive = _buf(D[50],D_50);)
+      intern (D_51)  (primitive = _buf(D[51],D_51);)
+      intern (D_52)  (primitive = _buf(D[52],D_52);)
+      intern (D_53)  (primitive = _buf(D[53],D_53);)
+      intern (D_54)  (primitive = _buf(D[54],D_54);)
+      intern (D_55)  (primitive = _buf(D[55],D_55);)
+      intern (D_56)  (primitive = _buf(D[56],D_56);)
+      intern (D_57)  (primitive = _buf(D[57],D_57);)
+      intern (D_58)  (primitive = _buf(D[58],D_58);)
+      intern (D_59)  (primitive = _buf(D[59],D_59);)
+      intern (D_60)  (primitive = _buf(D[60],D_60);)
+      intern (D_61)  (primitive = _buf(D[61],D_61);)
+      intern (D_62)  (primitive = _buf(D[62],D_62);)
+      intern (D_63)  (primitive = _buf(D[63],D_63);)
+
+        intern (AA_i) (
+           array = 7:0;
+        primitive = _buf(AA[0], AA_i[0]);
+        primitive = _buf(AA[1], AA_i[1]);
+        primitive = _buf(AA[2], AA_i[2]);
+        primitive = _buf(AA[3], AA_i[3]);
+        primitive = _buf(AA[4], AA_i[4]);
+        primitive = _buf(AA[5], AA_i[5]);
+        primitive = _buf(AA[6], AA_i[6]);
+        primitive = _buf(AA[7], AA_i[7]);
+        )
+
+        intern (AB_i) (
+           array = 7:0;
+        primitive = _buf(AB[0], AB_i[0]);
+        primitive = _buf(AB[1], AB_i[1]);
+        primitive = _buf(AB[2], AB_i[2]);
+        primitive = _buf(AB[3], AB_i[3]);
+        primitive = _buf(AB[4], AB_i[4]);
+        primitive = _buf(AB[5], AB_i[5]);
+        primitive = _buf(AB[6], AB_i[6]);
+        primitive = _buf(AB[7], AB_i[7]);
+        )
+
+
+
+
+        intern (Q_0) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_0),
+                _write{,,}     (  CLKW, WE_0,AA_i, D_0) );
+                )
+		
+        intern (Q_1) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_1),
+                _write{,,}     (  CLKW, WE_1,AA_i, D_1) );
+                )
+		
+        intern (Q_2) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_2),
+                _write{,,}     (  CLKW, WE_2,AA_i, D_2) );
+                )
+		
+        intern (Q_3) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_3),
+                _write{,,}     (  CLKW, WE_3,AA_i, D_3) );
+                )
+		
+        intern (Q_4) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_4),
+                _write{,,}     (  CLKW, WE_4,AA_i, D_4) );
+                )
+		
+        intern (Q_5) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_5),
+                _write{,,}     (  CLKW, WE_5,AA_i, D_5) );
+                )
+		
+        intern (Q_6) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_6),
+                _write{,,}     (  CLKW, WE_6,AA_i, D_6) );
+                )
+		
+        intern (Q_7) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_7),
+                _write{,,}     (  CLKW, WE_7,AA_i, D_7) );
+                )
+		
+        intern (Q_8) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_8),
+                _write{,,}     (  CLKW, WE_8,AA_i, D_8) );
+                )
+		
+        intern (Q_9) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_9),
+                _write{,,}     (  CLKW, WE_9,AA_i, D_9) );
+                )
+		
+        intern (Q_10) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_10),
+                _write{,,}     (  CLKW, WE_10,AA_i, D_10) );
+                )
+		
+        intern (Q_11) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_11),
+                _write{,,}     (  CLKW, WE_11,AA_i, D_11) );
+                )
+		
+        intern (Q_12) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_12),
+                _write{,,}     (  CLKW, WE_12,AA_i, D_12) );
+                )
+		
+        intern (Q_13) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_13),
+                _write{,,}     (  CLKW, WE_13,AA_i, D_13) );
+                )
+		
+        intern (Q_14) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_14),
+                _write{,,}     (  CLKW, WE_14,AA_i, D_14) );
+                )
+		
+        intern (Q_15) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_15),
+                _write{,,}     (  CLKW, WE_15,AA_i, D_15) );
+                )
+		
+        intern (Q_16) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_16),
+                _write{,,}     (  CLKW, WE_16,AA_i, D_16) );
+                )
+		
+        intern (Q_17) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_17),
+                _write{,,}     (  CLKW, WE_17,AA_i, D_17) );
+                )
+		
+        intern (Q_18) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_18),
+                _write{,,}     (  CLKW, WE_18,AA_i, D_18) );
+                )
+		
+        intern (Q_19) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_19),
+                _write{,,}     (  CLKW, WE_19,AA_i, D_19) );
+                )
+		
+        intern (Q_20) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_20),
+                _write{,,}     (  CLKW, WE_20,AA_i, D_20) );
+                )
+		
+        intern (Q_21) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_21),
+                _write{,,}     (  CLKW, WE_21,AA_i, D_21) );
+                )
+		
+        intern (Q_22) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_22),
+                _write{,,}     (  CLKW, WE_22,AA_i, D_22) );
+                )
+		
+        intern (Q_23) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_23),
+                _write{,,}     (  CLKW, WE_23,AA_i, D_23) );
+                )
+		
+        intern (Q_24) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_24),
+                _write{,,}     (  CLKW, WE_24,AA_i, D_24) );
+                )
+		
+        intern (Q_25) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_25),
+                _write{,,}     (  CLKW, WE_25,AA_i, D_25) );
+                )
+		
+        intern (Q_26) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_26),
+                _write{,,}     (  CLKW, WE_26,AA_i, D_26) );
+                )
+		
+        intern (Q_27) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_27),
+                _write{,,}     (  CLKW, WE_27,AA_i, D_27) );
+                )
+		
+        intern (Q_28) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_28),
+                _write{,,}     (  CLKW, WE_28,AA_i, D_28) );
+                )
+		
+        intern (Q_29) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_29),
+                _write{,,}     (  CLKW, WE_29,AA_i, D_29) );
+                )
+		
+        intern (Q_30) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_30),
+                _write{,,}     (  CLKW, WE_30,AA_i, D_30) );
+                )
+		
+        intern (Q_31) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_31),
+                _write{,,}     (  CLKW, WE_31,AA_i, D_31) );
+                )
+		
+        intern (Q_32) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_32),
+                _write{,,}     (  CLKW, WE_32,AA_i, D_32) );
+                )
+		
+        intern (Q_33) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_33),
+                _write{,,}     (  CLKW, WE_33,AA_i, D_33) );
+                )
+		
+        intern (Q_34) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_34),
+                _write{,,}     (  CLKW, WE_34,AA_i, D_34) );
+                )
+		
+        intern (Q_35) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_35),
+                _write{,,}     (  CLKW, WE_35,AA_i, D_35) );
+                )
+		
+        intern (Q_36) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_36),
+                _write{,,}     (  CLKW, WE_36,AA_i, D_36) );
+                )
+		
+        intern (Q_37) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_37),
+                _write{,,}     (  CLKW, WE_37,AA_i, D_37) );
+                )
+		
+        intern (Q_38) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_38),
+                _write{,,}     (  CLKW, WE_38,AA_i, D_38) );
+                )
+		
+        intern (Q_39) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_39),
+                _write{,,}     (  CLKW, WE_39,AA_i, D_39) );
+                )
+		
+        intern (Q_40) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_40),
+                _write{,,}     (  CLKW, WE_40,AA_i, D_40) );
+                )
+		
+        intern (Q_41) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_41),
+                _write{,,}     (  CLKW, WE_41,AA_i, D_41) );
+                )
+		
+        intern (Q_42) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_42),
+                _write{,,}     (  CLKW, WE_42,AA_i, D_42) );
+                )
+		
+        intern (Q_43) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_43),
+                _write{,,}     (  CLKW, WE_43,AA_i, D_43) );
+                )
+		
+        intern (Q_44) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_44),
+                _write{,,}     (  CLKW, WE_44,AA_i, D_44) );
+                )
+		
+        intern (Q_45) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_45),
+                _write{,,}     (  CLKW, WE_45,AA_i, D_45) );
+                )
+		
+        intern (Q_46) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_46),
+                _write{,,}     (  CLKW, WE_46,AA_i, D_46) );
+                )
+		
+        intern (Q_47) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_47),
+                _write{,,}     (  CLKW, WE_47,AA_i, D_47) );
+                )
+		
+        intern (Q_48) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_48),
+                _write{,,}     (  CLKW, WE_48,AA_i, D_48) );
+                )
+		
+        intern (Q_49) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_49),
+                _write{,,}     (  CLKW, WE_49,AA_i, D_49) );
+                )
+		
+        intern (Q_50) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_50),
+                _write{,,}     (  CLKW, WE_50,AA_i, D_50) );
+                )
+		
+        intern (Q_51) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_51),
+                _write{,,}     (  CLKW, WE_51,AA_i, D_51) );
+                )
+		
+        intern (Q_52) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_52),
+                _write{,,}     (  CLKW, WE_52,AA_i, D_52) );
+                )
+		
+        intern (Q_53) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_53),
+                _write{,,}     (  CLKW, WE_53,AA_i, D_53) );
+                )
+		
+        intern (Q_54) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_54),
+                _write{,,}     (  CLKW, WE_54,AA_i, D_54) );
+                )
+		
+        intern (Q_55) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_55),
+                _write{,,}     (  CLKW, WE_55,AA_i, D_55) );
+                )
+		
+        intern (Q_56) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_56),
+                _write{,,}     (  CLKW, WE_56,AA_i, D_56) );
+                )
+		
+        intern (Q_57) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_57),
+                _write{,,}     (  CLKW, WE_57,AA_i, D_57) );
+                )
+		
+        intern (Q_58) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_58),
+                _write{,,}     (  CLKW, WE_58,AA_i, D_58) );
+                )
+		
+        intern (Q_59) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_59),
+                _write{,,}     (  CLKW, WE_59,AA_i, D_59) );
+                )
+		
+        intern (Q_60) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_60),
+                _write{,,}     (  CLKW, WE_60,AA_i, D_60) );
+                )
+		
+        intern (Q_61) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_61),
+                _write{,,}     (  CLKW, WE_61,AA_i, D_61) );
+                )
+		
+        intern (Q_62) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_62),
+                _write{,,}     (  CLKW, WE_62,AA_i, D_62) );
+                )
+		
+        intern (Q_63) (
+        data_size = 1;
+        address_size = 8;
+        min_address = 0;
+        max_address = 255;
+        edge_trigger = rw;
+        read_write_conflict=XW;
+        primitive = _cram ( , ,
+                _read {,h,h,h} (, CLKR, RE,  AB_i, Q_63),
+                _write{,,}     (  CLKW, WE_63,AA_i, D_63) );
+                )
+		
+
+	output (Q) (
+   	   array = 63:0;
+	primitive = _buf(Q_0, Q[0]);
+	primitive = _buf(Q_1, Q[1]);
+	primitive = _buf(Q_2, Q[2]);
+	primitive = _buf(Q_3, Q[3]);
+	primitive = _buf(Q_4, Q[4]);
+	primitive = _buf(Q_5, Q[5]);
+	primitive = _buf(Q_6, Q[6]);
+	primitive = _buf(Q_7, Q[7]);
+	primitive = _buf(Q_8, Q[8]);
+	primitive = _buf(Q_9, Q[9]);
+	primitive = _buf(Q_10, Q[10]);
+	primitive = _buf(Q_11, Q[11]);
+	primitive = _buf(Q_12, Q[12]);
+	primitive = _buf(Q_13, Q[13]);
+	primitive = _buf(Q_14, Q[14]);
+	primitive = _buf(Q_15, Q[15]);
+	primitive = _buf(Q_16, Q[16]);
+	primitive = _buf(Q_17, Q[17]);
+	primitive = _buf(Q_18, Q[18]);
+	primitive = _buf(Q_19, Q[19]);
+	primitive = _buf(Q_20, Q[20]);
+	primitive = _buf(Q_21, Q[21]);
+	primitive = _buf(Q_22, Q[22]);
+	primitive = _buf(Q_23, Q[23]);
+	primitive = _buf(Q_24, Q[24]);
+	primitive = _buf(Q_25, Q[25]);
+	primitive = _buf(Q_26, Q[26]);
+	primitive = _buf(Q_27, Q[27]);
+	primitive = _buf(Q_28, Q[28]);
+	primitive = _buf(Q_29, Q[29]);
+	primitive = _buf(Q_30, Q[30]);
+	primitive = _buf(Q_31, Q[31]);
+	primitive = _buf(Q_32, Q[32]);
+	primitive = _buf(Q_33, Q[33]);
+	primitive = _buf(Q_34, Q[34]);
+	primitive = _buf(Q_35, Q[35]);
+	primitive = _buf(Q_36, Q[36]);
+	primitive = _buf(Q_37, Q[37]);
+	primitive = _buf(Q_38, Q[38]);
+	primitive = _buf(Q_39, Q[39]);
+	primitive = _buf(Q_40, Q[40]);
+	primitive = _buf(Q_41, Q[41]);
+	primitive = _buf(Q_42, Q[42]);
+	primitive = _buf(Q_43, Q[43]);
+	primitive = _buf(Q_44, Q[44]);
+	primitive = _buf(Q_45, Q[45]);
+	primitive = _buf(Q_46, Q[46]);
+	primitive = _buf(Q_47, Q[47]);
+	primitive = _buf(Q_48, Q[48]);
+	primitive = _buf(Q_49, Q[49]);
+	primitive = _buf(Q_50, Q[50]);
+	primitive = _buf(Q_51, Q[51]);
+	primitive = _buf(Q_52, Q[52]);
+	primitive = _buf(Q_53, Q[53]);
+	primitive = _buf(Q_54, Q[54]);
+	primitive = _buf(Q_55, Q[55]);
+	primitive = _buf(Q_56, Q[56]);
+	primitive = _buf(Q_57, Q[57]);
+	primitive = _buf(Q_58, Q[58]);
+	primitive = _buf(Q_59, Q[59]);
+	primitive = _buf(Q_60, Q[60]);
+	primitive = _buf(Q_61, Q[61]);
+	primitive = _buf(Q_62, Q[62]);
+	primitive = _buf(Q_63, Q[63]);
+	)	
+) 

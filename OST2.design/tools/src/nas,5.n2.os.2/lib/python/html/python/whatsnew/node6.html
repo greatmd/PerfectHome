@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="whatsnew24.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="whatsnew24.html" title='What's New in Python 2.4' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node7.html" />
+<link rel="prev" href="node5.html" />
+<link rel="parent" href="whatsnew24.html" />
+<link rel="next" href="node7.html" />
+<meta name='aesop' content='information' />
+<title>5 PEP 318: Decorators for Functions and Methods</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="4 PEP 292: Simpler"
+  href="node5.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6 PEP 322: Reverse"
+  href="node7.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node5.html">4 PEP 292: Simpler</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node7.html">6 PEP 322: Reverse</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000600000000000000000">
+5 PEP 318: Decorators for Functions and Methods</A>
+</H1>
+
+<P>
+Python 2.2 extended Python's object model by adding static methods and
+class methods, but it didn't extend Python's syntax to provide any new
+way of defining static or class methods.  Instead, you had to write a
+<tt class="keyword">def</tt> statement in the usual way, and pass the resulting
+method to a <tt class="function">staticmethod()</tt> or <tt class="function">classmethod()</tt>
+function that would wrap up the function as a method of the new type.
+Your code would look like this:
+
+<P>
+<div class="verbatim"><pre>
+class C:
+   def meth (cls):
+       ...
+   
+   meth = classmethod(meth)   # Rebind name to wrapped-up class method
+</pre></div>
+
+<P>
+If the method was very long, it would be easy to miss or forget the
+<tt class="function">classmethod()</tt> invocation after the function body.  
+
+<P>
+The intention was always to add some syntax to make such definitions
+more readable, but at the time of 2.2's release a good syntax was not
+obvious.  Today a good syntax <em>still</em> isn't obvious but users are
+asking for easier access to the feature; a new syntactic feature has
+been added to meet this need.
+
+<P>
+The new feature is called ``function decorators''.  The name comes
+from the idea that <tt class="function">classmethod</tt>, <tt class="function">staticmethod</tt>,
+and friends are storing additional information on a function object;
+they're <em>decorating</em> functions with more details.
+
+<P>
+The notation borrows from Java and uses the "<tt class="character">@</tt>" character as an
+indicator.  Using the new syntax, the example above would be written:
+
+<P>
+<div class="verbatim"><pre>
+class C:
+
+   @classmethod
+   def meth (cls):
+       ...
+</pre></div>
+
+<P>
+The <code>@classmethod</code> is shorthand for the
+<code>meth=classmethod(meth)</code> assignment.  More generally, if you have
+the following:
+
+<P>
+<div class="verbatim"><pre>
+@A @B @C
+def f ():
+    ...
+</pre></div>
+
+<P>
+It's equivalent to the following pre-decorator code:
+
+<P>
+<div class="verbatim"><pre>
+def f(): ...
+f = A(B(C(f)))
+</pre></div>
+
+<P>
+Decorators must come on the line before a function definition, and
+can't be on the same line, meaning that <code>@A def f(): ...</code> is
+illegal.  You can only decorate function definitions, either at the
+module level or inside a class; you can't decorate class definitions.
+
+<P>
+A decorator is just a function that takes the function to be decorated
+as an argument and returns either the same function or some new
+callable thing.  It's easy to write your own decorators.  The
+following simple example just sets an attribute on the function
+object:
+
+<P>
+<div class="verbatim"><pre>
+&gt;&gt;&gt; def deco(func):
+...    func.attr = 'decorated'
+...    return func
+...
+&gt;&gt;&gt; @deco
+... def f(): pass
+...
+&gt;&gt;&gt; f
+&lt;function f at 0x402ef0d4&gt;
+&gt;&gt;&gt; f.attr
+'decorated'
+&gt;&gt;&gt;
+</pre></div>
+
+<P>
+As a slightly more realistic example, the following decorator checks
+that the supplied argument is an integer:
+
+<P>
+<div class="verbatim"><pre>
+def require_int (func):
+    def wrapper (arg):
+        assert isinstance(arg, int)
+        return func(arg)
+
+    return wrapper
+
+@require_int
+def p1 (arg):
+    print arg
+
+@require_int
+def p2(arg):
+    print arg*2
+</pre></div>
+
+<P>
+An example in <a class="rfc" id='rfcref-1445' xml:id='rfcref-1445'
+href="http://www.python.org/peps/pep-0318.html">PEP 318</a> contains a fancier version of this idea that
+lets you both specify the required type and check the returned type.
+
+<P>
+Decorator functions can take arguments.  If arguments are supplied,
+your decorator function is called with only those arguments and must
+return a new decorator function; this function must take a single
+function and return a function, as previously described.  In other
+words, <code>@A @B @C(args)</code> becomes:
+
+<P>
+<div class="verbatim"><pre>
+def f(): ...
+_deco = C(args)
+f = A(B(_deco(f)))
+</pre></div>
+
+<P>
+Getting this right can be slightly brain-bending, but it's not too
+difficult.
+
+<P>
+A small related change makes the <tt class="member">func_name</tt> attribute of
+functions writable.  This attribute is used to display function names
+in tracebacks, so decorators should change the name of any new
+function that's constructed and returned.
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+<dl compact="compact" class="seerfc">
+    <dt><a href="http://www.python.org/peps/pep-0318.html"
+        title="Decorators for Functions, Methods and Classes"
+        >PEP 318, <em>Decorators for Functions, Methods and Classes</em></a>
+    <dd>Written 
+by Kevin D. Smith, Jim Jewett, and Skip Montanaro.  Several people
+wrote patches implementing function decorators, but the one that was
+actually checked in was patch #979728, written by Mark Russell.
+  </dl>
+</div>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="4 PEP 292: Simpler"
+  href="node5.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="6 PEP 322: Reverse"
+  href="node7.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node5.html">4 PEP 292: Simpler</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node7.html">6 PEP 322: Reverse</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 1.01.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

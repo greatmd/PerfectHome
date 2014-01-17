@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="csv-fmt-params.html" />
+<link rel="prev" href="module-csv.html" />
+<link rel="parent" href="module-csv.html" />
+<link rel="next" href="csv-fmt-params.html" />
+<meta name='aesop' content='information' />
+<title>12.20.1 Module Contents </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.20 csv  "
+  href="module-csv.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.20 csv  "
+  href="module-csv.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.20.2 Dialects and Formatting"
+  href="csv-fmt-params.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-csv.html">12.20 csv  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-csv.html">12.20 csv  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="csv-fmt-params.html">12.20.2 Dialects and Formatting</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00142010000000000000000"></A><A NAME="csv-contents"></A>
+<BR>
+12.20.1 Module Contents 
+</H2>
+
+<P>
+The <tt class="module">csv</tt> module defines the following functions:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4213' xml:id='l2h-4213' class="function">reader</tt></b>(</nobr></td>
+  <td><var>csvfile</var><big>[</big><var>,
+                         dialect=<code>'excel'</code></var><big>[</big><var>, fmtparam</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Return a reader object which will iterate over lines in the given
+<var>csvfile</var>.  <var>csvfile</var> can be any object which supports the
+iterator protocol and returns a string each time its <tt class="method">next</tt>
+method is called.  If <var>csvfile</var> is a file object, it must be opened with
+the 'b' flag on platforms where that makes a difference.  An optional
+<var>dialect</var> parameter can be given
+which is used to define a set of parameters specific to a particular CSV
+dialect.  It may be an instance of a subclass of the <tt class="class">Dialect</tt>
+class or one of the strings returned by the <tt class="function">list_dialects</tt>
+function.  The other optional <var>fmtparam</var> keyword arguments can be
+given to override individual formatting parameters in the current
+dialect.  For more information about the dialect and formatting
+parameters, see section&nbsp;<A href="csv-fmt-params.html#csv-fmt-params">12.20.2</A>, ``Dialects and Formatting
+Parameters'' for details of these parameters.
+
+<P>
+All data read are returned as strings.  No automatic data type
+conversion is performed.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4214' xml:id='l2h-4214' class="function">writer</tt></b>(</nobr></td>
+  <td><var>csvfile</var><big>[</big><var>,
+                         dialect=<code>'excel'</code></var><big>[</big><var>, fmtparam</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Return a writer object responsible for converting the user's data into
+delimited strings on the given file-like object.  <var>csvfile</var> can be any
+object with a <tt class="function">write</tt> method.  If <var>csvfile</var> is a file object,
+it must be opened with the 'b' flag on platforms where that makes a
+difference.  An optional
+<var>dialect</var> parameter can be given which is used to define a set of
+parameters specific to a particular CSV dialect.  It may be an instance
+of a subclass of the <tt class="class">Dialect</tt> class or one of the strings
+returned by the <tt class="function">list_dialects</tt> function.  The other optional
+<var>fmtparam</var> keyword arguments can be given to override individual
+formatting parameters in the current dialect.  For more information
+about the dialect and formatting parameters, see
+section&nbsp;<A href="csv-fmt-params.html#csv-fmt-params">12.20.2</A>, ``Dialects and Formatting Parameters'' for
+details of these parameters.  To make it as easy as possible to
+interface with modules which implement the DB API, the value
+<tt class="constant">None</tt> is written as the empty string.  While this isn't a
+reversible transformation, it makes it easier to dump SQL NULL data values
+to CSV files without preprocessing the data returned from a
+<code>cursor.fetch*()</code> call.  All other non-string data are stringified
+with <tt class="function">str()</tt> before being written.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4215' xml:id='l2h-4215' class="function">register_dialect</tt></b>(</nobr></td>
+  <td><var>name, dialect</var>)</td></tr></table></dt>
+<dd>
+Associate <var>dialect</var> with <var>name</var>.  <var>dialect</var> must be a subclass
+of <tt class="class">csv.Dialect</tt>.  <var>name</var> must be a string or Unicode object.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4216' xml:id='l2h-4216' class="function">unregister_dialect</tt></b>(</nobr></td>
+  <td><var>name</var>)</td></tr></table></dt>
+<dd>
+Delete the dialect associated with <var>name</var> from the dialect registry.  An
+<tt class="exception">Error</tt> is raised if <var>name</var> is not a registered dialect
+name.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4217' xml:id='l2h-4217' class="function">get_dialect</tt></b>(</nobr></td>
+  <td><var>name</var>)</td></tr></table></dt>
+<dd>
+Return the dialect associated with <var>name</var>.  An <tt class="exception">Error</tt> is
+raised if <var>name</var> is not a registered dialect name.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4218' xml:id='l2h-4218' class="function">list_dialects</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the names of all registered dialects.
+</dl>
+
+<P>
+The <tt class="module">csv</tt> module defines the following classes:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-4219' xml:id='l2h-4219' class="class">DictReader</tt></b>(</nobr></td>
+  <td><var>csvfile</var><big>[</big><var>,
+			      fieldnames=<tt class="constant">None</tt>,</var><big>[</big><var>,
+                              restkey=<tt class="constant">None</tt></var><big>[</big><var>,
+			      restval=<tt class="constant">None</tt></var><big>[</big><var>,
+                              dialect=<code>'excel'</code></var><big>[</big><var>,
+			      *args, **kwds</var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Create an object which operates like a regular reader but maps the
+information read into a dict whose keys are given by the optional
+ <var>fieldnames</var>
+parameter.  If the <var>fieldnames</var> parameter is omitted, the values in
+the first row of the <var>csvfile</var> will be used as the fieldnames.
+If the row read has fewer fields than the fieldnames sequence,
+the value of <var>restval</var> will be used as the default value.  If the row
+read has more fields than the fieldnames sequence, the remaining data is
+added as a sequence keyed by the value of <var>restkey</var>.  If the row read
+has fewer fields than the fieldnames sequence, the remaining keys take the
+value of the optional <var>restval</var> parameter.  Any other optional or
+keyword arguments are passed to the underlying <tt class="class">reader</tt> instance.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-4220' xml:id='l2h-4220' class="class">DictWriter</tt></b>(</nobr></td>
+  <td><var>csvfile, fieldnames</var><big>[</big><var>,
+                              restval=""</var><big>[</big><var>,
+                              extrasaction=<code>'raise'</code></var><big>[</big><var>,
+                              dialect=<code>'excel'</code></var><big>[</big><var>,
+			      *args, **kwds</var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Create an object which operates like a regular writer but maps dictionaries
+onto output rows.  The <var>fieldnames</var> parameter identifies the order in
+which values in the dictionary passed to the <tt class="method">writerow()</tt> method are
+written to the <var>csvfile</var>.  The optional <var>restval</var> parameter
+specifies the value to be written if the dictionary is missing a key in
+<var>fieldnames</var>.  If the dictionary passed to the <tt class="method">writerow()</tt>
+method contains a key not found in <var>fieldnames</var>, the optional
+<var>extrasaction</var> parameter indicates what action to take.  If it is set
+to <code>'raise'</code> a <tt class="exception">ValueError</tt> is raised.  If it is set to
+<code>'ignore'</code>, extra values in the dictionary are ignored.  Any other
+optional or keyword arguments are passed to the underlying <tt class="class">writer</tt>
+instance.
+
+<P>
+Note that unlike the <tt class="class">DictReader</tt> class, the <var>fieldnames</var>
+parameter of the <tt class="class">DictWriter</tt> is not optional.  Since Python's
+<tt class="class">dict</tt> objects are not ordered, there is not enough information
+available to deduce the order in which the row should be written to the
+<var>csvfile</var>.
+
+<P>
+</dl>
+
+<P>
+<dl><dt><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-4221' xml:id='l2h-4221' class="class">Dialect</tt></b>
+<dd>
+The <tt class="class">Dialect</tt> class is a container class relied on primarily for its
+attributes, which are used to define the parameters for a specific
+<tt class="class">reader</tt> or <tt class="class">writer</tt> instance.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id='l2h-4222' xml:id='l2h-4222' class="class">Sniffer</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+The <tt class="class">Sniffer</tt> class is used to deduce the format of a CSV file.
+</dl>
+
+<P>
+The <tt class="class">Sniffer</tt> class provides a single method:
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4223' xml:id='l2h-4223' class="method">sniff</tt></b>(</nobr></td>
+  <td><var>sample</var><big>[</big><var>,delimiters=None</var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Analyze the given <var>sample</var> and return a <tt class="class">Dialect</tt> subclass
+reflecting the parameters found.  If the optional <var>delimiters</var> parameter
+is given, it is interpreted as a string containing possible valid delimiter
+characters.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4224' xml:id='l2h-4224' class="method">has_header</tt></b>(</nobr></td>
+  <td><var>sample</var>)</td></tr></table></dt>
+<dd>
+Analyze the sample text (presumed to be in CSV format) and return
+<tt class="constant">True</tt> if the first row appears to be a series of column
+headers.
+</dl>
+
+<P>
+The <tt class="module">csv</tt> module defines the following constants:
+
+<P>
+<dl><dt><b><tt id='l2h-4225' xml:id='l2h-4225'>QUOTE_ALL</tt></b></dt>
+<dd>
+Instructs <tt class="class">writer</tt> objects to quote all fields.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-4226' xml:id='l2h-4226'>QUOTE_MINIMAL</tt></b></dt>
+<dd>
+Instructs <tt class="class">writer</tt> objects to only quote those fields which contain
+the current <var>delimiter</var> or begin with the current <var>quotechar</var>.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-4227' xml:id='l2h-4227'>QUOTE_NONNUMERIC</tt></b></dt>
+<dd>
+Instructs <tt class="class">writer</tt> objects to quote all non-numeric fields.
+</dd></dl>
+
+<P>
+<dl><dt><b><tt id='l2h-4228' xml:id='l2h-4228'>QUOTE_NONE</tt></b></dt>
+<dd>
+Instructs <tt class="class">writer</tt> objects to never quote fields.  When the current
+<var>delimiter</var> occurs in output data it is preceded by the current
+<var>escapechar</var> character.  When <tt class="constant">QUOTE_NONE</tt> is in effect, it
+is an error not to have a single-character <var>escapechar</var> defined, even if
+no data to be written contains the <var>delimiter</var> character.
+</dd></dl>
+
+<P>
+The <tt class="module">csv</tt> module defines the following exception:
+
+<P>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4229' xml:id='l2h-4229' class="exception">Error</tt></b></dt>
+<dd>
+Raised by any of the functions when an error is detected.
+</dd></dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12.20 csv  "
+  href="module-csv.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="12.20 csv  "
+  href="module-csv.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="12.20.2 Dialects and Formatting"
+  href="csv-fmt-params.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-csv.html">12.20 csv  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-csv.html">12.20 csv  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="csv-fmt-params.html">12.20.2 Dialects and Formatting</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

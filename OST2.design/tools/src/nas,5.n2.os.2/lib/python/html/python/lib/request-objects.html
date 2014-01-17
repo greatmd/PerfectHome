@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="lib.html" title='Python Library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="opener-director-objects.html" />
+<link rel="prev" href="module-urllib2.html" />
+<link rel="parent" href="module-urllib2.html" />
+<link rel="next" href="opener-director-objects.html" />
+<meta name='aesop' content='information' />
+<title>11.5.1 Request Objects </title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.5 urllib2  "
+  href="module-urllib2.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11.5 urllib2  "
+  href="module-urllib2.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.5.2 OpenerDirector Objects"
+  href="opener-director-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-urllib2.html">11.5 urllib2  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-urllib2.html">11.5 urllib2  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="opener-director-objects.html">11.5.2 OpenerDirector Objects</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013510000000000000000"></A><A NAME="request-objects"></A>
+<BR>
+11.5.1 Request Objects 
+</H2>
+
+<P>
+The following methods describe all of <tt class="class">Request</tt>'s public interface,
+and so all must be overridden in subclasses.
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3247' xml:id='l2h-3247' class="method">add_data</tt></b>(</nobr></td>
+  <td><var>data</var>)</td></tr></table></dt>
+<dd>
+Set the <tt class="class">Request</tt> data to <var>data</var>.  This is ignored by all
+handlers except HTTP handlers -- and there it should be a byte
+string, and will change the request to be <code>POST</code> rather than
+<code>GET</code>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3248' xml:id='l2h-3248' class="method">get_method</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return a string indicating the HTTP request method.  This is only
+meaningful for HTTP requests, and currently always returns
+<code>'GET'</code> or <code>'POST'</code>.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3249' xml:id='l2h-3249' class="method">has_data</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return whether the instance has a non-<code>None</code> data.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3250' xml:id='l2h-3250' class="method">get_data</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the instance's data.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3251' xml:id='l2h-3251' class="method">add_header</tt></b>(</nobr></td>
+  <td><var>key, val</var>)</td></tr></table></dt>
+<dd>
+Add another header to the request.  Headers are currently ignored by
+all handlers except HTTP handlers, where they are added to the list
+of headers sent to the server.  Note that there cannot be more than
+one header with the same name, and later calls will overwrite
+previous calls in case the <var>key</var> collides.  Currently, this is
+no loss of HTTP functionality, since all headers which have meaning
+when used more than once have a (header-specific) way of gaining the
+same functionality using only one header.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3252' xml:id='l2h-3252' class="method">add_unredirected_header</tt></b>(</nobr></td>
+  <td><var>key, header</var>)</td></tr></table></dt>
+<dd>
+Add a header that will not be added to a redirected request.
+
+<span class="versionnote">New in version 2.4.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3253' xml:id='l2h-3253' class="method">has_header</tt></b>(</nobr></td>
+  <td><var>header</var>)</td></tr></table></dt>
+<dd>
+Return whether the instance has the named header (checks both regular
+and unredirected).
+
+<span class="versionnote">New in version 2.4.</span>
+
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3254' xml:id='l2h-3254' class="method">get_full_url</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the URL given in the constructor.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3255' xml:id='l2h-3255' class="method">get_type</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the type of the URL -- also known as the scheme.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3256' xml:id='l2h-3256' class="method">get_host</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the host to which a connection will be made.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3257' xml:id='l2h-3257' class="method">get_selector</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the selector -- the part of the URL that is sent to
+the server.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3258' xml:id='l2h-3258' class="method">set_proxy</tt></b>(</nobr></td>
+  <td><var>host, type</var>)</td></tr></table></dt>
+<dd>
+Prepare the request by connecting to a proxy server. The <var>host</var>
+and <var>type</var> will replace those of the instance, and the instance's
+selector will be the original URL given in the constructor.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3259' xml:id='l2h-3259' class="method">get_origin_req_host</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return the request-host of the origin transaction, as defined by
+<a class="rfc" id='rfcref-90005' xml:id='rfcref-90005'
+href="http://www.faqs.org/rfcs/rfc2965.html">RFC 2965</a>.  See the documentation for the <tt class="class">Request</tt>
+constructor.
+</dl>
+
+<P>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-3260' xml:id='l2h-3260' class="method">is_unverifiable</tt></b>(</nobr></td>
+  <td><var></var>)</td></tr></table></dt>
+<dd>
+Return whether the request is unverifiable, as defined by RFC 2965.
+See the documentation for the <tt class="class">Request</tt> constructor.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="11.5 urllib2  "
+  href="module-urllib2.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="11.5 urllib2  "
+  href="module-urllib2.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="11.5.2 OpenerDirector Objects"
+  href="opener-director-objects.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></A></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="module-urllib2.html">11.5 urllib2  </A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="module-urllib2.html">11.5 urllib2  </A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="opener-director-objects.html">11.5.2 OpenerDirector Objects</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.4.2, documentation updated on 28 September 2005.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

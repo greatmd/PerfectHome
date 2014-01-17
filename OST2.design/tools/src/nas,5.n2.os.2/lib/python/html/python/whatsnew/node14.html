@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="whatsnew24.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="whatsnew24.html" title='What's New in Python 2.4' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node15.html" />
+<link rel="prev" href="node13.html" />
+<link rel="parent" href="whatsnew24.html" />
+<link rel="next" href="node15.html" />
+<meta name='aesop' content='information' />
+<title>13 Build and C API Changes</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12 New, Improved, and"
+  href="node13.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="14 Porting to Python"
+  href="node15.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node13.html">12 New, Improved, and</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node15.html">14 Porting to Python</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+<div class='online-navigation'>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></a>
+
+<UL CLASS="ChildLinks">
+<LI><A href="node14.html#SECTION0001410000000000000000">13.1 Port-Specific Changes</a>
+</ul>
+<!--End of Table of Child-Links-->
+</div>
+<HR>
+
+<H1><A NAME="SECTION0001400000000000000000">
+13 Build and C API Changes</A>
+</H1>
+
+<P>
+Some of the changes to Python's build process and to the C API are:
+
+<P>
+
+<UL>
+<LI>Three new convenience macros were added for common return
+  values from extension functions: Py_RETURN_NONE,
+  Py_RETURN_TRUE, and Py_RETURN_FALSE.
+  (Contributed by Brett Cannon.)
+
+<P>
+</LI>
+<LI>Another new macro, Py_CLEAR(<var>obj</var>), 
+  decreases the reference count of <var>obj</var> and sets <var>obj</var> to the
+  null pointer.  (Contributed by Jim Fulton.)
+
+<P>
+</LI>
+<LI>A new function, <tt class="cfunction">PyTuple_Pack(<var>N</var>, <var>obj1</var>,
+  <var>obj2</var>, ..., <var>objN</var>)</tt>, constructs tuples from a variable
+  length argument list of Python objects.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>A new function, <tt class="cfunction">PyDict_Contains(<var>d</var>, <var>k</var>)</tt>,
+  implements fast dictionary lookups without masking exceptions raised
+  during the look-up process.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>The Py_IS_NAN(<var>X</var>) macro returns 1 if 
+  its float or double argument <var>X</var> is a NaN.  
+  (Contributed by Tim Peters.)
+
+<P>
+</LI>
+<LI>C code can avoid unnecessary locking by using the new
+   <tt class="cfunction">PyEval_ThreadsInitialized()</tt> function to tell 
+   if any thread operations have been performed.  If this function 
+   returns false, no lock operations are needed.
+   (Contributed by Nick Coghlan.)
+
+<P>
+</LI>
+<LI>A new function, <tt class="cfunction">PyArg_VaParseTupleAndKeywords()</tt>,
+  is the same as <tt class="cfunction">PyArg_ParseTupleAndKeywords()</tt> but takes a 
+  <tt class="ctype">va_list</tt> instead of a number of arguments.
+  (Contributed by Greg Chapman.)
+
+<P>
+</LI>
+<LI>A new method flag, <tt class="constant">METH_COEXISTS</tt>, allows a function
+  defined in slots to co-exist with a <tt class="ctype">PyCFunction</tt> having the
+  same name.  This can halve the access time for a method such as
+  <tt class="method">set.__contains__()</tt>.  (Contributed by Raymond Hettinger.)
+
+<P>
+</LI>
+<LI>Python can now be built with additional profiling for the
+  interpreter itself, intended as an aid to people developing the
+  Python core.  Providing <b class="programopt">---enable-profiling</b> to the
+  <b class="program">configure</b> script will let you profile the interpreter with
+  <b class="program">gprof</b>, and providing the <b class="programopt">---with-tsc</b>
+  switch enables profiling using the Pentium's Time-Stamp-Counter
+  register.  Note that the <b class="programopt">---with-tsc</b> switch is slightly
+  misnamed, because the profiling feature also works on the PowerPC
+  platform, though that processor architecture doesn't call that
+  register ``the TSC register''.  (Contributed by Jeremy Hylton.)
+
+<P>
+</LI>
+<LI>The <tt class="ctype">tracebackobject</tt> type has been renamed to <tt class="ctype">PyTracebackObject</tt>.
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION0001410000000000000000">
+13.1 Port-Specific Changes</A>
+</H2>
+
+<P>
+
+<UL>
+<LI>The Windows port now builds under MSVC++ 7.1 as well as version 6.
+  (Contributed by Martin von Loewis.)
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="12 New, Improved, and"
+  href="node13.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="14 Porting to Python"
+  href="node15.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node13.html">12 New, Improved, and</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node15.html">14 Porting to Python</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 1.01.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,103 @@
+# ========== Copyright Header Begin ==========================================
+# 
+# OpenSPARC T2 Processor File: fpga_synth_synplicity_default.prj
+# Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+# 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#
+# * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For the avoidance of doubt, and except that if any non-GPL license 
+# choice is available it will apply instead, Sun elects to use only 
+# the General Public License version 2 (GPLv2) at this time for any 
+# software where a choice of GPL license versions is made 
+# available with the language indicating that GPLv2 or any later version 
+# may be used, or where a choice of which version of the GPL is applied is 
+# otherwise unspecified. 
+#
+# Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+# CA 95054 USA or visit www.sun.com if you need additional information or 
+# have any questions. 
+# 
+# ========== Copyright Header End ============================================
+
+########default synplicity project file/template############
+####top defined by fpga_synth
+####flist defined by fpga_synth
+# Add Constraints file
+
+add_file -constraint $DV_ROOT/tools/fpga/fpga_synth_synplicity_mapper.sdc
+
+####
+###set_option -top_module "t2"
+
+
+#simulation options
+set_option -write_verilog 1
+
+
+#gate output dir
+impl -add t2_synth -type fpga
+
+
+#compilation/mapping options
+set_option -default_enum_encoding default
+set_option -resource_sharing 1
+set_option -use_fsm_explorer 0
+
+#map options
+set_option -frequency 16.000
+set_option -run_prop_extract 1
+set_option -fanout_limit 10000
+set_option -disable_io_insertion 0
+set_option -pipe 1
+set_option -update_models_cp 0
+set_option -enable_prepacking 1
+set_option -retiming 0
+set_option -no_sequential_opt 0
+set_option -fixgatedclocks 3
+set_option -fixgeneratedclocks 3
+set_option -effort default
+
+
+#sequential_optimizations options
+set_option -symbolic_fsm_compiler 1
+
+#planner options
+set_option -write_pp_verilog 1
+set_option -write_pp_vhdl 1
+set_option -write_pp_mixed 1
+set_option -write_pp_srs 1
+
+#simulation options
+set_option -write_verilog 1
+set_option -write_vhdl 0
+
+#VIF options
+set_option -write_vif 0
+
+#automatic place and route (vendor) options
+set_option -write_apr_constraint 1
+
+############################
+#implementation attributes
+#
+set_option -vlog_std v2001
+set_option -dup 0
+set_option -auto_constrain_io 1
+set_option -project_relative_includes 1
+set_option -enable64bit 1
+set_option -suppress_remap 1
+

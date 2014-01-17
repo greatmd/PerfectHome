@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="whatsnew24.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python Documentation Index' />
+<link rel="first" href="whatsnew24.html" title='What's New in Python 2.4' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="node9.html" />
+<link rel="prev" href="node7.html" />
+<link rel="parent" href="whatsnew24.html" />
+<link rel="next" href="node9.html" />
+<meta name='aesop' content='information' />
+<title>7 PEP 324: New subprocess Module</title>
+</head>
+<body>
+<DIV CLASS="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6 PEP 322: Reverse"
+  href="node7.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="8 PEP 327: Decimal"
+  href="node9.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node7.html">6 PEP 322: Reverse</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node9.html">8 PEP 327: Decimal</A>
+</div>
+<hr /></div>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000800000000000000000">
+7 PEP 324: New subprocess Module</A>
+</H1>
+
+<P>
+The standard library provides a number of ways to execute a
+subprocess, offering different features and different levels of
+complexity.  <tt class="function">os.system(<var>command</var>)</tt> is easy to use, but
+slow (it runs a shell process which executes the command) and
+dangerous (you have to be careful about escaping the shell's
+metacharacters).  The <tt class="module">popen2</tt> module offers classes that can
+capture standard output and standard error from the subprocess, but
+the naming is confusing.  The <tt class="module">subprocess</tt> module cleans 
+this up, providing a unified interface that offers all the features
+you might need.
+
+<P>
+Instead of <tt class="module">popen2</tt>'s collection of classes,
+<tt class="module">subprocess</tt> contains a single class called <tt class="class">Popen</tt> 
+whose constructor supports a number of different keyword arguments.
+
+<P>
+<div class="verbatim"><pre>
+class Popen(args, bufsize=0, executable=None,
+	    stdin=None, stdout=None, stderr=None,
+	    preexec_fn=None, close_fds=False, shell=False,
+	    cwd=None, env=None, universal_newlines=False,
+	    startupinfo=None, creationflags=0):
+</pre></div>
+
+<P>
+<var>args</var> is commonly a sequence of strings that will be the
+arguments to the program executed as the subprocess.  (If the
+<var>shell</var> argument is true, <var>args</var> can be a string which will
+then be passed on to the shell for interpretation, just as
+<tt class="function">os.system()</tt> does.)
+
+<P>
+<var>stdin</var>, <var>stdout</var>, and <var>stderr</var> specify what the
+subprocess's input, output, and error streams will be.  You can
+provide a file object or a file descriptor, or you can use the
+constant <code>subprocess.PIPE</code> to create a pipe between the
+subprocess and the parent.
+
+<P>
+The constructor has a number of handy options:
+
+<P>
+
+<UL>
+<LI><var>close_fds</var> requests that all file descriptors be closed
+  before running the subprocess.
+
+<P>
+</LI>
+<LI><var>cwd</var> specifies the working directory in which the
+  subprocess will be executed (defaulting to whatever the parent's
+  working directory is).
+
+<P>
+</LI>
+<LI><var>env</var> is a dictionary specifying environment variables.
+
+<P>
+</LI>
+<LI><var>preexec_fn</var> is a function that gets called before the
+  child is started.
+
+<P>
+</LI>
+<LI><var>universal_newlines</var> opens the child's input and output
+  using Python's universal newline feature.
+
+<P>
+</LI>
+</UL>
+
+<P>
+Once you've created the <tt class="class">Popen</tt> instance, 
+you can call its <tt class="method">wait()</tt> method to pause until the subprocess
+has exited, <tt class="method">poll()</tt> to check if it's exited without pausing, 
+or <tt class="method">communicate(<var>data</var>)</tt> to send the string <var>data</var> to
+the subprocess's standard input.   <tt class="method">communicate(<var>data</var>)</tt> 
+then reads any data that the subprocess has sent to its standard output 
+or standard error, returning a tuple <code>(<var>stdout_data</var>,
+<var>stderr_data</var>)</code>.
+
+<P>
+<tt class="function">call()</tt> is a shortcut that passes its arguments along to the
+<tt class="class">Popen</tt> constructor, waits for the command to complete, and
+returns the status code of the subprocess.  It can serve as a safer
+analog to <tt class="function">os.system()</tt>:
+
+<P>
+<div class="verbatim"><pre>
+sts = subprocess.call(['dpkg', '-i', '/tmp/new-package.deb'])
+if sts == 0:
+    # Success
+    ...
+else:
+    # dpkg returned an error
+    ...
+</pre></div>
+
+<P>
+The command is invoked without use of the shell.  If you really do want to 
+use the shell, you can add <code>shell=True</code> as a keyword argument and provide
+a string instead of a sequence:
+
+<P>
+<div class="verbatim"><pre>
+sts = subprocess.call('dpkg -i /tmp/new-package.deb', shell=True)
+</pre></div>
+
+<P>
+The PEP takes various examples of shell and Python code and shows how
+they'd be translated into Python code that uses <tt class="module">subprocess</tt>. 
+Reading this section of the PEP is highly recommended.
+
+<P>
+<div class="seealso">
+  <p class="heading">See Also:</p>
+
+<dl compact="compact" class="seerfc">
+    <dt><a href="http://www.python.org/peps/pep-0324.html"
+        title="subprocess - New process module"
+        >PEP 324, <em>subprocess - New process module</em></a>
+    <dd>Written and implemented by Peter &#197;strand, with assistance from Fredrik Lundh and others.
+  </dl>
+</div>
+
+<P>
+
+<DIV CLASS="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="6 PEP 322: Reverse"
+  href="node7.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></A></td>
+<td class='online-navigation'><a rel="parent" title="What's New in Python"
+  href="whatsnew24.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up One Level' width='32' /></A></td>
+<td class='online-navigation'><a rel="next" title="8 PEP 327: Decimal"
+  href="node9.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></A></td>
+<td align="center" width="100%">What's New in Python 2.4</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></A></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+<td class='online-navigation'><img src='../icons/blank.png'
+  border='0' height='32'  alt='' width='32' /></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="node7.html">6 PEP 322: Reverse</A>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="whatsnew24.html">What's New in Python</A>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="node9.html">8 PEP 327: Decimal</A>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 1.01.</span>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>
