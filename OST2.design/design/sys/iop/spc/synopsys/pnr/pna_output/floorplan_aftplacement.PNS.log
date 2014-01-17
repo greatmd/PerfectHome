@@ -1,0 +1,20 @@
+
+Name of design : floorplan_aftplacement
+Number of cell instance masters in the library : 328
+Number of cell instances in the design : 213789
+Processing net VDD ...
+Average power dissipation in floorplan_aftplacement :    74.98 mW
+Power supply voltage :     1.50 V
+Average current in floorplan_aftplacement :    49.99 mA
+Number of power pad nodes reaching to the power ports of the leaf cells or blocks : 84
+Maximum IR drop in floorplan_aftplacement : 114.92 mV
+Maximum current in floorplan_aftplacement : 4.505 mA
+Processing net VSS ...
+Average power dissipation in floorplan_aftplacement :    74.98 mW
+Power supply voltage :     1.50 V
+Average current in floorplan_aftplacement :    49.99 mA
+Number of power pad nodes reaching to the power ports of the leaf cells or blocks : 84
+Maximum IR drop in floorplan_aftplacement : 114.34 mV
+Maximum current in floorplan_aftplacement : 4.619 mA
+Memory usage for design data :      75243.520 Kbytes
+Overall takes     3.70 seconds

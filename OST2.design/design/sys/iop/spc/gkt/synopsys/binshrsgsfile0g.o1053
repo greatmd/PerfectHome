@@ -1,0 +1,185 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+
+                      Design Compiler Graphical
+                            DC Ultra (TM)
+                             DFTMAX (TM)
+                         Power Compiler (TM)
+                           DesignWare (R)
+                           DC Expert (TM)
+                         Design Vision (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                            DFT Compiler
+                        Library Compiler (TM)
+                         Design Compiler(R)
+
+         Version G-2012.06-SP5-1 for RHEL64 -- Mar 18, 2013
+               Copyright (c) 1988-2012 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+# ========== Copyright Header Begin ==========================================
+# 
+# OpenSPARC T2 Processor File: run.scr
+# Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+# 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#
+# * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For the avoidance of doubt, and except that if any non-GPL license 
+# choice is available it will apply instead, Sun elects to use only 
+# the General Public License version 2 (GPLv2) at this time for any 
+# software where a choice of GPL license versions is made 
+# available with the language indicating that GPLv2 or any later version 
+# may be used, or where a choice of which version of the GPL is applied is 
+# otherwise unspecified. 
+#
+# Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+# CA 95054 USA or visit www.sun.com if you need additional information or 
+# have any questions. 
+# 
+# ========== Copyright Header End ============================================
+sh date
+Sun Jan 12 15:07:34 PST 2014
+sh hostname
+rsg4.stanford.edu
+sh uptime
+ 15:07:34 up 31 days, 22:39,  1 user,  load average: 7.86, 6.40, 6.13
+remove_design -all
+1
+if {[file exists template]} {
+   sh rm -rf template
+}
+sh mkdir template
+if {![file exists gate]} {
+   sh mkdir gate
+}
+if {![file exists sdc]} {
+   sh mkdir sdc
+}
+if {![file exists log]} {
+   sh mkdir log
+}
+###########################################################################
+# 1. Setup from environment variables
+###########################################################################
+set dv_root [sh echo \$DV_ROOT]
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design
+set syn_home [sh echo \$SYN_LIB]
+/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn
+source -echo -verbose script/user_cfg.scr
+Error: could not open script file "script/user_cfg.scr" (CMD-015)
+set search_path [concat $search_path script/]
+. /cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn /cad/synopsys/dc_shell/G-2012.06-SP5-1/minpower/syn /cad/synopsys/dc_shell/G-2012.06-SP5-1/dw/syn_ver /cad/synopsys/dc_shell/G-2012.06-SP5-1/dw/sim_ver script/
+set search_path [concat $syn_home    $search_path ]
+/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn . /cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn /cad/synopsys/dc_shell/G-2012.06-SP5-1/minpower/syn /cad/synopsys/dc_shell/G-2012.06-SP5-1/dw/syn_ver /cad/synopsys/dc_shell/G-2012.06-SP5-1/dw/sim_ver script/
+foreach include_path $include_paths {
+   set search_path [concat $search_path $dv_root/$include_path]
+}
+Error: can't read "include_paths": no such variable
+	Use error_info for more info. (CMD-013)
+sh date
+Sun Jan 12 15:07:34 PST 2014
+set link_library [concat $link_library                          $mem_libs                          $black_box_designs]
+Error: can't read "mem_libs": no such variable
+	Use error_info for more info. (CMD-013)
+#set target_library $syn_home/lsi_10k.db 
+set target_library [concat $target_library                            $mem_libs]
+Error: can't read "mem_libs": no such variable
+	Use error_info for more info. (CMD-013)
+set hdlin_enable_vpp true
+Information: Variable 'hdlin_enable_vpp' is obsolete and is being ignored. (INFO-100)
+true
+set hdlin_auto_save_templates false
+false
+define_design_lib WORK -path .template
+1
+set verilogout_single_bit false
+false
+set hdlout_internal_busses true
+true
+set bus_naming_style {%s[%d]}
+%s[%d]
+set bus_inference_style $bus_naming_style
+%s[%d]
+echo $search_path
+/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn . /cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn /cad/synopsys/dc_shell/G-2012.06-SP5-1/minpower/syn /cad/synopsys/dc_shell/G-2012.06-SP5-1/dw/syn_ver /cad/synopsys/dc_shell/G-2012.06-SP5-1/dw/sim_ver script/
+###########################################################################
+# 2. Read Designs
+###########################################################################
+set all_rtl_files  { }
+ 
+foreach rtl_file $rtl_files {
+    set full_file_path $dv_root/$rtl_file
+    set all_rtl_files [concat $all_rtl_files $full_file_path ]
+}
+Error: can't read "rtl_files": no such variable
+	Use error_info for more info. (CMD-013)
+##Donguk: define LIB has been added to compile basic logics in lib
+## TODO: better to separate only those rtl_files from the rest and
+##       apply "define LIB " only to those files
+#analyze -format verilog -define RUNDC $all_rtl_files
+analyze -format verilog -define {RUNDC LIB SYN_MACRO} $all_rtl_files
+Error: Value for list 'file_list' must have more than zero elements. (CMD-036)
+elaborate $top_module
+Error: can't read "top_module": no such variable
+	Use error_info for more info. (CMD-013)
+#####
+if {[info exists mix_files] && ($mix_files != {}) } {
+   foreach mix_file $mix_files {
+      set index_beg [expr {[string last "/" $mix_file] + 1}]
+      set mix_file_name [string range $mix_file $index_beg end]
+      read_file -format verilog -define RUNDC gate/${mix_file_name}.exp
+   }
+}
+set design_list [list]
+foreach_in_collection design_object [get_designs] {
+   set design_name [get_object_name $design_object]
+   lappend design_list $design_name
+}
+Error: Can't find designs matching '*'. (UID-109)
+sh date
+Sun Jan 12 15:07:34 PST 2014
+current_design $top_module
+Error: can't read "top_module": no such variable
+	Use error_info for more info. (CMD-013)
+echo $top_module
+Error: can't read "top_module": no such variable
+	Use error_info for more info. (CMD-013)
+if {[get_designs -hier $dont_touch_modules] != {}} {
+   set_dont_touch $dont_touch_modules
+}
+Error: can't read "dont_touch_modules": no such variable
+	Use error_info for more info. (CMD-013)
+set dc_shell_status [ link ]
+Error: Current design is not defined. (UID-4)
+0
+if {$dc_shell_status == 0} {
+   echo "****************************************************"
+   echo "* ERROR!!!! Failed to Link...exiting prematurely.  *"
+   echo "****************************************************"
+   quit
+}
+****************************************************
+* ERROR!!!! Failed to Link...exiting prematurely.  *
+****************************************************
+
+Thank you...

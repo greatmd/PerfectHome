@@ -1,0 +1,760 @@
+create_qtm_model n2_frf_mp_256x78_cust
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q -clock CP
+create_qtm_load_type -lib_cell DFQD2BWP35 -input_pin D load_dff
+create_qtm_drive_type -lib_cell DFQD2BWP35 -output_pin Q drive_dff
+create_qtm_port -type clock { l2clk }
+create_qtm_port -type input { scan_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { scan_in }
+create_qtm_port -type input { main_clken }
+set_qtm_port_load -type load_dff -factor 1.000000 { main_clken }
+create_qtm_port -type input { tcu_se_scancollar_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_se_scancollar_in }
+create_qtm_port -type input { tcu_scan_en }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_scan_en }
+create_qtm_port -type input { tcu_array_wr_inhibit }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_array_wr_inhibit }
+create_qtm_port -type input { tcu_bclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_bclk }
+create_qtm_port -type input { tcu_aclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_aclk }
+create_qtm_port -type input { tcu_pce_ov }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_pce_ov }
+create_qtm_port -type input { pce }
+set_qtm_port_load -type load_dff -factor 1.000000 { pce }
+create_qtm_port -type input { r1_addr[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r1_addr[2] }
+create_qtm_port -type input { r1_addr[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r1_addr[1] }
+create_qtm_port -type input { r1_addr[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r1_addr[0] }
+create_qtm_port -type input { r1_valid }
+set_qtm_port_load -type load_dff -factor 1.000000 { r1_valid }
+create_qtm_port -type input { r_tid[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r_tid[2] }
+create_qtm_port -type input { r_tid[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r_tid[1] }
+create_qtm_port -type input { r_tid[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r_tid[0] }
+create_qtm_port -type input { r2_addr[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r2_addr[4] }
+create_qtm_port -type input { r2_addr[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r2_addr[3] }
+create_qtm_port -type input { r2_addr[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r2_addr[2] }
+create_qtm_port -type input { r2_addr[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r2_addr[1] }
+create_qtm_port -type input { r2_addr[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r2_addr[0] }
+create_qtm_port -type input { r2_valid }
+set_qtm_port_load -type load_dff -factor 1.000000 { r2_valid }
+create_qtm_port -type input { r1_addr[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r1_addr[4] }
+create_qtm_port -type input { r1_addr[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { r1_addr[3] }
+create_qtm_port -type input { w1_addr[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_addr[2] }
+create_qtm_port -type input { w1_addr[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_addr[1] }
+create_qtm_port -type input { w1_addr[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_addr[0] }
+create_qtm_port -type input { w1_valid[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_valid[1] }
+create_qtm_port -type input { w1_valid[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_valid[0] }
+create_qtm_port -type input { w1_tid[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_tid[2] }
+create_qtm_port -type input { w1_tid[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_tid[1] }
+create_qtm_port -type input { w1_tid[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_tid[0] }
+create_qtm_port -type input { w2_addr[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_addr[0] }
+create_qtm_port -type input { w2_valid[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_valid[1] }
+create_qtm_port -type input { w2_valid[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_valid[0] }
+create_qtm_port -type input { w2_tid[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_tid[2] }
+create_qtm_port -type input { w2_tid[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_tid[1] }
+create_qtm_port -type input { w2_tid[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_tid[0] }
+create_qtm_port -type input { w1_addr[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_addr[4] }
+create_qtm_port -type input { w1_addr[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_addr[3] }
+create_qtm_port -type input { w1_data[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[3] }
+create_qtm_port -type input { w1_data[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[2] }
+create_qtm_port -type input { w1_data[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[1] }
+create_qtm_port -type input { w1_data[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[0] }
+create_qtm_port -type input { w2_addr[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_addr[4] }
+create_qtm_port -type input { w2_addr[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_addr[3] }
+create_qtm_port -type input { w2_addr[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_addr[2] }
+create_qtm_port -type input { w2_addr[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_addr[1] }
+create_qtm_port -type input { w1_data[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[11] }
+create_qtm_port -type input { w1_data[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[10] }
+create_qtm_port -type input { w1_data[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[9] }
+create_qtm_port -type input { w1_data[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[8] }
+create_qtm_port -type input { w1_data[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[7] }
+create_qtm_port -type input { w1_data[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[6] }
+create_qtm_port -type input { w1_data[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[5] }
+create_qtm_port -type input { w1_data[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[4] }
+create_qtm_port -type input { w1_data[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[19] }
+create_qtm_port -type input { w1_data[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[18] }
+create_qtm_port -type input { w1_data[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[17] }
+create_qtm_port -type input { w1_data[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[16] }
+create_qtm_port -type input { w1_data[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[15] }
+create_qtm_port -type input { w1_data[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[14] }
+create_qtm_port -type input { w1_data[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[13] }
+create_qtm_port -type input { w1_data[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[12] }
+create_qtm_port -type input { w1_data[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[27] }
+create_qtm_port -type input { w1_data[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[26] }
+create_qtm_port -type input { w1_data[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[25] }
+create_qtm_port -type input { w1_data[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[24] }
+create_qtm_port -type input { w1_data[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[23] }
+create_qtm_port -type input { w1_data[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[22] }
+create_qtm_port -type input { w1_data[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[21] }
+create_qtm_port -type input { w1_data[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[20] }
+create_qtm_port -type input { w1_data[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[35] }
+create_qtm_port -type input { w1_data[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[34] }
+create_qtm_port -type input { w1_data[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[33] }
+create_qtm_port -type input { w1_data[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[32] }
+create_qtm_port -type input { w1_data[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[31] }
+create_qtm_port -type input { w1_data[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[30] }
+create_qtm_port -type input { w1_data[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[29] }
+create_qtm_port -type input { w1_data[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[28] }
+create_qtm_port -type input { w1_data[43] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[43] }
+create_qtm_port -type input { w1_data[42] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[42] }
+create_qtm_port -type input { w1_data[41] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[41] }
+create_qtm_port -type input { w1_data[40] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[40] }
+create_qtm_port -type input { w1_data[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[39] }
+create_qtm_port -type input { w1_data[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[38] }
+create_qtm_port -type input { w1_data[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[37] }
+create_qtm_port -type input { w1_data[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[36] }
+create_qtm_port -type input { w1_data[51] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[51] }
+create_qtm_port -type input { w1_data[50] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[50] }
+create_qtm_port -type input { w1_data[49] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[49] }
+create_qtm_port -type input { w1_data[48] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[48] }
+create_qtm_port -type input { w1_data[47] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[47] }
+create_qtm_port -type input { w1_data[46] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[46] }
+create_qtm_port -type input { w1_data[45] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[45] }
+create_qtm_port -type input { w1_data[44] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[44] }
+create_qtm_port -type input { w1_data[59] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[59] }
+create_qtm_port -type input { w1_data[58] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[58] }
+create_qtm_port -type input { w1_data[57] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[57] }
+create_qtm_port -type input { w1_data[56] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[56] }
+create_qtm_port -type input { w1_data[55] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[55] }
+create_qtm_port -type input { w1_data[54] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[54] }
+create_qtm_port -type input { w1_data[53] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[53] }
+create_qtm_port -type input { w1_data[52] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[52] }
+create_qtm_port -type input { w1_ecc[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[3] }
+create_qtm_port -type input { w1_ecc[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[2] }
+create_qtm_port -type input { w1_ecc[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[1] }
+create_qtm_port -type input { w1_ecc[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[0] }
+create_qtm_port -type input { w1_data[63] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[63] }
+create_qtm_port -type input { w1_data[62] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[62] }
+create_qtm_port -type input { w1_data[61] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[61] }
+create_qtm_port -type input { w1_data[60] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_data[60] }
+create_qtm_port -type input { w1_ecc[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[11] }
+create_qtm_port -type input { w1_ecc[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[10] }
+create_qtm_port -type input { w1_ecc[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[9] }
+create_qtm_port -type input { w1_ecc[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[8] }
+create_qtm_port -type input { w1_ecc[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[7] }
+create_qtm_port -type input { w1_ecc[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[6] }
+create_qtm_port -type input { w1_ecc[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[5] }
+create_qtm_port -type input { w1_ecc[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[4] }
+create_qtm_port -type input { w2_data[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[5] }
+create_qtm_port -type input { w2_data[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[4] }
+create_qtm_port -type input { w2_data[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[3] }
+create_qtm_port -type input { w2_data[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[2] }
+create_qtm_port -type input { w2_data[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[1] }
+create_qtm_port -type input { w2_data[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[0] }
+create_qtm_port -type input { w1_ecc[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[13] }
+create_qtm_port -type input { w1_ecc[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w1_ecc[12] }
+create_qtm_port -type input { w2_data[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[13] }
+create_qtm_port -type input { w2_data[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[12] }
+create_qtm_port -type input { w2_data[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[11] }
+create_qtm_port -type input { w2_data[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[10] }
+create_qtm_port -type input { w2_data[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[9] }
+create_qtm_port -type input { w2_data[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[8] }
+create_qtm_port -type input { w2_data[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[7] }
+create_qtm_port -type input { w2_data[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[6] }
+create_qtm_port -type input { w2_data[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[21] }
+create_qtm_port -type input { w2_data[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[20] }
+create_qtm_port -type input { w2_data[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[19] }
+create_qtm_port -type input { w2_data[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[18] }
+create_qtm_port -type input { w2_data[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[17] }
+create_qtm_port -type input { w2_data[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[16] }
+create_qtm_port -type input { w2_data[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[15] }
+create_qtm_port -type input { w2_data[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[14] }
+create_qtm_port -type input { w2_data[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[29] }
+create_qtm_port -type input { w2_data[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[28] }
+create_qtm_port -type input { w2_data[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[27] }
+create_qtm_port -type input { w2_data[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[26] }
+create_qtm_port -type input { w2_data[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[25] }
+create_qtm_port -type input { w2_data[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[24] }
+create_qtm_port -type input { w2_data[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[23] }
+create_qtm_port -type input { w2_data[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[22] }
+create_qtm_port -type input { w2_data[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[37] }
+create_qtm_port -type input { w2_data[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[36] }
+create_qtm_port -type input { w2_data[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[35] }
+create_qtm_port -type input { w2_data[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[34] }
+create_qtm_port -type input { w2_data[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[33] }
+create_qtm_port -type input { w2_data[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[32] }
+create_qtm_port -type input { w2_data[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[31] }
+create_qtm_port -type input { w2_data[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[30] }
+create_qtm_port -type input { w2_data[45] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[45] }
+create_qtm_port -type input { w2_data[44] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[44] }
+create_qtm_port -type input { w2_data[43] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[43] }
+create_qtm_port -type input { w2_data[42] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[42] }
+create_qtm_port -type input { w2_data[41] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[41] }
+create_qtm_port -type input { w2_data[40] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[40] }
+create_qtm_port -type input { w2_data[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[39] }
+create_qtm_port -type input { w2_data[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[38] }
+create_qtm_port -type input { w2_data[53] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[53] }
+create_qtm_port -type input { w2_data[52] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[52] }
+create_qtm_port -type input { w2_data[51] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[51] }
+create_qtm_port -type input { w2_data[50] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[50] }
+create_qtm_port -type input { w2_data[49] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[49] }
+create_qtm_port -type input { w2_data[48] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[48] }
+create_qtm_port -type input { w2_data[47] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[47] }
+create_qtm_port -type input { w2_data[46] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[46] }
+create_qtm_port -type input { w2_data[61] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[61] }
+create_qtm_port -type input { w2_data[60] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[60] }
+create_qtm_port -type input { w2_data[59] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[59] }
+create_qtm_port -type input { w2_data[58] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[58] }
+create_qtm_port -type input { w2_data[57] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[57] }
+create_qtm_port -type input { w2_data[56] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[56] }
+create_qtm_port -type input { w2_data[55] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[55] }
+create_qtm_port -type input { w2_data[54] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[54] }
+create_qtm_port -type input { w2_ecc[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[5] }
+create_qtm_port -type input { w2_ecc[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[4] }
+create_qtm_port -type input { w2_ecc[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[3] }
+create_qtm_port -type input { w2_ecc[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[2] }
+create_qtm_port -type input { w2_ecc[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[1] }
+create_qtm_port -type input { w2_ecc[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[0] }
+create_qtm_port -type input { w2_data[63] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[63] }
+create_qtm_port -type input { w2_data[62] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_data[62] }
+create_qtm_port -type input { w2_ecc[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[13] }
+create_qtm_port -type input { w2_ecc[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[12] }
+create_qtm_port -type input { w2_ecc[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[11] }
+create_qtm_port -type input { w2_ecc[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[10] }
+create_qtm_port -type input { w2_ecc[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[9] }
+create_qtm_port -type input { w2_ecc[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[8] }
+create_qtm_port -type input { w2_ecc[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[7] }
+create_qtm_port -type input { w2_ecc[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { w2_ecc[6] }
+create_qtm_port -type output { frf_r1_data[5] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[5] }
+create_qtm_port -type output { frf_r1_data[4] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[4] }
+create_qtm_port -type output { frf_r1_data[3] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[3] }
+create_qtm_port -type output { frf_r1_data[2] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[2] }
+create_qtm_port -type output { frf_r1_data[1] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[1] }
+create_qtm_port -type output { frf_r1_data[0] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[0] }
+create_qtm_port -type output { frf_r1_data[13] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[13] }
+create_qtm_port -type output { frf_r1_data[12] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[12] }
+create_qtm_port -type output { frf_r1_data[11] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[11] }
+create_qtm_port -type output { frf_r1_data[10] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[10] }
+create_qtm_port -type output { frf_r1_data[9] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[9] }
+create_qtm_port -type output { frf_r1_data[8] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[8] }
+create_qtm_port -type output { frf_r1_data[7] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[7] }
+create_qtm_port -type output { frf_r1_data[6] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[6] }
+create_qtm_port -type output { frf_r1_data[21] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[21] }
+create_qtm_port -type output { frf_r1_data[20] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[20] }
+create_qtm_port -type output { frf_r1_data[19] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[19] }
+create_qtm_port -type output { frf_r1_data[18] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[18] }
+create_qtm_port -type output { frf_r1_data[17] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[17] }
+create_qtm_port -type output { frf_r1_data[16] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[16] }
+create_qtm_port -type output { frf_r1_data[15] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[15] }
+create_qtm_port -type output { frf_r1_data[14] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[14] }
+create_qtm_port -type output { frf_r1_data[29] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[29] }
+create_qtm_port -type output { frf_r1_data[28] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[28] }
+create_qtm_port -type output { frf_r1_data[27] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[27] }
+create_qtm_port -type output { frf_r1_data[26] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[26] }
+create_qtm_port -type output { frf_r1_data[25] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[25] }
+create_qtm_port -type output { frf_r1_data[24] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[24] }
+create_qtm_port -type output { frf_r1_data[23] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[23] }
+create_qtm_port -type output { frf_r1_data[22] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[22] }
+create_qtm_port -type output { frf_r1_data[37] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[37] }
+create_qtm_port -type output { frf_r1_data[36] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[36] }
+create_qtm_port -type output { frf_r1_data[35] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[35] }
+create_qtm_port -type output { frf_r1_data[34] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[34] }
+create_qtm_port -type output { frf_r1_data[33] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[33] }
+create_qtm_port -type output { frf_r1_data[32] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[32] }
+create_qtm_port -type output { frf_r1_data[31] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[31] }
+create_qtm_port -type output { frf_r1_data[30] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[30] }
+create_qtm_port -type output { frf_r1_data[45] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[45] }
+create_qtm_port -type output { frf_r1_data[44] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[44] }
+create_qtm_port -type output { frf_r1_data[43] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[43] }
+create_qtm_port -type output { frf_r1_data[42] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[42] }
+create_qtm_port -type output { frf_r1_data[41] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[41] }
+create_qtm_port -type output { frf_r1_data[40] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[40] }
+create_qtm_port -type output { frf_r1_data[39] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[39] }
+create_qtm_port -type output { frf_r1_data[38] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[38] }
+create_qtm_port -type output { frf_r1_data[53] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[53] }
+create_qtm_port -type output { frf_r1_data[52] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[52] }
+create_qtm_port -type output { frf_r1_data[51] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[51] }
+create_qtm_port -type output { frf_r1_data[50] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[50] }
+create_qtm_port -type output { frf_r1_data[49] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[49] }
+create_qtm_port -type output { frf_r1_data[48] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[48] }
+create_qtm_port -type output { frf_r1_data[47] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[47] }
+create_qtm_port -type output { frf_r1_data[46] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[46] }
+create_qtm_port -type output { frf_r1_data[61] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[61] }
+create_qtm_port -type output { frf_r1_data[60] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[60] }
+create_qtm_port -type output { frf_r1_data[59] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[59] }
+create_qtm_port -type output { frf_r1_data[58] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[58] }
+create_qtm_port -type output { frf_r1_data[57] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[57] }
+create_qtm_port -type output { frf_r1_data[56] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[56] }
+create_qtm_port -type output { frf_r1_data[55] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[55] }
+create_qtm_port -type output { frf_r1_data[54] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[54] }
+create_qtm_port -type output { frf_r1_ecc[5] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[5] }
+create_qtm_port -type output { frf_r1_ecc[4] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[4] }
+create_qtm_port -type output { frf_r1_ecc[3] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[3] }
+create_qtm_port -type output { frf_r1_ecc[2] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[2] }
+create_qtm_port -type output { frf_r1_ecc[1] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[1] }
+create_qtm_port -type output { frf_r1_ecc[0] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[0] }
+create_qtm_port -type output { frf_r1_data[63] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[63] }
+create_qtm_port -type output { frf_r1_data[62] }
+set_qtm_port_drive -type drive_dff { frf_r1_data[62] }
+create_qtm_port -type output { frf_r1_ecc[13] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[13] }
+create_qtm_port -type output { frf_r1_ecc[12] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[12] }
+create_qtm_port -type output { frf_r1_ecc[11] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[11] }
+create_qtm_port -type output { frf_r1_ecc[10] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[10] }
+create_qtm_port -type output { frf_r1_ecc[9] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[9] }
+create_qtm_port -type output { frf_r1_ecc[8] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[8] }
+create_qtm_port -type output { frf_r1_ecc[7] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[7] }
+create_qtm_port -type output { frf_r1_ecc[6] }
+set_qtm_port_drive -type drive_dff { frf_r1_ecc[6] }
+create_qtm_port -type output { frf_r2_data[7] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[7] }
+create_qtm_port -type output { frf_r2_data[6] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[6] }
+create_qtm_port -type output { frf_r2_data[5] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[5] }
+create_qtm_port -type output { frf_r2_data[4] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[4] }
+create_qtm_port -type output { frf_r2_data[3] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[3] }
+create_qtm_port -type output { frf_r2_data[2] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[2] }
+create_qtm_port -type output { frf_r2_data[1] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[1] }
+create_qtm_port -type output { frf_r2_data[0] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[0] }
+create_qtm_port -type output { frf_r2_data[15] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[15] }
+create_qtm_port -type output { frf_r2_data[14] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[14] }
+create_qtm_port -type output { frf_r2_data[13] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[13] }
+create_qtm_port -type output { frf_r2_data[12] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[12] }
+create_qtm_port -type output { frf_r2_data[11] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[11] }
+create_qtm_port -type output { frf_r2_data[10] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[10] }
+create_qtm_port -type output { frf_r2_data[9] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[9] }
+create_qtm_port -type output { frf_r2_data[8] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[8] }
+create_qtm_port -type output { frf_r2_data[23] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[23] }
+create_qtm_port -type output { frf_r2_data[22] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[22] }
+create_qtm_port -type output { frf_r2_data[21] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[21] }
+create_qtm_port -type output { frf_r2_data[20] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[20] }
+create_qtm_port -type output { frf_r2_data[19] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[19] }
+create_qtm_port -type output { frf_r2_data[18] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[18] }
+create_qtm_port -type output { frf_r2_data[17] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[17] }
+create_qtm_port -type output { frf_r2_data[16] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[16] }
+create_qtm_port -type output { frf_r2_data[31] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[31] }
+create_qtm_port -type output { frf_r2_data[30] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[30] }
+create_qtm_port -type output { frf_r2_data[29] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[29] }
+create_qtm_port -type output { frf_r2_data[28] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[28] }
+create_qtm_port -type output { frf_r2_data[27] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[27] }
+create_qtm_port -type output { frf_r2_data[26] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[26] }
+create_qtm_port -type output { frf_r2_data[25] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[25] }
+create_qtm_port -type output { frf_r2_data[24] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[24] }
+create_qtm_port -type output { frf_r2_data[39] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[39] }
+create_qtm_port -type output { frf_r2_data[38] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[38] }
+create_qtm_port -type output { frf_r2_data[37] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[37] }
+create_qtm_port -type output { frf_r2_data[36] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[36] }
+create_qtm_port -type output { frf_r2_data[35] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[35] }
+create_qtm_port -type output { frf_r2_data[34] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[34] }
+create_qtm_port -type output { frf_r2_data[33] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[33] }
+create_qtm_port -type output { frf_r2_data[32] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[32] }
+create_qtm_port -type output { frf_r2_data[47] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[47] }
+create_qtm_port -type output { frf_r2_data[46] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[46] }
+create_qtm_port -type output { frf_r2_data[45] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[45] }
+create_qtm_port -type output { frf_r2_data[44] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[44] }
+create_qtm_port -type output { frf_r2_data[43] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[43] }
+create_qtm_port -type output { frf_r2_data[42] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[42] }
+create_qtm_port -type output { frf_r2_data[41] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[41] }
+create_qtm_port -type output { frf_r2_data[40] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[40] }
+create_qtm_port -type output { frf_r2_data[55] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[55] }
+create_qtm_port -type output { frf_r2_data[54] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[54] }
+create_qtm_port -type output { frf_r2_data[53] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[53] }
+create_qtm_port -type output { frf_r2_data[52] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[52] }
+create_qtm_port -type output { frf_r2_data[51] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[51] }
+create_qtm_port -type output { frf_r2_data[50] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[50] }
+create_qtm_port -type output { frf_r2_data[49] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[49] }
+create_qtm_port -type output { frf_r2_data[48] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[48] }
+create_qtm_port -type output { frf_r2_data[63] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[63] }
+create_qtm_port -type output { frf_r2_data[62] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[62] }
+create_qtm_port -type output { frf_r2_data[61] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[61] }
+create_qtm_port -type output { frf_r2_data[60] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[60] }
+create_qtm_port -type output { frf_r2_data[59] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[59] }
+create_qtm_port -type output { frf_r2_data[58] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[58] }
+create_qtm_port -type output { frf_r2_data[57] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[57] }
+create_qtm_port -type output { frf_r2_data[56] }
+set_qtm_port_drive -type drive_dff { frf_r2_data[56] }
+create_qtm_port -type output { frf_r2_ecc[7] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[7] }
+create_qtm_port -type output { frf_r2_ecc[6] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[6] }
+create_qtm_port -type output { frf_r2_ecc[5] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[5] }
+create_qtm_port -type output { frf_r2_ecc[4] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[4] }
+create_qtm_port -type output { frf_r2_ecc[3] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[3] }
+create_qtm_port -type output { frf_r2_ecc[2] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[2] }
+create_qtm_port -type output { frf_r2_ecc[1] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[1] }
+create_qtm_port -type output { frf_r2_ecc[0] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[0] }
+create_qtm_port -type output { frf_r2_ecc[13] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[13] }
+create_qtm_port -type output { frf_r2_ecc[12] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[12] }
+create_qtm_port -type output { frf_r2_ecc[11] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[11] }
+create_qtm_port -type output { frf_r2_ecc[10] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[10] }
+create_qtm_port -type output { frf_r2_ecc[9] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[9] }
+create_qtm_port -type output { frf_r2_ecc[8] }
+set_qtm_port_drive -type drive_dff { frf_r2_ecc[8] }
+create_qtm_port -type output { scan_out }
+set_qtm_port_drive -type drive_dff { scan_out }
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { r1_addr[2] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { r1_addr[2] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { r2_addr[4] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { r2_addr[4] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { r1_valid } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { r1_valid } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { r2_valid } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { r2_valid } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_addr[2] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_addr[2] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_addr[0] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_addr[0] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_valid[1] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_valid[1] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_valid[1] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_valid[1] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_tid[2] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_tid[2] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_tid[2] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_tid[2] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_ecc[3] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_ecc[3] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_ecc[5] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_ecc[5] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_data[3] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w1_data[3] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_data[5] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { w2_data[5] } -signal_edge fall -value 0.000000
+create_qtm_delay_arc -from { l2clk } -to { frf_r1_data[5] } -from_edge rise -to_edge rise -value 0.000000
+create_qtm_delay_arc -from { l2clk } -to { frf_r1_data[5] } -from_edge rise -to_edge fall -value 0.000000
+create_qtm_delay_arc -from { l2clk } -to { frf_r1_ecc[5] } -from_edge rise -to_edge rise -value 0.000000
+create_qtm_delay_arc -from { l2clk } -to { frf_r1_ecc[5] } -from_edge rise -to_edge fall -value 0.000000
+create_qtm_delay_arc -from { l2clk } -to { frf_r2_data[7] } -from_edge rise -to_edge rise -value 0.000000
+create_qtm_delay_arc -from { l2clk } -to { frf_r2_data[7] } -from_edge rise -to_edge fall -value 0.000000
+create_qtm_delay_arc -from { l2clk } -to { frf_r2_ecc[7] } -from_edge rise -to_edge rise -value 0.000000
+create_qtm_delay_arc -from { l2clk } -to { frf_r2_ecc[7] } -from_edge rise -to_edge fall -value 0.000000
+save_qtm_model
+write_qtm_model -out_dir qtm -text

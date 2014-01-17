@@ -1,0 +1,618 @@
+Initializing gui preferences from file  /rsghome/greatmd/.synopsys_icc_prefs.tcl
+# ========== Copyright Header Begin ==========================================
+# Autor : Donguk Moon (dongukmoon@stanford.edu)
+# Purpose 
+#  - place and route for SPARC core
+# Progress:
+# 1/04/2014 : QTM models for all black boxes
+# ========== Copyright Header End ============================================
+## black_box list
+##{n2_frf_mp_256x78_cust n2_com_dp_32x84_cust n2_com_dp_32x72_cust n2_dca_sp_9kb_cust n2_dva_dp_32x32_cust n2_com_dp_32x152_cust n2_stb_cm_64x45_cust n2_com_dp_64x84_cust n2_dta_sp_1920b_cust n2_tlb_tl_128x59_cust n2_irf_mp_128x72_cust n2_icd_sp_16p5kb_cust n2_ict_sp_1920b_cust n2_tlb_tl_64x59_cust}
+sh date
+Mon Jan  6 15:24:41 PST 2014
+sh hostname
+rsg1.stanford.edu
+sh uptime
+ 15:24:41 up 76 days,  9:45,  7 users,  load average: 21.87, 22.38, 21.46
+remove_design -all
+1
+set dv_root [sh echo \$DV_ROOT]
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design
+set syn_home [sh echo \$SYN_LIB]
+/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn
+## goto bb directory:
+set block  spc
+spc
+set blk_dir $dv_root/design/sys/iop/$block/synopsys
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys
+echo "Enter $blk_dir/bb for QTM modeling...." 
+Enter /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys/bb for QTM modeling....
+cd $blk_dir/bb
+source -echo -verbose $dv_root/design/sys/synopsys/script/pnr_lib_setup.tcl
+#########################################################################
+## Library Prepraation
+## 1. setup for logical and physical library
+## 2. load tlu_plus file => this is from Syonpsys EDK (TODO: not accurate)
+## 3. checking library/tlu consistancy 
+#########################################################################
+source -echo -verbose $dv_root/design/sys/synopsys/script/target_lib.scr
+# ========== Copyright Header Begin ==========================================
+# 
+# OpenSPARC T2 Processor File: target_lib.scr
+# Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+# 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#
+# * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For the avoidance of doubt, and except that if any non-GPL license 
+# choice is available it will apply instead, Sun elects to use only 
+# the General Public License version 2 (GPLv2) at this time for any 
+# software where a choice of GPL license versions is made 
+# available with the language indicating that GPLv2 or any later version 
+# may be used, or where a choice of which version of the GPL is applied is 
+# otherwise unspecified. 
+#
+# Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+# CA 95054 USA or visit www.sun.com if you need additional information or 
+# have any questions. 
+# 
+# ========== Copyright Header End ============================================
+echo "INFO: target library version $syn_home"
+INFO: target library version /cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn
+set gate_lib_file tcbn28hpmbwp35tt1v25c_ccs.db
+tcbn28hpmbwp35tt1v25c_ccs.db
+set link_library $gate_lib_file
+tcbn28hpmbwp35tt1v25c_ccs.db
+set target_library $gate_lib_file 
+tcbn28hpmbwp35tt1v25c_ccs.db
+set lib_dir_md /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+set std_lib_dir_md $lib_dir_md/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+#set wire_library_file   {lsi_10k.db}
+#set wire_library   lsi_10k
+#set wire_model_name      05x05
+#set wireload_mode      top
+set search_path [concat $search_path $syn_home $std_lib_dir_md $dv_root/design/sys/iop/spc/synopsys/bb/qtm/]
+. /cad/synopsys/icc/2011.09-SP1/libraries/syn /cad/synopsys/icc/2011.09-SP1/minpower/syn /cad/synopsys/icc/2011.09-SP1/dw/syn_ver /cad/synopsys/icc/2011.09-SP1/dw/sim_ver /cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys/bb/qtm/
+set link_library [concat * $link_library ]
+* tcbn28hpmbwp35tt1v25c_ccs.db
+#set_min_library tcbn28hpmbwp35tt1v25c_ccs.db -min_version tcbn28hpmbwp35ff0p99v0c_ccs.db 
+set symbol_library {}
+set dont_use_cells 1
+1
+set dont_use_cell_list {}
+## Donguk : following is added for PNR 
+#lappend link_library "n2_frf_mp_256x78_cust.db"
+# .tf file 
+set technology_file $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+# reference library
+set mw_reference_library [concat   $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28   ]
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28
+#TLU+ Files
+set max_tluplus $dv_root/pnr_lib/1p9m.tluplus
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+set min_tluplus $dv_root/pnr_lib/1p9m.tluplus
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+#set max_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+#set min_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+## Delete previous milkyway db
+if {[file exists mw_lib]} {
+   sh rm -rf mw_lib
+}
+create_mw_lib mw_lib -technology $technology_file -mw_reference_library $mw_reference_library
+Start to load technology file /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf.
+Warning: Layer 'AP' is missing the attribute 'minArea'. (line 728) (TFCHK-012)
+Warning: ContactCode 'VIA12_square' has undefined or zero enclosures. (line 745). (TFCHK-073)
+Warning: ContactCode 'VIA12_slot' has undefined or zero enclosures. (line 762). (TFCHK-073)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitMinResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitNomResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitMaxResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitMinResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitNomResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitMaxResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitMinResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitNomResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitMaxResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitMinResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitNomResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitMaxResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitMinResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitNomResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitMaxResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitMinResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitNomResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitMaxResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitMinResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitNomResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitMaxResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitMinResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitNomResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitMaxResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitMinResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitNomResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitMaxResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitMinResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitNomResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitMaxResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitMinResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitNomResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitMaxResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitMinResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitNomResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitMaxResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitMinResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitNomResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitMaxResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitMinResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitNomResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitMaxResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitMinResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitNomResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitMaxResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitMinResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitNomResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitMaxResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitMinResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitNomResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitMaxResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitMinResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitNomResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitMaxResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitMinResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitNomResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitMaxResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitMinResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitNomResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitMaxResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitMinResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitNomResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitMaxResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitMinResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitNomResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitMaxResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitMinResistance'. (line 3762) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitNomResistance'. (line 3762) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitMaxResistance'. (line 3762) (TFCHK-014)
+Information: ContactCode 'VIAGEN9AP' has a minimum cut spacing 1 that is less than the cut layer minimum spacing 2. (line 3762) (TFCHK-072)
+Warning: Layer 'M1' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.15. (TFCHK-049)
+Warning: Layer 'M2' has a pitch 0.135 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M3' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.295 or 0.15. (TFCHK-049)
+Warning: Layer 'M4' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M5' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.295 or 0.15. (TFCHK-049)
+Warning: Layer 'M6' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M7' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.335. (TFCHK-049)
+Warning: Layer 'M8' has a pitch 0.8 that does not match the recommended wire-to-via pitch 0.86. (TFCHK-049)
+Warning: Layer 'M9' has a pitch 0.8 that does not match the recommended wire-to-via pitch 2.6. (TFCHK-049)
+Warning: Layer 'AP' has a pitch 4.5 that does not match the recommended wire-to-via pitch 5. (TFCHK-049)
+Warning: Layer 'M3' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M4' has a pitch 0.1 that does not match the doubled pitch 0.27 or tripled pitch 0.405. (TFCHK-050)
+Warning: Layer 'M5' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M6' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M7' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M8' has a pitch 0.8 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M9' has a pitch 0.8 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'AP' has a pitch 4.5 that does not match the doubled pitch 1.6 or tripled pitch 2.4. (TFCHK-050)
+Warning: CapModel sections are missing. Capacitance models should be loaded with a TLU+ file later. (TFCHK-084)
+Technology file /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf has been loaded successfully.
+open_mw_lib mw_lib
+{mw_lib}
+#TODO: might need tech2itf map file
+set_tlu_plus_files  -max_tluplus $max_tluplus -min_tluplus $min_tluplus    
+Information: No layer mapping file is specified. Assume layer names are the same between the technology library and the ITF. (RCEX-071)
+1
+check_library
+Loading db file '/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db'
+Information: Using CCS timing libraries. (TIM-024)
+
+#BEGIN_XCHECK_LIBRARY
+
+Logic Library:    tcbn28hpmbwp35tt1v25c_ccs 
+Physical Library: /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28 
+check_library options:  
+Version:                                F-2011.09-ICC-SP1
+Check date and time:    Mon Jan  6 15:25:01 2014
+
+          List of logic library and file names
+------------------------------------------------------------------------------
+Logic library name           Logic library file name
+------------------------------------------------------------------------------
+tcbn28hpmbwp35tt1v25c_ccs    /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db
+------------------------------------------------------------------------------
+
+#BEGIN_XCHECK_LOGICCELLS
+
+Number of cells missing in logic library:       41 (out of 1303)
+
+Information: List of cells missing in logic library (LIBCHK-210)
+-------------------------------------------------------------------------
+Cell name                  Cell type             Physical library
+-------------------------------------------------------------------------
+LVLHLCLOD2BWP35            Core                  tsmc28
+LVLHLCLOD4BWP35            Core                  tsmc28
+LVLHLCLOD8BWP35            Core                  tsmc28
+LVLHLD1BWP35               Core                  tsmc28
+LVLHLD2BWP35               Core                  tsmc28
+LVLHLD4BWP35               Core                  tsmc28
+LVLHLD8BWP35               Core                  tsmc28
+LVLLHCD1BWP35              Core                  tsmc28
+LVLLHCD2BWP35              Core                  tsmc28
+LVLLHCD4BWP35              Core                  tsmc28
+LVLLHCD8BWP35              Core                  tsmc28
+LVLLHCLOD1BWP35            Core                  tsmc28
+LVLLHCLOD2BWP35            Core                  tsmc28
+LVLLHCLOD4BWP35            Core                  tsmc28
+LVLLHCLOD8BWP35            Core                  tsmc28
+LVLLHD1BWP35               Core                  tsmc28
+LVLLHD2BWP35               Core                  tsmc28
+LVLLHD4BWP35               Core                  tsmc28
+LVLLHD8BWP35               Core                  tsmc28
+LVLHLCD1BWP35              Core                  tsmc28
+LVLHLCD2BWP35              Core                  tsmc28
+LVLHLCD4BWP35              Core                  tsmc28
+LVLHLCD8BWP35              Core                  tsmc28
+LVLHLCLOD1BWP35            Core                  tsmc28
+ISOHID1BWP35               Core                  tsmc28
+ISOHID2BWP35               Core                  tsmc28
+ISOHID4BWP35               Core                  tsmc28
+ISOHID8BWP35               Core                  tsmc28
+ISOLOD1BWP35               Core                  tsmc28
+ISOLOD2BWP35               Core                  tsmc28
+ISOLOD4BWP35               Core                  tsmc28
+ISOLOD8BWP35               Core                  tsmc28
+TS6N28HPMA256X32M2SWBSO    Unknown               tsmc28
+TS6N28HPMA64X32M2SWBSO     Unknown               tsmc28
+TS1N28HPMB256X32M4SWBASO   Unknown               tsmc28
+TS1N28HPMB64X32M4SWBASO    Unknown               tsmc28
+TSDN28HPMA64X32M4F         Unknown               tsmc28
+TS6N28HPMA64X32M2F         Unknown               tsmc28
+TS1N28HPMB256X32M4S        Unknown               tsmc28
+TS6N28HPMA40X32M2F         Unknown               tsmc28
+TS1N28HPMB64X26M4S         Unknown               tsmc28
+-------------------------------------------------------------------------
+
+Information: List of physical only cells (LIBCHK-119)
+-------------------------------------------------------------------------
+Cell name                  Cell type             Physical library
+-------------------------------------------------------------------------
+TAPCELLBWP35               PGPinOnly             tsmc28
+FILL3BWP35                 PGPinOnly             tsmc28
+FILL4BWP35                 PGPinOnly             tsmc28
+FILL64BWP35                PGPinOnly             tsmc28
+FILL8BWP35                 PGPinOnly             tsmc28
+FILL16BWP35                PGPinOnly             tsmc28
+FILL2BWP35                 PGPinOnly             tsmc28
+FILL32BWP35                PGPinOnly             tsmc28
+BOUNDARY_LEFTBWP35         PGPinOnly             tsmc28
+BOUNDARY_RIGHTBWP35        PGPinOnly             tsmc28
+-------------------------------------------------------------------------
+
+#END_XCHECK_LOGICCELLS
+
+#BEGIN_XCHECK_PHYSICALCELLS
+
+Number of cells missing in physical library:    0 (out of 1354)
+
+#END_XCHECK_PHYSICALCELLS
+
+#BEGIN_XCHECK_PINS
+
+Number of cells with missing or mismatched pins in libraries:   0
+
+#END_XCHECK_PINS
+
+Logic vs. physical library check summary:
+Number of cells missing in logic library:       41 
+Information: Logic library is INCONSISTENT with physical library (LIBCHK-220)
+
+#END_XCHECK_LIBRARY
+
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28
+0
+check_tlu_plus_files
+
+Sanity check for TLU+ vs MW-Tech files:
+ max_tlu+: /rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+ min_tlu+: /rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+ mapping_file: default
+ max_emul_tlu+: **NONE**
+ min_emul_tlu+: **NONE**
+ MW design lib: mw_lib
+
+--------- Sanity Check on TLUPlus Files -------------
+1. Checking the conducting layer names in ITF and mapping file ... 
+[ Passed! ]
+2. Checking the via layer names in ITF and mapping file ... 
+[ Passed! ]
+3. Checking the consistency of Min Width and Min Spacing between MW-tech and ITF ... 
+[ Passed! ]
+----------------- Check Ends ------------------
+1
+1
+source -echo -verbose $dv_root/design/sys/synopsys/script/qtm_scripts/n2_frf_mp_256x78_cust.qtm.tcl
+set top_module n2_frf_mp_256x78_cust
+n2_frf_mp_256x78_cust
+read_verilog -dirty_netlist $top_module.v 
+Loading db file '/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db'
+Warning: Conflict unit found: MW tech file power unit is mW; Main Library power unit is nW. (IFS-007)
+Type of creating bus for undefined cells : 0
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:01, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 0 black boxes found. 
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:00, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'n2_frf_mp_256x78_cust.CEL' now...
+Total number of cell instances: 0
+Total number of nets: 358
+Total number of ports: 358 (include 0 PG ports)
+Total number of hierarchical cell instances: 1
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+current_design $top_module
+n2_frf_mp_256x78_cust
+#get_ports -filter {@port_direction == in}
+create_qtm_model $top_module
+1
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+1
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+1
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+1
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q -clock CP
+1
+create_qtm_load_type -lib_cell DFQD2BWP35 -input_pin D load_dff
+1
+create_qtm_drive_type -lib_cell DFQD2BWP35 -output_pin Q drive_dff
+1
+create_qtm_port l2clk -type clock 
+1
+foreach pt [ get_object_name [all_inputs] ] {
+  if {$pt != "l2clk"} {
+    create_qtm_port $pt -type input 
+    #create_qtm_port $pt -type inout 
+    set_qtm_port_load -type load_dff -factor 1 $pt 
+   }
+}
+Loading db file '/cad/synopsys/icc/2011.09-SP1/libraries/syn/gtech.db'
+Loading db file '/cad/synopsys/icc/2011.09-SP1/libraries/syn/standard.sldb'
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+
+  Linking design 'n2_frf_mp_256x78_cust'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  n2_frf_mp_256x78_cust       n2_frf_mp_256x78_cust.CEL
+  tcbn28hpmbwp35tt1v25c_ccs (library) /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db
+
+Load global CTS reference options from NID to stack
+foreach pt [ get_object_name [all_outputs] ] {
+  create_qtm_port $pt -type output 
+  #create_qtm_port $pt -type inout 
+  set_qtm_port_drive -type drive_dff $pt
+}
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to r1_addr -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to r2_addr -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to r1_valid -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to r2_valid -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_addr -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_addr -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_valid -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_valid -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_tid -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_tid -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_ecc -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_ecc -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_data -value 0
+1
+create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_data -value 0
+1
+#create_qtm_constraint_arc -hold -edge rise -from l2clk -to $pt -value 0
+create_qtm_delay_arc -from_edge rise -from l2clk -to frf_r1_data -value 0
+1
+create_qtm_delay_arc -from_edge rise -from l2clk -to frf_r1_ecc -value 0
+1
+create_qtm_delay_arc -from_edge rise -from l2clk -to frf_r2_data -value 0
+1
+create_qtm_delay_arc -from_edge rise -from l2clk -to frf_r2_ecc -value 0
+1
+#report_qtm_model
+save_qtm_model
+1
+write_qtm_model -out_dir qtm -text
+Info: Writing in-memory db timing model to on-disk .db file
+Info: as 'qtm/n2_frf_mp_256x78_cust.db' by write_qtm_model on Mon Jan  6 15:25:25 2014
+
+
+1
+1
+source -echo -verbose $dv_root/design/sys/synopsys/script/qtm_scripts/n2_com_dp_32x84_cust.qtm.tcl
+set top_module n2_com_dp_32x84_cust
+n2_com_dp_32x84_cust
+read_verilog -dirty_netlist $top_module.v 
+Warning: Conflict unit found: MW tech file power unit is mW; Main Library power unit is nW. (IFS-007)
+Type of creating bus for undefined cells : 0
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 1 *****
+
+*****  Pass 1 Complete *****
+Elapsed =    0:00:00, CPU =    0:00:00
+
+*****  Verilog HDL translation! *****
+
+*****    Start Pass 2 *****
+
+*****  Pass 2 Complete *****
+
+*****   Verilog HDL translation completed! *****
+ ------ Verilog Black Box Summary ------
+ 0 black boxes found. 
+ ------ Verilog Port Mismatch Summary ------
+ 0 port mismatches found. 
+Elapsed =    0:00:00, CPU =    0:00:00
+Hierarchy Preservation is turned ON
+The quick-attach skip-search mode has been turned on.
+  Start axu naming escaping style change ...
+  End axu naming escaping style change, status is 1
+Checking single pin net for cell 'n2_com_dp_32x84_cust.CEL' now...
+Total number of cell instances: 0
+Total number of nets: 192
+Total number of ports: 192 (include 0 PG ports)
+Total number of hierarchical cell instances: 1
+
+The quick-attach skip-search mode has been turned off.
+INFO:  total find 0 pg nets connected with tie net.
+Elapsed =    0:00:00, CPU =    0:00:00
+Information: Read verilog completed successfully.
+1
+current_design $top_module
+Error: Can't find design 'n2_com_dp_32x84_cust'. (UID-109)
+Current design is 'n2_frf_mp_256x78_cust'.
+{n2_frf_mp_256x78_cust}
+#get_ports -filter {@port_direction == in}
+create_qtm_model $top_module
+1
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+1
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+1
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+1
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q -clock CP
+1
+create_qtm_load_type -lib_cell DFQD2BWP35 -input_pin D load_dff
+1
+create_qtm_drive_type -lib_cell DFQD2BWP35 -output_pin Q drive_dff
+1
+create_qtm_port rdclk -type clock 
+1
+create_qtm_port wrclk -type clock 
+1
+foreach pt [ get_object_name [all_inputs] ] {
+  if {$pt != "rdclk" && $pt != "wrclk"} {
+    create_qtm_port $pt -type input 
+    set_qtm_port_load -type load_dff -factor 1 $pt 
+   }
+}
+foreach pt [ get_object_name [all_outputs] ] {
+  create_qtm_port $pt -type output 
+  set_qtm_port_drive -type drive_dff $pt
+}
+create_qtm_constraint_arc -setup -edge rise -from rdclk -to rd_adr -value 0
+Warning: Could not find QTM port rd_adr. (QTB-038)
+1
+create_qtm_constraint_arc -hold -edge rise -from rdclk -to rd_adr -value 0
+Warning: Could not find QTM port rd_adr. (QTB-038)
+1
+create_qtm_constraint_arc -setup -edge rise -from rdclk -to rd_en -value 0
+Warning: Could not find QTM port rd_en. (QTB-038)
+1
+create_qtm_constraint_arc -hold -edge rise -from rdclk -to rd_en -value 0
+Warning: Could not find QTM port rd_en. (QTB-038)
+1
+create_qtm_constraint_arc -setup -edge rise -from wrclk -to wr_adr -value 0
+Warning: Could not find QTM port wr_adr. (QTB-038)
+1
+create_qtm_constraint_arc -hold -edge rise -from wrclk -to wr_adr -value 0
+Warning: Could not find QTM port wr_adr. (QTB-038)
+1
+create_qtm_constraint_arc -setup -edge rise -from wrclk -to wr_en -value 0
+Warning: Could not find QTM port wr_en. (QTB-038)
+1
+create_qtm_constraint_arc -hold -edge rise -from wrclk -to wr_en -value 0
+Warning: Could not find QTM port wr_en. (QTB-038)
+1
+create_qtm_constraint_arc -setup -edge rise -from wrclk -to din -value 0
+Warning: Could not find QTM port din. (QTB-038)
+1
+create_qtm_constraint_arc -hold -edge rise -from wrclk -to din -value 0
+Warning: Could not find QTM port din. (QTB-038)
+1
+#create_qtm_delay_arc -from_edge rise -from rdclk -to dout -value 0
+#report_qtm_model
+save_qtm_model
+1
+write_qtm_model -out_dir qtm -text
+Info: Writing in-memory db timing model to on-disk .db file
+Info: as 'qtm/n2_frf_mp_256x78_cust.db' by write_qtm_model on Mon Jan  6 15:25:26 2014
+
+
+Info: Writing in-memory db timing model to on-disk .db file
+Info: as 'qtm/n2_com_dp_32x84_cust.db' by write_qtm_model on Mon Jan  6 15:25:26 2014
+
+
+1
+1
+1
+icc_shell> exit
+
+Thank you...
+

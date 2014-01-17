@@ -1,0 +1,176 @@
+ 
+****************************************
+Report : area
+Design : gkt
+Version: G-2012.06-SP5-1
+Date   : Sun Jan 12 16:05:19 2014
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    tcbn28hpmbwp35tt1v25c_ccs (File: /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db)
+
+Number of ports:                          974
+Number of nets:                          6389
+Number of cells:                         5880
+Number of combinational cells:           4106
+Number of sequential cells:              1774
+Number of macros:                           0
+Number of buf/inv:                       1533
+Number of references:                      61
+
+Combinational area:       2428.055988
+Buf/Inv area:              747.346486
+Noncombinational area:    3239.918984
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:          5667.974972
+Total area:                 undefined
+1
+ 
+****************************************
+Report : reference
+Design : gkt
+Version: G-2012.06-SP5-1
+Date   : Sun Jan 12 16:05:19 2014
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+AN2XD1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.486000       6      2.916000  
+AN3XD1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500       4      2.430000  
+AN4XD1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000       1      0.729000  
+AO21D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500      28     17.010000  
+AO21D4BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  1.336500       1      1.336500  
+AO22D0BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000     158    115.181996  
+AO31D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000       2      1.458000  
+AO32D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.972000       4      3.888000  
+AO221D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.972000       5      4.860000  
+AO222D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  1.093500     124    135.594002  
+AOI21D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.486000      57     27.702000  
+AOI22D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500     244    148.230004  
+AOI31D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500      24     14.580000  
+AOI32D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000      31     22.598999  
+AOI33D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.850500      14     11.907000  
+AOI211D1BWP35      tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500      15      9.112500  
+AOI221D1BWP35      tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000      93     67.796997  
+AOI222D1BWP35      tcbn28hpmbwp35tt1v25c_ccs
+                                  0.972000      14     13.608000  
+BUFFXD16BWP35      tcbn28hpmbwp35tt1v25c_ccs
+                                  3.037500     125    379.687488  
+CKBD1BWP35         tcbn28hpmbwp35tt1v25c_ccs
+                                  0.364500     210     76.544997  
+CKND1BWP35         tcbn28hpmbwp35tt1v25c_ccs
+                                  0.243000       1      0.243000  
+CKND2D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.364500     186     67.796997  
+DFND1BWP35         tcbn28hpmbwp35tt1v25c_ccs
+                                  2.065500      28     57.834001  n
+DFQD2BWP35         tcbn28hpmbwp35tt1v25c_ccs
+                                  1.822500    1746   3182.084983  n
+IAO21D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500       1      0.607500  
+IINR4D0BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.972000       1      0.972000  
+IND2D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.486000      11      5.346000  
+IND3D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500      13      7.897500  
+IND4D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000       3      2.187000  
+INR2XD0BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.486000      68     33.048000  
+INR3XD0BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500       6      3.645000  
+INR4D0BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000      15     10.935000  
+INVD1BWP35         tcbn28hpmbwp35tt1v25c_ccs
+                                  0.243000    1197    290.871001  
+IOA21D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500       5      3.037500  
+MAOI22D1BWP35      tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000       3      2.187000  
+MAOI222D1BWP35     tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000       1      0.729000  
+MOAI22D1BWP35      tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000      44     32.075999  
+ND3XD0BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.486000     135     65.610000  
+ND4D1BWP35         tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500      50     30.375001  
+NR2D1BWP35         tcbn28hpmbwp35tt1v25c_ccs
+                                  0.364500     162     59.048998  
+NR3D0BWP35         tcbn28hpmbwp35tt1v25c_ccs
+                                  0.486000      60     29.160000  
+NR4D0BWP35         tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500      40     24.300001  
+OA21D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500       5      3.037500  
+OA31D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000       1      0.729000  
+OA33D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.972000       1      0.972000  
+OA211D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000       1      0.729000  
+OAI21D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.486000      63     30.618000  
+OAI22D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500     382    232.065006  
+OAI31D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500      26     15.795000  
+OAI32D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000      35     25.514999  
+OAI33D1BWP35       tcbn28hpmbwp35tt1v25c_ccs
+                                  0.850500      25     21.262500  
+OAI211D1BWP35      tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500      36     21.870001  
+OAI221D1BWP35      tcbn28hpmbwp35tt1v25c_ccs
+                                  0.850500      78     66.338999  
+OAI222D1BWP35      tcbn28hpmbwp35tt1v25c_ccs
+                                  0.972000     259    251.748001  
+OR2XD1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.486000       4      1.944000  
+OR3XD1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.607500      12      7.290000  
+OR4XD1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.729000       1      0.729000  
+TIEHBWP35          tcbn28hpmbwp35tt1v25c_ccs
+                                  0.243000       1      0.243000  
+XNR2D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.972000       8      7.776000  
+XOR2D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  0.972000       2      1.944000  
+XOR4D1BWP35        tcbn28hpmbwp35tt1v25c_ccs
+                                  2.551500       4     10.206000  
+-----------------------------------------------------------------------------
+Total 61 references                                  5667.974972
+1

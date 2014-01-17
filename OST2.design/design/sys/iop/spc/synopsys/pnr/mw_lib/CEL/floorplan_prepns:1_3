@@ -1,0 +1,43 @@
+gkt > Hb Hb Vl 
+lsu > Hb Hb Vr 
+fgu > Hb Ht Vl Vl 
+exu1 > Hb Ht Vl Vr Hb Hb 
+clus_0 > Hb Ht Vl Vr Hb Ht Vl 
+pmu > Hb Ht Vl Vr Hb Ht Vr 
+exu0 > Hb Ht Vl Vr Ht 
+tlu > Hb Ht Vr Vl 
+mmu > Hb Ht Vr Vr 
+ifu_cmu > Ht Vl Hb Hb Hb 
+dec > Ht Vl Hb Hb Ht 
+pku > Ht Vl Hb Ht 
+ifu_ibu > Ht Vl Ht 
+ifu_ftu > Ht Vr 
+pseudo_clus_7 > Hb 
+mmu/mra0 > Ht Vl Hb 
+mmu/mra1 > Ht Vl Ht 
+mmu/scp0 > Ht Vr Hb 
+mmu/scp1 > Ht Vr Ht 
+pseudo_clus_6 > Hb Vl 
+tlu/tca > Hb Vr 
+tlu/tsa0 > Ht Vl 
+tlu/tsa1 > Ht Vr 
+pseudo_clus_5 > Hb 
+fgu/frf > Ht 
+pseudo_clus_4 > Vl 
+exu1/irf > Vr 
+pseudo_clus_3 > Vl 
+exu0/irf > Vr 
+pseudo_clus_2 > Vl Hb Hb 
+ifu_ftu/ftu_itb_cust > Vl Hb Ht Vl 
+ifu_ftu/ftu_icv_cust > Vl Hb Ht Vr 
+ifu_ftu/ftu_ict_cust > Vl Ht 
+ifu_ftu/ftu_icd_cust > Vr 
+lsu/stb_cam > Vl Hb Vl 
+lsu/dta > Vl Hb Vr 
+lsu/cpq > Vl Ht Vl Vl 
+pseudo_clus_1 > Vl Ht Vl Vr 
+lsu/tlb > Vl Ht Vr Hb Vl 
+lsu/lru > Vl Ht Vr Hb Vr Hb 
+lsu/dva > Vl Ht Vr Hb Vr Ht 
+lsu/stb_ram > Vl Ht Vr Ht 
+lsu/dca > Vr 

@@ -1,0 +1,16 @@
+vfplaceAutoConstraint v2.0 
+maxLineLength 132
+set_mpc_macro_array -name jxt_auto_array_0 -element [list  [get_cells lsu/lru lsu/dva] ]
+isRpArray 0
+toBePacked 1
+cellInstsArea 12800000000.000000
+xRpOffset -1
+yRpOffset -1
+rpAnchorPoint 8
+LegalOrientation jxt_auto_array_0 R0
+ElementRelativeOrientation 0 R0 R0
+ElementOffsetLocation
+540 540 
+81620 540 
+EndOffsetLocation
+ArraySize 162160 81080 

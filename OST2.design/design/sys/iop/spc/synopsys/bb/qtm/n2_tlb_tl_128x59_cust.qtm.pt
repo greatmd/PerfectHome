@@ -1,0 +1,861 @@
+create_qtm_model n2_tlb_tl_128x59_cust
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q -clock CP
+create_qtm_load_type -lib_cell DFQD2BWP35 -input_pin D load_dff
+create_qtm_drive_type -lib_cell DFQD2BWP35 -output_pin Q drive_dff
+create_qtm_port -type clock { l2clk }
+create_qtm_port -type input { scan_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { scan_in }
+create_qtm_port -type input { tcu_scan_en }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_scan_en }
+create_qtm_port -type input { tcu_array_wr_inhibit }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_array_wr_inhibit }
+create_qtm_port -type input { tcu_se_scancollar_out }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_se_scancollar_out }
+create_qtm_port -type input { tcu_se_scancollar_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_se_scancollar_in }
+create_qtm_port -type input { tcu_bclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_bclk }
+create_qtm_port -type input { tcu_aclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_aclk }
+create_qtm_port -type input { pce }
+set_qtm_port_load -type load_dff -factor 1.000000 { pce }
+create_qtm_port -type input { tcu_pce_ov }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_pce_ov }
+create_qtm_port -type input { tlb_rw_index[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_rw_index[1] }
+create_qtm_port -type input { tlb_rw_index[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_rw_index[0] }
+create_qtm_port -type input { tlb_cam_vld }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_cam_vld }
+create_qtm_port -type input { tlb_rd_vld }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_rd_vld }
+create_qtm_port -type input { tlb_wr_vld }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_wr_vld }
+create_qtm_port -type input { tlb_bypass }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_bypass }
+create_qtm_port -type input { disable_clear_ubit }
+set_qtm_port_load -type load_dff -factor 1.000000 { disable_clear_ubit }
+create_qtm_port -type input { tlb_demap_context }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_demap_context }
+create_qtm_port -type input { tlb_demap }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_demap }
+create_qtm_port -type input { tlb_rw_index_vld }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_rw_index_vld }
+create_qtm_port -type input { tlb_rw_index[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_rw_index[6] }
+create_qtm_port -type input { tlb_rw_index[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_rw_index[5] }
+create_qtm_port -type input { tlb_rw_index[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_rw_index[4] }
+create_qtm_port -type input { tlb_rw_index[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_rw_index[3] }
+create_qtm_port -type input { tlb_rw_index[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_rw_index[2] }
+create_qtm_port -type input { tte_tag[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[5] }
+create_qtm_port -type input { tte_tag[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[4] }
+create_qtm_port -type input { tte_tag[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[3] }
+create_qtm_port -type input { tte_tag[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[2] }
+create_qtm_port -type input { tte_tag[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[1] }
+create_qtm_port -type input { tte_tag[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[0] }
+create_qtm_port -type input { tlb_demap_real }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_demap_real }
+create_qtm_port -type input { tlb_demap_all }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_demap_all }
+create_qtm_port -type input { tte_tag[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[13] }
+create_qtm_port -type input { tte_tag[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[12] }
+create_qtm_port -type input { tte_tag[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[11] }
+create_qtm_port -type input { tte_tag[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[10] }
+create_qtm_port -type input { tte_tag[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[9] }
+create_qtm_port -type input { tte_tag[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[8] }
+create_qtm_port -type input { tte_tag[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[7] }
+create_qtm_port -type input { tte_tag[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[6] }
+create_qtm_port -type input { tte_tag[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[21] }
+create_qtm_port -type input { tte_tag[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[20] }
+create_qtm_port -type input { tte_tag[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[19] }
+create_qtm_port -type input { tte_tag[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[18] }
+create_qtm_port -type input { tte_tag[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[17] }
+create_qtm_port -type input { tte_tag[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[16] }
+create_qtm_port -type input { tte_tag[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[15] }
+create_qtm_port -type input { tte_tag[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[14] }
+create_qtm_port -type input { tte_tag[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[29] }
+create_qtm_port -type input { tte_tag[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[28] }
+create_qtm_port -type input { tte_tag[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[27] }
+create_qtm_port -type input { tte_tag[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[26] }
+create_qtm_port -type input { tte_tag[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[25] }
+create_qtm_port -type input { tte_tag[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[24] }
+create_qtm_port -type input { tte_tag[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[23] }
+create_qtm_port -type input { tte_tag[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[22] }
+create_qtm_port -type input { tte_tag[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[37] }
+create_qtm_port -type input { tte_tag[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[36] }
+create_qtm_port -type input { tte_tag[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[35] }
+create_qtm_port -type input { tte_tag[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[34] }
+create_qtm_port -type input { tte_tag[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[33] }
+create_qtm_port -type input { tte_tag[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[32] }
+create_qtm_port -type input { tte_tag[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[31] }
+create_qtm_port -type input { tte_tag[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[30] }
+create_qtm_port -type input { tte_tag[45] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[45] }
+create_qtm_port -type input { tte_tag[44] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[44] }
+create_qtm_port -type input { tte_tag[43] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[43] }
+create_qtm_port -type input { tte_tag[42] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[42] }
+create_qtm_port -type input { tte_tag[41] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[41] }
+create_qtm_port -type input { tte_tag[40] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[40] }
+create_qtm_port -type input { tte_tag[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[39] }
+create_qtm_port -type input { tte_tag[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[38] }
+create_qtm_port -type input { tte_tag[53] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[53] }
+create_qtm_port -type input { tte_tag[52] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[52] }
+create_qtm_port -type input { tte_tag[51] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[51] }
+create_qtm_port -type input { tte_tag[50] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[50] }
+create_qtm_port -type input { tte_tag[49] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[49] }
+create_qtm_port -type input { tte_tag[48] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[48] }
+create_qtm_port -type input { tte_tag[47] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[47] }
+create_qtm_port -type input { tte_tag[46] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[46] }
+create_qtm_port -type input { tte_tag[61] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[61] }
+create_qtm_port -type input { tte_tag[60] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[60] }
+create_qtm_port -type input { tte_tag[59] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[59] }
+create_qtm_port -type input { tte_tag[58] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[58] }
+create_qtm_port -type input { tte_tag[57] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[57] }
+create_qtm_port -type input { tte_tag[56] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[56] }
+create_qtm_port -type input { tte_tag[55] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[55] }
+create_qtm_port -type input { tte_tag[54] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[54] }
+create_qtm_port -type input { tte_page_size_mask[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_page_size_mask[2] }
+create_qtm_port -type input { tte_page_size_mask[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_page_size_mask[1] }
+create_qtm_port -type input { tte_page_size_mask[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_page_size_mask[0] }
+create_qtm_port -type input { tte_ubit }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_ubit }
+create_qtm_port -type input { tte_tag[65] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[65] }
+create_qtm_port -type input { tte_tag[64] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[64] }
+create_qtm_port -type input { tte_tag[63] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[63] }
+create_qtm_port -type input { tte_tag[62] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_tag[62] }
+create_qtm_port -type input { tte_data[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[7] }
+create_qtm_port -type input { tte_data[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[6] }
+create_qtm_port -type input { tte_data[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[5] }
+create_qtm_port -type input { tte_data[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[4] }
+create_qtm_port -type input { tte_data[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[3] }
+create_qtm_port -type input { tte_data[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[2] }
+create_qtm_port -type input { tte_data[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[1] }
+create_qtm_port -type input { tte_data[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[0] }
+create_qtm_port -type input { tte_data[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[15] }
+create_qtm_port -type input { tte_data[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[14] }
+create_qtm_port -type input { tte_data[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[13] }
+create_qtm_port -type input { tte_data[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[12] }
+create_qtm_port -type input { tte_data[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[11] }
+create_qtm_port -type input { tte_data[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[10] }
+create_qtm_port -type input { tte_data[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[9] }
+create_qtm_port -type input { tte_data[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[8] }
+create_qtm_port -type input { tte_data[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[23] }
+create_qtm_port -type input { tte_data[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[22] }
+create_qtm_port -type input { tte_data[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[21] }
+create_qtm_port -type input { tte_data[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[20] }
+create_qtm_port -type input { tte_data[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[19] }
+create_qtm_port -type input { tte_data[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[18] }
+create_qtm_port -type input { tte_data[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[17] }
+create_qtm_port -type input { tte_data[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[16] }
+create_qtm_port -type input { tte_data[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[31] }
+create_qtm_port -type input { tte_data[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[30] }
+create_qtm_port -type input { tte_data[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[29] }
+create_qtm_port -type input { tte_data[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[28] }
+create_qtm_port -type input { tte_data[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[27] }
+create_qtm_port -type input { tte_data[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[26] }
+create_qtm_port -type input { tte_data[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[25] }
+create_qtm_port -type input { tte_data[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[24] }
+create_qtm_port -type input { tlb_va[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_va[12] }
+create_qtm_port -type input { tlb_va[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tlb_va[11] }
+create_qtm_port -type input { tte_data[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[37] }
+create_qtm_port -type input { tte_data[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[36] }
+create_qtm_port -type input { tte_data[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[35] }
+create_qtm_port -type input { tte_data[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[34] }
+create_qtm_port -type input { tte_data[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[33] }
+create_qtm_port -type input { tte_data[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { tte_data[32] }
+create_qtm_port -type input { cache_ptag_w0[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[18] }
+create_qtm_port -type input { cache_ptag_w0[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[17] }
+create_qtm_port -type input { cache_ptag_w0[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[16] }
+create_qtm_port -type input { cache_ptag_w0[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[15] }
+create_qtm_port -type input { cache_ptag_w0[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[14] }
+create_qtm_port -type input { cache_ptag_w0[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[13] }
+create_qtm_port -type input { cache_ptag_w0[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[12] }
+create_qtm_port -type input { cache_ptag_w0[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[11] }
+create_qtm_port -type input { cache_ptag_w0[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[26] }
+create_qtm_port -type input { cache_ptag_w0[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[25] }
+create_qtm_port -type input { cache_ptag_w0[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[24] }
+create_qtm_port -type input { cache_ptag_w0[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[23] }
+create_qtm_port -type input { cache_ptag_w0[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[22] }
+create_qtm_port -type input { cache_ptag_w0[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[21] }
+create_qtm_port -type input { cache_ptag_w0[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[20] }
+create_qtm_port -type input { cache_ptag_w0[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[19] }
+create_qtm_port -type input { cache_ptag_w0[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[34] }
+create_qtm_port -type input { cache_ptag_w0[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[33] }
+create_qtm_port -type input { cache_ptag_w0[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[32] }
+create_qtm_port -type input { cache_ptag_w0[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[31] }
+create_qtm_port -type input { cache_ptag_w0[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[30] }
+create_qtm_port -type input { cache_ptag_w0[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[29] }
+create_qtm_port -type input { cache_ptag_w0[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[28] }
+create_qtm_port -type input { cache_ptag_w0[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[27] }
+create_qtm_port -type input { cache_ptag_w1[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[13] }
+create_qtm_port -type input { cache_ptag_w1[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[12] }
+create_qtm_port -type input { cache_ptag_w1[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[11] }
+create_qtm_port -type input { cache_ptag_w0[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[39] }
+create_qtm_port -type input { cache_ptag_w0[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[38] }
+create_qtm_port -type input { cache_ptag_w0[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[37] }
+create_qtm_port -type input { cache_ptag_w0[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[36] }
+create_qtm_port -type input { cache_ptag_w0[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w0[35] }
+create_qtm_port -type input { cache_ptag_w1[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[21] }
+create_qtm_port -type input { cache_ptag_w1[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[20] }
+create_qtm_port -type input { cache_ptag_w1[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[19] }
+create_qtm_port -type input { cache_ptag_w1[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[18] }
+create_qtm_port -type input { cache_ptag_w1[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[17] }
+create_qtm_port -type input { cache_ptag_w1[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[16] }
+create_qtm_port -type input { cache_ptag_w1[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[15] }
+create_qtm_port -type input { cache_ptag_w1[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[14] }
+create_qtm_port -type input { cache_ptag_w1[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[29] }
+create_qtm_port -type input { cache_ptag_w1[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[28] }
+create_qtm_port -type input { cache_ptag_w1[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[27] }
+create_qtm_port -type input { cache_ptag_w1[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[26] }
+create_qtm_port -type input { cache_ptag_w1[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[25] }
+create_qtm_port -type input { cache_ptag_w1[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[24] }
+create_qtm_port -type input { cache_ptag_w1[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[23] }
+create_qtm_port -type input { cache_ptag_w1[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[22] }
+create_qtm_port -type input { cache_ptag_w1[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[37] }
+create_qtm_port -type input { cache_ptag_w1[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[36] }
+create_qtm_port -type input { cache_ptag_w1[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[35] }
+create_qtm_port -type input { cache_ptag_w1[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[34] }
+create_qtm_port -type input { cache_ptag_w1[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[33] }
+create_qtm_port -type input { cache_ptag_w1[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[32] }
+create_qtm_port -type input { cache_ptag_w1[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[31] }
+create_qtm_port -type input { cache_ptag_w1[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[30] }
+create_qtm_port -type input { cache_ptag_w2[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[16] }
+create_qtm_port -type input { cache_ptag_w2[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[15] }
+create_qtm_port -type input { cache_ptag_w2[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[14] }
+create_qtm_port -type input { cache_ptag_w2[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[13] }
+create_qtm_port -type input { cache_ptag_w2[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[12] }
+create_qtm_port -type input { cache_ptag_w2[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[11] }
+create_qtm_port -type input { cache_ptag_w1[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[39] }
+create_qtm_port -type input { cache_ptag_w1[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w1[38] }
+create_qtm_port -type input { cache_ptag_w2[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[24] }
+create_qtm_port -type input { cache_ptag_w2[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[23] }
+create_qtm_port -type input { cache_ptag_w2[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[22] }
+create_qtm_port -type input { cache_ptag_w2[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[21] }
+create_qtm_port -type input { cache_ptag_w2[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[20] }
+create_qtm_port -type input { cache_ptag_w2[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[19] }
+create_qtm_port -type input { cache_ptag_w2[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[18] }
+create_qtm_port -type input { cache_ptag_w2[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[17] }
+create_qtm_port -type input { cache_ptag_w2[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[32] }
+create_qtm_port -type input { cache_ptag_w2[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[31] }
+create_qtm_port -type input { cache_ptag_w2[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[30] }
+create_qtm_port -type input { cache_ptag_w2[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[29] }
+create_qtm_port -type input { cache_ptag_w2[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[28] }
+create_qtm_port -type input { cache_ptag_w2[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[27] }
+create_qtm_port -type input { cache_ptag_w2[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[26] }
+create_qtm_port -type input { cache_ptag_w2[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[25] }
+create_qtm_port -type input { cache_ptag_w3[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[11] }
+create_qtm_port -type input { cache_ptag_w2[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[39] }
+create_qtm_port -type input { cache_ptag_w2[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[38] }
+create_qtm_port -type input { cache_ptag_w2[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[37] }
+create_qtm_port -type input { cache_ptag_w2[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[36] }
+create_qtm_port -type input { cache_ptag_w2[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[35] }
+create_qtm_port -type input { cache_ptag_w2[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[34] }
+create_qtm_port -type input { cache_ptag_w2[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w2[33] }
+create_qtm_port -type input { cache_ptag_w3[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[19] }
+create_qtm_port -type input { cache_ptag_w3[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[18] }
+create_qtm_port -type input { cache_ptag_w3[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[17] }
+create_qtm_port -type input { cache_ptag_w3[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[16] }
+create_qtm_port -type input { cache_ptag_w3[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[15] }
+create_qtm_port -type input { cache_ptag_w3[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[14] }
+create_qtm_port -type input { cache_ptag_w3[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[13] }
+create_qtm_port -type input { cache_ptag_w3[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[12] }
+create_qtm_port -type input { cache_ptag_w3[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[27] }
+create_qtm_port -type input { cache_ptag_w3[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[26] }
+create_qtm_port -type input { cache_ptag_w3[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[25] }
+create_qtm_port -type input { cache_ptag_w3[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[24] }
+create_qtm_port -type input { cache_ptag_w3[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[23] }
+create_qtm_port -type input { cache_ptag_w3[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[22] }
+create_qtm_port -type input { cache_ptag_w3[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[21] }
+create_qtm_port -type input { cache_ptag_w3[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[20] }
+create_qtm_port -type input { cache_ptag_w3[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[35] }
+create_qtm_port -type input { cache_ptag_w3[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[34] }
+create_qtm_port -type input { cache_ptag_w3[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[33] }
+create_qtm_port -type input { cache_ptag_w3[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[32] }
+create_qtm_port -type input { cache_ptag_w3[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[31] }
+create_qtm_port -type input { cache_ptag_w3[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[30] }
+create_qtm_port -type input { cache_ptag_w3[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[29] }
+create_qtm_port -type input { cache_ptag_w3[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[28] }
+create_qtm_port -type input { cache_set_vld[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_set_vld[3] }
+create_qtm_port -type input { cache_set_vld[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_set_vld[2] }
+create_qtm_port -type input { cache_set_vld[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_set_vld[1] }
+create_qtm_port -type input { cache_set_vld[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_set_vld[0] }
+create_qtm_port -type input { cache_ptag_w3[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[39] }
+create_qtm_port -type input { cache_ptag_w3[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[38] }
+create_qtm_port -type input { cache_ptag_w3[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[37] }
+create_qtm_port -type input { cache_ptag_w3[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { cache_ptag_w3[36] }
+create_qtm_port -type output { scan_out }
+set_qtm_port_drive -type drive_dff { scan_out }
+create_qtm_port -type output { tlb_context0_hit }
+set_qtm_port_drive -type drive_dff { tlb_context0_hit }
+create_qtm_port -type output { tlb_cam_mhit }
+set_qtm_port_drive -type drive_dff { tlb_cam_mhit }
+create_qtm_port -type output { tlb_cam_hit }
+set_qtm_port_drive -type drive_dff { tlb_cam_hit }
+create_qtm_port -type output { cache_hit }
+set_qtm_port_drive -type drive_dff { cache_hit }
+create_qtm_port -type output { cache_way_hit[3] }
+set_qtm_port_drive -type drive_dff { cache_way_hit[3] }
+create_qtm_port -type output { cache_way_hit[2] }
+set_qtm_port_drive -type drive_dff { cache_way_hit[2] }
+create_qtm_port -type output { cache_way_hit[1] }
+set_qtm_port_drive -type drive_dff { cache_way_hit[1] }
+create_qtm_port -type output { cache_way_hit[0] }
+set_qtm_port_drive -type drive_dff { cache_way_hit[0] }
+create_qtm_port -type output { tlb_pgnum_crit[20] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[20] }
+create_qtm_port -type output { tlb_pgnum_crit[19] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[19] }
+create_qtm_port -type output { tlb_pgnum_crit[18] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[18] }
+create_qtm_port -type output { tlb_pgnum_crit[17] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[17] }
+create_qtm_port -type output { tlb_pgnum_crit[16] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[16] }
+create_qtm_port -type output { tlb_pgnum_crit[15] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[15] }
+create_qtm_port -type output { tlb_pgnum_crit[14] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[14] }
+create_qtm_port -type output { tlb_pgnum_crit[13] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[13] }
+create_qtm_port -type output { tlb_pgnum_crit[28] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[28] }
+create_qtm_port -type output { tlb_pgnum_crit[27] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[27] }
+create_qtm_port -type output { tlb_pgnum_crit[26] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[26] }
+create_qtm_port -type output { tlb_pgnum_crit[25] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[25] }
+create_qtm_port -type output { tlb_pgnum_crit[24] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[24] }
+create_qtm_port -type output { tlb_pgnum_crit[23] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[23] }
+create_qtm_port -type output { tlb_pgnum_crit[22] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[22] }
+create_qtm_port -type output { tlb_pgnum_crit[21] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[21] }
+create_qtm_port -type output { tlb_pgnum_crit[36] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[36] }
+create_qtm_port -type output { tlb_pgnum_crit[35] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[35] }
+create_qtm_port -type output { tlb_pgnum_crit[34] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[34] }
+create_qtm_port -type output { tlb_pgnum_crit[33] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[33] }
+create_qtm_port -type output { tlb_pgnum_crit[32] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[32] }
+create_qtm_port -type output { tlb_pgnum_crit[31] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[31] }
+create_qtm_port -type output { tlb_pgnum_crit[30] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[30] }
+create_qtm_port -type output { tlb_pgnum_crit[29] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[29] }
+create_qtm_port -type output { tlb_pgnum[17] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[17] }
+create_qtm_port -type output { tlb_pgnum[16] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[16] }
+create_qtm_port -type output { tlb_pgnum[15] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[15] }
+create_qtm_port -type output { tlb_pgnum[14] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[14] }
+create_qtm_port -type output { tlb_pgnum[13] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[13] }
+create_qtm_port -type output { tlb_pgnum_crit[39] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[39] }
+create_qtm_port -type output { tlb_pgnum_crit[38] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[38] }
+create_qtm_port -type output { tlb_pgnum_crit[37] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum_crit[37] }
+create_qtm_port -type output { tlb_pgnum[25] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[25] }
+create_qtm_port -type output { tlb_pgnum[24] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[24] }
+create_qtm_port -type output { tlb_pgnum[23] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[23] }
+create_qtm_port -type output { tlb_pgnum[22] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[22] }
+create_qtm_port -type output { tlb_pgnum[21] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[21] }
+create_qtm_port -type output { tlb_pgnum[20] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[20] }
+create_qtm_port -type output { tlb_pgnum[19] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[19] }
+create_qtm_port -type output { tlb_pgnum[18] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[18] }
+create_qtm_port -type output { tlb_pgnum[33] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[33] }
+create_qtm_port -type output { tlb_pgnum[32] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[32] }
+create_qtm_port -type output { tlb_pgnum[31] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[31] }
+create_qtm_port -type output { tlb_pgnum[30] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[30] }
+create_qtm_port -type output { tlb_pgnum[29] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[29] }
+create_qtm_port -type output { tlb_pgnum[28] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[28] }
+create_qtm_port -type output { tlb_pgnum[27] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[27] }
+create_qtm_port -type output { tlb_pgnum[26] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[26] }
+create_qtm_port -type output { tlb_tte_data[1] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[1] }
+create_qtm_port -type output { tlb_tte_data[0] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[0] }
+create_qtm_port -type output { tlb_pgnum[39] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[39] }
+create_qtm_port -type output { tlb_pgnum[38] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[38] }
+create_qtm_port -type output { tlb_pgnum[37] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[37] }
+create_qtm_port -type output { tlb_pgnum[36] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[36] }
+create_qtm_port -type output { tlb_pgnum[35] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[35] }
+create_qtm_port -type output { tlb_pgnum[34] }
+set_qtm_port_drive -type drive_dff { tlb_pgnum[34] }
+create_qtm_port -type output { tlb_tte_data[9] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[9] }
+create_qtm_port -type output { tlb_tte_data[8] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[8] }
+create_qtm_port -type output { tlb_tte_data[7] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[7] }
+create_qtm_port -type output { tlb_tte_data[6] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[6] }
+create_qtm_port -type output { tlb_tte_data[5] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[5] }
+create_qtm_port -type output { tlb_tte_data[4] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[4] }
+create_qtm_port -type output { tlb_tte_data[3] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[3] }
+create_qtm_port -type output { tlb_tte_data[2] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[2] }
+create_qtm_port -type output { tlb_tte_data[17] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[17] }
+create_qtm_port -type output { tlb_tte_data[16] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[16] }
+create_qtm_port -type output { tlb_tte_data[15] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[15] }
+create_qtm_port -type output { tlb_tte_data[14] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[14] }
+create_qtm_port -type output { tlb_tte_data[13] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[13] }
+create_qtm_port -type output { tlb_tte_data[12] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[12] }
+create_qtm_port -type output { tlb_tte_data[11] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[11] }
+create_qtm_port -type output { tlb_tte_data[10] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[10] }
+create_qtm_port -type output { tlb_tte_data[25] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[25] }
+create_qtm_port -type output { tlb_tte_data[24] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[24] }
+create_qtm_port -type output { tlb_tte_data[23] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[23] }
+create_qtm_port -type output { tlb_tte_data[22] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[22] }
+create_qtm_port -type output { tlb_tte_data[21] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[21] }
+create_qtm_port -type output { tlb_tte_data[20] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[20] }
+create_qtm_port -type output { tlb_tte_data[19] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[19] }
+create_qtm_port -type output { tlb_tte_data[18] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[18] }
+create_qtm_port -type output { tlb_tte_data[33] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[33] }
+create_qtm_port -type output { tlb_tte_data[32] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[32] }
+create_qtm_port -type output { tlb_tte_data[31] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[31] }
+create_qtm_port -type output { tlb_tte_data[30] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[30] }
+create_qtm_port -type output { tlb_tte_data[29] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[29] }
+create_qtm_port -type output { tlb_tte_data[28] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[28] }
+create_qtm_port -type output { tlb_tte_data[27] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[27] }
+create_qtm_port -type output { tlb_tte_data[26] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[26] }
+create_qtm_port -type output { tlb_tte_tag[3] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[3] }
+create_qtm_port -type output { tlb_tte_tag[2] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[2] }
+create_qtm_port -type output { tlb_tte_tag[1] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[1] }
+create_qtm_port -type output { tlb_tte_tag[0] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[0] }
+create_qtm_port -type output { tlb_tte_data[37] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[37] }
+create_qtm_port -type output { tlb_tte_data[36] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[36] }
+create_qtm_port -type output { tlb_tte_data[35] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[35] }
+create_qtm_port -type output { tlb_tte_data[34] }
+set_qtm_port_drive -type drive_dff { tlb_tte_data[34] }
+create_qtm_port -type output { tlb_tte_tag[11] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[11] }
+create_qtm_port -type output { tlb_tte_tag[10] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[10] }
+create_qtm_port -type output { tlb_tte_tag[9] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[9] }
+create_qtm_port -type output { tlb_tte_tag[8] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[8] }
+create_qtm_port -type output { tlb_tte_tag[7] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[7] }
+create_qtm_port -type output { tlb_tte_tag[6] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[6] }
+create_qtm_port -type output { tlb_tte_tag[5] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[5] }
+create_qtm_port -type output { tlb_tte_tag[4] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[4] }
+create_qtm_port -type output { tlb_tte_tag[19] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[19] }
+create_qtm_port -type output { tlb_tte_tag[18] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[18] }
+create_qtm_port -type output { tlb_tte_tag[17] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[17] }
+create_qtm_port -type output { tlb_tte_tag[16] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[16] }
+create_qtm_port -type output { tlb_tte_tag[15] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[15] }
+create_qtm_port -type output { tlb_tte_tag[14] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[14] }
+create_qtm_port -type output { tlb_tte_tag[13] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[13] }
+create_qtm_port -type output { tlb_tte_tag[12] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[12] }
+create_qtm_port -type output { tlb_tte_tag[27] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[27] }
+create_qtm_port -type output { tlb_tte_tag[26] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[26] }
+create_qtm_port -type output { tlb_tte_tag[25] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[25] }
+create_qtm_port -type output { tlb_tte_tag[24] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[24] }
+create_qtm_port -type output { tlb_tte_tag[23] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[23] }
+create_qtm_port -type output { tlb_tte_tag[22] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[22] }
+create_qtm_port -type output { tlb_tte_tag[21] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[21] }
+create_qtm_port -type output { tlb_tte_tag[20] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[20] }
+create_qtm_port -type output { tlb_tte_tag[35] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[35] }
+create_qtm_port -type output { tlb_tte_tag[34] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[34] }
+create_qtm_port -type output { tlb_tte_tag[33] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[33] }
+create_qtm_port -type output { tlb_tte_tag[32] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[32] }
+create_qtm_port -type output { tlb_tte_tag[31] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[31] }
+create_qtm_port -type output { tlb_tte_tag[30] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[30] }
+create_qtm_port -type output { tlb_tte_tag[29] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[29] }
+create_qtm_port -type output { tlb_tte_tag[28] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[28] }
+create_qtm_port -type output { tlb_tte_tag[43] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[43] }
+create_qtm_port -type output { tlb_tte_tag[42] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[42] }
+create_qtm_port -type output { tlb_tte_tag[41] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[41] }
+create_qtm_port -type output { tlb_tte_tag[40] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[40] }
+create_qtm_port -type output { tlb_tte_tag[39] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[39] }
+create_qtm_port -type output { tlb_tte_tag[38] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[38] }
+create_qtm_port -type output { tlb_tte_tag[37] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[37] }
+create_qtm_port -type output { tlb_tte_tag[36] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[36] }
+create_qtm_port -type output { tlb_tte_tag[51] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[51] }
+create_qtm_port -type output { tlb_tte_tag[50] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[50] }
+create_qtm_port -type output { tlb_tte_tag[49] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[49] }
+create_qtm_port -type output { tlb_tte_tag[48] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[48] }
+create_qtm_port -type output { tlb_tte_tag[47] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[47] }
+create_qtm_port -type output { tlb_tte_tag[46] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[46] }
+create_qtm_port -type output { tlb_tte_tag[45] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[45] }
+create_qtm_port -type output { tlb_tte_tag[44] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[44] }
+create_qtm_port -type output { tlb_tte_tag[59] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[59] }
+create_qtm_port -type output { tlb_tte_tag[58] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[58] }
+create_qtm_port -type output { tlb_tte_tag[57] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[57] }
+create_qtm_port -type output { tlb_tte_tag[56] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[56] }
+create_qtm_port -type output { tlb_tte_tag[55] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[55] }
+create_qtm_port -type output { tlb_tte_tag[54] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[54] }
+create_qtm_port -type output { tlb_tte_tag[53] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[53] }
+create_qtm_port -type output { tlb_tte_tag[52] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[52] }
+create_qtm_port -type output { tlb_tte_data_parity }
+set_qtm_port_drive -type drive_dff { tlb_tte_data_parity }
+create_qtm_port -type output { tlb_tte_u_bit }
+set_qtm_port_drive -type drive_dff { tlb_tte_u_bit }
+create_qtm_port -type output { tlb_tte_tag[65] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[65] }
+create_qtm_port -type output { tlb_tte_tag[64] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[64] }
+create_qtm_port -type output { tlb_tte_tag[63] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[63] }
+create_qtm_port -type output { tlb_tte_tag[62] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[62] }
+create_qtm_port -type output { tlb_tte_tag[61] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[61] }
+create_qtm_port -type output { tlb_tte_tag[60] }
+set_qtm_port_drive -type drive_dff { tlb_tte_tag[60] }
+report_qtm_model
+save_qtm_model
+write_qtm_model -out_dir qtm -text

@@ -1,0 +1,737 @@
+
+                          IC Compiler (TM)
+                         IC Compiler-PC (TM)
+                         IC Compiler-XP (TM)
+                         IC Compiler-DP (TM)
+                         IC Compiler-AG (TM)
+
+          Version H-2013.03-ICC for RHEL64 -- Mar 05, 2013
+
+Zroute is the default router for ICC, ICC-PC, ICC-DP and ICC-AG in IC Compiler.
+         Classic router will continue to be fully supported.
+
+               Copyright (c) 1988-2013 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+Initializing gui preferences from file  /rsghome/greatmd/.synopsys_icc_prefs.tcl
+# ========== Copyright Header Begin ==========================================
+# Autor : Donguk Moon (dongukmoon@stanford.edu)
+# Purpose 
+#  - place and route for SPARC core
+# Progress:
+# 12/09/2013 : Library setup and consistency checking
+# ========== Copyright Header End ============================================
+sh date
+Sun Dec 15 18:45:20 PST 2013
+sh hostname
+selene.Stanford.EDU
+sh uptime
+ 18:45:20 up 3 days, 18:04, 10 users,  load average: 0.07, 0.07, 0.07
+remove_design -all
+1
+set dv_root [sh echo \$DV_ROOT]
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design
+set syn_home [sh echo \$SYN_LIB]
+/hd/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn
+#########################################################################
+## Library Prepraation
+## 1. setup for logical and physical library
+## 2. load tlu_plus file => this is from Syonpsys EDK (TODO: not accurate)
+## 3. checking library/tlu consistancy 
+#########################################################################
+source -echo -verbose $dv_root/design/sys/synopsys/script/target_lib.scr
+# ========== Copyright Header Begin ==========================================
+# 
+# OpenSPARC T2 Processor File: target_lib.scr
+# Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+# 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#
+# * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For the avoidance of doubt, and except that if any non-GPL license 
+# choice is available it will apply instead, Sun elects to use only 
+# the General Public License version 2 (GPLv2) at this time for any 
+# software where a choice of GPL license versions is made 
+# available with the language indicating that GPLv2 or any later version 
+# may be used, or where a choice of which version of the GPL is applied is 
+# otherwise unspecified. 
+#
+# Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+# CA 95054 USA or visit www.sun.com if you need additional information or 
+# have any questions. 
+# 
+# ========== Copyright Header End ============================================
+echo "INFO: target library version $syn_home"
+INFO: target library version /hd/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn
+set gate_lib_file tcbn28hpmbwp35tt1v25c_ccs.db
+tcbn28hpmbwp35tt1v25c_ccs.db
+set link_library $gate_lib_file
+tcbn28hpmbwp35tt1v25c_ccs.db
+set target_library $gate_lib_file 
+tcbn28hpmbwp35tt1v25c_ccs.db
+set lib_dir_md /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+set std_lib_dir_md $lib_dir_md/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+#set wire_library_file   {lsi_10k.db}
+#set wire_library   lsi_10k
+#set wire_model_name      05x05
+#set wireload_mode      top
+set search_path [concat $search_path $syn_home $std_lib_dir_md]
+. /hd/cad/synopsys/icc/H-2013.03/libraries/syn /hd/cad/synopsys/icc/H-2013.03/minpower/syn /hd/cad/synopsys/icc/H-2013.03/dw/syn_ver /hd/cad/synopsys/icc/H-2013.03/dw/sim_ver /hd/cad/synopsys/dc_shell/G-2012.06-SP5-1/libraries/syn /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+set link_library [concat * $link_library ]
+* tcbn28hpmbwp35tt1v25c_ccs.db
+set symbol_library {}
+set dont_use_cells 1
+1
+set dont_use_cell_list {}
+## Donguk : following is added for PNR 
+# .tf file 
+set technology_file $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+# reference library
+set mw_reference_library [concat   $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28   ]
+/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28
+#TLU+ Files
+set max_tluplus $dv_root/pnr_lib/1p9m.tluplus
+/rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+#set max_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+#set min_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+if {[file exists pnr]} {
+   sh rm -rf pnr
+}
+sh mkdir pnr
+cd pnr 
+if {[file exists mw_lib]} {
+   sh rm -rf mw_lib
+}
+create_mw_lib mw_lib -technology $technology_file -mw_reference_library $mw_reference_library
+Start to load technology file /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf.
+Warning: Layer 'AP' is missing the attribute 'minArea'. (line 728) (TFCHK-012)
+Warning: ContactCode 'VIA12_square' has undefined or zero enclosures. (line 745). (TFCHK-073)
+Warning: ContactCode 'VIA12_slot' has undefined or zero enclosures. (line 762). (TFCHK-073)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitMinResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitNomResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12' is missing the attribute 'unitMaxResistance'. (line 3314) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitMinResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitNomResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_Enc' is missing the attribute 'unitMaxResistance'. (line 3330) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitMinResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitNomResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT' is missing the attribute 'unitMaxResistance'. (line 3346) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN12_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3362) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitMinResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitNomResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23' is missing the attribute 'unitMaxResistance'. (line 3378) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitMinResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitNomResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_Enc' is missing the attribute 'unitMaxResistance'. (line 3394) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitMinResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitNomResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT' is missing the attribute 'unitMaxResistance'. (line 3410) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN23_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3426) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitMinResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitNomResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34' is missing the attribute 'unitMaxResistance'. (line 3442) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitMinResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitNomResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_Enc' is missing the attribute 'unitMaxResistance'. (line 3458) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitMinResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitNomResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT' is missing the attribute 'unitMaxResistance'. (line 3474) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN34_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3490) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitMinResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitNomResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45' is missing the attribute 'unitMaxResistance'. (line 3506) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitMinResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitNomResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_Enc' is missing the attribute 'unitMaxResistance'. (line 3522) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitMinResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitNomResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT' is missing the attribute 'unitMaxResistance'. (line 3538) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN45_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3554) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitMinResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitNomResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56' is missing the attribute 'unitMaxResistance'. (line 3570) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitMinResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitNomResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_Enc' is missing the attribute 'unitMaxResistance'. (line 3586) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitMinResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitNomResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT' is missing the attribute 'unitMaxResistance'. (line 3602) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN56_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3618) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitMinResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitNomResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67' is missing the attribute 'unitMaxResistance'. (line 3634) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitMinResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitNomResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_Enc' is missing the attribute 'unitMaxResistance'. (line 3650) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitMinResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitNomResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT' is missing the attribute 'unitMaxResistance'. (line 3666) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitMinResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitNomResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN67_RECT_Enc' is missing the attribute 'unitMaxResistance'. (line 3682) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitMinResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitNomResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78' is missing the attribute 'unitMaxResistance'. (line 3698) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitMinResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitNomResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN78_Enc' is missing the attribute 'unitMaxResistance'. (line 3714) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitMinResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitNomResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89' is missing the attribute 'unitMaxResistance'. (line 3730) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitMinResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitNomResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN89_Enc' is missing the attribute 'unitMaxResistance'. (line 3746) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitMinResistance'. (line 3762) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitNomResistance'. (line 3762) (TFCHK-014)
+Warning: ContactCode 'VIAGEN9AP' is missing the attribute 'unitMaxResistance'. (line 3762) (TFCHK-014)
+Information: ContactCode 'VIAGEN9AP' has a minimum cut spacing 1 that is less than the cut layer minimum spacing 2. (line 3762) (TFCHK-072)
+Warning: Layer 'M1' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.15. (TFCHK-049)
+Warning: Layer 'M2' has a pitch 0.135 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M3' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.295 or 0.15. (TFCHK-049)
+Warning: Layer 'M4' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M5' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.295 or 0.15. (TFCHK-049)
+Warning: Layer 'M6' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.18 or 0.295. (TFCHK-049)
+Warning: Layer 'M7' has a pitch 0.1 that does not match the recommended wire-to-via pitch 0.335. (TFCHK-049)
+Warning: Layer 'M8' has a pitch 0.8 that does not match the recommended wire-to-via pitch 0.86. (TFCHK-049)
+Warning: Layer 'M9' has a pitch 0.8 that does not match the recommended wire-to-via pitch 2.6. (TFCHK-049)
+Warning: Layer 'AP' has a pitch 4.5 that does not match the recommended wire-to-via pitch 5. (TFCHK-049)
+Warning: Layer 'M3' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M4' has a pitch 0.1 that does not match the doubled pitch 0.27 or tripled pitch 0.405. (TFCHK-050)
+Warning: Layer 'M5' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M6' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M7' has a pitch 0.1 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M8' has a pitch 0.8 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'M9' has a pitch 0.8 that does not match the doubled pitch 0.2 or tripled pitch 0.3. (TFCHK-050)
+Warning: Layer 'AP' has a pitch 4.5 that does not match the doubled pitch 1.6 or tripled pitch 2.4. (TFCHK-050)
+Warning: CapModel sections are missing. Capacitance models should be loaded with a TLU+ file later. (TFCHK-084)
+Technology file /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf has been loaded successfully.
+open_mw_lib mw_lib
+{mw_lib}
+set_tlu_plus_files                      -max_tluplus $max_tluplus 
+Information: No layer mapping file is specified. Assume layer names are the same between the technology library and the ITF. (RCEX-071)
+1
+check_library
+ViewDB Library /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db loaded by check_library
+
+#BEGIN_XCHECK_LIBRARY
+
+Logic Library:    tcbn28hpmbwp35tt1v25c_ccs 
+Physical Library: /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28 
+check_library options: 	
+Version: 				H-2013.03-ICC
+Check date and time:	Sun Dec 15 18:45:25 2013
+
+          List of logic library and file names
+------------------------------------------------------------------------------
+Logic library name           Logic library file name
+------------------------------------------------------------------------------
+tcbn28hpmbwp35tt1v25c_ccs    /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db
+------------------------------------------------------------------------------
+
+#BEGIN_XCHECK_LOGICCELLS
+
+Number of cells missing in logic library:	41 (out of 1303)
+
+Information: List of cells missing in logic library (LIBCHK-210)
+-------------------------------------------------------------------------
+Cell name                  Cell type             Physical library
+-------------------------------------------------------------------------
+LVLHLCLOD2BWP35            Core                  tsmc28
+LVLHLCLOD4BWP35            Core                  tsmc28
+LVLHLCLOD8BWP35            Core                  tsmc28
+LVLHLD1BWP35               Core                  tsmc28
+LVLHLD2BWP35               Core                  tsmc28
+LVLHLD4BWP35               Core                  tsmc28
+LVLHLD8BWP35               Core                  tsmc28
+LVLLHCD1BWP35              Core                  tsmc28
+LVLLHCD2BWP35              Core                  tsmc28
+LVLLHCD4BWP35              Core                  tsmc28
+LVLLHCD8BWP35              Core                  tsmc28
+LVLLHCLOD1BWP35            Core                  tsmc28
+LVLLHCLOD2BWP35            Core                  tsmc28
+LVLLHCLOD4BWP35            Core                  tsmc28
+LVLLHCLOD8BWP35            Core                  tsmc28
+LVLLHD1BWP35               Core                  tsmc28
+LVLLHD2BWP35               Core                  tsmc28
+LVLLHD4BWP35               Core                  tsmc28
+LVLLHD8BWP35               Core                  tsmc28
+LVLHLCD1BWP35              Core                  tsmc28
+LVLHLCD2BWP35              Core                  tsmc28
+LVLHLCD4BWP35              Core                  tsmc28
+LVLHLCD8BWP35              Core                  tsmc28
+LVLHLCLOD1BWP35            Core                  tsmc28
+ISOHID1BWP35               Core                  tsmc28
+ISOHID2BWP35               Core                  tsmc28
+ISOHID4BWP35               Core                  tsmc28
+ISOHID8BWP35               Core                  tsmc28
+ISOLOD1BWP35               Core                  tsmc28
+ISOLOD2BWP35               Core                  tsmc28
+ISOLOD4BWP35               Core                  tsmc28
+ISOLOD8BWP35               Core                  tsmc28
+TS6N28HPMA256X32M2SWBSO    Unknown               tsmc28
+TS6N28HPMA64X32M2SWBSO     Unknown               tsmc28
+TS1N28HPMB256X32M4SWBASO   Unknown               tsmc28
+TS1N28HPMB64X32M4SWBASO    Unknown               tsmc28
+TSDN28HPMA64X32M4F         Unknown               tsmc28
+TS6N28HPMA64X32M2F         Unknown               tsmc28
+TS1N28HPMB256X32M4S        Unknown               tsmc28
+TS6N28HPMA40X32M2F         Unknown               tsmc28
+TS1N28HPMB64X26M4S         Unknown               tsmc28
+-------------------------------------------------------------------------
+
+Information: List of physical only cells (LIBCHK-119)
+-------------------------------------------------------------------------
+Cell name                  Cell type             Physical library
+-------------------------------------------------------------------------
+TAPCELLBWP35               PGPinOnly             tsmc28
+FILL3BWP35                 PGPinOnly             tsmc28
+FILL4BWP35                 PGPinOnly             tsmc28
+FILL64BWP35                PGPinOnly             tsmc28
+FILL8BWP35                 PGPinOnly             tsmc28
+FILL16BWP35                PGPinOnly             tsmc28
+FILL2BWP35                 PGPinOnly             tsmc28
+FILL32BWP35                PGPinOnly             tsmc28
+BOUNDARY_LEFTBWP35         PGPinOnly             tsmc28
+BOUNDARY_RIGHTBWP35        PGPinOnly             tsmc28
+-------------------------------------------------------------------------
+
+#END_XCHECK_LOGICCELLS
+
+#BEGIN_XCHECK_PHYSICALCELLS
+
+Number of cells missing in physical library:	0 (out of 1354)
+
+#END_XCHECK_PHYSICALCELLS
+
+#BEGIN_XCHECK_PINS
+
+Number of cells with missing or mismatched pins in libraries:	0
+
+#END_XCHECK_PINS
+
+#BEGIN_XCHECK_CELLANTENNADIODETYPE
+
+Number of cells with inconsistent antenna_diode_type:	0
+
+#END_XCHECK_CELLANTENNADIODETYPE
+
+Logic vs. physical library check summary:
+Number of cells missing in logic library:	41 
+Information: Logic library is INCONSISTENT with physical library (LIBCHK-220)
+
+#END_XCHECK_LIBRARY
+
+0
+check_tlu_plus_files
+
+Sanity check for TLU+ vs MW-Tech files:
+ max_tlu+: /rsgs/file0/greatmd/david/abl/OST2/OST2.design/pnr_lib/1p9m.tluplus
+ min_tlu+: **NONE**
+ mapping_file: default
+ max_emul_tlu+: **NONE**
+ min_emul_tlu+: **NONE**
+ MW design lib: mw_lib
+
+--------- Sanity Check on TLUPlus Files -------------
+INFO: mapping file is not provided
+INFO: ITF and Milkyway TF layer names should be the same
+1. Checking the conducting layer names in ITF and mapping file ... 
+[ Passed! ]
+2. Checking the via layer names in ITF and mapping file ... 
+[ Passed! ]
+3. Checking the consistency of Min Width and Min Spacing between MW-tech and ITF ... 
+[ Passed! ]
+----------------- Check Ends ------------------
+1
+#########################################################################
+## Loading synthesized netlist for SPC
+#########################################################################
+read_ddc ../../dec/synopsys/gate/dec.ddc
+Loading db file '/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db'
+Information: Using CCS timing libraries. (TIM-024)
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Loading db file '/hd/cad/synopsys/icc/H-2013.03/libraries/syn/gtech.db'
+Loading db file '/hd/cad/synopsys/icc/H-2013.03/libraries/syn/standard.sldb'
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+  Loading link library 'tcbn28hpmbwp35tt1v25c_ccs'
+  Loading link library 'gtech'
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/dec/synopsys/gate/dec.ddc'.
+Loaded 1 design.
+Current design is 'dec'.
+dec
+read_ddc ../../exu/synopsys/gate/exu.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/exu/synopsys/gate/exu.ddc'.
+Loaded 1 design.
+Current design is 'exu'.
+exu
+read_ddc ../../fgu/synopsys/gate/fgu.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/fgu/synopsys/gate/fgu.ddc'.
+Loaded 1 design.
+Current design is 'fgu'.
+fgu
+read_ddc ../../gkt/synopsys/gate/gkt.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/gkt/synopsys/gate/gkt.ddc'.
+Loaded 1 design.
+Current design is 'gkt'.
+gkt
+read_ddc ../../ifu/ifu_cmu/synopsys/gate/ifu_cmu.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/ifu/ifu_cmu/synopsys/gate/ifu_cmu.ddc'.
+Loaded 1 design.
+Current design is 'ifu_cmu'.
+ifu_cmu
+read_ddc ../../ifu/ifu_ftu/synopsys/gate/ifu_ftu.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/ifu/ifu_ftu/synopsys/gate/ifu_ftu.ddc'.
+Loaded 1 design.
+Current design is 'ifu_ftu'.
+ifu_ftu
+read_ddc ../../ifu/ifu_ibu/synopsys/gate/ifu_ibu.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/ifu/ifu_ibu/synopsys/gate/ifu_ibu.ddc'.
+Loaded 1 design.
+Current design is 'ifu_ibu'.
+ifu_ibu
+read_ddc ../../lsu/synopsys/gate/lsu.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/lsu/synopsys/gate/lsu.ddc'.
+Loaded 1 design.
+Current design is 'lsu'.
+lsu
+read_ddc ../../mmu/synopsys/gate/mmu.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/mmu/synopsys/gate/mmu.ddc'.
+Loaded 1 design.
+Current design is 'mmu'.
+mmu
+read_ddc ../../pku/synopsys/gate/pku.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/pku/synopsys/gate/pku.ddc'.
+Loaded 1 design.
+Current design is 'pku'.
+pku
+read_ddc ../../pmu/synopsys/gate/pmu.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/pmu/synopsys/gate/pmu.ddc'.
+Loaded 1 design.
+Current design is 'pmu'.
+pmu
+read_ddc ../../tlu/synopsys/gate/tlu.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/tlu/synopsys/gate/tlu.ddc'.
+Loaded 1 design.
+Current design is 'tlu'.
+tlu
+read_ddc ../gate/spc.ddc
+Warning: Unit conflict found: Milkyway technology file power unit is mW; main library power unit is nW. (IFS-007)
+Information: linking reference library : /scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28. (PSYN-878)
+Reading ddc file '/rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys/gate/spc.ddc'.
+Loaded 1 design.
+Current design is 'spc'.
+spc
+set top_module spc
+spc
+current_design $top_module
+Current design is 'spc'.
+{spc}
+link
+
+  Linking design 'spc'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  spc                         /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/synopsys/gate/spc.ddc
+  tcbn28hpmbwp35tt1v25c_ccs (library) /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a/tcbn28hpmbwp35tt1v25c_ccs.db
+  * (12 designs)              /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/iop/spc/dec/synopsys/gate/dec.ddc, etc
+
+Information: Building the design 'spu'. (HDL-193)
+Warning: Cannot find the design 'spu' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_l1hdr_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_l1hdr_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_u1_inv_1x'. (HDL-193)
+Warning: Cannot find the design 'cl_u1_inv_1x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_u1_nor3_1x'. (HDL-193)
+Warning: Cannot find the design 'cl_u1_nor3_1x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_u1_buf_1x'. (HDL-193)
+Warning: Cannot find the design 'cl_u1_buf_1x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_u1_nand3_1x'. (HDL-193)
+Warning: Cannot find the design 'cl_u1_nand3_1x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_u1_nand2_1x'. (HDL-193)
+Warning: Cannot find the design 'cl_u1_nand2_1x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_sc1_aomux2_1x'. (HDL-193)
+Warning: Cannot find the design 'cl_sc1_aomux2_1x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_u1_nor2_1x'. (HDL-193)
+Warning: Cannot find the design 'cl_u1_nor2_1x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_penc3_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_penc3_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_penc5_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_penc5_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_muxbuff2_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_muxbuff2_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_penc6_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_penc6_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_sc1_l1hdr_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_sc1_l1hdr_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_muxbuff3_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_muxbuff3_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_muxbuff8_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_muxbuff8_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_penc2_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_penc2_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_muxbuff4_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_muxbuff4_8x' in the library 'WORK'. (LBR-1)
+
+// Seems to be SRAMs 
+Information: Building the design 'n2_frf_mp_256x78_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_frf_mp_256x78_cust' in the library 'WORK'. (LBR-1)
+
+Information: Building the design 'cl_dp1_pdec8_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_pdec8_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_penc4_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_penc4_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_penc8_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_penc8_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_muxbuff6_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_muxbuff6_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_penc7_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_penc7_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_add136_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_add136_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_boothenc_4x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_boothenc_4x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_muxbuff5_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_muxbuff5_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_pdec4_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_pdec4_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_zdt64_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_zdt64_8x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_muxbuff7_8x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_muxbuff7_8x' in the library 'WORK'. (LBR-1)
+
+Information: Building the design 'n2_icd_sp_16p5kb_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_icd_sp_16p5kb_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_ict_sp_1920b_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_ict_sp_1920b_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_dva_dp_32x32_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_dva_dp_32x32_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_tlb_tl_64x59_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_tlb_tl_64x59_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_irf_mp_128x72_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_irf_mp_128x72_cust' in the library 'WORK'. (LBR-1)
+
+Information: Building the design 'cl_dp1_penc5_64x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_penc5_64x' in the library 'WORK'. (LBR-1)
+
+Information: Building the design 'n2_com_dp_32x152_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_com_dp_32x152_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_com_dp_32x72_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_com_dp_32x72_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_dca_sp_9kb_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_dca_sp_9kb_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_stb_cm_64x45_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_stb_cm_64x45_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_com_dp_64x84_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_com_dp_64x84_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_dta_sp_1920b_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_dta_sp_1920b_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_tlb_tl_128x59_cust'. (HDL-193)
+Warning: Cannot find the design 'n2_tlb_tl_128x59_cust' in the library 'WORK'. (LBR-1)
+Information: Building the design 'cl_dp1_muxbuff8_32x'. (HDL-193)
+Warning: Cannot find the design 'cl_dp1_muxbuff8_32x' in the library 'WORK'. (LBR-1)
+Information: Building the design 'n2_com_dp_32x84_cust'. (HDL-193)
+
+Warning: Cannot find the design 'n2_com_dp_32x84_cust' in the library 'WORK'. (LBR-1)
+Warning: Unable to resolve reference 'spu' in 'spc'. (LINK-5)
+
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_u1_inv_1x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_u1_nor3_1x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_u1_buf_1x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_u1_nand3_1x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_u1_nand2_1x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_aomux2_1x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_u1_nor2_1x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc3_8x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc5_8x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff2_8x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc6_8x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'spc'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'gkt'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'gkt'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff2_8x' in 'gkt'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff3_8x' in 'gkt'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff8_8x' in 'gkt'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc2_8x' in 'gkt'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff4_8x' in 'gkt'. (LINK-5)
+Warning: Unable to resolve reference 'n2_frf_mp_256x78_cust' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc2_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff4_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc3_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff2_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec8_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc4_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc8_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc5_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc6_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff6_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc7_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_add136_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_boothenc_4x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff5_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff3_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec4_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_zdt64_8x' in 'fgu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff7_8x' in 'ifu_ibu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff5_8x' in 'ifu_ibu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'ifu_ibu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'ifu_ibu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_icd_sp_16p5kb_cust' in 'ifu_ftu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_ict_sp_1920b_cust' in 'ifu_ftu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_dva_dp_32x32_cust' in 'ifu_ftu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_tlb_tl_64x59_cust' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff3_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff4_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff2_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc2_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff8_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff6_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff5_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec8_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc3_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff7_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc4_8x' in 'ifu_ftu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'ifu_cmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc2_8x' in 'ifu_cmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'ifu_cmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff8_8x' in 'ifu_cmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec8_8x' in 'ifu_cmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'dec'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'pku'. (LINK-5)
+Warning: Unable to resolve reference 'n2_irf_mp_128x72_cust' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_zdt64_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc5_64x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc4_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff8_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc5_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc6_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc2_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff7_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc3_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec8_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc7_8x' in 'exu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'exu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_com_dp_32x152_cust' in 'tlu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_com_dp_32x72_cust' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc5_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc7_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc2_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff4_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc8_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc4_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff5_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc3_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec8_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff8_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff2_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff3_8x' in 'tlu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff6_8x' in 'tlu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_dca_sp_9kb_cust' in 'lsu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_dva_dp_32x32_cust' in 'lsu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_com_dp_32x152_cust' in 'lsu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_stb_cm_64x45_cust' in 'lsu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_com_dp_64x84_cust' in 'lsu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_dta_sp_1920b_cust' in 'lsu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_tlb_tl_128x59_cust' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc2_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc3_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec4_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff2_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff5_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc8_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec8_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff8_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff8_32x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff4_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc4_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc5_8x' in 'lsu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff3_8x' in 'lsu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_com_dp_32x84_cust' in 'mmu'. (LINK-5)
+Warning: Unable to resolve reference 'n2_com_dp_32x72_cust' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff4_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc7_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff8_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec8_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff2_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc4_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc5_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc2_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_pdec4_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc3_8x' in 'mmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_l1hdr_8x' in 'pmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc8_8x' in 'pmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc2_8x' in 'pmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_muxbuff8_8x' in 'pmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_dp1_penc3_8x' in 'pmu'. (LINK-5)
+//Warning: Unable to resolve reference 'cl_sc1_l1hdr_8x' in 'pmu'. (LINK-5)
+Error: Cannot write Milkyway for un-uniquified design. (MWDC-014)
+0
+#quit
+icc_shell> exit
+
+Thank you...
+Exit IC Compiler!

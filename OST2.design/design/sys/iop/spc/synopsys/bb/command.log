@@ -1,0 +1,240 @@
+#@ # 
+#@ # Running icc_shell Version F-2011.09-ICC-SP1 for linux -- Sep 29, 2011
+#@ # Date:   Mon Jan  6 15:24:40 2014
+#@ # Run by: greatmd@rsg1.stanford.edu
+#@ 
+
+source -echo -verbose /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/synopsys/script/build_qtms.tcl
+#@ # ========== Copyright Header Begin ==========================================
+#@ # Autor : Donguk Moon (dongukmoon@stanford.edu)
+#@ # Purpose 
+#@ #  - place and route for SPARC core
+#@ # Progress:
+#@ # 1/04/2014 : QTM models for all black boxes
+#@ # ========== Copyright Header End ============================================
+#@ 
+#@ ## black_box list
+#@ ##{n2_frf_mp_256x78_cust n2_com_dp_32x84_cust n2_com_dp_32x72_cust n2_dca_sp_9kb_cust n2_dva_dp_32x32_cust n2_com_dp_32x152_cust n2_stb_cm_64x45_cust n2_com_dp_64x84_cust n2_dta_sp_1920b_cust n2_tlb_tl_128x59_cust n2_irf_mp_128x72_cust n2_icd_sp_16p5kb_cust n2_ict_sp_1920b_cust n2_tlb_tl_64x59_cust}
+#@ 
+#@ sh date
+#@ sh hostname
+#@ sh uptime
+#@ remove_design -all
+#@ set dv_root [sh echo \$DV_ROOT]
+#@ set syn_home [sh echo \$SYN_LIB]
+#@ 
+#@ 
+#@ ## goto bb directory:
+#@ set block  spc
+#@ set blk_dir $dv_root/design/sys/iop/$block/synopsys
+#@ echo "Enter $blk_dir/bb for QTM modeling...." 
+#@ cd $blk_dir/bb
+#@ 
+#@ source -echo -verbose $dv_root/design/sys/synopsys/script/pnr_lib_setup.tcl
+#@ #########################################################################
+#@ ## Library Prepraation
+#@ ## 1. setup for logical and physical library
+#@ ## 2. load tlu_plus file => this is from Syonpsys EDK (TODO: not accurate)
+#@ ## 3. checking library/tlu consistancy 
+#@ #########################################################################
+#@ 
+#@ source -echo -verbose $dv_root/design/sys/synopsys/script/target_lib.scr
+#@ # ========== Copyright Header Begin ==========================================
+#@ # 
+#@ # OpenSPARC T2 Processor File: target_lib.scr
+#@ # Copyright (C) 1995-2007 Sun Microsystems, Inc. All Rights Reserved
+#@ # 4150 Network Circle, Santa Clara, California 95054, U.S.A.
+#@ #
+#@ # * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER. 
+#@ #
+#@ # This program is free software; you can redistribute it and/or modify
+#@ # it under the terms of the GNU General Public License as published by
+#@ # the Free Software Foundation; version 2 of the License.
+#@ #
+#@ # This program is distributed in the hope that it will be useful,
+#@ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+#@ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#@ # GNU General Public License for more details.
+#@ #
+#@ # You should have received a copy of the GNU General Public License
+#@ # along with this program; if not, write to the Free Software
+#@ # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#@ #
+#@ # For the avoidance of doubt, and except that if any non-GPL license 
+#@ # choice is available it will apply instead, Sun elects to use only 
+#@ # the General Public License version 2 (GPLv2) at this time for any 
+#@ # software where a choice of GPL license versions is made 
+#@ # available with the language indicating that GPLv2 or any later version 
+#@ # may be used, or where a choice of which version of the GPL is applied is 
+#@ # otherwise unspecified. 
+#@ #
+#@ # Please contact Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, 
+#@ # CA 95054 USA or visit www.sun.com if you need additional information or 
+#@ # have any questions. 
+#@ # 
+#@ # ========== Copyright Header End ============================================
+#@ echo "INFO: target library version $syn_home"
+#@ 
+#@ set gate_lib_file tcbn28hpmbwp35tt1v25c_ccs.db
+#@ set link_library $gate_lib_file
+#@ set target_library $gate_lib_file 
+#@ 
+#@ set lib_dir_md /rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10
+#@ set std_lib_dir_md $lib_dir_md/STD/TSMCHOME/digital/Front_End/timing_power_noise/CCS/tcbn28hpmbwp35_111a
+#@ 
+#@ #set wire_library_file   {lsi_10k.db}
+#@ #set wire_library   lsi_10k
+#@ #set wire_model_name      05x05
+#@ #set wireload_mode      top
+#@ 
+#@ set search_path [concat $search_path $syn_home $std_lib_dir_md $dv_root/design/sys/iop/spc/synopsys/bb/qtm/]
+#@ set link_library [concat * $link_library ]
+#@ 
+#@ #set_min_library tcbn28hpmbwp35tt1v25c_ccs.db -min_version tcbn28hpmbwp35ff0p99v0c_ccs.db 
+#@ set symbol_library {}
+#@ set dont_use_cells 1
+#@ set dont_use_cell_list {}
+#@ 
+#@ ## Donguk : following is added for PNR 
+#@ #lappend link_library "n2_frf_mp_256x78_cust.db"
+#@ 
+#@ # .tf file 
+#@ set technology_file $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28.tf
+#@ # reference library
+#@ set mw_reference_library [concat   $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28   ]
+#@ #TLU+ Files
+#@ set max_tluplus $dv_root/pnr_lib/1p9m.tluplus
+#@ set min_tluplus $dv_root/pnr_lib/1p9m.tluplus
+#@ #set max_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+#@ #set min_tluplus $lib_dir_md/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/techfiles/starrc/1p9m.tluplus
+#@ 
+#@ # -- End source /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/synopsys/script/target_lib.scr
+
+#@ 
+#@ 
+#@ ## Delete previous milkyway db
+#@ if {[file exists mw_lib]} {
+#@    sh rm -rf mw_lib
+#@ }
+#@ create_mw_lib mw_lib -technology $technology_file -mw_reference_library $mw_reference_library
+#@ open_mw_lib mw_lib
+#@ 
+#@ #TODO: might need tech2itf map file
+#@ set_tlu_plus_files  -max_tluplus $max_tluplus -min_tluplus $min_tluplus    
+#@ 
+#@ check_library
+#@ set lc_check_lib_mw_libs "/rsgs/scratch0/eccheng/libs/tsmc/package.2013.05.10/STD/TSMCHOME/digital/Back_End/lef/tcbn28hpmbwp35_110a/milkyway/tsmc28"
+
+#@ check_tlu_plus_files
+#@ # -- End source /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/synopsys/script/pnr_lib_setup.tcl
+
+#@ 
+#@ source -echo -verbose $dv_root/design/sys/synopsys/script/qtm_scripts/n2_frf_mp_256x78_cust.qtm.tcl
+#@ set top_module n2_frf_mp_256x78_cust
+#@ read_verilog -dirty_netlist $top_module.v 
+#@ current_design $top_module
+#@ 
+#@ #get_ports -filter {@port_direction == in}
+#@ create_qtm_model $top_module
+#@ set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+#@ set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+#@ set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+#@ set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q -clock CP
+#@ create_qtm_load_type -lib_cell DFQD2BWP35 -input_pin D load_dff
+#@ create_qtm_drive_type -lib_cell DFQD2BWP35 -output_pin Q drive_dff
+#@ 
+#@ create_qtm_port l2clk -type clock 
+#@ foreach pt [ get_object_name [all_inputs] ] {
+#@   if {$pt != "l2clk"} {
+#@     create_qtm_port $pt -type input 
+#@     #create_qtm_port $pt -type inout 
+#@     set_qtm_port_load -type load_dff -factor 1 $pt 
+#@    }
+#@ }
+#@ foreach pt [ get_object_name [all_outputs] ] {
+#@   create_qtm_port $pt -type output 
+#@   #create_qtm_port $pt -type inout 
+#@   set_qtm_port_drive -type drive_dff $pt
+#@ }
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to r1_addr -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to r2_addr -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to r1_valid -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to r2_valid -value 0
+#@ 
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_addr -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_addr -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_valid -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_valid -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_tid -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_tid -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_ecc -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_ecc -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w1_data -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from l2clk -to w2_data -value 0
+#@ #create_qtm_constraint_arc -hold -edge rise -from l2clk -to $pt -value 0
+#@ 
+#@ create_qtm_delay_arc -from_edge rise -from l2clk -to frf_r1_data -value 0
+#@ create_qtm_delay_arc -from_edge rise -from l2clk -to frf_r1_ecc -value 0
+#@ create_qtm_delay_arc -from_edge rise -from l2clk -to frf_r2_data -value 0
+#@ create_qtm_delay_arc -from_edge rise -from l2clk -to frf_r2_ecc -value 0
+#@ 
+#@ #report_qtm_model
+#@ save_qtm_model
+#@ write_qtm_model -out_dir qtm -text
+#@ 
+#@ 
+#@ # -- End source /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/synopsys/script/qtm_scripts/n2_frf_mp_256x78_cust.qtm.tcl
+
+#@ source -echo -verbose $dv_root/design/sys/synopsys/script/qtm_scripts/n2_com_dp_32x84_cust.qtm.tcl
+#@ set top_module n2_com_dp_32x84_cust
+#@ read_verilog -dirty_netlist $top_module.v 
+#@ current_design $top_module
+#@ 
+#@ #get_ports -filter {@port_direction == in}
+#@ create_qtm_model $top_module
+#@ set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+#@ set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+#@ set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+#@ set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q -clock CP
+#@ create_qtm_load_type -lib_cell DFQD2BWP35 -input_pin D load_dff
+#@ create_qtm_drive_type -lib_cell DFQD2BWP35 -output_pin Q drive_dff
+#@ 
+#@ create_qtm_port rdclk -type clock 
+#@ create_qtm_port wrclk -type clock 
+#@ 
+#@ foreach pt [ get_object_name [all_inputs] ] {
+#@   if {$pt != "rdclk" && $pt != "wrclk"} {
+#@     create_qtm_port $pt -type input 
+#@     set_qtm_port_load -type load_dff -factor 1 $pt 
+#@    }
+#@ }
+#@ foreach pt [ get_object_name [all_outputs] ] {
+#@   create_qtm_port $pt -type output 
+#@   set_qtm_port_drive -type drive_dff $pt
+#@ }
+#@ 
+#@ create_qtm_constraint_arc -setup -edge rise -from rdclk -to rd_adr -value 0
+#@ create_qtm_constraint_arc -hold -edge rise -from rdclk -to rd_adr -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from rdclk -to rd_en -value 0
+#@ create_qtm_constraint_arc -hold -edge rise -from rdclk -to rd_en -value 0
+#@ 
+#@ create_qtm_constraint_arc -setup -edge rise -from wrclk -to wr_adr -value 0
+#@ create_qtm_constraint_arc -hold -edge rise -from wrclk -to wr_adr -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from wrclk -to wr_en -value 0
+#@ create_qtm_constraint_arc -hold -edge rise -from wrclk -to wr_en -value 0
+#@ create_qtm_constraint_arc -setup -edge rise -from wrclk -to din -value 0
+#@ create_qtm_constraint_arc -hold -edge rise -from wrclk -to din -value 0
+#@ 
+#@ #create_qtm_delay_arc -from_edge rise -from rdclk -to dout -value 0
+#@ 
+#@ #report_qtm_model
+#@ save_qtm_model
+#@ write_qtm_model -out_dir qtm -text
+#@ 
+#@ 
+#@ # -- End source /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/synopsys/script/qtm_scripts/n2_com_dp_32x84_cust.qtm.tcl
+
+#@ 
+#@ # -- End source /rsgs/file0/greatmd/david/abl/OST2/OST2.design/design/sys/synopsys/script/build_qtms.tcl
+
+exit

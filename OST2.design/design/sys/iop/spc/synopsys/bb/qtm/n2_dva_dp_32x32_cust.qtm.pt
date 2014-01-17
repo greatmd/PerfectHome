@@ -1,0 +1,272 @@
+create_qtm_model n2_dva_dp_32x32_cust
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q -clock CP
+create_qtm_load_type -lib_cell DFQD2BWP35 -input_pin D load_dff
+create_qtm_drive_type -lib_cell DFQD2BWP35 -output_pin Q drive_dff
+create_qtm_port -type clock { l2clk }
+create_qtm_port -type input { tcu_aclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_aclk }
+create_qtm_port -type input { tcu_array_wr_inhibit }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_array_wr_inhibit }
+create_qtm_port -type input { tcu_scan_en }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_scan_en }
+create_qtm_port -type input { tcu_se_scancollar_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_se_scancollar_in }
+create_qtm_port -type input { tcu_pce_ov }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_pce_ov }
+create_qtm_port -type input { rd_addr[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { rd_addr[4] }
+create_qtm_port -type input { rd_addr[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { rd_addr[3] }
+create_qtm_port -type input { rd_addr[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { rd_addr[2] }
+create_qtm_port -type input { rd_addr[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { rd_addr[1] }
+create_qtm_port -type input { rd_addr[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { rd_addr[0] }
+create_qtm_port -type input { scan_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { scan_in }
+create_qtm_port -type input { pce }
+set_qtm_port_load -type load_dff -factor 1.000000 { pce }
+create_qtm_port -type input { tcu_bclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_bclk }
+create_qtm_port -type input { din[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[2] }
+create_qtm_port -type input { din[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[1] }
+create_qtm_port -type input { din[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[0] }
+create_qtm_port -type input { wr_addr[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { wr_addr[4] }
+create_qtm_port -type input { wr_addr[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { wr_addr[3] }
+create_qtm_port -type input { wr_addr[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { wr_addr[2] }
+create_qtm_port -type input { wr_addr[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { wr_addr[1] }
+create_qtm_port -type input { wr_addr[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { wr_addr[0] }
+create_qtm_port -type input { din[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[10] }
+create_qtm_port -type input { din[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[9] }
+create_qtm_port -type input { din[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[8] }
+create_qtm_port -type input { din[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[7] }
+create_qtm_port -type input { din[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[6] }
+create_qtm_port -type input { din[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[5] }
+create_qtm_port -type input { din[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[4] }
+create_qtm_port -type input { din[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[3] }
+create_qtm_port -type input { din[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[18] }
+create_qtm_port -type input { din[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[17] }
+create_qtm_port -type input { din[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[16] }
+create_qtm_port -type input { din[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[15] }
+create_qtm_port -type input { din[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[14] }
+create_qtm_port -type input { din[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[13] }
+create_qtm_port -type input { din[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[12] }
+create_qtm_port -type input { din[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[11] }
+create_qtm_port -type input { din[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[26] }
+create_qtm_port -type input { din[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[25] }
+create_qtm_port -type input { din[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[24] }
+create_qtm_port -type input { din[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[23] }
+create_qtm_port -type input { din[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[22] }
+create_qtm_port -type input { din[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[21] }
+create_qtm_port -type input { din[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[20] }
+create_qtm_port -type input { din[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[19] }
+create_qtm_port -type input { bit_wen[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[2] }
+create_qtm_port -type input { bit_wen[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[1] }
+create_qtm_port -type input { bit_wen[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[0] }
+create_qtm_port -type input { din[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[31] }
+create_qtm_port -type input { din[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[30] }
+create_qtm_port -type input { din[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[29] }
+create_qtm_port -type input { din[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[28] }
+create_qtm_port -type input { din[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { din[27] }
+create_qtm_port -type input { bit_wen[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[10] }
+create_qtm_port -type input { bit_wen[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[9] }
+create_qtm_port -type input { bit_wen[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[8] }
+create_qtm_port -type input { bit_wen[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[7] }
+create_qtm_port -type input { bit_wen[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[6] }
+create_qtm_port -type input { bit_wen[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[5] }
+create_qtm_port -type input { bit_wen[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[4] }
+create_qtm_port -type input { bit_wen[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[3] }
+create_qtm_port -type input { bit_wen[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[18] }
+create_qtm_port -type input { bit_wen[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[17] }
+create_qtm_port -type input { bit_wen[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[16] }
+create_qtm_port -type input { bit_wen[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[15] }
+create_qtm_port -type input { bit_wen[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[14] }
+create_qtm_port -type input { bit_wen[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[13] }
+create_qtm_port -type input { bit_wen[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[12] }
+create_qtm_port -type input { bit_wen[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[11] }
+create_qtm_port -type input { bit_wen[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[26] }
+create_qtm_port -type input { bit_wen[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[25] }
+create_qtm_port -type input { bit_wen[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[24] }
+create_qtm_port -type input { bit_wen[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[23] }
+create_qtm_port -type input { bit_wen[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[22] }
+create_qtm_port -type input { bit_wen[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[21] }
+create_qtm_port -type input { bit_wen[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[20] }
+create_qtm_port -type input { bit_wen[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[19] }
+create_qtm_port -type input { wr_en }
+set_qtm_port_load -type load_dff -factor 1.000000 { wr_en }
+create_qtm_port -type input { rd_en }
+set_qtm_port_load -type load_dff -factor 1.000000 { rd_en }
+create_qtm_port -type input { bit_wen[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[31] }
+create_qtm_port -type input { bit_wen[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[30] }
+create_qtm_port -type input { bit_wen[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[29] }
+create_qtm_port -type input { bit_wen[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[28] }
+create_qtm_port -type input { bit_wen[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { bit_wen[27] }
+create_qtm_port -type output { dout[0] }
+set_qtm_port_drive -type drive_dff { dout[0] }
+create_qtm_port -type output { dout[8] }
+set_qtm_port_drive -type drive_dff { dout[8] }
+create_qtm_port -type output { dout[7] }
+set_qtm_port_drive -type drive_dff { dout[7] }
+create_qtm_port -type output { dout[6] }
+set_qtm_port_drive -type drive_dff { dout[6] }
+create_qtm_port -type output { dout[5] }
+set_qtm_port_drive -type drive_dff { dout[5] }
+create_qtm_port -type output { dout[4] }
+set_qtm_port_drive -type drive_dff { dout[4] }
+create_qtm_port -type output { dout[3] }
+set_qtm_port_drive -type drive_dff { dout[3] }
+create_qtm_port -type output { dout[2] }
+set_qtm_port_drive -type drive_dff { dout[2] }
+create_qtm_port -type output { dout[1] }
+set_qtm_port_drive -type drive_dff { dout[1] }
+create_qtm_port -type output { dout[16] }
+set_qtm_port_drive -type drive_dff { dout[16] }
+create_qtm_port -type output { dout[15] }
+set_qtm_port_drive -type drive_dff { dout[15] }
+create_qtm_port -type output { dout[14] }
+set_qtm_port_drive -type drive_dff { dout[14] }
+create_qtm_port -type output { dout[13] }
+set_qtm_port_drive -type drive_dff { dout[13] }
+create_qtm_port -type output { dout[12] }
+set_qtm_port_drive -type drive_dff { dout[12] }
+create_qtm_port -type output { dout[11] }
+set_qtm_port_drive -type drive_dff { dout[11] }
+create_qtm_port -type output { dout[10] }
+set_qtm_port_drive -type drive_dff { dout[10] }
+create_qtm_port -type output { dout[9] }
+set_qtm_port_drive -type drive_dff { dout[9] }
+create_qtm_port -type output { dout[24] }
+set_qtm_port_drive -type drive_dff { dout[24] }
+create_qtm_port -type output { dout[23] }
+set_qtm_port_drive -type drive_dff { dout[23] }
+create_qtm_port -type output { dout[22] }
+set_qtm_port_drive -type drive_dff { dout[22] }
+create_qtm_port -type output { dout[21] }
+set_qtm_port_drive -type drive_dff { dout[21] }
+create_qtm_port -type output { dout[20] }
+set_qtm_port_drive -type drive_dff { dout[20] }
+create_qtm_port -type output { dout[19] }
+set_qtm_port_drive -type drive_dff { dout[19] }
+create_qtm_port -type output { dout[18] }
+set_qtm_port_drive -type drive_dff { dout[18] }
+create_qtm_port -type output { dout[17] }
+set_qtm_port_drive -type drive_dff { dout[17] }
+create_qtm_port -type output { scan_out }
+set_qtm_port_drive -type drive_dff { scan_out }
+create_qtm_port -type output { dout[31] }
+set_qtm_port_drive -type drive_dff { dout[31] }
+create_qtm_port -type output { dout[30] }
+set_qtm_port_drive -type drive_dff { dout[30] }
+create_qtm_port -type output { dout[29] }
+set_qtm_port_drive -type drive_dff { dout[29] }
+create_qtm_port -type output { dout[28] }
+set_qtm_port_drive -type drive_dff { dout[28] }
+create_qtm_port -type output { dout[27] }
+set_qtm_port_drive -type drive_dff { dout[27] }
+create_qtm_port -type output { dout[26] }
+set_qtm_port_drive -type drive_dff { dout[26] }
+create_qtm_port -type output { dout[25] }
+set_qtm_port_drive -type drive_dff { dout[25] }
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { rd_addr[4] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { rd_addr[4] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { rd_addr[4] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { rd_addr[4] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { rd_en } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { rd_en } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { rd_en } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { rd_en } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { rd_en } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { rd_en } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { rd_en } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { rd_en } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { bit_wen[2] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { bit_wen[2] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { bit_wen[2] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { bit_wen[2] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { wr_addr[4] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { wr_addr[4] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { wr_addr[4] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { wr_addr[4] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { wr_en } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { wr_en } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { wr_en } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { wr_en } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { din[2] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -setup -from l2clk -edge rise -to { din[2] } -signal_edge fall -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { din[2] } -signal_edge rise -value 0.000000
+create_qtm_constraint_arc -hold -from l2clk -edge rise -to { din[2] } -signal_edge fall -value 0.000000
+save_qtm_model
+write_qtm_model -out_dir qtm -text

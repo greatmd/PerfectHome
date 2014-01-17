@@ -1,0 +1,803 @@
+create_qtm_model n2_dca_sp_9kb_cust
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q -clock CP
+create_qtm_load_type -lib_cell DFQD2BWP35 -input_pin D load_dff
+create_qtm_drive_type -lib_cell DFQD2BWP35 -output_pin Q drive_dff
+create_qtm_port -type input { dcache_rd_addr_e[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rd_addr_e[7] }
+create_qtm_port -type input { dcache_rd_addr_e[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rd_addr_e[6] }
+create_qtm_port -type input { dcache_rd_addr_e[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rd_addr_e[5] }
+create_qtm_port -type input { dcache_rd_addr_e[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rd_addr_e[4] }
+create_qtm_port -type input { dcache_rd_addr_e[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rd_addr_e[3] }
+create_qtm_port -type input { dcache_alt_addr_e[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_addr_e[7] }
+create_qtm_port -type input { dcache_alt_addr_e[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_addr_e[6] }
+create_qtm_port -type input { dcache_alt_addr_e[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_addr_e[5] }
+create_qtm_port -type input { dcache_alt_addr_e[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_addr_e[4] }
+create_qtm_port -type input { dcache_alt_addr_e[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_addr_e[3] }
+create_qtm_port -type input { dcache_rd_addr_e[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rd_addr_e[10] }
+create_qtm_port -type input { dcache_rd_addr_e[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rd_addr_e[9] }
+create_qtm_port -type input { dcache_rd_addr_e[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rd_addr_e[8] }
+create_qtm_port -type input { dcache_wclk_en_e }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wclk_en_e }
+create_qtm_port -type input { dcache_clk_en_e }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_clk_en_e }
+create_qtm_port -type input { dcache_wvld_e }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wvld_e }
+create_qtm_port -type input { dcache_rvld_e }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rvld_e }
+create_qtm_port -type input { dcache_alt_addr_sel_e }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_addr_sel_e }
+create_qtm_port -type input { dcache_alt_addr_e[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_addr_e[10] }
+create_qtm_port -type input { dcache_alt_addr_e[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_addr_e[9] }
+create_qtm_port -type input { dcache_alt_addr_e[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_addr_e[8] }
+create_qtm_port -type input { dcache_wdata_e[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[6] }
+create_qtm_port -type input { dcache_wdata_e[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[5] }
+create_qtm_port -type input { dcache_wdata_e[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[4] }
+create_qtm_port -type input { dcache_wdata_e[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[3] }
+create_qtm_port -type input { dcache_wdata_e[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[2] }
+create_qtm_port -type input { dcache_wdata_e[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[1] }
+create_qtm_port -type input { dcache_wdata_e[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[0] }
+create_qtm_port -type input { dcache_rclk_en_m }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rclk_en_m }
+create_qtm_port -type input { dcache_wdata_e[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[14] }
+create_qtm_port -type input { dcache_wdata_e[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[13] }
+create_qtm_port -type input { dcache_wdata_e[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[12] }
+create_qtm_port -type input { dcache_wdata_e[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[11] }
+create_qtm_port -type input { dcache_wdata_e[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[10] }
+create_qtm_port -type input { dcache_wdata_e[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[9] }
+create_qtm_port -type input { dcache_wdata_e[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[8] }
+create_qtm_port -type input { dcache_wdata_e[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[7] }
+create_qtm_port -type input { dcache_wdata_e[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[22] }
+create_qtm_port -type input { dcache_wdata_e[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[21] }
+create_qtm_port -type input { dcache_wdata_e[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[20] }
+create_qtm_port -type input { dcache_wdata_e[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[19] }
+create_qtm_port -type input { dcache_wdata_e[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[18] }
+create_qtm_port -type input { dcache_wdata_e[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[17] }
+create_qtm_port -type input { dcache_wdata_e[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[16] }
+create_qtm_port -type input { dcache_wdata_e[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[15] }
+create_qtm_port -type input { dcache_wdata_e[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[30] }
+create_qtm_port -type input { dcache_wdata_e[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[29] }
+create_qtm_port -type input { dcache_wdata_e[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[28] }
+create_qtm_port -type input { dcache_wdata_e[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[27] }
+create_qtm_port -type input { dcache_wdata_e[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[26] }
+create_qtm_port -type input { dcache_wdata_e[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[25] }
+create_qtm_port -type input { dcache_wdata_e[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[24] }
+create_qtm_port -type input { dcache_wdata_e[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[23] }
+create_qtm_port -type input { dcache_wdata_e[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[38] }
+create_qtm_port -type input { dcache_wdata_e[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[37] }
+create_qtm_port -type input { dcache_wdata_e[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[36] }
+create_qtm_port -type input { dcache_wdata_e[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[35] }
+create_qtm_port -type input { dcache_wdata_e[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[34] }
+create_qtm_port -type input { dcache_wdata_e[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[33] }
+create_qtm_port -type input { dcache_wdata_e[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[32] }
+create_qtm_port -type input { dcache_wdata_e[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[31] }
+create_qtm_port -type input { dcache_wdata_e[46] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[46] }
+create_qtm_port -type input { dcache_wdata_e[45] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[45] }
+create_qtm_port -type input { dcache_wdata_e[44] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[44] }
+create_qtm_port -type input { dcache_wdata_e[43] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[43] }
+create_qtm_port -type input { dcache_wdata_e[42] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[42] }
+create_qtm_port -type input { dcache_wdata_e[41] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[41] }
+create_qtm_port -type input { dcache_wdata_e[40] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[40] }
+create_qtm_port -type input { dcache_wdata_e[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[39] }
+create_qtm_port -type input { dcache_wdata_e[54] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[54] }
+create_qtm_port -type input { dcache_wdata_e[53] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[53] }
+create_qtm_port -type input { dcache_wdata_e[52] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[52] }
+create_qtm_port -type input { dcache_wdata_e[51] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[51] }
+create_qtm_port -type input { dcache_wdata_e[50] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[50] }
+create_qtm_port -type input { dcache_wdata_e[49] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[49] }
+create_qtm_port -type input { dcache_wdata_e[48] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[48] }
+create_qtm_port -type input { dcache_wdata_e[47] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[47] }
+create_qtm_port -type input { dcache_wdata_e[62] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[62] }
+create_qtm_port -type input { dcache_wdata_e[61] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[61] }
+create_qtm_port -type input { dcache_wdata_e[60] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[60] }
+create_qtm_port -type input { dcache_wdata_e[59] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[59] }
+create_qtm_port -type input { dcache_wdata_e[58] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[58] }
+create_qtm_port -type input { dcache_wdata_e[57] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[57] }
+create_qtm_port -type input { dcache_wdata_e[56] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[56] }
+create_qtm_port -type input { dcache_wdata_e[55] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[55] }
+create_qtm_port -type input { dcache_wdata_e[70] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[70] }
+create_qtm_port -type input { dcache_wdata_e[69] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[69] }
+create_qtm_port -type input { dcache_wdata_e[68] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[68] }
+create_qtm_port -type input { dcache_wdata_e[67] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[67] }
+create_qtm_port -type input { dcache_wdata_e[66] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[66] }
+create_qtm_port -type input { dcache_wdata_e[65] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[65] }
+create_qtm_port -type input { dcache_wdata_e[64] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[64] }
+create_qtm_port -type input { dcache_wdata_e[63] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[63] }
+create_qtm_port -type input { dcache_wdata_e[78] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[78] }
+create_qtm_port -type input { dcache_wdata_e[77] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[77] }
+create_qtm_port -type input { dcache_wdata_e[76] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[76] }
+create_qtm_port -type input { dcache_wdata_e[75] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[75] }
+create_qtm_port -type input { dcache_wdata_e[74] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[74] }
+create_qtm_port -type input { dcache_wdata_e[73] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[73] }
+create_qtm_port -type input { dcache_wdata_e[72] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[72] }
+create_qtm_port -type input { dcache_wdata_e[71] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[71] }
+create_qtm_port -type input { dcache_wdata_e[86] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[86] }
+create_qtm_port -type input { dcache_wdata_e[85] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[85] }
+create_qtm_port -type input { dcache_wdata_e[84] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[84] }
+create_qtm_port -type input { dcache_wdata_e[83] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[83] }
+create_qtm_port -type input { dcache_wdata_e[82] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[82] }
+create_qtm_port -type input { dcache_wdata_e[81] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[81] }
+create_qtm_port -type input { dcache_wdata_e[80] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[80] }
+create_qtm_port -type input { dcache_wdata_e[79] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[79] }
+create_qtm_port -type input { dcache_wdata_e[94] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[94] }
+create_qtm_port -type input { dcache_wdata_e[93] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[93] }
+create_qtm_port -type input { dcache_wdata_e[92] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[92] }
+create_qtm_port -type input { dcache_wdata_e[91] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[91] }
+create_qtm_port -type input { dcache_wdata_e[90] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[90] }
+create_qtm_port -type input { dcache_wdata_e[89] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[89] }
+create_qtm_port -type input { dcache_wdata_e[88] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[88] }
+create_qtm_port -type input { dcache_wdata_e[87] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[87] }
+create_qtm_port -type input { dcache_wdata_e[102] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[102] }
+create_qtm_port -type input { dcache_wdata_e[101] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[101] }
+create_qtm_port -type input { dcache_wdata_e[100] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[100] }
+create_qtm_port -type input { dcache_wdata_e[99] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[99] }
+create_qtm_port -type input { dcache_wdata_e[98] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[98] }
+create_qtm_port -type input { dcache_wdata_e[97] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[97] }
+create_qtm_port -type input { dcache_wdata_e[96] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[96] }
+create_qtm_port -type input { dcache_wdata_e[95] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[95] }
+create_qtm_port -type input { dcache_wdata_e[110] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[110] }
+create_qtm_port -type input { dcache_wdata_e[109] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[109] }
+create_qtm_port -type input { dcache_wdata_e[108] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[108] }
+create_qtm_port -type input { dcache_wdata_e[107] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[107] }
+create_qtm_port -type input { dcache_wdata_e[106] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[106] }
+create_qtm_port -type input { dcache_wdata_e[105] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[105] }
+create_qtm_port -type input { dcache_wdata_e[104] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[104] }
+create_qtm_port -type input { dcache_wdata_e[103] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[103] }
+create_qtm_port -type input { dcache_wdata_e[118] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[118] }
+create_qtm_port -type input { dcache_wdata_e[117] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[117] }
+create_qtm_port -type input { dcache_wdata_e[116] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[116] }
+create_qtm_port -type input { dcache_wdata_e[115] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[115] }
+create_qtm_port -type input { dcache_wdata_e[114] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[114] }
+create_qtm_port -type input { dcache_wdata_e[113] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[113] }
+create_qtm_port -type input { dcache_wdata_e[112] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[112] }
+create_qtm_port -type input { dcache_wdata_e[111] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[111] }
+create_qtm_port -type input { dcache_wdata_e[126] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[126] }
+create_qtm_port -type input { dcache_wdata_e[125] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[125] }
+create_qtm_port -type input { dcache_wdata_e[124] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[124] }
+create_qtm_port -type input { dcache_wdata_e[123] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[123] }
+create_qtm_port -type input { dcache_wdata_e[122] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[122] }
+create_qtm_port -type input { dcache_wdata_e[121] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[121] }
+create_qtm_port -type input { dcache_wdata_e[120] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[120] }
+create_qtm_port -type input { dcache_wdata_e[119] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[119] }
+create_qtm_port -type input { dcache_wdata_e[134] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[134] }
+create_qtm_port -type input { dcache_wdata_e[133] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[133] }
+create_qtm_port -type input { dcache_wdata_e[132] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[132] }
+create_qtm_port -type input { dcache_wdata_e[131] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[131] }
+create_qtm_port -type input { dcache_wdata_e[130] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[130] }
+create_qtm_port -type input { dcache_wdata_e[129] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[129] }
+create_qtm_port -type input { dcache_wdata_e[128] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[128] }
+create_qtm_port -type input { dcache_wdata_e[127] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[127] }
+create_qtm_port -type input { dcache_wdata_e[142] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[142] }
+create_qtm_port -type input { dcache_wdata_e[141] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[141] }
+create_qtm_port -type input { dcache_wdata_e[140] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[140] }
+create_qtm_port -type input { dcache_wdata_e[139] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[139] }
+create_qtm_port -type input { dcache_wdata_e[138] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[138] }
+create_qtm_port -type input { dcache_wdata_e[137] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[137] }
+create_qtm_port -type input { dcache_wdata_e[136] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[136] }
+create_qtm_port -type input { dcache_wdata_e[135] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[135] }
+create_qtm_port -type input { dcache_byte_wr_en_e[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[4] }
+create_qtm_port -type input { dcache_byte_wr_en_e[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[3] }
+create_qtm_port -type input { dcache_byte_wr_en_e[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[2] }
+create_qtm_port -type input { dcache_byte_wr_en_e[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[1] }
+create_qtm_port -type input { dcache_byte_wr_en_e[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[0] }
+create_qtm_port -type input { dcache_wr_way_e[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wr_way_e[1] }
+create_qtm_port -type input { dcache_wr_way_e[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wr_way_e[0] }
+create_qtm_port -type input { dcache_wdata_e[143] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_wdata_e[143] }
+create_qtm_port -type input { dcache_byte_wr_en_e[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[12] }
+create_qtm_port -type input { dcache_byte_wr_en_e[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[11] }
+create_qtm_port -type input { dcache_byte_wr_en_e[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[10] }
+create_qtm_port -type input { dcache_byte_wr_en_e[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[9] }
+create_qtm_port -type input { dcache_byte_wr_en_e[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[8] }
+create_qtm_port -type input { dcache_byte_wr_en_e[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[7] }
+create_qtm_port -type input { dcache_byte_wr_en_e[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[6] }
+create_qtm_port -type input { dcache_byte_wr_en_e[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[5] }
+create_qtm_port -type input { dcache_rsel_way_b[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rsel_way_b[0] }
+create_qtm_port -type input { dcache_alt_rsel_way_m[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_rsel_way_m[3] }
+create_qtm_port -type input { dcache_alt_rsel_way_m[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_rsel_way_m[2] }
+create_qtm_port -type input { dcache_alt_rsel_way_m[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_rsel_way_m[1] }
+create_qtm_port -type input { dcache_alt_rsel_way_m[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_rsel_way_m[0] }
+create_qtm_port -type input { dcache_byte_wr_en_e[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[15] }
+create_qtm_port -type input { dcache_byte_wr_en_e[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[14] }
+create_qtm_port -type input { dcache_byte_wr_en_e[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_byte_wr_en_e[13] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[3] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[2] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[1] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[0] }
+create_qtm_port -type input { dcache_alt_way_sel_m }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_alt_way_sel_m }
+create_qtm_port -type input { dcache_rsel_way_b[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rsel_way_b[3] }
+create_qtm_port -type input { dcache_rsel_way_b[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rsel_way_b[2] }
+create_qtm_port -type input { dcache_rsel_way_b[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_rsel_way_b[1] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[11] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[10] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[9] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[8] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[7] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[6] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[5] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[4] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[19] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[18] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[17] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[16] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[15] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[14] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[13] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[12] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[27] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[26] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[25] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[24] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[23] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[22] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[21] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[20] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[35] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[34] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[33] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[32] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[31] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[30] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[29] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[28] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[43] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[43] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[42] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[42] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[41] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[41] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[40] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[40] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[39] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[38] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[37] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[36] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[51] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[51] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[50] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[50] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[49] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[49] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[48] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[48] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[47] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[47] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[46] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[46] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[45] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[45] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[44] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[44] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[59] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[59] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[58] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[58] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[57] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[57] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[56] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[56] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[55] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[55] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[54] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[54] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[53] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[53] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[52] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[52] }
+create_qtm_port -type input { dcache_bypass_e_ }
+set_qtm_port_load -type load_dff -factor 1.000000 { dcache_bypass_e_ }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[63] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[63] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[62] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[62] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[61] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[61] }
+create_qtm_port -type input { lsu_l2fill_or_byp_data_m[60] }
+set_qtm_port_load -type load_dff -factor 1.000000 { lsu_l2fill_or_byp_data_m[60] }
+create_qtm_port -type input { tcu_scan_en }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_scan_en }
+create_qtm_port -type input { tcu_array_wr_inhibit }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_array_wr_inhibit }
+create_qtm_port -type input { tcu_bclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_bclk }
+create_qtm_port -type input { tcu_aclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_aclk }
+create_qtm_port -type input { tcu_pce_ov }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_pce_ov }
+create_qtm_port -type input { scan_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { scan_in }
+create_qtm_port -type input { l2clk }
+set_qtm_port_load -type load_dff -factor 1.000000 { l2clk }
+create_qtm_port -type input { fuse_dca_repair_value[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_repair_value[4] }
+create_qtm_port -type input { fuse_dca_repair_value[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_repair_value[3] }
+create_qtm_port -type input { fuse_dca_repair_value[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_repair_value[2] }
+create_qtm_port -type input { fuse_dca_repair_value[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_repair_value[1] }
+create_qtm_port -type input { fuse_dca_repair_value[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_repair_value[0] }
+create_qtm_port -type input { tcu_se_scancollar_out }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_se_scancollar_out }
+create_qtm_port -type input { tcu_se_scancollar_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_se_scancollar_in }
+create_qtm_port -type input { fuse_red_reset }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_red_reset }
+create_qtm_port -type input { fuse_dca_wen }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_wen }
+create_qtm_port -type input { fuse_dca_rid[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_rid[1] }
+create_qtm_port -type input { fuse_dca_rid[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_rid[0] }
+create_qtm_port -type input { fuse_dca_repair_en[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_repair_en[1] }
+create_qtm_port -type input { fuse_dca_repair_en[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_repair_en[0] }
+create_qtm_port -type input { fuse_dca_repair_value[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { fuse_dca_repair_value[5] }
+create_qtm_port -type input { vnw_ary }
+set_qtm_port_load -type load_dff -factor 1.000000 { vnw_ary }
+create_qtm_port -type output { dcache_rdata_b[2] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[2] }
+create_qtm_port -type output { dcache_rdata_b[1] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[1] }
+create_qtm_port -type output { dcache_rdata_b[0] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[0] }
+create_qtm_port -type output { dcache_rdata_b[10] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[10] }
+create_qtm_port -type output { dcache_rdata_b[9] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[9] }
+create_qtm_port -type output { dcache_rdata_b[8] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[8] }
+create_qtm_port -type output { dcache_rdata_b[7] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[7] }
+create_qtm_port -type output { dcache_rdata_b[6] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[6] }
+create_qtm_port -type output { dcache_rdata_b[5] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[5] }
+create_qtm_port -type output { dcache_rdata_b[4] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[4] }
+create_qtm_port -type output { dcache_rdata_b[3] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[3] }
+create_qtm_port -type output { dcache_rdata_b[18] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[18] }
+create_qtm_port -type output { dcache_rdata_b[17] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[17] }
+create_qtm_port -type output { dcache_rdata_b[16] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[16] }
+create_qtm_port -type output { dcache_rdata_b[15] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[15] }
+create_qtm_port -type output { dcache_rdata_b[14] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[14] }
+create_qtm_port -type output { dcache_rdata_b[13] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[13] }
+create_qtm_port -type output { dcache_rdata_b[12] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[12] }
+create_qtm_port -type output { dcache_rdata_b[11] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[11] }
+create_qtm_port -type output { dcache_rdata_b[26] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[26] }
+create_qtm_port -type output { dcache_rdata_b[25] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[25] }
+create_qtm_port -type output { dcache_rdata_b[24] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[24] }
+create_qtm_port -type output { dcache_rdata_b[23] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[23] }
+create_qtm_port -type output { dcache_rdata_b[22] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[22] }
+create_qtm_port -type output { dcache_rdata_b[21] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[21] }
+create_qtm_port -type output { dcache_rdata_b[20] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[20] }
+create_qtm_port -type output { dcache_rdata_b[19] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[19] }
+create_qtm_port -type output { dcache_rdata_b[34] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[34] }
+create_qtm_port -type output { dcache_rdata_b[33] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[33] }
+create_qtm_port -type output { dcache_rdata_b[32] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[32] }
+create_qtm_port -type output { dcache_rdata_b[31] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[31] }
+create_qtm_port -type output { dcache_rdata_b[30] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[30] }
+create_qtm_port -type output { dcache_rdata_b[29] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[29] }
+create_qtm_port -type output { dcache_rdata_b[28] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[28] }
+create_qtm_port -type output { dcache_rdata_b[27] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[27] }
+create_qtm_port -type output { dcache_rdata_b[42] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[42] }
+create_qtm_port -type output { dcache_rdata_b[41] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[41] }
+create_qtm_port -type output { dcache_rdata_b[40] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[40] }
+create_qtm_port -type output { dcache_rdata_b[39] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[39] }
+create_qtm_port -type output { dcache_rdata_b[38] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[38] }
+create_qtm_port -type output { dcache_rdata_b[37] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[37] }
+create_qtm_port -type output { dcache_rdata_b[36] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[36] }
+create_qtm_port -type output { dcache_rdata_b[35] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[35] }
+create_qtm_port -type output { dcache_rdata_b[50] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[50] }
+create_qtm_port -type output { dcache_rdata_b[49] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[49] }
+create_qtm_port -type output { dcache_rdata_b[48] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[48] }
+create_qtm_port -type output { dcache_rdata_b[47] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[47] }
+create_qtm_port -type output { dcache_rdata_b[46] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[46] }
+create_qtm_port -type output { dcache_rdata_b[45] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[45] }
+create_qtm_port -type output { dcache_rdata_b[44] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[44] }
+create_qtm_port -type output { dcache_rdata_b[43] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[43] }
+create_qtm_port -type output { dcache_rdata_b[58] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[58] }
+create_qtm_port -type output { dcache_rdata_b[57] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[57] }
+create_qtm_port -type output { dcache_rdata_b[56] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[56] }
+create_qtm_port -type output { dcache_rdata_b[55] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[55] }
+create_qtm_port -type output { dcache_rdata_b[54] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[54] }
+create_qtm_port -type output { dcache_rdata_b[53] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[53] }
+create_qtm_port -type output { dcache_rdata_b[52] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[52] }
+create_qtm_port -type output { dcache_rdata_b[51] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[51] }
+create_qtm_port -type output { dcache_rparity_b[2] }
+set_qtm_port_drive -type drive_dff { dcache_rparity_b[2] }
+create_qtm_port -type output { dcache_rparity_b[1] }
+set_qtm_port_drive -type drive_dff { dcache_rparity_b[1] }
+create_qtm_port -type output { dcache_rparity_b[0] }
+set_qtm_port_drive -type drive_dff { dcache_rparity_b[0] }
+create_qtm_port -type output { dcache_rdata_b[63] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[63] }
+create_qtm_port -type output { dcache_rdata_b[62] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[62] }
+create_qtm_port -type output { dcache_rdata_b[61] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[61] }
+create_qtm_port -type output { dcache_rdata_b[60] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[60] }
+create_qtm_port -type output { dcache_rdata_b[59] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_b[59] }
+create_qtm_port -type output { dcache_perr_w2_b }
+set_qtm_port_drive -type drive_dff { dcache_perr_w2_b }
+create_qtm_port -type output { dcache_perr_w1_b }
+set_qtm_port_drive -type drive_dff { dcache_perr_w1_b }
+create_qtm_port -type output { dcache_perr_w0_b }
+set_qtm_port_drive -type drive_dff { dcache_perr_w0_b }
+create_qtm_port -type output { dcache_rparity_b[7] }
+set_qtm_port_drive -type drive_dff { dcache_rparity_b[7] }
+create_qtm_port -type output { dcache_rparity_b[6] }
+set_qtm_port_drive -type drive_dff { dcache_rparity_b[6] }
+create_qtm_port -type output { dcache_rparity_b[5] }
+set_qtm_port_drive -type drive_dff { dcache_rparity_b[5] }
+create_qtm_port -type output { dcache_rparity_b[4] }
+set_qtm_port_drive -type drive_dff { dcache_rparity_b[4] }
+create_qtm_port -type output { dcache_rparity_b[3] }
+set_qtm_port_drive -type drive_dff { dcache_rparity_b[3] }
+create_qtm_port -type output { dcache_rdata_msb_w0_b[6] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w0_b[6] }
+create_qtm_port -type output { dcache_rdata_msb_w0_b[5] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w0_b[5] }
+create_qtm_port -type output { dcache_rdata_msb_w0_b[4] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w0_b[4] }
+create_qtm_port -type output { dcache_rdata_msb_w0_b[3] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w0_b[3] }
+create_qtm_port -type output { dcache_rdata_msb_w0_b[2] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w0_b[2] }
+create_qtm_port -type output { dcache_rdata_msb_w0_b[1] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w0_b[1] }
+create_qtm_port -type output { dcache_rdata_msb_w0_b[0] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w0_b[0] }
+create_qtm_port -type output { dcache_perr_w3_b }
+set_qtm_port_drive -type drive_dff { dcache_perr_w3_b }
+create_qtm_port -type output { dcache_rdata_msb_w1_b[6] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w1_b[6] }
+create_qtm_port -type output { dcache_rdata_msb_w1_b[5] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w1_b[5] }
+create_qtm_port -type output { dcache_rdata_msb_w1_b[4] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w1_b[4] }
+create_qtm_port -type output { dcache_rdata_msb_w1_b[3] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w1_b[3] }
+create_qtm_port -type output { dcache_rdata_msb_w1_b[2] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w1_b[2] }
+create_qtm_port -type output { dcache_rdata_msb_w1_b[1] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w1_b[1] }
+create_qtm_port -type output { dcache_rdata_msb_w1_b[0] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w1_b[0] }
+create_qtm_port -type output { dcache_rdata_msb_w0_b[7] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w0_b[7] }
+create_qtm_port -type output { dcache_rdata_msb_w2_b[6] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w2_b[6] }
+create_qtm_port -type output { dcache_rdata_msb_w2_b[5] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w2_b[5] }
+create_qtm_port -type output { dcache_rdata_msb_w2_b[4] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w2_b[4] }
+create_qtm_port -type output { dcache_rdata_msb_w2_b[3] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w2_b[3] }
+create_qtm_port -type output { dcache_rdata_msb_w2_b[2] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w2_b[2] }
+create_qtm_port -type output { dcache_rdata_msb_w2_b[1] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w2_b[1] }
+create_qtm_port -type output { dcache_rdata_msb_w2_b[0] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w2_b[0] }
+create_qtm_port -type output { dcache_rdata_msb_w1_b[7] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w1_b[7] }
+create_qtm_port -type output { dcache_rdata_msb_w3_b[6] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w3_b[6] }
+create_qtm_port -type output { dcache_rdata_msb_w3_b[5] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w3_b[5] }
+create_qtm_port -type output { dcache_rdata_msb_w3_b[4] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w3_b[4] }
+create_qtm_port -type output { dcache_rdata_msb_w3_b[3] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w3_b[3] }
+create_qtm_port -type output { dcache_rdata_msb_w3_b[2] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w3_b[2] }
+create_qtm_port -type output { dcache_rdata_msb_w3_b[1] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w3_b[1] }
+create_qtm_port -type output { dcache_rdata_msb_w3_b[0] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w3_b[0] }
+create_qtm_port -type output { dcache_rdata_msb_w2_b[7] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w2_b[7] }
+create_qtm_port -type output { dcache_rdata_msb_w3_b[7] }
+set_qtm_port_drive -type drive_dff { dcache_rdata_msb_w3_b[7] }
+create_qtm_port -type output { scan_out }
+set_qtm_port_drive -type drive_dff { scan_out }
+create_qtm_port -type output { dca_fuse_repair_value[0] }
+set_qtm_port_drive -type drive_dff { dca_fuse_repair_value[0] }
+create_qtm_port -type output { dca_fuse_repair_en[1] }
+set_qtm_port_drive -type drive_dff { dca_fuse_repair_en[1] }
+create_qtm_port -type output { dca_fuse_repair_en[0] }
+set_qtm_port_drive -type drive_dff { dca_fuse_repair_en[0] }
+create_qtm_port -type output { dca_fuse_repair_value[5] }
+set_qtm_port_drive -type drive_dff { dca_fuse_repair_value[5] }
+create_qtm_port -type output { dca_fuse_repair_value[4] }
+set_qtm_port_drive -type drive_dff { dca_fuse_repair_value[4] }
+create_qtm_port -type output { dca_fuse_repair_value[3] }
+set_qtm_port_drive -type drive_dff { dca_fuse_repair_value[3] }
+create_qtm_port -type output { dca_fuse_repair_value[2] }
+set_qtm_port_drive -type drive_dff { dca_fuse_repair_value[2] }
+create_qtm_port -type output { dca_fuse_repair_value[1] }
+set_qtm_port_drive -type drive_dff { dca_fuse_repair_value[1] }
+save_qtm_model
+write_qtm_model -out_dir qtm -text

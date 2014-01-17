@@ -1,0 +1,265 @@
+create_qtm_model n2_stb_cm_64x45_cust
+set_qtm_technology -library tcbn28hpmbwp35tt1v25c_ccs
+set_qtm_global_parameter -param setup -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param hold -lib_cell DFQD2BWP35 -pin D
+set_qtm_global_parameter -param clk_to_output -lib_cell DFQD2BWP35 -pin Q -clock CP
+create_qtm_load_type -lib_cell DFQD2BWP35 -input_pin D load_dff
+create_qtm_drive_type -lib_cell DFQD2BWP35 -output_pin Q drive_dff
+create_qtm_port -type clock { l2clk }
+create_qtm_port -type input { stb_cam_rptr_vld }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_rptr_vld }
+create_qtm_port -type input { stb_cam_wptr_vld }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_wptr_vld }
+create_qtm_port -type input { stb_cam_rw_tid[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_rw_tid[2] }
+create_qtm_port -type input { stb_cam_rw_tid[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_rw_tid[1] }
+create_qtm_port -type input { stb_cam_rw_tid[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_rw_tid[0] }
+create_qtm_port -type input { stb_cam_rw_ptr[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_rw_ptr[2] }
+create_qtm_port -type input { stb_cam_rw_ptr[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_rw_ptr[1] }
+create_qtm_port -type input { stb_cam_rw_ptr[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_rw_ptr[0] }
+create_qtm_port -type input { stb_camwr_data[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[7] }
+create_qtm_port -type input { stb_camwr_data[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[6] }
+create_qtm_port -type input { stb_camwr_data[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[5] }
+create_qtm_port -type input { stb_camwr_data[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[4] }
+create_qtm_port -type input { stb_camwr_data[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[3] }
+create_qtm_port -type input { stb_camwr_data[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[2] }
+create_qtm_port -type input { stb_camwr_data[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[1] }
+create_qtm_port -type input { stb_camwr_data[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[0] }
+create_qtm_port -type input { stb_camwr_data[15] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[15] }
+create_qtm_port -type input { stb_camwr_data[14] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[14] }
+create_qtm_port -type input { stb_camwr_data[13] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[13] }
+create_qtm_port -type input { stb_camwr_data[12] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[12] }
+create_qtm_port -type input { stb_camwr_data[11] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[11] }
+create_qtm_port -type input { stb_camwr_data[10] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[10] }
+create_qtm_port -type input { stb_camwr_data[9] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[9] }
+create_qtm_port -type input { stb_camwr_data[8] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[8] }
+create_qtm_port -type input { stb_camwr_data[23] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[23] }
+create_qtm_port -type input { stb_camwr_data[22] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[22] }
+create_qtm_port -type input { stb_camwr_data[21] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[21] }
+create_qtm_port -type input { stb_camwr_data[20] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[20] }
+create_qtm_port -type input { stb_camwr_data[19] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[19] }
+create_qtm_port -type input { stb_camwr_data[18] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[18] }
+create_qtm_port -type input { stb_camwr_data[17] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[17] }
+create_qtm_port -type input { stb_camwr_data[16] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[16] }
+create_qtm_port -type input { stb_camwr_data[31] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[31] }
+create_qtm_port -type input { stb_camwr_data[30] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[30] }
+create_qtm_port -type input { stb_camwr_data[29] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[29] }
+create_qtm_port -type input { stb_camwr_data[28] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[28] }
+create_qtm_port -type input { stb_camwr_data[27] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[27] }
+create_qtm_port -type input { stb_camwr_data[26] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[26] }
+create_qtm_port -type input { stb_camwr_data[25] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[25] }
+create_qtm_port -type input { stb_camwr_data[24] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[24] }
+create_qtm_port -type input { stb_camwr_data[39] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[39] }
+create_qtm_port -type input { stb_camwr_data[38] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[38] }
+create_qtm_port -type input { stb_camwr_data[37] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[37] }
+create_qtm_port -type input { stb_camwr_data[36] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[36] }
+create_qtm_port -type input { stb_camwr_data[35] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[35] }
+create_qtm_port -type input { stb_camwr_data[34] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[34] }
+create_qtm_port -type input { stb_camwr_data[33] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[33] }
+create_qtm_port -type input { stb_camwr_data[32] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[32] }
+create_qtm_port -type input { stb_cam_cm_tid[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_cm_tid[1] }
+create_qtm_port -type input { stb_cam_cm_tid[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_cm_tid[0] }
+create_qtm_port -type input { stb_cam_vld }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_vld }
+create_qtm_port -type input { stb_camwr_data[44] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[44] }
+create_qtm_port -type input { stb_camwr_data[43] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[43] }
+create_qtm_port -type input { stb_camwr_data[42] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[42] }
+create_qtm_port -type input { stb_camwr_data[41] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[41] }
+create_qtm_port -type input { stb_camwr_data[40] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_camwr_data[40] }
+create_qtm_port -type input { stb_cam_line_en[6] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_line_en[6] }
+create_qtm_port -type input { stb_cam_line_en[5] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_line_en[5] }
+create_qtm_port -type input { stb_cam_line_en[4] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_line_en[4] }
+create_qtm_port -type input { stb_cam_line_en[3] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_line_en[3] }
+create_qtm_port -type input { stb_cam_line_en[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_line_en[2] }
+create_qtm_port -type input { stb_cam_line_en[1] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_line_en[1] }
+create_qtm_port -type input { stb_cam_line_en[0] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_line_en[0] }
+create_qtm_port -type input { stb_cam_cm_tid[2] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_cm_tid[2] }
+create_qtm_port -type input { stb_quad_ld_cam }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_quad_ld_cam }
+create_qtm_port -type input { stb_cam_line_en[7] }
+set_qtm_port_load -type load_dff -factor 1.000000 { stb_cam_line_en[7] }
+create_qtm_port -type input { tcu_pce_ov }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_pce_ov }
+create_qtm_port -type input { scan_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { scan_in }
+create_qtm_port -type input { pce }
+set_qtm_port_load -type load_dff -factor 1.000000 { pce }
+create_qtm_port -type input { tcu_array_wr_inhibit }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_array_wr_inhibit }
+create_qtm_port -type input { tcu_se_scancollar_out }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_se_scancollar_out }
+create_qtm_port -type input { tcu_se_scancollar_in }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_se_scancollar_in }
+create_qtm_port -type input { tcu_scan_en }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_scan_en }
+create_qtm_port -type input { tcu_bclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_bclk }
+create_qtm_port -type input { tcu_aclk }
+set_qtm_port_load -type load_dff -factor 1.000000 { tcu_aclk }
+create_qtm_port -type output { stb_rdata_ramc[5] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[5] }
+create_qtm_port -type output { stb_rdata_ramc[4] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[4] }
+create_qtm_port -type output { stb_rdata_ramc[3] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[3] }
+create_qtm_port -type output { stb_rdata_ramc[2] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[2] }
+create_qtm_port -type output { stb_rdata_ramc[1] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[1] }
+create_qtm_port -type output { stb_rdata_ramc[0] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[0] }
+create_qtm_port -type output { stb_rdata_ramc[13] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[13] }
+create_qtm_port -type output { stb_rdata_ramc[12] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[12] }
+create_qtm_port -type output { stb_rdata_ramc[11] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[11] }
+create_qtm_port -type output { stb_rdata_ramc[10] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[10] }
+create_qtm_port -type output { stb_rdata_ramc[9] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[9] }
+create_qtm_port -type output { stb_rdata_ramc[8] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[8] }
+create_qtm_port -type output { stb_rdata_ramc[7] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[7] }
+create_qtm_port -type output { stb_rdata_ramc[6] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[6] }
+create_qtm_port -type output { stb_rdata_ramc[21] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[21] }
+create_qtm_port -type output { stb_rdata_ramc[20] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[20] }
+create_qtm_port -type output { stb_rdata_ramc[19] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[19] }
+create_qtm_port -type output { stb_rdata_ramc[18] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[18] }
+create_qtm_port -type output { stb_rdata_ramc[17] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[17] }
+create_qtm_port -type output { stb_rdata_ramc[16] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[16] }
+create_qtm_port -type output { stb_rdata_ramc[15] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[15] }
+create_qtm_port -type output { stb_rdata_ramc[14] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[14] }
+create_qtm_port -type output { stb_rdata_ramc[29] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[29] }
+create_qtm_port -type output { stb_rdata_ramc[28] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[28] }
+create_qtm_port -type output { stb_rdata_ramc[27] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[27] }
+create_qtm_port -type output { stb_rdata_ramc[26] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[26] }
+create_qtm_port -type output { stb_rdata_ramc[25] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[25] }
+create_qtm_port -type output { stb_rdata_ramc[24] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[24] }
+create_qtm_port -type output { stb_rdata_ramc[23] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[23] }
+create_qtm_port -type output { stb_rdata_ramc[22] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[22] }
+create_qtm_port -type output { stb_rdata_ramc[37] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[37] }
+create_qtm_port -type output { stb_rdata_ramc[36] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[36] }
+create_qtm_port -type output { stb_rdata_ramc[35] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[35] }
+create_qtm_port -type output { stb_rdata_ramc[34] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[34] }
+create_qtm_port -type output { stb_rdata_ramc[33] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[33] }
+create_qtm_port -type output { stb_rdata_ramc[32] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[32] }
+create_qtm_port -type output { stb_rdata_ramc[31] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[31] }
+create_qtm_port -type output { stb_rdata_ramc[30] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[30] }
+create_qtm_port -type output { stb_ld_partial_raw }
+set_qtm_port_drive -type drive_dff { stb_ld_partial_raw }
+create_qtm_port -type output { stb_rdata_ramc[44] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[44] }
+create_qtm_port -type output { stb_rdata_ramc[43] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[43] }
+create_qtm_port -type output { stb_rdata_ramc[42] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[42] }
+create_qtm_port -type output { stb_rdata_ramc[41] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[41] }
+create_qtm_port -type output { stb_rdata_ramc[40] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[40] }
+create_qtm_port -type output { stb_rdata_ramc[39] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[39] }
+create_qtm_port -type output { stb_rdata_ramc[38] }
+set_qtm_port_drive -type drive_dff { stb_rdata_ramc[38] }
+create_qtm_port -type output { stb_cam_mhit }
+set_qtm_port_drive -type drive_dff { stb_cam_mhit }
+create_qtm_port -type output { stb_cam_hit }
+set_qtm_port_drive -type drive_dff { stb_cam_hit }
+create_qtm_port -type output { stb_cam_hit_ptr[2] }
+set_qtm_port_drive -type drive_dff { stb_cam_hit_ptr[2] }
+create_qtm_port -type output { stb_cam_hit_ptr[1] }
+set_qtm_port_drive -type drive_dff { stb_cam_hit_ptr[1] }
+create_qtm_port -type output { stb_cam_hit_ptr[0] }
+set_qtm_port_drive -type drive_dff { stb_cam_hit_ptr[0] }
+create_qtm_port -type output { scan_out }
+set_qtm_port_drive -type drive_dff { scan_out }
+report_qtm_model
+save_qtm_model
+write_qtm_model -out_dir qtm -text

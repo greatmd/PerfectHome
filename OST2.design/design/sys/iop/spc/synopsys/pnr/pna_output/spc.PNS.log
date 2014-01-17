@@ -1,0 +1,20 @@
+
+Name of design : spc
+Number of cell instance masters in the library : 337
+Number of cell instances in the design : 213791
+Processing net VDD ...
+Average power dissipation in spc :    76.12 mW
+Power supply voltage :     1.50 V
+Average current in spc :    50.74 mA
+Number of power pad nodes reaching to the power ports of the leaf cells or blocks : 92
+Maximum IR drop in spc : 116.47 mV
+Maximum current in spc : 4.593 mA
+Processing net VSS ...
+Average power dissipation in spc :    76.12 mW
+Power supply voltage :     1.50 V
+Average current in spc :    50.74 mA
+Number of power pad nodes reaching to the power ports of the leaf cells or blocks : 92
+Maximum IR drop in spc : 115.71 mV
+Maximum current in spc : 4.972 mA
+Memory usage for design data :     108363.776 Kbytes
+Overall takes     3.82 seconds

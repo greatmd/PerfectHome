@@ -1,0 +1,4 @@
+. /hd/cad/xilinx/14.6/ISE_DS/common/.settings64.sh /hd/cad/xilinx/14.6/ISE_DS/common
+. /hd/cad/xilinx/14.6/ISE_DS/EDK/.settings64.sh /hd/cad/xilinx/14.6/ISE_DS/EDK
+. /hd/cad/xilinx/14.6/ISE_DS/PlanAhead/.settings64.sh /hd/cad/xilinx/14.6/ISE_DS/PlanAhead
+. /hd/cad/xilinx/14.6/ISE_DS/ISE/.settings64.sh /hd/cad/xilinx/14.6/ISE_DS/ISE

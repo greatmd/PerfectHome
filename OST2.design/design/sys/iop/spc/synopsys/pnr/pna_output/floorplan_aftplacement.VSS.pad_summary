@@ -1,0 +1,31 @@
+Power Pad Synthesis(PPS) Summary File
+
+A. Report User Constraints
+power net name:	VSS
+power budget:	0.00 [mW]
+supply voltage:	1.50 [V]
+target ir-drop:	150.00 [mV]
+target maximum pad current: ignored
+maximum number of pads:	100
+
+B. Report Pad Synthesis Results
+#iter.  ir-drop         pad-current     #synthesized_pads improvement(%)
+        max/(x y)       max/(x y)       current/total     ir-drop/pad-current
+-----------------------------------------------------------------
+1 168.73/(45.322 194.536) 13.92/(273.568 0.000) 8/16  0.00/0.00
+1 152.18/(522.922 445.736) 11.29/(846.085 434.772) 10/20  9.81/18.87
+2 149.66/(522.922 445.736) 10.36/(0.000 434.772) 11/21  1.65/8.21
+
+C. Report Pad Current Results
+Virtual Pad at (0.000 434.772) Supplies   10.36 mA Current (12.58%)
+Virtual Pad at (0.000 878.005) Supplies    6.67 mA Current (8.11%)
+Virtual Pad at (273.568 1329.700) Supplies    5.37 mA Current (6.52%)
+Virtual Pad at (555.596 1329.700) Supplies    6.36 mA Current (7.72%)
+Virtual Pad at (846.085 434.772) Supplies    6.43 mA Current (7.81%)
+Virtual Pad at (846.085 878.005) Supplies    9.27 mA Current (11.26%)
+Virtual Pad at (273.568 0.000) Supplies    7.42 mA Current (9.01%)
+Virtual Pad at (555.596 0.000) Supplies    7.66 mA Current (9.30%)
+Virtual Pad at (414.582 0.000) Supplies    6.85 mA Current (8.31%)
+Virtual Pad at (145.244 0.000) Supplies    9.71 mA Current (11.79%)
+Virtual Pad at (846.085 468.615) Supplies    6.24 mA Current (7.58%)
+
